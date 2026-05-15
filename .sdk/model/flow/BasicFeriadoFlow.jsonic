@@ -1,0 +1,32 @@
+# BasicFeriadoFlow
+
+main: kit: flow: BasicFeriadoFlow:
+{
+  entity: "feriado",
+  kind: "basic",
+  name: "BasicFeriadoFlow",
+  step: [
+    {
+      input: {
+        ref: "feriado_ref01",
+        srcdatavar: "feriado_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "feriado01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-feriado_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFeriadoFlow"
+}

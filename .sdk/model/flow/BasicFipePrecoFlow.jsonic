@@ -1,0 +1,32 @@
+# BasicFipePrecoFlow
+
+main: kit: flow: BasicFipePrecoFlow:
+{
+  entity: "fipe_preco",
+  kind: "basic",
+  name: "BasicFipePrecoFlow",
+  step: [
+    {
+      input: {
+        ref: "fipe_preco_ref01",
+        srcdatavar: "fipe_preco_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "fipe_preco01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-fipe_preco_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFipePrecoFlow"
+}

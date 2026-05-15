@@ -1,0 +1,83 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 10
+  metrics: count: path: 12
+  metrics: count: method: 12
+
+  entity: bank: {
+    path: "/banks/v1": {
+      action: "v1": {}
+      op: list: method: *GET
+    }
+    path: "/banks/v1/{code}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: cep: {
+    path: "/cep/v1/{cep}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.cep`")|top
+    }
+    path: "/cep/v2/{cep}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.cep`")|top
+    }
+  }
+
+  entity: cnpj: {
+    path: "/cnpj/v1/{cnpj}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.cnpj`")|top
+    }
+  }
+
+  entity: ddd: {
+    path: "/ddd/v1/{ddd}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: feriado: {
+    path: "/feriados/v1/{ano}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: fipe_marca: {
+    path: "/fipe/marcas/v1/{tipoVeiculo}": {
+      rename: param: "tipoVeiculo": *"tipo_veiculo"
+      op: load: method: *GET
+    }
+  }
+
+  entity: fipe_preco: {
+    path: "/fipe/preco/v1/{codigoFipe}": {
+      rename: param: "codigoFipe": *"codigo_fipe"
+      op: load: method: *GET
+    }
+  }
+
+  entity: municipio: {
+    path: "/ibge/municipios/v1/{siglaUF}": {
+      rename: param: "siglaUF": *"sigla_uf"
+      op: load: method: *GET
+    }
+  }
+
+  entity: ufn: {
+    path: "/ibge/uf/v1": {
+      action: "v1": {}
+      op: list: method: *GET
+    }
+  }
+
+  entity: ufn2: {
+    path: "/ibge/uf/v1/{siglaUF}": {
+      rename: param: "siglaUF": *"sigla_uf"
+      op: load: method: *GET
+    }
+  }
+
+}

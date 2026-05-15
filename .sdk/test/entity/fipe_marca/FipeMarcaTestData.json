@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "fipe_marca": {
+      "FIPE_MARCA00": {
+        "nome": "s14",
+        "valor": "s15",
+        "tipo_veiculo": "TIPO_VEICULO01"
+      },
+      "FIPE_MARCA01": {
+        "nome": "s28",
+        "valor": "s29",
+        "tipo_veiculo": "TIPO_VEICULO01"
+      },
+      "FIPE_MARCA02": {
+        "nome": "s3c",
+        "valor": "s3d",
+        "tipo_veiculo": "TIPO_VEICULO01"
+      }
+    }
+  },
+  "new": {
+    "fipe_marca": {
+      "fipe_marca_ref01": {
+        "nome": "s50",
+        "valor": "s51"
+      }
+    }
+  }
+}

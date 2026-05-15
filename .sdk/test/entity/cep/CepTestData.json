@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "cep": {
+      "CEP00": {
+        "cep": "s46",
+        "city": "s47",
+        "location": {},
+        "neighborhood": "s49",
+        "service": "s4a",
+        "state": "s4b",
+        "street": "s4c"
+      },
+      "CEP01": {
+        "cep": "s8c",
+        "city": "s8d",
+        "location": {},
+        "neighborhood": "s8f",
+        "service": "s90",
+        "state": "s91",
+        "street": "s92"
+      },
+      "CEP02": {
+        "cep": "sd2",
+        "city": "sd3",
+        "location": {},
+        "neighborhood": "sd5",
+        "service": "sd6",
+        "state": "sd7",
+        "street": "sd8"
+      }
+    }
+  },
+  "new": {
+    "cep": {
+      "cep_ref01": {
+        "cep": "s118",
+        "city": "s119",
+        "location": {},
+        "neighborhood": "s11b",
+        "service": "s11c",
+        "state": "s11d",
+        "street": "s11e"
+      }
+    }
+  }
+}

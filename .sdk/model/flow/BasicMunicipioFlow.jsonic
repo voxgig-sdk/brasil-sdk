@@ -1,0 +1,32 @@
+# BasicMunicipioFlow
+
+main: kit: flow: BasicMunicipioFlow:
+{
+  entity: "municipio",
+  kind: "basic",
+  name: "BasicMunicipioFlow",
+  step: [
+    {
+      input: {
+        ref: "municipio_ref01",
+        srcdatavar: "municipio_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "municipio01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-municipio_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMunicipioFlow"
+}

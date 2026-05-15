@@ -1,0 +1,90 @@
+{
+  "existing": {
+    "cnpj": {
+      "CNPJ00": {
+        "bairro": "sb4",
+        "capital_social": 181,
+        "cep": "sb6",
+        "cnae_fiscal": "sb7",
+        "cnae_fiscal_descricao": "sb8",
+        "cnpj": "sb9",
+        "complemento": "sba",
+        "data_inicio_atividade": "sbb",
+        "ddd_telefone_1": "sbc",
+        "logradouro": "sbd",
+        "municipio": "sbe",
+        "natureza_juridica": "sbf",
+        "nome_fantasia": "sc0",
+        "numero": "sc1",
+        "porte": "sc2",
+        "qsa": [],
+        "razao_social": "sc4",
+        "uf": "sc5"
+      },
+      "CNPJ01": {
+        "bairro": "s168",
+        "capital_social": 361,
+        "cep": "s16a",
+        "cnae_fiscal": "s16b",
+        "cnae_fiscal_descricao": "s16c",
+        "cnpj": "s16d",
+        "complemento": "s16e",
+        "data_inicio_atividade": "s16f",
+        "ddd_telefone_1": "s170",
+        "logradouro": "s171",
+        "municipio": "s172",
+        "natureza_juridica": "s173",
+        "nome_fantasia": "s174",
+        "numero": "s175",
+        "porte": "s176",
+        "qsa": [],
+        "razao_social": "s178",
+        "uf": "s179"
+      },
+      "CNPJ02": {
+        "bairro": "s21c",
+        "capital_social": 541,
+        "cep": "s21e",
+        "cnae_fiscal": "s21f",
+        "cnae_fiscal_descricao": "s220",
+        "cnpj": "s221",
+        "complemento": "s222",
+        "data_inicio_atividade": "s223",
+        "ddd_telefone_1": "s224",
+        "logradouro": "s225",
+        "municipio": "s226",
+        "natureza_juridica": "s227",
+        "nome_fantasia": "s228",
+        "numero": "s229",
+        "porte": "s22a",
+        "qsa": [],
+        "razao_social": "s22c",
+        "uf": "s22d"
+      }
+    }
+  },
+  "new": {
+    "cnpj": {
+      "cnpj_ref01": {
+        "bairro": "s2d0",
+        "capital_social": 721,
+        "cep": "s2d2",
+        "cnae_fiscal": "s2d3",
+        "cnae_fiscal_descricao": "s2d4",
+        "cnpj": "s2d5",
+        "complemento": "s2d6",
+        "data_inicio_atividade": "s2d7",
+        "ddd_telefone_1": "s2d8",
+        "logradouro": "s2d9",
+        "municipio": "s2da",
+        "natureza_juridica": "s2db",
+        "nome_fantasia": "s2dc",
+        "numero": "s2dd",
+        "porte": "s2de",
+        "qsa": [],
+        "razao_social": "s2e0",
+        "uf": "s2e1"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+# Entity: ufn
+
+main: kit: entity: ufn: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "nome"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "regiao"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "sigla"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "ufn"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/ibge/uf/v1"
+          parts: [
+            "ibge"
+            "uf"
+            "v1"
+          ]
+          select: {
+            "$action": "v1"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Brasil API"
+        url: "https://brasilapi.com.br/docs"
+      }
+      description: "Acesso programático de informações relacionadas a CEPs, bancos, CNPJ, IBGE, feriados nacionais, tabela FIPE e muito mais, fornecendo endpoints modernos com baixa latência. Este projeto busca centralizar dados públicos para uma fácil e rápida consulta em aplicações."
+      license: {
+        name: "MIT"
+        url: "https://opensource.org/licenses/MIT"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://brasilapi.com.br/api"
+        }
+      ]
+      title: "Brasil API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

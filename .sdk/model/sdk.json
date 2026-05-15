@@ -1,0 +1,1562 @@
+{
+  "name": "brasil",
+  "origin": "voxgig-sdk",
+  "def": "brasil_0.1.0.json",
+  "main": {
+    "kit": {
+      "info": {
+        "contact": {
+          "name": "Brasil API",
+          "url": "https://brasilapi.com.br/docs"
+        },
+        "description": "Acesso programático de informações relacionadas a CEPs, bancos, CNPJ, IBGE, feriados nacionais, tabela FIPE e muito mais, fornecendo endpoints modernos com baixa latência. Este projeto busca centralizar dados públicos para uma fácil e rápida consulta em aplicações.",
+        "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "servers": [
+          {
+            "description": "Production server",
+            "url": "https://brasilapi.com.br/api"
+          }
+        ],
+        "title": "Brasil API",
+        "version": "1.0.0"
+      },
+      "config": {
+        "auth": {
+          "prefix": "Bearer"
+        },
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "entity": {
+        "bank": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "code",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "full_name",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "ispb",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "name",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "bank",
+          "op": {
+            "list": {
+              "name": "list",
+              "points": [
+                {
+                  "method": "GET",
+                  "orig": "/banks/v1",
+                  "parts": [
+                    "banks",
+                    "v1"
+                  ],
+                  "select": {
+                    "$action": "v1"
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true,
+                  "args": {}
+                }
+              ],
+              "input": "data"
+            },
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "001",
+                        "kind": "param",
+                        "name": "code",
+                        "orig": "code",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/banks/v1/{code}",
+                  "parts": [
+                    "banks",
+                    "v1",
+                    "{code}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "code"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "cep": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "cep",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "city",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "location",
+              "req": false,
+              "type": "`$OBJECT`",
+              "active": true
+            },
+            {
+              "name": "neighborhood",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "service",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "state",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "street",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "cep",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "01310100",
+                        "kind": "param",
+                        "name": "cep",
+                        "orig": "cep",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/cep/v1/{cep}",
+                  "parts": [
+                    "cep",
+                    "v1",
+                    "{cep}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "cep"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                },
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "01310100",
+                        "kind": "param",
+                        "name": "cep",
+                        "orig": "cep",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/cep/v2/{cep}",
+                  "parts": [
+                    "cep",
+                    "v2",
+                    "{cep}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "cep"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ],
+              [
+                "v2"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "cnpj": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "bairro",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "capital_social",
+              "req": false,
+              "type": "`$NUMBER`",
+              "active": true
+            },
+            {
+              "name": "cep",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "cnae_fiscal",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "cnae_fiscal_descricao",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "cnpj",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "complemento",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "data_inicio_atividade",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "ddd_telefone_1",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "logradouro",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "municipio",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "natureza_juridica",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "nome_fantasia",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "numero",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "porte",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "qsa",
+              "req": false,
+              "type": "`$ARRAY`",
+              "active": true
+            },
+            {
+              "name": "razao_social",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "uf",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "cnpj",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "00000000000191",
+                        "kind": "param",
+                        "name": "cnpj",
+                        "orig": "cnpj",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/cnpj/v1/{cnpj}",
+                  "parts": [
+                    "cnpj",
+                    "v1",
+                    "{cnpj}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "cnpj"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "ddd": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "city",
+              "req": false,
+              "type": "`$ARRAY`",
+              "active": true
+            },
+            {
+              "name": "state",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "ddd",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "11",
+                        "kind": "param",
+                        "name": "ddd",
+                        "orig": "ddd",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/ddd/v1/{ddd}",
+                  "parts": [
+                    "ddd",
+                    "v1",
+                    "{ddd}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "ddd"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "feriado": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "date",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "name",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "type",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "feriado",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": 2024,
+                        "kind": "param",
+                        "name": "ano",
+                        "orig": "ano",
+                        "reqd": true,
+                        "type": "`$INTEGER`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/feriados/v1/{ano}",
+                  "parts": [
+                    "feriados",
+                    "v1",
+                    "{ano}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "ano"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "fipe_marca": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "nome",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "valor",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "fipe_marca",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "carros",
+                        "kind": "param",
+                        "name": "tipo_veiculo",
+                        "orig": "tipo_veiculo",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/fipe/marcas/v1/{tipoVeiculo}",
+                  "parts": [
+                    "fipe",
+                    "marcas",
+                    "v1",
+                    "{tipo_veiculo}"
+                  ],
+                  "rename": {
+                    "param": {
+                      "tipoVeiculo": "tipo_veiculo"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "tipo_veiculo"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "fipe_preco": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "ano_modelo",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "codigo_fipe",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "combustivel",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "marca",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "mes_referencia",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "modelo",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "sigla_combustivel",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "tipo_veiculo",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "valor",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "fipe_preco",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "001004-1",
+                        "kind": "param",
+                        "name": "codigo_fipe",
+                        "orig": "codigo_fipe",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/fipe/preco/v1/{codigoFipe}",
+                  "parts": [
+                    "fipe",
+                    "preco",
+                    "v1",
+                    "{codigo_fipe}"
+                  ],
+                  "rename": {
+                    "param": {
+                      "codigoFipe": "codigo_fipe"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "codigo_fipe"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "municipio": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "codigo_ibge",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "nome",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "name": "municipio",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "SP",
+                        "kind": "param",
+                        "name": "sigla_uf",
+                        "orig": "sigla_uf",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/ibge/municipios/v1/{siglaUF}",
+                  "parts": [
+                    "ibge",
+                    "municipios",
+                    "v1",
+                    "{sigla_uf}"
+                  ],
+                  "rename": {
+                    "param": {
+                      "siglaUF": "sigla_uf"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "sigla_uf"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        },
+        "ufn": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "id",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "nome",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "regiao",
+              "req": false,
+              "type": "`$OBJECT`",
+              "active": true
+            },
+            {
+              "name": "sigla",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "ufn",
+          "op": {
+            "list": {
+              "name": "list",
+              "points": [
+                {
+                  "method": "GET",
+                  "orig": "/ibge/uf/v1",
+                  "parts": [
+                    "ibge",
+                    "uf",
+                    "v1"
+                  ],
+                  "select": {
+                    "$action": "v1"
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true,
+                  "args": {}
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "active": true,
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "ufn2": {
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "name": "id",
+              "req": false,
+              "type": "`$INTEGER`",
+              "active": true
+            },
+            {
+              "name": "nome",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            },
+            {
+              "name": "regiao",
+              "req": false,
+              "type": "`$OBJECT`",
+              "active": true
+            },
+            {
+              "name": "sigla",
+              "req": false,
+              "type": "`$STRING`",
+              "active": true
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "ufn2",
+          "op": {
+            "load": {
+              "name": "load",
+              "points": [
+                {
+                  "args": {
+                    "params": [
+                      {
+                        "example": "SP",
+                        "kind": "param",
+                        "name": "sigla_uf",
+                        "orig": "sigla_uf",
+                        "reqd": true,
+                        "type": "`$STRING`",
+                        "active": true
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/ibge/uf/v1/{siglaUF}",
+                  "parts": [
+                    "ibge",
+                    "uf",
+                    "v1",
+                    "{sigla_uf}"
+                  ],
+                  "rename": {
+                    "param": {
+                      "siglaUF": "sigla_uf"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "sigla_uf"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  },
+                  "active": true
+                }
+              ],
+              "input": "data"
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "v1"
+              ]
+            ]
+          },
+          "active": true
+        }
+      },
+      "feature": {
+        "test": {
+          "name": "test",
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1",
+          "active": true,
+          "config": {
+            "options": {
+              "active": false
+            }
+          },
+          "hook": {
+            "PostConstruct": {
+              "active": true,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": true,
+              "await": false
+            },
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
+            "PrePoint": {
+              "active": true
+            },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": true,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            }
+          },
+          "target": {
+            "ts": {
+              "deps": {}
+            },
+            "go": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            }
+          }
+        }
+      },
+      "flow": {
+        "BasicBankFlow": {
+          "entity": "bank",
+          "kind": "basic",
+          "name": "BasicBankFlow",
+          "step": [
+            {
+              "op": "list",
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "bank_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "match": {},
+              "data": {},
+              "input": {},
+              "spec": []
+            },
+            {
+              "input": {
+                "ref": "bank_ref01",
+                "srcdatavar": "bank_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "bank01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-bank_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicBankFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicCepFlow": {
+          "entity": "cep",
+          "kind": "basic",
+          "name": "BasicCepFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "cep_ref01",
+                "srcdatavar": "cep_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "cep01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-cep_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicCepFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicCnpjFlow": {
+          "entity": "cnpj",
+          "kind": "basic",
+          "name": "BasicCnpjFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "cnpj_ref01",
+                "srcdatavar": "cnpj_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "cnpj01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-cnpj_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicCnpjFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicDddFlow": {
+          "entity": "ddd",
+          "kind": "basic",
+          "name": "BasicDddFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "ddd_ref01",
+                "srcdatavar": "ddd_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "ddd01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-ddd_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicDddFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicFeriadoFlow": {
+          "entity": "feriado",
+          "kind": "basic",
+          "name": "BasicFeriadoFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "feriado_ref01",
+                "srcdatavar": "feriado_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "feriado01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-feriado_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicFeriadoFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicFipeMarcaFlow": {
+          "entity": "fipe_marca",
+          "kind": "basic",
+          "name": "BasicFipeMarcaFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "fipe_marca_ref01",
+                "srcdatavar": "fipe_marca_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "fipe_marca01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-fipe_marca_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicFipeMarcaFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicFipePrecoFlow": {
+          "entity": "fipe_preco",
+          "kind": "basic",
+          "name": "BasicFipePrecoFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "fipe_preco_ref01",
+                "srcdatavar": "fipe_preco_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "fipe_preco01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-fipe_preco_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicFipePrecoFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicMunicipioFlow": {
+          "entity": "municipio",
+          "kind": "basic",
+          "name": "BasicMunicipioFlow",
+          "step": [
+            {
+              "input": {
+                "ref": "municipio_ref01",
+                "srcdatavar": "municipio_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "municipio01"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-municipio_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicMunicipioFlow",
+          "active": true,
+          "param": {}
+        },
+        "BasicUfn2Flow": {
+          "entity": "ufn2",
+          "kind": "basic",
+          "name": "BasicUfn2Flow",
+          "step": [
+            {
+              "input": {
+                "ref": "ufn2_ref01",
+                "srcdatavar": "ufn2_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "ufn201"
+              },
+              "op": "load",
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-ufn2_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "data": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicUfn2Flow",
+          "active": true,
+          "param": {}
+        },
+        "BasicUfnFlow": {
+          "entity": "ufn",
+          "kind": "basic",
+          "name": "BasicUfnFlow",
+          "step": [
+            {
+              "op": "list",
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "ufn_ref01"
+                  }
+                }
+              ],
+              "active": true,
+              "match": {},
+              "data": {},
+              "input": {},
+              "spec": []
+            }
+          ],
+          "key$": "BasicUfnFlow",
+          "active": true,
+          "param": {}
+        }
+      },
+      "target": {
+        "ts": {
+          "title": "TypeScript",
+          "ext": "ts",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "deps": {
+            "dotenv": {
+              "active": true,
+              "version": "^17.4.2",
+              "kind": "dev"
+            },
+            "typescript": {
+              "active": true,
+              "version": "^5.9.3",
+              "kind": "dev"
+            },
+            "@types/node": {
+              "active": true,
+              "version": "^25.6.0",
+              "kind": "dev"
+            }
+          },
+          "name": "ts",
+          "active": true
+        },
+        "go": {
+          "title": "Golang",
+          "ext": "go",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "srcfeature": false,
+          "deps": {
+            "github.com/voxgig/struct": {
+              "active": true,
+              "version": "v0.0.0",
+              "replace": "./utility/struct",
+              "kind": "prod"
+            }
+          },
+          "name": "go",
+          "active": true
+        },
+        "lua": {
+          "title": "Lua",
+          "ext": "lua",
+          "comment": {
+            "line": "--"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "srcfeature": false,
+          "deps": {
+            "dkjson": {
+              "active": true,
+              "version": "2.5",
+              "kind": "prod"
+            }
+          },
+          "name": "lua",
+          "active": true
+        },
+        "php": {
+          "title": "PHP",
+          "ext": "php",
+          "comment": {
+            "line": "//"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "srcfeature": false,
+          "deps": {},
+          "name": "php",
+          "active": true
+        },
+        "py": {
+          "title": "Python",
+          "ext": "py",
+          "comment": {
+            "line": "#"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "srcfeature": false,
+          "deps": {
+            "requests": {
+              "active": true,
+              "version": "2.33",
+              "kind": "prod"
+            }
+          },
+          "name": "py",
+          "active": true
+        },
+        "rb": {
+          "title": "Ruby",
+          "ext": "rb",
+          "comment": {
+            "line": "#"
+          },
+          "module": {
+            "name": "brasil"
+          },
+          "srcfeature": false,
+          "deps": {
+            "voxgig-struct": {
+              "active": true,
+              "version": "0.0.10",
+              "kind": "prod"
+            },
+            "json": {
+              "active": true,
+              "version": "0",
+              "kind": "prod"
+            }
+          },
+          "name": "rb",
+          "active": true
+        }
+      },
+      "option": {}
+    },
+    "def": {
+      "desc": ""
+    },
+    "api": {
+      "guide": {},
+      "entity": {}
+    }
+  },
+  "name__orig": "brasil",
+  "Name": "Brasil",
+  "name_": "brasil",
+  "name-": "brasil",
+  "NAME": "BRASIL"
+}

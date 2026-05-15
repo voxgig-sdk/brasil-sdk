@@ -1,0 +1,12 @@
+# Flows
+
+@"BasicBankFlow.jsonic"
+@"BasicCepFlow.jsonic"
+@"BasicCnpjFlow.jsonic"
+@"BasicDddFlow.jsonic"
+@"BasicFeriadoFlow.jsonic"
+@"BasicFipeMarcaFlow.jsonic"
+@"BasicFipePrecoFlow.jsonic"
+@"BasicMunicipioFlow.jsonic"
+@"BasicUfn2Flow.jsonic"
+@"BasicUfnFlow.jsonic"

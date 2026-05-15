@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "municipio": {
+      "MUNICIPIO00": {
+        "codigo_ibge": "s14",
+        "nome": "s15",
+        "sigla_uf": "SIGLA_UF01"
+      },
+      "MUNICIPIO01": {
+        "codigo_ibge": "s28",
+        "nome": "s29",
+        "sigla_uf": "SIGLA_UF01"
+      },
+      "MUNICIPIO02": {
+        "codigo_ibge": "s3c",
+        "nome": "s3d",
+        "sigla_uf": "SIGLA_UF01"
+      }
+    }
+  },
+  "new": {
+    "municipio": {
+      "municipio_ref01": {
+        "codigo_ibge": "s50",
+        "nome": "s51"
+      }
+    }
+  }
+}

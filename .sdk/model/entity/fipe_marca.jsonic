@@ -1,0 +1,75 @@
+# Entity: fipe_marca
+
+main: kit: entity: fipe_marca: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "nome"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "valor"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "fipe_marca"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "carros"
+                kind: "param"
+                name: "tipo_veiculo"
+                orig: "tipo_veiculo"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/fipe/marcas/v1/{tipoVeiculo}"
+          parts: [
+            "fipe"
+            "marcas"
+            "v1"
+            "{tipo_veiculo}"
+          ]
+          rename: {
+            param: {
+              tipoVeiculo: "tipo_veiculo"
+            }
+          }
+          select: {
+            exist: [
+              "tipo_veiculo"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

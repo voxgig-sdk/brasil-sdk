@@ -1,0 +1,69 @@
+# Entity: ddd
+
+main: kit: entity: ddd: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "city"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "state"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "ddd"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "11"
+                kind: "param"
+                name: "ddd"
+                orig: "ddd"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ddd/v1/{ddd}"
+          parts: [
+            "ddd"
+            "v1"
+            "{ddd}"
+          ]
+          select: {
+            exist: [
+              "ddd"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

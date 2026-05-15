@@ -1,0 +1,127 @@
+# Entity: cep
+
+main: kit: entity: cep: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "cep"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "city"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "neighborhood"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "service"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "state"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "street"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "cep"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "01310100"
+                kind: "param"
+                name: "cep"
+                orig: "cep"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cep/v1/{cep}"
+          parts: [
+            "cep"
+            "v1"
+            "{cep}"
+          ]
+          select: {
+            exist: [
+              "cep"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "01310100"
+                kind: "param"
+                name: "cep"
+                orig: "cep"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cep/v2/{cep}"
+          parts: [
+            "cep"
+            "v2"
+            "{cep}"
+          ]
+          select: {
+            exist: [
+              "cep"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+      [
+        "v2"
+      ]
+    ]
+  }
+
+
+
+}

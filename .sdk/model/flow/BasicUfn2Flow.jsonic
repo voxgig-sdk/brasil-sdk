@@ -1,0 +1,32 @@
+# BasicUfn2Flow
+
+main: kit: flow: BasicUfn2Flow:
+{
+  entity: "ufn2",
+  kind: "basic",
+  name: "BasicUfn2Flow",
+  step: [
+    {
+      input: {
+        ref: "ufn2_ref01",
+        srcdatavar: "ufn2_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "ufn201"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-ufn2_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUfn2Flow"
+}

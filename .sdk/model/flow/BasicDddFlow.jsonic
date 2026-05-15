@@ -1,0 +1,32 @@
+# BasicDddFlow
+
+main: kit: flow: BasicDddFlow:
+{
+  entity: "ddd",
+  kind: "basic",
+  name: "BasicDddFlow",
+  step: [
+    {
+      input: {
+        ref: "ddd_ref01",
+        srcdatavar: "ddd_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "ddd01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-ddd_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDddFlow"
+}

@@ -1,0 +1,110 @@
+# Entity: fipe_preco
+
+main: kit: entity: fipe_preco: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "ano_modelo"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "codigo_fipe"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "combustivel"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "marca"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "mes_referencia"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "modelo"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "sigla_combustivel"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "tipo_veiculo"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "valor"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "fipe_preco"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "001004-1"
+                kind: "param"
+                name: "codigo_fipe"
+                orig: "codigo_fipe"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/fipe/preco/v1/{codigoFipe}"
+          parts: [
+            "fipe"
+            "preco"
+            "v1"
+            "{codigo_fipe}"
+          ]
+          rename: {
+            param: {
+              codigoFipe: "codigo_fipe"
+            }
+          }
+          select: {
+            exist: [
+              "codigo_fipe"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

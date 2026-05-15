@@ -1,0 +1,32 @@
+# BasicFipeMarcaFlow
+
+main: kit: flow: BasicFipeMarcaFlow:
+{
+  entity: "fipe_marca",
+  kind: "basic",
+  name: "BasicFipeMarcaFlow",
+  step: [
+    {
+      input: {
+        ref: "fipe_marca_ref01",
+        srcdatavar: "fipe_marca_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "fipe_marca01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-fipe_marca_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFipeMarcaFlow"
+}

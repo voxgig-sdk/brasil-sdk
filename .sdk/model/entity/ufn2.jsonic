@@ -1,0 +1,90 @@
+# Entity: ufn2
+
+main: kit: entity: ufn2: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "nome"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "regiao"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "sigla"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "ufn2"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "SP"
+                kind: "param"
+                name: "sigla_uf"
+                orig: "sigla_uf"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ibge/uf/v1/{siglaUF}"
+          parts: [
+            "ibge"
+            "uf"
+            "v1"
+            "{sigla_uf}"
+          ]
+          rename: {
+            param: {
+              siglaUF: "sigla_uf"
+            }
+          }
+          select: {
+            exist: [
+              "sigla_uf"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

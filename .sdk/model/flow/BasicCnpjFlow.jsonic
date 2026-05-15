@@ -1,0 +1,32 @@
+# BasicCnpjFlow
+
+main: kit: flow: BasicCnpjFlow:
+{
+  entity: "cnpj",
+  kind: "basic",
+  name: "BasicCnpjFlow",
+  step: [
+    {
+      input: {
+        ref: "cnpj_ref01",
+        srcdatavar: "cnpj_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "cnpj01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-cnpj_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCnpjFlow"
+}

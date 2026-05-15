@@ -1,0 +1,149 @@
+# Entity: cnpj
+
+main: kit: entity: cnpj: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "bairro"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "capital_social"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "cep"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "cnae_fiscal"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "cnae_fiscal_descricao"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "cnpj"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "complemento"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "data_inicio_atividade"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "ddd_telefone_1"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "logradouro"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "municipio"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "natureza_juridica"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nome_fantasia"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "numero"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "porte"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "qsa"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "razao_social"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "uf"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "cnpj"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "00000000000191"
+                kind: "param"
+                name: "cnpj"
+                orig: "cnpj"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cnpj/v1/{cnpj}"
+          parts: [
+            "cnpj"
+            "v1"
+            "{cnpj}"
+          ]
+          select: {
+            exist: [
+              "cnpj"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

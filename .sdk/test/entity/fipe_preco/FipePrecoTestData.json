@@ -1,0 +1,54 @@
+{
+  "existing": {
+    "fipe_preco": {
+      "FIPE_PRECO00": {
+        "ano_modelo": "s5a",
+        "codigo_fipe": "s5b",
+        "combustivel": "s5c",
+        "marca": "s5d",
+        "mes_referencia": "s5e",
+        "modelo": "s5f",
+        "sigla_combustivel": "s60",
+        "tipo_veiculo": "s61",
+        "valor": "s62"
+      },
+      "FIPE_PRECO01": {
+        "ano_modelo": "sb4",
+        "codigo_fipe": "sb5",
+        "combustivel": "sb6",
+        "marca": "sb7",
+        "mes_referencia": "sb8",
+        "modelo": "sb9",
+        "sigla_combustivel": "sba",
+        "tipo_veiculo": "sbb",
+        "valor": "sbc"
+      },
+      "FIPE_PRECO02": {
+        "ano_modelo": "s10e",
+        "codigo_fipe": "s10f",
+        "combustivel": "s110",
+        "marca": "s111",
+        "mes_referencia": "s112",
+        "modelo": "s113",
+        "sigla_combustivel": "s114",
+        "tipo_veiculo": "s115",
+        "valor": "s116"
+      }
+    }
+  },
+  "new": {
+    "fipe_preco": {
+      "fipe_preco_ref01": {
+        "ano_modelo": "s168",
+        "codigo_fipe": "s169",
+        "combustivel": "s16a",
+        "marca": "s16b",
+        "mes_referencia": "s16c",
+        "modelo": "s16d",
+        "sigla_combustivel": "s16e",
+        "tipo_veiculo": "s16f",
+        "valor": "s170"
+      }
+    }
+  }
+}

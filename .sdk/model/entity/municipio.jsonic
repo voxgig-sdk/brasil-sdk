@@ -1,0 +1,75 @@
+# Entity: municipio
+
+main: kit: entity: municipio: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "codigo_ibge"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nome"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "municipio"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "SP"
+                kind: "param"
+                name: "sigla_uf"
+                orig: "sigla_uf"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ibge/municipios/v1/{siglaUF}"
+          parts: [
+            "ibge"
+            "municipios"
+            "v1"
+            "{sigla_uf}"
+          ]
+          rename: {
+            param: {
+              siglaUF: "sigla_uf"
+            }
+          }
+          select: {
+            exist: [
+              "sigla_uf"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

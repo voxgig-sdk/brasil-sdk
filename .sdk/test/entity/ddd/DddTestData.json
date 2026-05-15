@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "ddd": {
+      "DDD00": {
+        "city": [],
+        "state": "s15",
+        "ddd": "DDD01"
+      },
+      "DDD01": {
+        "city": [],
+        "state": "s29",
+        "ddd": "DDD01"
+      },
+      "DDD02": {
+        "city": [],
+        "state": "s3d",
+        "ddd": "DDD01"
+      }
+    }
+  },
+  "new": {
+    "ddd": {
+      "ddd_ref01": {
+        "city": [],
+        "state": "s51"
+      }
+    }
+  }
+}

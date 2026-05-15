@@ -1,0 +1,44 @@
+# BasicBankFlow
+
+main: kit: flow: BasicBankFlow:
+{
+  entity: "bank",
+  kind: "basic",
+  name: "BasicBankFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "bank_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "bank_ref01",
+        srcdatavar: "bank_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "bank01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-bank_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBankFlow"
+}

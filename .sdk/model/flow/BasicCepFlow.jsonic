@@ -1,0 +1,32 @@
+# BasicCepFlow
+
+main: kit: flow: BasicCepFlow:
+{
+  entity: "cep",
+  kind: "basic",
+  name: "BasicCepFlow",
+  step: [
+    {
+      input: {
+        ref: "cep_ref01",
+        srcdatavar: "cep_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "cep01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-cep_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCepFlow"
+}

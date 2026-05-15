@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "ufn2": {
+      "UFN200": {
+        "id": "UFN200",
+        "nome": "s29",
+        "regiao": {},
+        "sigla": "s2b",
+        "sigla_uf": "SIGLA_UF01"
+      },
+      "UFN201": {
+        "id": "UFN201",
+        "nome": "s51",
+        "regiao": {},
+        "sigla": "s53",
+        "sigla_uf": "SIGLA_UF01"
+      },
+      "UFN202": {
+        "id": "UFN202",
+        "nome": "s79",
+        "regiao": {},
+        "sigla": "s7b",
+        "sigla_uf": "SIGLA_UF01"
+      }
+    }
+  },
+  "new": {
+    "ufn2": {
+      "ufn2_ref01": {
+        "nome": "sa1",
+        "regiao": {},
+        "sigla": "sa3"
+      }
+    }
+  }
+}

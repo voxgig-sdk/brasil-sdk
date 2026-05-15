@@ -1,0 +1,22 @@
+# BasicUfnFlow
+
+main: kit: flow: BasicUfnFlow:
+{
+  entity: "ufn",
+  kind: "basic",
+  name: "BasicUfnFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "ufn_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUfnFlow"
+}
