@@ -4,17 +4,20 @@
       "MUNICIPIO00": {
         "codigo_ibge": "s14",
         "nome": "s15",
-        "sigla_uf": "SIGLA_UF01"
+        "sigla_uf": "SIGLA_UF01",
+        "id": "MUNICIPIO00"
       },
       "MUNICIPIO01": {
         "codigo_ibge": "s28",
         "nome": "s29",
-        "sigla_uf": "SIGLA_UF01"
+        "sigla_uf": "SIGLA_UF01",
+        "id": "MUNICIPIO01"
       },
       "MUNICIPIO02": {
         "codigo_ibge": "s3c",
         "nome": "s3d",
-        "sigla_uf": "SIGLA_UF01"
+        "sigla_uf": "SIGLA_UF01",
+        "id": "MUNICIPIO02"
       }
     }
   },

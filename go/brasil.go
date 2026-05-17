@@ -1,10 +1,10 @@
 package voxgigbrasilsdk
 
 import (
-	"github.com/voxgig-sdk/brasil-sdk/core"
-	"github.com/voxgig-sdk/brasil-sdk/entity"
-	"github.com/voxgig-sdk/brasil-sdk/feature"
-	_ "github.com/voxgig-sdk/brasil-sdk/utility"
+	"github.com/voxgig-sdk/brasil-sdk/go/core"
+	"github.com/voxgig-sdk/brasil-sdk/go/entity"
+	"github.com/voxgig-sdk/brasil-sdk/go/feature"
+	_ "github.com/voxgig-sdk/brasil-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

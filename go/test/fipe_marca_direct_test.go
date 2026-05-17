@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/brasil-sdk"
-	"github.com/voxgig-sdk/brasil-sdk/core"
+	sdk "github.com/voxgig-sdk/brasil-sdk/go"
+	"github.com/voxgig-sdk/brasil-sdk/go/core"
 )
 
 func TestFipeMarcaDirect(t *testing.T) {

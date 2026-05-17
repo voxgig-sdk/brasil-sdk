@@ -10,7 +10,8 @@
         "modelo": "s5f",
         "sigla_combustivel": "s60",
         "tipo_veiculo": "s61",
-        "valor": "s62"
+        "valor": "s62",
+        "id": "FIPE_PRECO00"
       },
       "FIPE_PRECO01": {
         "ano_modelo": "sb4",
@@ -21,7 +22,8 @@
         "modelo": "sb9",
         "sigla_combustivel": "sba",
         "tipo_veiculo": "sbb",
-        "valor": "sbc"
+        "valor": "sbc",
+        "id": "FIPE_PRECO01"
       },
       "FIPE_PRECO02": {
         "ano_modelo": "s10e",
@@ -32,7 +34,8 @@
         "modelo": "s113",
         "sigla_combustivel": "s114",
         "tipo_veiculo": "s115",
-        "valor": "s116"
+        "valor": "s116",
+        "id": "FIPE_PRECO02"
       }
     }
   },

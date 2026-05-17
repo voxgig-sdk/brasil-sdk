@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/brasil-sdk/core"
+	"github.com/voxgig-sdk/brasil-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/brasil-sdk/go/utility/struct"
 )
 
 type BankEntity struct {

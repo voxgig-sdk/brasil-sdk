@@ -5,19 +5,22 @@
         "code": "s28",
         "full_name": "s29",
         "ispb": "s2a",
-        "name": "s2b"
+        "name": "s2b",
+        "id": "BANK00"
       },
       "BANK01": {
         "code": "s50",
         "full_name": "s51",
         "ispb": "s52",
-        "name": "s53"
+        "name": "s53",
+        "id": "BANK01"
       },
       "BANK02": {
         "code": "s78",
         "full_name": "s79",
         "ispb": "s7a",
-        "name": "s7b"
+        "name": "s7b",
+        "id": "BANK02"
       }
     }
   },

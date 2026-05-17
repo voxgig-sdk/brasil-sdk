@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/brasil-sdk"
-	"github.com/voxgig-sdk/brasil-sdk/core"
+	sdk "github.com/voxgig-sdk/brasil-sdk/go"
+	"github.com/voxgig-sdk/brasil-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/brasil-sdk/go/utility/struct"
 )
 
 func TestBankEntity(t *testing.T) {

@@ -8,7 +8,8 @@
         "neighborhood": "s49",
         "service": "s4a",
         "state": "s4b",
-        "street": "s4c"
+        "street": "s4c",
+        "id": "CEP00"
       },
       "CEP01": {
         "cep": "s8c",
@@ -17,7 +18,8 @@
         "neighborhood": "s8f",
         "service": "s90",
         "state": "s91",
-        "street": "s92"
+        "street": "s92",
+        "id": "CEP01"
       },
       "CEP02": {
         "cep": "sd2",
@@ -26,7 +28,8 @@
         "neighborhood": "sd5",
         "service": "sd6",
         "state": "sd7",
-        "street": "sd8"
+        "street": "sd8",
+        "id": "CEP02"
       }
     }
   },

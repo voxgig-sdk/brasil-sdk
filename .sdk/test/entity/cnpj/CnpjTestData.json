@@ -19,7 +19,8 @@
         "porte": "sc2",
         "qsa": [],
         "razao_social": "sc4",
-        "uf": "sc5"
+        "uf": "sc5",
+        "id": "CNPJ00"
       },
       "CNPJ01": {
         "bairro": "s168",
@@ -39,7 +40,8 @@
         "porte": "s176",
         "qsa": [],
         "razao_social": "s178",
-        "uf": "s179"
+        "uf": "s179",
+        "id": "CNPJ01"
       },
       "CNPJ02": {
         "bairro": "s21c",
@@ -59,7 +61,8 @@
         "porte": "s22a",
         "qsa": [],
         "razao_social": "s22c",
-        "uf": "s22d"
+        "uf": "s22d",
+        "id": "CNPJ02"
       }
     }
   },

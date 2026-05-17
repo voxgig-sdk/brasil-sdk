@@ -5,19 +5,22 @@
         "date": "s1e",
         "name": "s1f",
         "type": "s20",
-        "ano": "ANO01"
+        "ano": "ANO01",
+        "id": "FERIADO00"
       },
       "FERIADO01": {
         "date": "s3c",
         "name": "s3d",
         "type": "s3e",
-        "ano": "ANO01"
+        "ano": "ANO01",
+        "id": "FERIADO01"
       },
       "FERIADO02": {
         "date": "s5a",
         "name": "s5b",
         "type": "s5c",
-        "ano": "ANO01"
+        "ano": "ANO01",
+        "id": "FERIADO02"
       }
     }
   },
