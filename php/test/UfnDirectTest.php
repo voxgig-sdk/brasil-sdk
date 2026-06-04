@@ -68,14 +68,12 @@ function ufn_direct_setup($mockres)
     $env = Runner::env_override([
         "BRASIL_TEST_UFN_ENTID" => [],
         "BRASIL_TEST_LIVE" => "FALSE",
-        "BRASIL_APIKEY" => "NONE",
     ]);
 
     $live = $env["BRASIL_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["BRASIL_APIKEY"],
         ];
         $client = new BrasilSDK($merged_opts);
         return [

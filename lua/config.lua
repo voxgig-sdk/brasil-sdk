@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://brasilapi.com.br/api",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },

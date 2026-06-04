@@ -21,7 +21,26 @@
           }
         ],
         "title": "Brasil API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Programmatic access to Brazilian public data — CEPs, banks, CNPJ, IBGE, holidays, FIPE tables and more",
+        "homepage": "https://brasilapi.com.br/",
+        "docs_url": "https://brasilapi.com.br/docs",
+        "license_short": "MIT — open-source community project",
+        "license_md": "- MIT licensed, open-source community project maintained by Brazilian developers.\n- No API key or authentication required; CORS is enabled for browser clients.\n- The project asks consumers to avoid bulk/sequential scraping or high-volume automated crawling and to make requests that reflect genuine user need.\n- Service is still evolving — formal Terms of Service are being developed and availability is best-effort.",
+        "about_md": "[BrasilAPI](https://brasilapi.com.br/) is a community-maintained Brazilian initiative that centralises public-sector data behind a single, modern HTTPS API with low latency and CORS enabled. It exists to make information that is otherwise scattered across legacy government sites — Correios CEPs, the Central Bank of Brazil's bank registry, IBGE municipality lists, national holidays, FIPE vehicle pricing tables and more — accessible from any client without an API key.\n\nWhat you can look up:\n- Brazilian postal codes (`CEP`) and the address they map to\n- Bank registry entries from the Central Bank of Brazil\n- Companies by `CNPJ`\n- Telephone area codes (`DDD`) and the cities they cover\n- National holidays for a given year\n- FIPE vehicle brands and reference prices\n- IBGE municipalities and Brazilian states (`UF`)\n\nAll endpoints are read-only `GET` requests served from `https://brasilapi.com.br/api`. No authentication is required and responses are JSON. Data is sourced from upstream public registries (Correios, Banco Central, IBGE, FIPE, etc.); BrasilAPI proxies and normalises these sources, so freshness depends on the underlying authority.",
+        "entity_desc": {
+          "bank": "Brazilian banks registered with the Central Bank of Brazil, looked up by code (e.g. `/banks/v1`, `/banks/v1/{code}`).",
+          "cep": "Brazilian postal code (Código de Endereçamento Postal) resolution to street, neighbourhood, city and state (e.g. `/cep/v1/{cep}`, `/cep/v2/{cep}`).",
+          "cnpj": "Brazilian company registration (Cadastro Nacional da Pessoa Jurídica) lookup by tax ID (e.g. `/cnpj/v1/{cnpj}`).",
+          "ddd": "Brazilian telephone area codes (Discagem Direta à Distância) and the cities they cover (e.g. `/ddd/v1/{ddd}`).",
+          "feriado": "Brazilian national holidays for a given year (e.g. `/feriados/v1/{ano}`).",
+          "fipe_marca": "Vehicle brands from the FIPE (Fundação Instituto de Pesquisas Econômicas) reference tables, segmented by vehicle type (e.g. `/fipe/marcas/v1/{tipoVeiculo}`).",
+          "fipe_preco": "FIPE reference prices for vehicles by FIPE code (e.g. `/fipe/preco/v1/{codigoFipe}`).",
+          "municipio": "Brazilian municipalities sourced from IBGE, listed by state code (e.g. `/ibge/municipios/v1/{siglaUF}`).",
+          "ufn": "Brazilian federative units (states) — listings and lookup by code or abbreviation via the IBGE UF endpoints.",
+          "ufn2": "Alternate-version Brazilian federative unit endpoints exposing UF information from the IBGE dataset."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -29,7 +48,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "bank": {
