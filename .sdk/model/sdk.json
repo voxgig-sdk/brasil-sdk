@@ -1,53 +1,13 @@
 {
-  "name": "brasil",
-  "origin": "voxgig-sdk",
   "def": "brasil_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "contact": {
-          "name": "Brasil API",
-          "url": "https://brasilapi.com.br/docs"
-        },
-        "description": "Acesso programático de informações relacionadas a CEPs, bancos, CNPJ, IBGE, feriados nacionais, tabela FIPE e muito mais, fornecendo endpoints modernos com baixa latência. Este projeto busca centralizar dados públicos para uma fácil e rápida consulta em aplicações.",
-        "license": {
-          "name": "MIT",
-          "url": "https://opensource.org/licenses/MIT"
-        },
-        "servers": [
-          {
-            "description": "Production server",
-            "url": "https://brasilapi.com.br/api"
-          }
-        ],
-        "title": "Brasil API",
-        "version": "1.0.0",
-        "tagline": "Programmatic access to Brazilian public data — CEPs, banks, CNPJ, IBGE, holidays, FIPE tables and more",
-        "homepage": "https://brasilapi.com.br/",
-        "docs_url": "https://brasilapi.com.br/docs",
-        "license_short": "MIT — open-source community project",
-        "license_md": "- MIT licensed, open-source community project maintained by Brazilian developers.\n- No API key or authentication required; CORS is enabled for browser clients.\n- The project asks consumers to avoid bulk/sequential scraping or high-volume automated crawling and to make requests that reflect genuine user need.\n- Service is still evolving — formal Terms of Service are being developed and availability is best-effort.",
-        "about_md": "[BrasilAPI](https://brasilapi.com.br/) is a community-maintained Brazilian initiative that centralises public-sector data behind a single, modern HTTPS API with low latency and CORS enabled. It exists to make information that is otherwise scattered across legacy government sites — Correios CEPs, the Central Bank of Brazil's bank registry, IBGE municipality lists, national holidays, FIPE vehicle pricing tables and more — accessible from any client without an API key.\n\nWhat you can look up:\n- Brazilian postal codes (`CEP`) and the address they map to\n- Bank registry entries from the Central Bank of Brazil\n- Companies by `CNPJ`\n- Telephone area codes (`DDD`) and the cities they cover\n- National holidays for a given year\n- FIPE vehicle brands and reference prices\n- IBGE municipalities and Brazilian states (`UF`)\n\nAll endpoints are read-only `GET` requests served from `https://brasilapi.com.br/api`. No authentication is required and responses are JSON. Data is sourced from upstream public registries (Correios, Banco Central, IBGE, FIPE, etc.); BrasilAPI proxies and normalises these sources, so freshness depends on the underlying authority.",
-        "entity_desc": {
-          "bank": "Brazilian banks registered with the Central Bank of Brazil, looked up by code (e.g. `/banks/v1`, `/banks/v1/{code}`).",
-          "cep": "Brazilian postal code (Código de Endereçamento Postal) resolution to street, neighbourhood, city and state (e.g. `/cep/v1/{cep}`, `/cep/v2/{cep}`).",
-          "cnpj": "Brazilian company registration (Cadastro Nacional da Pessoa Jurídica) lookup by tax ID (e.g. `/cnpj/v1/{cnpj}`).",
-          "ddd": "Brazilian telephone area codes (Discagem Direta à Distância) and the cities they cover (e.g. `/ddd/v1/{ddd}`).",
-          "feriado": "Brazilian national holidays for a given year (e.g. `/feriados/v1/{ano}`).",
-          "fipe_marca": "Vehicle brands from the FIPE (Fundação Instituto de Pesquisas Econômicas) reference tables, segmented by vehicle type (e.g. `/fipe/marcas/v1/{tipoVeiculo}`).",
-          "fipe_preco": "FIPE reference prices for vehicles by FIPE code (e.g. `/fipe/preco/v1/{codigoFipe}`).",
-          "municipio": "Brazilian municipalities sourced from IBGE, listed by state code (e.g. `/ibge/municipios/v1/{siglaUF}`).",
-          "ufn": "Brazilian federative units (states) — listings and lookup by code or abbreviation via the IBGE UF endpoints.",
-          "ufn2": "Alternate-version Brazilian federative unit endpoints exposing UF information from the IBGE dataset."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -56,45 +16,52 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "bank": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "code",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "full_name",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "ispb",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "name",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "bank",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/banks/v1",
                   "parts": [
@@ -107,27 +74,26 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             },
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "001",
                         "kind": "param",
                         "name": "code",
                         "orig": "code",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -146,11 +112,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -159,73 +123,75 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "cep": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "cep",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "city",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "location",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "neighborhood",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "service",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "state",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "street",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "cep",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "01310100",
                         "kind": "param",
                         "name": "cep",
                         "orig": "cep",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -243,21 +209,21 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
+                    "res": "`body.cep`"
+                  }
                 },
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "01310100",
                         "kind": "param",
                         "name": "cep",
                         "orig": "cep",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -275,12 +241,10 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
+                    "res": "`body.cep`"
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -292,139 +256,141 @@
                 "v2"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "cnpj": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "bairro",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "capital_social",
               "req": false,
-              "type": "`$NUMBER`",
-              "active": true
+              "type": "`$NUMBER`"
             },
             {
+              "active": true,
               "name": "cep",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "cnae_fiscal",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "cnae_fiscal_descricao",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "cnpj",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "complemento",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "data_inicio_atividade",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "ddd_telefone_1",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "logradouro",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "municipio",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "natureza_juridica",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "nome_fantasia",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "numero",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "porte",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "qsa",
               "req": false,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             },
             {
+              "active": true,
               "name": "razao_social",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "uf",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "cnpj",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "00000000000191",
                         "kind": "param",
                         "name": "cnpj",
                         "orig": "cnpj",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -442,12 +408,10 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
+                    "res": "`body.cnpj`"
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -456,43 +420,45 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "ddd": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "city",
               "req": false,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             },
             {
+              "active": true,
               "name": "state",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "ddd",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "11",
                         "kind": "param",
                         "name": "ddd",
                         "orig": "ddd",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -511,11 +477,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -524,49 +488,51 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "feriado": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "date",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "name",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "type",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "feriado",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": 2024,
                         "kind": "param",
                         "name": "ano",
                         "orig": "ano",
                         "reqd": true,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       }
                     ]
                   },
@@ -585,11 +551,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -598,43 +562,45 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "fipe_marca": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "nome",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "valor",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "fipe_marca",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "carros",
                         "kind": "param",
                         "name": "tipo_veiculo",
                         "orig": "tipo_veiculo",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -659,11 +625,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -672,85 +636,87 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "fipe_preco": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "ano_modelo",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "codigo_fipe",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "combustivel",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "marca",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "mes_referencia",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "modelo",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "sigla_combustivel",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "tipo_veiculo",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "valor",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "fipe_preco",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "001004-1",
                         "kind": "param",
                         "name": "codigo_fipe",
                         "orig": "codigo_fipe",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -775,11 +741,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -788,43 +752,45 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "municipio": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "codigo_ibge",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "nome",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "municipio",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "SP",
                         "kind": "param",
                         "name": "sigla_uf",
                         "orig": "sigla_uf",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -849,11 +815,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -862,37 +826,37 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         },
         "ufn": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "nome",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "regiao",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "sigla",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "id": {
@@ -902,9 +866,12 @@
           "name": "ufn",
           "op": {
             "list": {
+              "input": "data",
               "name": "list",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/ibge/uf/v1",
                   "parts": [
@@ -918,47 +885,44 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "ufn2": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "id",
               "req": false,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "nome",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "regiao",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "sigla",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "id": {
@@ -968,19 +932,21 @@
           "name": "ufn2",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "SP",
                         "kind": "param",
                         "name": "sigla_uf",
                         "orig": "sigla_uf",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -1005,11 +971,9 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
           "relations": {
@@ -1018,15 +982,11 @@
                 "v1"
               ]
             ]
-          },
-          "active": true
+          }
         }
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -1034,6 +994,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -1042,25 +1010,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -1076,20 +1030,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -1104,23 +1070,30 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicBankFlow": {
+          "active": true,
           "entity": "bank",
+          "key$": "BasicBankFlow",
           "kind": "basic",
           "name": "BasicBankFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1128,14 +1101,11 @@
                     "ref": "bank_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             },
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "bank_ref01",
                 "srcdatavar": "bank_ref01_data",
@@ -1145,6 +1115,7 @@
                 "id": "bank01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1152,22 +1123,21 @@
                     "mark": "Mark01-bank_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicBankFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicCepFlow": {
+          "active": true,
           "entity": "cep",
+          "key$": "BasicCepFlow",
           "kind": "basic",
           "name": "BasicCepFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "cep_ref01",
                 "srcdatavar": "cep_ref01_data",
@@ -1177,6 +1147,7 @@
                 "id": "cep01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1184,22 +1155,21 @@
                     "mark": "Mark01-cep_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicCepFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicCnpjFlow": {
+          "active": true,
           "entity": "cnpj",
+          "key$": "BasicCnpjFlow",
           "kind": "basic",
           "name": "BasicCnpjFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "cnpj_ref01",
                 "srcdatavar": "cnpj_ref01_data",
@@ -1209,6 +1179,7 @@
                 "id": "cnpj01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1216,22 +1187,21 @@
                     "mark": "Mark01-cnpj_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicCnpjFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicDddFlow": {
+          "active": true,
           "entity": "ddd",
+          "key$": "BasicDddFlow",
           "kind": "basic",
           "name": "BasicDddFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "ddd_ref01",
                 "srcdatavar": "ddd_ref01_data",
@@ -1241,6 +1211,7 @@
                 "id": "ddd01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1248,22 +1219,21 @@
                     "mark": "Mark01-ddd_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicDddFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicFeriadoFlow": {
+          "active": true,
           "entity": "feriado",
+          "key$": "BasicFeriadoFlow",
           "kind": "basic",
           "name": "BasicFeriadoFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "feriado_ref01",
                 "srcdatavar": "feriado_ref01_data",
@@ -1273,6 +1243,7 @@
                 "id": "feriado01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1280,22 +1251,21 @@
                     "mark": "Mark01-feriado_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicFeriadoFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicFipeMarcaFlow": {
+          "active": true,
           "entity": "fipe_marca",
+          "key$": "BasicFipeMarcaFlow",
           "kind": "basic",
           "name": "BasicFipeMarcaFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "fipe_marca_ref01",
                 "srcdatavar": "fipe_marca_ref01_data",
@@ -1305,6 +1275,7 @@
                 "id": "fipe_marca01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1312,22 +1283,21 @@
                     "mark": "Mark01-fipe_marca_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicFipeMarcaFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicFipePrecoFlow": {
+          "active": true,
           "entity": "fipe_preco",
+          "key$": "BasicFipePrecoFlow",
           "kind": "basic",
           "name": "BasicFipePrecoFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "fipe_preco_ref01",
                 "srcdatavar": "fipe_preco_ref01_data",
@@ -1337,6 +1307,7 @@
                 "id": "fipe_preco01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1344,22 +1315,21 @@
                     "mark": "Mark01-fipe_preco_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicFipePrecoFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicMunicipioFlow": {
+          "active": true,
           "entity": "municipio",
+          "key$": "BasicMunicipioFlow",
           "kind": "basic",
           "name": "BasicMunicipioFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "municipio_ref01",
                 "srcdatavar": "municipio_ref01_data",
@@ -1369,6 +1339,7 @@
                 "id": "municipio01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1376,22 +1347,21 @@
                     "mark": "Mark01-municipio_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicMunicipioFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicUfn2Flow": {
+          "active": true,
           "entity": "ufn2",
+          "key$": "BasicUfn2Flow",
           "kind": "basic",
           "name": "BasicUfn2Flow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "ufn2_ref01",
                 "srcdatavar": "ufn2_ref01_data",
@@ -1401,6 +1371,7 @@
                 "id": "ufn201"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1408,23 +1379,25 @@
                     "mark": "Mark01-ufn2_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicUfn2Flow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicUfnFlow": {
+          "active": true,
           "entity": "ufn",
+          "key$": "BasicUfnFlow",
           "kind": "basic",
           "name": "BasicUfnFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
               "op": "list",
+              "spec": [],
               "valid": [
                 {
                   "apply": "ItemExists",
@@ -1432,29 +1405,57 @@
                     "ref": "ufn_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicUfnFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "contact": {
+          "name": "Brasil API",
+          "url": "https://brasilapi.com.br/docs"
+        },
+        "description": "Acesso programático de informações relacionadas a CEPs, bancos, CNPJ, IBGE, feriados nacionais, tabela FIPE e muito mais, fornecendo endpoints modernos com baixa latência. Este projeto busca centralizar dados públicos para uma fácil e rápida consulta em aplicações.",
+        "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+        },
+        "servers": [
+          {
+            "description": "Production server",
+            "url": "https://brasilapi.com.br/api"
+          }
+        ],
+        "title": "Brasil API",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "brasil"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "brasil"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -1469,19 +1470,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "brasil"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -1496,138 +1497,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "brasil"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "brasil"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "brasil"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "brasil"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "brasil"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "brasil"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "brasil"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "brasil"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "brasil"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "brasil",
+  "origin": "voxgig-sdk"
 }

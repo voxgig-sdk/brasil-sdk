@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -139,7 +139,7 @@ local bank = client:Bank(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Bank(nil):list(nil, nil)
+local results, err = client:Bank():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -147,7 +147,7 @@ local results, err = client:Bank(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Bank(nil):load({ id = "bank_id" }, nil)
+local result, err = client:Bank():load({ id = "bank_id" })
 ```
 
 ### Common Methods
@@ -205,7 +205,7 @@ local cep = client:Cep(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cep(nil):load({ id = "cep_id" }, nil)
+local result, err = client:Cep():load({ id = "cep_id" })
 ```
 
 ### Common Methods
@@ -274,7 +274,7 @@ local cnpj = client:Cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cnpj(nil):load({ id = "cnpj_id" }, nil)
+local result, err = client:Cnpj():load({ id = "cnpj_id" })
 ```
 
 ### Common Methods
@@ -327,7 +327,7 @@ local ddd = client:Ddd(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ddd(nil):load({ id = "ddd_id" }, nil)
+local result, err = client:Ddd():load({ id = "ddd_id" })
 ```
 
 ### Common Methods
@@ -381,7 +381,7 @@ local feriado = client:Feriado(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Feriado(nil):load({ id = "feriado_id" }, nil)
+local result, err = client:Feriado():load({ id = "feriado_id" })
 ```
 
 ### Common Methods
@@ -434,7 +434,7 @@ local fipe_marca = client:FipeMarca(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipeMarca(nil):load({ id = "fipe_marca_id" }, nil)
+local result, err = client:FipeMarca():load({ id = "fipe_marca_id" })
 ```
 
 ### Common Methods
@@ -494,7 +494,7 @@ local fipe_preco = client:FipePreco(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipePreco(nil):load({ id = "fipe_preco_id" }, nil)
+local result, err = client:FipePreco():load({ id = "fipe_preco_id" })
 ```
 
 ### Common Methods
@@ -547,7 +547,7 @@ local municipio = client:Municipio(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Municipio(nil):load({ id = "municipio_id" }, nil)
+local result, err = client:Municipio():load({ id = "municipio_id" })
 ```
 
 ### Common Methods
@@ -602,7 +602,7 @@ local ufn = client:Ufn(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Ufn(nil):list(nil, nil)
+local results, err = client:Ufn():list()
 ```
 
 ### Common Methods
@@ -657,7 +657,7 @@ local ufn2 = client:Ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ufn2(nil):load({ id = "ufn2_id" }, nil)
+local result, err = client:Ufn2():load({ id = "ufn2_id" })
 ```
 
 ### Common Methods

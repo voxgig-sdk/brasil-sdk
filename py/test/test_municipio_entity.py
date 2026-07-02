@@ -91,6 +91,7 @@ def _municipio_basic_setup(extra):
         "BRASIL_TEST_MUNICIPIO_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
+        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _municipio_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

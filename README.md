@@ -1,23 +1,8 @@
 # Brasil SDK
 
-Programmatic access to Brazilian public data — CEPs, banks, CNPJ, IBGE, holidays, FIPE tables and more
+Brasil API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Brasil API
-
-[BrasilAPI](https://brasilapi.com.br/) is a community-maintained Brazilian initiative that centralises public-sector data behind a single, modern HTTPS API with low latency and CORS enabled. It exists to make information that is otherwise scattered across legacy government sites — Correios CEPs, the Central Bank of Brazil's bank registry, IBGE municipality lists, national holidays, FIPE vehicle pricing tables and more — accessible from any client without an API key.
-
-What you can look up:
-- Brazilian postal codes (`CEP`) and the address they map to
-- Bank registry entries from the Central Bank of Brazil
-- Companies by `CNPJ`
-- Telephone area codes (`DDD`) and the cities they cover
-- National holidays for a given year
-- FIPE vehicle brands and reference prices
-- IBGE municipalities and Brazilian states (`UF`)
-
-All endpoints are read-only `GET` requests served from `https://brasilapi.com.br/api`. No authentication is required and responses are JSON. Data is sourced from upstream public registries (Correios, Banco Central, IBGE, FIPE, etc.); BrasilAPI proxies and normalises these sources, so freshness depends on the underlying authority.
 
 ## Try it
 
@@ -51,29 +36,31 @@ gem install brasil-sdk
 luarocks install brasil-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { BrasilSDK } from 'brasil'
 
-const client = new BrasilSDK({})
+const client = new BrasilSDK({
+  apikey: process.env.BRASIL_APIKEY,
+})
 
 // List all banks
 const banks = await client.Bank().list()
+console.log(banks.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -103,16 +90,16 @@ The API exposes 10 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Bank** | Brazilian banks registered with the Central Bank of Brazil, looked up by code (e.g. `/banks/v1`, `/banks/v1/{code}`). | `/banks/v1` |
-| **Cep** | Brazilian postal code (Código de Endereçamento Postal) resolution to street, neighbourhood, city and state (e.g. `/cep/v1/{cep}`, `/cep/v2/{cep}`). | `/cep/v1/{cep}` |
-| **Cnpj** | Brazilian company registration (Cadastro Nacional da Pessoa Jurídica) lookup by tax ID (e.g. `/cnpj/v1/{cnpj}`). | `/cnpj/v1/{cnpj}` |
-| **Ddd** | Brazilian telephone area codes (Discagem Direta à Distância) and the cities they cover (e.g. `/ddd/v1/{ddd}`). | `/ddd/v1/{ddd}` |
-| **Feriado** | Brazilian national holidays for a given year (e.g. `/feriados/v1/{ano}`). | `/feriados/v1/{ano}` |
-| **FipeMarca** | Vehicle brands from the FIPE (Fundação Instituto de Pesquisas Econômicas) reference tables, segmented by vehicle type (e.g. `/fipe/marcas/v1/{tipoVeiculo}`). | `/fipe/marcas/v1/{tipoVeiculo}` |
-| **FipePreco** | FIPE reference prices for vehicles by FIPE code (e.g. `/fipe/preco/v1/{codigoFipe}`). | `/fipe/preco/v1/{codigoFipe}` |
-| **Municipio** | Brazilian municipalities sourced from IBGE, listed by state code (e.g. `/ibge/municipios/v1/{siglaUF}`). | `/ibge/municipios/v1/{siglaUF}` |
-| **Ufn** | Brazilian federative units (states) — listings and lookup by code or abbreviation via the IBGE UF endpoints. | `/ibge/uf/v1` |
-| **Ufn2** | Alternate-version Brazilian federative unit endpoints exposing UF information from the IBGE dataset. | `/ibge/uf/v1/{siglaUF}` |
+| **Bank** |  | `/banks/v1` |
+| **Cep** |  | `/cep/v1/{cep}` |
+| **Cnpj** |  | `/cnpj/v1/{cnpj}` |
+| **Ddd** |  | `/ddd/v1/{ddd}` |
+| **Feriado** |  | `/feriados/v1/{ano}` |
+| **FipeMarca** |  | `/fipe/marcas/v1/{tipoVeiculo}` |
+| **FipePreco** |  | `/fipe/preco/v1/{codigoFipe}` |
+| **Municipio** |  | `/ibge/municipios/v1/{siglaUF}` |
+| **Ufn** |  | `/ibge/uf/v1` |
+| **Ufn2** |  | `/ibge/uf/v1/{siglaUF}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -122,17 +109,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from brasil_sdk import BrasilSDK
 
-client = BrasilSDK({})
+client = BrasilSDK({
+    "apikey": os.environ.get("BRASIL_APIKEY"),
+})
 
 # List all banks
-banks, err = client.Bank(None).list(None, None)
+banks, err = client.Bank().list()
+print(banks)
 
 # Load a specific bank
-bank, err = client.Bank(None).load(
-    {"id": "example_id"}, None
-)
+bank, err = client.Bank().load({"id": "example_id"})
+print(bank)
 ```
 
 ### PHP
@@ -141,15 +131,17 @@ bank, err = client.Bank(None).load(
 <?php
 require_once 'brasil_sdk.php';
 
-$client = new BrasilSDK([]);
+$client = new BrasilSDK([
+    "apikey" => getenv("BRASIL_APIKEY"),
+]);
 
 // List all banks
-[$banks, $err] = $client->Bank(null)->list(null, null);
+[$banks, $err] = $client->Bank()->list();
+print_r($banks);
 
 // Load a specific bank
-[$bank, $err] = $client->Bank(null)->load(
-    ["id" => "example_id"], null
-);
+[$bank, $err] = $client->Bank()->load(["id" => "example_id"]);
+print_r($bank);
 ```
 
 ### Golang
@@ -157,10 +149,13 @@ $client = new BrasilSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/brasil-sdk/go"
 
-client := sdk.NewBrasilSDK(map[string]any{})
+client := sdk.NewBrasilSDK(map[string]any{
+    "apikey": os.Getenv("BRASIL_APIKEY"),
+})
 
 // List all banks
 banks, err := client.Bank(nil).List(nil, nil)
+fmt.Println(banks)
 ```
 
 ### Ruby
@@ -168,15 +163,17 @@ banks, err := client.Bank(nil).List(nil, nil)
 ```ruby
 require_relative "Brasil_sdk"
 
-client = BrasilSDK.new({})
+client = BrasilSDK.new({
+  "apikey" => ENV["BRASIL_APIKEY"],
+})
 
 # List all banks
-banks, err = client.Bank(nil).list(nil, nil)
+banks, err = client.Bank().list
+puts banks
 
 # Load a specific bank
-bank, err = client.Bank(nil).load(
-  { "id" => "example_id" }, nil
-)
+bank, err = client.Bank().load({ "id" => "example_id" })
+puts bank
 ```
 
 ### Lua
@@ -184,15 +181,17 @@ bank, err = client.Bank(nil).load(
 ```lua
 local sdk = require("brasil_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("BRASIL_APIKEY"),
+})
 
 -- List all banks
-local banks, err = client:Bank(nil):list(nil, nil)
+local banks, err = client:Bank():list()
+print(banks)
 
 -- Load a specific bank
-local bank, err = client:Bank(nil):load(
-  { id = "example_id" }, nil
-)
+local bank, err = client:Bank():load({ id = "example_id" })
+print(bank)
 ```
 
 ## Unit testing in offline mode
@@ -211,25 +210,21 @@ const result = await client.Bank().load({ id: 'test01' })
 ### Python
 
 ```python
-client = BrasilSDK.test(None, None)
-result, err = client.Bank(None).load(
-    {"id": "test01"}, None
-)
+client = BrasilSDK.test()
+result, err = client.Bank().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = BrasilSDK::test(null, null);
-[$result, $err] = $client->Bank(null)->load(
-    ["id" => "test01"], null
-);
+$client = BrasilSDK::test();
+[$result, $err] = $client->Bank()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Bank(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -238,19 +233,15 @@ result, err := client.Bank(nil).Load(
 ### Ruby
 
 ```ruby
-client = BrasilSDK.test(nil, nil)
-result, err = client.Bank(nil).load(
-  { "id" => "test01" }, nil
-)
+client = BrasilSDK.test
+result, err = client.Bank().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Bank(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Bank():load({ id = "test01" })
 ```
 
 ## How it works
@@ -354,16 +345,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Brasil API
-
-- Upstream: [https://brasilapi.com.br/](https://brasilapi.com.br/)
-- API docs: [https://brasilapi.com.br/docs](https://brasilapi.com.br/docs)
-
-- MIT licensed, open-source community project maintained by Brazilian developers.
-- No API key or authentication required; CORS is enabled for browser clients.
-- The project asks consumers to avoid bulk/sequential scraping or high-volume automated crawling and to make requests that reflect genuine user need.
-- Service is still evolving — formal Terms of Service are being developed and availability is best-effort.
 
 ---
 

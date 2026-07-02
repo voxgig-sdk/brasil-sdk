@@ -66,12 +66,14 @@ def _ufn2_direct_setup(mockres):
     env = runner.env_override({
         "BRASIL_TEST_UFN__ENTID": {},
         "BRASIL_TEST_LIVE": "FALSE",
+        "BRASIL_APIKEY": "NONE",
     })
 
     live = env.get("BRASIL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("BRASIL_APIKEY"),
         }
         client = BrasilSDK(merged_opts)
         return {

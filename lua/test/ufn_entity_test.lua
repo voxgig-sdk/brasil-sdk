@@ -92,6 +92,7 @@ function ufn_basic_setup(extra)
     ["BRASIL_TEST_UFN_ENTID"] = idmap,
     ["BRASIL_TEST_LIVE"] = "FALSE",
     ["BRASIL_TEST_EXPLAIN"] = "FALSE",
+    ["BRASIL_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,6 +104,7 @@ function ufn_basic_setup(extra)
   if env["BRASIL_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["BRASIL_APIKEY"],
       },
       extra or {},
     })

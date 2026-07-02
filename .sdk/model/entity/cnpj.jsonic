@@ -129,7 +129,7 @@ main: kit: entity: cnpj: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.cnpj`"
           }
         }
       ]

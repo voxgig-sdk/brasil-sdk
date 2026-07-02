@@ -117,12 +117,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'BRASIL_TEST_BANK_ENTID': {},
     'BRASIL_TEST_LIVE': 'FALSE',
+    'BRASIL_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.BRASIL_TEST_LIVE
 
   if (live) {
     const client = new BrasilSDK({
+      apikey: env.BRASIL_APIKEY,
     })
 
     let idmap: any = env['BRASIL_TEST_BANK_ENTID']

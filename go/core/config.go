@@ -14,6 +14,9 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://brasilapi.com.br/api",
+			"auth": map[string]any{
+				"prefix": "Bearer",
+			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -34,40 +37,43 @@ func MakeConfig() map[string]any {
 			"bank": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "code",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "full_name",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "ispb",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "name",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 3,
 					},
 				},
 				"name": "bank",
 				"op": map[string]any{
 					"list": map[string]any{
+						"input": "data",
 						"name": "list",
 						"points": []any{
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "GET",
 								"orig": "/banks/v1",
 								"parts": []any{
@@ -81,28 +87,27 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "list",
 					},
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "001",
 											"kind": "param",
 											"name": "code",
 											"orig": "code",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -122,11 +127,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -141,71 +144,73 @@ func MakeConfig() map[string]any {
 			"cep": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "cep",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "city",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "location",
 						"req": false,
 						"type": "`$OBJECT`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "neighborhood",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 3,
 					},
 					map[string]any{
+						"active": true,
 						"name": "service",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 4,
 					},
 					map[string]any{
+						"active": true,
 						"name": "state",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 5,
 					},
 					map[string]any{
+						"active": true,
 						"name": "street",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 6,
 					},
 				},
 				"name": "cep",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "01310100",
 											"kind": "param",
 											"name": "cep",
 											"orig": "cep",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -223,22 +228,22 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.cep`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "01310100",
 											"kind": "param",
 											"name": "cep",
 											"orig": "cep",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -256,13 +261,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.cep`",
 								},
-								"active": true,
 								"index$": 1,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -280,148 +283,150 @@ func MakeConfig() map[string]any {
 			"cnpj": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "bairro",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "capital_social",
 						"req": false,
 						"type": "`$NUMBER`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "cep",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "cnae_fiscal",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 3,
 					},
 					map[string]any{
+						"active": true,
 						"name": "cnae_fiscal_descricao",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 4,
 					},
 					map[string]any{
+						"active": true,
 						"name": "cnpj",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 5,
 					},
 					map[string]any{
+						"active": true,
 						"name": "complemento",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 6,
 					},
 					map[string]any{
+						"active": true,
 						"name": "data_inicio_atividade",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 7,
 					},
 					map[string]any{
+						"active": true,
 						"name": "ddd_telefone_1",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 8,
 					},
 					map[string]any{
+						"active": true,
 						"name": "logradouro",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 9,
 					},
 					map[string]any{
+						"active": true,
 						"name": "municipio",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 10,
 					},
 					map[string]any{
+						"active": true,
 						"name": "natureza_juridica",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 11,
 					},
 					map[string]any{
+						"active": true,
 						"name": "nome_fantasia",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 12,
 					},
 					map[string]any{
+						"active": true,
 						"name": "numero",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 13,
 					},
 					map[string]any{
+						"active": true,
 						"name": "porte",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 14,
 					},
 					map[string]any{
+						"active": true,
 						"name": "qsa",
 						"req": false,
 						"type": "`$ARRAY`",
-						"active": true,
 						"index$": 15,
 					},
 					map[string]any{
+						"active": true,
 						"name": "razao_social",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 16,
 					},
 					map[string]any{
+						"active": true,
 						"name": "uf",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 17,
 					},
 				},
 				"name": "cnpj",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "00000000000191",
 											"kind": "param",
 											"name": "cnpj",
 											"orig": "cnpj",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -439,13 +444,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.cnpj`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -460,36 +463,38 @@ func MakeConfig() map[string]any {
 			"ddd": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "city",
 						"req": false,
 						"type": "`$ARRAY`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "state",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 				},
 				"name": "ddd",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "11",
 											"kind": "param",
 											"name": "ddd",
 											"orig": "ddd",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -509,11 +514,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -528,43 +531,45 @@ func MakeConfig() map[string]any {
 			"feriado": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "date",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "name",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "type",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 2,
 					},
 				},
 				"name": "feriado",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": 2024,
 											"kind": "param",
 											"name": "ano",
 											"orig": "ano",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"active": true,
 										},
 									},
 								},
@@ -584,11 +589,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -603,36 +606,38 @@ func MakeConfig() map[string]any {
 			"fipe_marca": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "nome",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "valor",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 				},
 				"name": "fipe_marca",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "carros",
 											"kind": "param",
 											"name": "tipo_veiculo",
 											"orig": "tipo_veiculo",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -658,11 +663,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -677,85 +680,87 @@ func MakeConfig() map[string]any {
 			"fipe_preco": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "ano_modelo",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "codigo_fipe",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "combustivel",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "marca",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 3,
 					},
 					map[string]any{
+						"active": true,
 						"name": "mes_referencia",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 4,
 					},
 					map[string]any{
+						"active": true,
 						"name": "modelo",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 5,
 					},
 					map[string]any{
+						"active": true,
 						"name": "sigla_combustivel",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 6,
 					},
 					map[string]any{
+						"active": true,
 						"name": "tipo_veiculo",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 7,
 					},
 					map[string]any{
+						"active": true,
 						"name": "valor",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 8,
 					},
 				},
 				"name": "fipe_preco",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "001004-1",
 											"kind": "param",
 											"name": "codigo_fipe",
 											"orig": "codigo_fipe",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -781,11 +786,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -800,36 +803,38 @@ func MakeConfig() map[string]any {
 			"municipio": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "codigo_ibge",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "nome",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 				},
 				"name": "municipio",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "SP",
 											"kind": "param",
 											"name": "sigla_uf",
 											"orig": "sigla_uf",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -855,11 +860,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
@@ -874,40 +877,43 @@ func MakeConfig() map[string]any {
 			"ufn": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "id",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "nome",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "regiao",
 						"req": false,
 						"type": "`$OBJECT`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "sigla",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 3,
 					},
 				},
 				"name": "ufn",
 				"op": map[string]any{
 					"list": map[string]any{
+						"input": "data",
 						"name": "list",
 						"points": []any{
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "GET",
 								"orig": "/ibge/uf/v1",
 								"parts": []any{
@@ -922,12 +928,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "list",
 					},
 				},
@@ -938,50 +941,52 @@ func MakeConfig() map[string]any {
 			"ufn2": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "id",
 						"req": false,
 						"type": "`$INTEGER`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "nome",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "regiao",
 						"req": false,
 						"type": "`$OBJECT`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "sigla",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 3,
 					},
 				},
 				"name": "ufn2",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
+											"active": true,
 											"example": "SP",
 											"kind": "param",
 											"name": "sigla_uf",
 											"orig": "sigla_uf",
 											"reqd": true,
 											"type": "`$STRING`",
-											"active": true,
 										},
 									},
 								},
@@ -1007,11 +1012,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},
