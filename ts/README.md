@@ -10,7 +10,7 @@ The TypeScript SDK for the Brasil API — a type-safe, entity-oriented client wi
 
 ## Install
 ```bash
-npm install brasil
+npm install @voxgig-sdk/brasil
 ```
 ## Tutorial: your first API call
 

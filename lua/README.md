@@ -10,7 +10,7 @@ The Lua SDK for the Brasil API — an entity-oriented client using Lua conventio
 
 ## Install
 ```bash
-luarocks install brasil-sdk
+luarocks install voxgig-sdk-brasil
 ```
 
 If the module is not yet published, add the source directory to

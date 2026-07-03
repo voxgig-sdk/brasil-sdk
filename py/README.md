@@ -10,7 +10,7 @@ The Python SDK for the Brasil API — an entity-oriented client following Python
 
 ## Install
 ```bash
-pip install brasil-sdk
+pip install voxgig-sdk-brasil
 ```
 
 Or install from source:

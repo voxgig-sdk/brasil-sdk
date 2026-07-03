@@ -10,13 +10,13 @@ The Ruby SDK for the Brasil API — an entity-oriented client using idiomatic Ru
 
 ## Install
 ```bash
-gem install brasil-sdk
+gem install voxgig-sdk-brasil
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "brasil-sdk"
+gem "voxgig-sdk-brasil"
 ```
 
 Then run:
