@@ -217,7 +217,7 @@ Alias for `BrasilSDK.test()`.
 ## BankEntity
 
 ```ts
-const bank = client.bank
+const bank = client.Bank()
 ```
 
 ### Fields
@@ -236,7 +236,7 @@ const bank = client.bank
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.bank.list()
+const results = await client.Bank().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -244,7 +244,7 @@ const results = await client.bank.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.bank.load({ id: 'bank_id' })
+const result = await client.Bank().load({ id: 'bank_id' })
 ```
 
 ### Common Methods
@@ -278,7 +278,7 @@ Return a copy of the entity options.
 ## CepEntity
 
 ```ts
-const cep = client.cep
+const cep = client.Cep()
 ```
 
 ### Fields
@@ -300,7 +300,7 @@ const cep = client.cep
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.cep.load({ id: 'cep_id' })
+const result = await client.Cep().load({ id: 'cep_id' })
 ```
 
 ### Common Methods
@@ -334,7 +334,7 @@ Return a copy of the entity options.
 ## CnpjEntity
 
 ```ts
-const cnpj = client.cnpj
+const cnpj = client.Cnpj()
 ```
 
 ### Fields
@@ -367,7 +367,7 @@ const cnpj = client.cnpj
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.cnpj.load({ id: 'cnpj_id' })
+const result = await client.Cnpj().load({ id: 'cnpj_id' })
 ```
 
 ### Common Methods
@@ -401,7 +401,7 @@ Return a copy of the entity options.
 ## DddEntity
 
 ```ts
-const ddd = client.ddd
+const ddd = client.Ddd()
 ```
 
 ### Fields
@@ -418,7 +418,7 @@ const ddd = client.ddd
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ddd.load({ id: 'ddd_id' })
+const result = await client.Ddd().load({ id: 'ddd_id' })
 ```
 
 ### Common Methods
@@ -452,7 +452,7 @@ Return a copy of the entity options.
 ## FeriadoEntity
 
 ```ts
-const feriado = client.feriado
+const feriado = client.Feriado()
 ```
 
 ### Fields
@@ -470,7 +470,7 @@ const feriado = client.feriado
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.feriado.load({ id: 'feriado_id' })
+const result = await client.Feriado().load({ id: 'feriado_id' })
 ```
 
 ### Common Methods
@@ -504,7 +504,7 @@ Return a copy of the entity options.
 ## FipeMarcaEntity
 
 ```ts
-const fipe_marca = client.fipe_marca
+const fipe_marca = client.FipeMarca()
 ```
 
 ### Fields
@@ -521,7 +521,7 @@ const fipe_marca = client.fipe_marca
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.fipe_marca.load({ id: 'fipe_marca_id' })
+const result = await client.FipeMarca().load({ id: 'fipe_marca_id' })
 ```
 
 ### Common Methods
@@ -555,7 +555,7 @@ Return a copy of the entity options.
 ## FipePrecoEntity
 
 ```ts
-const fipe_preco = client.fipe_preco
+const fipe_preco = client.FipePreco()
 ```
 
 ### Fields
@@ -579,7 +579,7 @@ const fipe_preco = client.fipe_preco
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.fipe_preco.load({ id: 'fipe_preco_id' })
+const result = await client.FipePreco().load({ id: 'fipe_preco_id' })
 ```
 
 ### Common Methods
@@ -613,7 +613,7 @@ Return a copy of the entity options.
 ## MunicipioEntity
 
 ```ts
-const municipio = client.municipio
+const municipio = client.Municipio()
 ```
 
 ### Fields
@@ -630,7 +630,7 @@ const municipio = client.municipio
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.municipio.load({ id: 'municipio_id' })
+const result = await client.Municipio().load({ id: 'municipio_id' })
 ```
 
 ### Common Methods
@@ -664,7 +664,7 @@ Return a copy of the entity options.
 ## UfnEntity
 
 ```ts
-const ufn = client.ufn
+const ufn = client.Ufn()
 ```
 
 ### Fields
@@ -683,7 +683,7 @@ const ufn = client.ufn
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.ufn.list()
+const results = await client.Ufn().list()
 ```
 
 ### Common Methods
@@ -717,7 +717,7 @@ Return a copy of the entity options.
 ## Ufn2Entity
 
 ```ts
-const ufn2 = client.ufn2
+const ufn2 = client.Ufn2()
 ```
 
 ### Fields
@@ -736,7 +736,7 @@ const ufn2 = client.ufn2
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ufn2.load({ id: 'ufn2_id' })
+const result = await client.Ufn2().load({ id: 'ufn2_id' })
 ```
 
 ### Common Methods

@@ -228,7 +228,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.cep`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -262,7 +262,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.cep`",
+                  "res": "`body`",
                 },
                 "index$": 1,
               },
@@ -446,7 +446,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.cnpj`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },

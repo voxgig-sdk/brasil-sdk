@@ -31,26 +31,26 @@ local sdk = require("brasil_sdk")
 local client = sdk.new()
 ```
 
-### 2. List banks
+### 2. List bank records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:bank():list()
+local banks, err = client:Bank():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(banks) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a bank
 
 ```lua
-local result, err = client:bank():load({ id = "example_id" })
+local bank, err = client:Bank():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(bank)
 ```
 
 
@@ -96,8 +96,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:bank():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Bank():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -183,8 +183,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `FipeMarca` | `(data) -> FipeMarcaEntity` | Create a FipeMarca entity instance. |
 | `FipePreco` | `(data) -> FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data) -> MunicipioEntity` | Create a Municipio entity instance. |
-| `Ufn` | `(data) -> UfnEntity` | Create a Ufn entity instance. |
-| `Ufn2` | `(data) -> Ufn2Entity` | Create a Ufn2 entity instance. |
+| `Ufn` | `(data) -> UfnEntity` | Create an Ufn entity instance. |
+| `Ufn2` | `(data) -> Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -206,17 +206,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local bank, err = client:Bank():load({ id = "example_id" })
+    if err then error(err) end
+    -- bank is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -372,7 +377,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.bank`
+Create an instance: `local bank = client:Bank(nil)`
 
 #### Operations
 
@@ -392,20 +397,20 @@ Create an instance: `const bank = client.bank`
 
 #### Example: Load
 
-```ts
-const bank = await client.bank.load({ id: 'bank_id' })
+```lua
+local bank, err = client:Bank():load({ id = "bank_id" })
 ```
 
 #### Example: List
 
-```ts
-const banks = await client.bank.list()
+```lua
+local banks, err = client:Bank():list()
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.cep`
+Create an instance: `local cep = client:Cep(nil)`
 
 #### Operations
 
@@ -427,14 +432,14 @@ Create an instance: `const cep = client.cep`
 
 #### Example: Load
 
-```ts
-const cep = await client.cep.load({ id: 'cep_id' })
+```lua
+local cep, err = client:Cep():load({ id = "cep_id" })
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.cnpj`
+Create an instance: `local cnpj = client:Cnpj(nil)`
 
 #### Operations
 
@@ -467,14 +472,14 @@ Create an instance: `const cnpj = client.cnpj`
 
 #### Example: Load
 
-```ts
-const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
+```lua
+local cnpj, err = client:Cnpj():load({ id = "cnpj_id" })
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.ddd`
+Create an instance: `local ddd = client:Ddd(nil)`
 
 #### Operations
 
@@ -491,14 +496,14 @@ Create an instance: `const ddd = client.ddd`
 
 #### Example: Load
 
-```ts
-const ddd = await client.ddd.load({ id: 'ddd_id' })
+```lua
+local ddd, err = client:Ddd():load({ id = "ddd_id" })
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.feriado`
+Create an instance: `local feriado = client:Feriado(nil)`
 
 #### Operations
 
@@ -516,14 +521,14 @@ Create an instance: `const feriado = client.feriado`
 
 #### Example: Load
 
-```ts
-const feriado = await client.feriado.load({ id: 'feriado_id' })
+```lua
+local feriado, err = client:Feriado():load({ id = "feriado_id" })
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.fipe_marca`
+Create an instance: `local fipe_marca = client:FipeMarca(nil)`
 
 #### Operations
 
@@ -540,14 +545,14 @@ Create an instance: `const fipe_marca = client.fipe_marca`
 
 #### Example: Load
 
-```ts
-const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
+```lua
+local fipe_marca, err = client:FipeMarca():load({ id = "fipe_marca_id" })
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.fipe_preco`
+Create an instance: `local fipe_preco = client:FipePreco(nil)`
 
 #### Operations
 
@@ -571,14 +576,14 @@ Create an instance: `const fipe_preco = client.fipe_preco`
 
 #### Example: Load
 
-```ts
-const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
+```lua
+local fipe_preco, err = client:FipePreco():load({ id = "fipe_preco_id" })
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.municipio`
+Create an instance: `local municipio = client:Municipio(nil)`
 
 #### Operations
 
@@ -595,14 +600,14 @@ Create an instance: `const municipio = client.municipio`
 
 #### Example: Load
 
-```ts
-const municipio = await client.municipio.load({ id: 'municipio_id' })
+```lua
+local municipio, err = client:Municipio():load({ id = "municipio_id" })
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.ufn`
+Create an instance: `local ufn = client:Ufn(nil)`
 
 #### Operations
 
@@ -621,14 +626,14 @@ Create an instance: `const ufn = client.ufn`
 
 #### Example: List
 
-```ts
-const ufns = await client.ufn.list()
+```lua
+local ufns, err = client:Ufn():list()
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.ufn2`
+Create an instance: `local ufn2 = client:Ufn2(nil)`
 
 #### Operations
 
@@ -647,8 +652,8 @@ Create an instance: `const ufn2 = client.ufn2`
 
 #### Example: Load
 
-```ts
-const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
+```lua
+local ufn2, err = client:Ufn2():load({ id = "ufn2_id" })
 ```
 
 
@@ -723,7 +728,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local bank = client:bank()
+local bank = client:Bank()
 bank:load({ id = "example_id" })
 
 -- bank:data_get() now returns the loaded bank data

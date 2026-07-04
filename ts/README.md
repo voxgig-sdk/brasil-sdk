@@ -28,25 +28,28 @@ import { BrasilSDK } from '@voxgig-sdk/brasil'
 const client = new BrasilSDK()
 ```
 
-### 2. List banks
+### 2. List bank records
+
+`list()` resolves to an array of Bank objects — iterate it directly:
 
 ```ts
-const result = await client.bank.list()
+const banks = await client.Bank().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const bank of banks) {
+  console.log(bank)
 }
 ```
 
 ### 3. Load a bank
 
-```ts
-const result = await client.bank.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const bank = await client.Bank().load({ id: 'example_id' })
+  console.log(bank)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -64,6 +67,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -92,9 +98,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = BrasilSDK.test()
 
-const result = await client.bank.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const bank = await client.Bank().load({ id: 'test01' })
+// bank is a bare entity populated with mock response data
+console.log(bank)
 ```
 
 You can also use the instance method:
@@ -109,7 +115,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.bank
+const entity = client.Bank()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -195,8 +201,8 @@ new BrasilSDK(options?: {
 | `FipeMarca(data?)` | `FipeMarcaEntity` | Create a FipeMarca entity instance. |
 | `FipePreco(data?)` | `FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio(data?)` | `MunicipioEntity` | Create a Municipio entity instance. |
-| `Ufn(data?)` | `UfnEntity` | Create a Ufn entity instance. |
-| `Ufn2(data?)` | `Ufn2Entity` | Create a Ufn2 entity instance. |
+| `Ufn(data?)` | `UfnEntity` | Create an Ufn entity instance. |
+| `Ufn2(data?)` | `Ufn2Entity` | Create an Ufn2 entity instance. |
 | `tester(testopts?, sdkopts?)` | `BrasilSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -213,29 +219,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): BrasilSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -419,7 +426,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.bank`
+Create an instance: `const bank = client.Bank()`
 
 #### Operations
 
@@ -440,19 +447,19 @@ Create an instance: `const bank = client.bank`
 #### Example: Load
 
 ```ts
-const bank = await client.bank.load({ id: 'bank_id' })
+const bank = await client.Bank().load({ id: 'bank_id' })
 ```
 
 #### Example: List
 
 ```ts
-const banks = await client.bank.list()
+const banks = await client.Bank().list()
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.cep`
+Create an instance: `const cep = client.Cep()`
 
 #### Operations
 
@@ -475,13 +482,13 @@ Create an instance: `const cep = client.cep`
 #### Example: Load
 
 ```ts
-const cep = await client.cep.load({ id: 'cep_id' })
+const cep = await client.Cep().load({ id: 'cep_id' })
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.cnpj`
+Create an instance: `const cnpj = client.Cnpj()`
 
 #### Operations
 
@@ -515,13 +522,13 @@ Create an instance: `const cnpj = client.cnpj`
 #### Example: Load
 
 ```ts
-const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
+const cnpj = await client.Cnpj().load({ id: 'cnpj_id' })
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.ddd`
+Create an instance: `const ddd = client.Ddd()`
 
 #### Operations
 
@@ -539,13 +546,13 @@ Create an instance: `const ddd = client.ddd`
 #### Example: Load
 
 ```ts
-const ddd = await client.ddd.load({ id: 'ddd_id' })
+const ddd = await client.Ddd().load({ id: 'ddd_id' })
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.feriado`
+Create an instance: `const feriado = client.Feriado()`
 
 #### Operations
 
@@ -564,13 +571,13 @@ Create an instance: `const feriado = client.feriado`
 #### Example: Load
 
 ```ts
-const feriado = await client.feriado.load({ id: 'feriado_id' })
+const feriado = await client.Feriado().load({ id: 'feriado_id' })
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.fipe_marca`
+Create an instance: `const fipe_marca = client.FipeMarca()`
 
 #### Operations
 
@@ -588,13 +595,13 @@ Create an instance: `const fipe_marca = client.fipe_marca`
 #### Example: Load
 
 ```ts
-const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
+const fipe_marca = await client.FipeMarca().load({ id: 'fipe_marca_id' })
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.fipe_preco`
+Create an instance: `const fipe_preco = client.FipePreco()`
 
 #### Operations
 
@@ -619,13 +626,13 @@ Create an instance: `const fipe_preco = client.fipe_preco`
 #### Example: Load
 
 ```ts
-const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
+const fipe_preco = await client.FipePreco().load({ id: 'fipe_preco_id' })
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.municipio`
+Create an instance: `const municipio = client.Municipio()`
 
 #### Operations
 
@@ -643,13 +650,13 @@ Create an instance: `const municipio = client.municipio`
 #### Example: Load
 
 ```ts
-const municipio = await client.municipio.load({ id: 'municipio_id' })
+const municipio = await client.Municipio().load({ id: 'municipio_id' })
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.ufn`
+Create an instance: `const ufn = client.Ufn()`
 
 #### Operations
 
@@ -669,13 +676,13 @@ Create an instance: `const ufn = client.ufn`
 #### Example: List
 
 ```ts
-const ufns = await client.ufn.list()
+const ufns = await client.Ufn().list()
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.ufn2`
+Create an instance: `const ufn2 = client.Ufn2()`
 
 #### Operations
 
@@ -695,7 +702,7 @@ Create an instance: `const ufn2 = client.ufn2`
 #### Example: Load
 
 ```ts
-const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
+const ufn2 = await client.Ufn2().load({ id: 'ufn2_id' })
 ```
 
 
@@ -766,7 +773,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const bank = client.bank
+const bank = client.Bank()
 await bank.load({ id: "example_id" })
 
 // bank.data() now returns the loaded bank data

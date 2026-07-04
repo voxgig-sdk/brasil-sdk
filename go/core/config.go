@@ -227,7 +227,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.cep`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},
@@ -261,7 +261,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.cep`",
+									"res": "`body`",
 								},
 								"index$": 1,
 							},
@@ -445,7 +445,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.cnpj`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},

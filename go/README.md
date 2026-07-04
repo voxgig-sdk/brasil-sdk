@@ -30,53 +30,39 @@ go mod edit -replace github.com/voxgig-sdk/brasil-sdk/go=../brasil-sdk/go
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/brasil-sdk/go"
-    "github.com/voxgig-sdk/brasil-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List banks
-
-```go
-    result, err := client.Bank(nil).List(nil, nil)
+    // List bank records — the value is the array of records itself.
+    banks, err := client.Bank(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range banks.([]any) {
+        fmt.Println(item)
     }
-```
 
-### 3. Load a bank
-
-```go
-    result, err = client.Bank(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single bank — the value is the loaded record.
+    bank, err := client.Bank(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(bank)
 }
 ```
 
@@ -127,10 +113,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Bank(nil).Load(
+bank, err := client.Bank(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(bank) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -215,8 +204,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `FipeMarca` | `(data map[string]any) BrasilEntity` | Create a FipeMarca entity instance. |
 | `FipePreco` | `(data map[string]any) BrasilEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data map[string]any) BrasilEntity` | Create a Municipio entity instance. |
-| `Ufn` | `(data map[string]any) BrasilEntity` | Create a Ufn entity instance. |
-| `Ufn2` | `(data map[string]any) BrasilEntity` | Create a Ufn2 entity instance. |
+| `Ufn` | `(data map[string]any) BrasilEntity` | Create an Ufn entity instance. |
+| `Ufn2` | `(data map[string]any) BrasilEntity` | Create an Ufn2 entity instance. |
 
 ### Entity interface (BrasilEntity)
 
@@ -236,17 +225,24 @@ All entities implement the `BrasilEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    bank, err := client.Bank(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // bank is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -423,13 +419,21 @@ Create an instance: `bank := client.Bank(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Bank(nil).Load(map[string]any{"id": "bank_id"}, nil)
+bank, err := client.Bank(nil).Load(map[string]any{"id": "bank_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(bank) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Bank(nil).List(nil, nil)
+banks, err := client.Bank(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(banks) // the array of records
 ```
 
 
@@ -458,7 +462,11 @@ Create an instance: `cep := client.Cep(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Cep(nil).Load(map[string]any{"id": "cep_id"}, nil)
+cep, err := client.Cep(nil).Load(map[string]any{"id": "cep_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(cep) // the loaded record
 ```
 
 
@@ -498,7 +506,11 @@ Create an instance: `cnpj := client.Cnpj(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Cnpj(nil).Load(map[string]any{"id": "cnpj_id"}, nil)
+cnpj, err := client.Cnpj(nil).Load(map[string]any{"id": "cnpj_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(cnpj) // the loaded record
 ```
 
 
@@ -522,7 +534,11 @@ Create an instance: `ddd := client.Ddd(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Ddd(nil).Load(map[string]any{"id": "ddd_id"}, nil)
+ddd, err := client.Ddd(nil).Load(map[string]any{"id": "ddd_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ddd) // the loaded record
 ```
 
 
@@ -547,7 +563,11 @@ Create an instance: `feriado := client.Feriado(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Feriado(nil).Load(map[string]any{"id": "feriado_id"}, nil)
+feriado, err := client.Feriado(nil).Load(map[string]any{"id": "feriado_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(feriado) // the loaded record
 ```
 
 
@@ -571,7 +591,11 @@ Create an instance: `fipe_marca := client.FipeMarca(nil)`
 #### Example: Load
 
 ```go
-result, err := client.FipeMarca(nil).Load(map[string]any{"id": "fipe_marca_id"}, nil)
+fipe_marca, err := client.FipeMarca(nil).Load(map[string]any{"id": "fipe_marca_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(fipe_marca) // the loaded record
 ```
 
 
@@ -602,7 +626,11 @@ Create an instance: `fipe_preco := client.FipePreco(nil)`
 #### Example: Load
 
 ```go
-result, err := client.FipePreco(nil).Load(map[string]any{"id": "fipe_preco_id"}, nil)
+fipe_preco, err := client.FipePreco(nil).Load(map[string]any{"id": "fipe_preco_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(fipe_preco) // the loaded record
 ```
 
 
@@ -626,7 +654,11 @@ Create an instance: `municipio := client.Municipio(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Municipio(nil).Load(map[string]any{"id": "municipio_id"}, nil)
+municipio, err := client.Municipio(nil).Load(map[string]any{"id": "municipio_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(municipio) // the loaded record
 ```
 
 
@@ -652,7 +684,11 @@ Create an instance: `ufn := client.Ufn(nil)`
 #### Example: List
 
 ```go
-results, err := client.Ufn(nil).List(nil, nil)
+ufns, err := client.Ufn(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ufns) // the array of records
 ```
 
 
@@ -678,7 +714,11 @@ Create an instance: `ufn2 := client.Ufn2(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Ufn2(nil).Load(map[string]any{"id": "ufn2_id"}, nil)
+ufn2, err := client.Ufn2(nil).Load(map[string]any{"id": "ufn2_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ufn2) // the loaded record
 ```
 
 

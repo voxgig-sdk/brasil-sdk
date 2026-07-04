@@ -213,140 +213,70 @@ class BrasilSDK {
 
 
 
-  _bank?: BankEntity
-
-  // Idiomatic facade: `client.bank.list()` / `client.bank.load({ id })`.
-  get bank(): BankEntity {
-    return (this._bank ??= new BankEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.bank` instead. */
+  // Entity access: `client.Bank().list()` / `client.Bank().load({ id })`.
   Bank(data?: any) {
     const self = this
     return new BankEntity(self,data)
   }
 
 
-  _cep?: CepEntity
-
-  // Idiomatic facade: `client.cep.list()` / `client.cep.load({ id })`.
-  get cep(): CepEntity {
-    return (this._cep ??= new CepEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.cep` instead. */
+  // Entity access: `client.Cep().list()` / `client.Cep().load({ id })`.
   Cep(data?: any) {
     const self = this
     return new CepEntity(self,data)
   }
 
 
-  _cnpj?: CnpjEntity
-
-  // Idiomatic facade: `client.cnpj.list()` / `client.cnpj.load({ id })`.
-  get cnpj(): CnpjEntity {
-    return (this._cnpj ??= new CnpjEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.cnpj` instead. */
+  // Entity access: `client.Cnpj().list()` / `client.Cnpj().load({ id })`.
   Cnpj(data?: any) {
     const self = this
     return new CnpjEntity(self,data)
   }
 
 
-  _ddd?: DddEntity
-
-  // Idiomatic facade: `client.ddd.list()` / `client.ddd.load({ id })`.
-  get ddd(): DddEntity {
-    return (this._ddd ??= new DddEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.ddd` instead. */
+  // Entity access: `client.Ddd().list()` / `client.Ddd().load({ id })`.
   Ddd(data?: any) {
     const self = this
     return new DddEntity(self,data)
   }
 
 
-  _feriado?: FeriadoEntity
-
-  // Idiomatic facade: `client.feriado.list()` / `client.feriado.load({ id })`.
-  get feriado(): FeriadoEntity {
-    return (this._feriado ??= new FeriadoEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.feriado` instead. */
+  // Entity access: `client.Feriado().list()` / `client.Feriado().load({ id })`.
   Feriado(data?: any) {
     const self = this
     return new FeriadoEntity(self,data)
   }
 
 
-  _fipe_marca?: FipeMarcaEntity
-
-  // Idiomatic facade: `client.fipe_marca.list()` / `client.fipe_marca.load({ id })`.
-  get fipe_marca(): FipeMarcaEntity {
-    return (this._fipe_marca ??= new FipeMarcaEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.fipe_marca` instead. */
+  // Entity access: `client.FipeMarca().list()` / `client.FipeMarca().load({ id })`.
   FipeMarca(data?: any) {
     const self = this
     return new FipeMarcaEntity(self,data)
   }
 
 
-  _fipe_preco?: FipePrecoEntity
-
-  // Idiomatic facade: `client.fipe_preco.list()` / `client.fipe_preco.load({ id })`.
-  get fipe_preco(): FipePrecoEntity {
-    return (this._fipe_preco ??= new FipePrecoEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.fipe_preco` instead. */
+  // Entity access: `client.FipePreco().list()` / `client.FipePreco().load({ id })`.
   FipePreco(data?: any) {
     const self = this
     return new FipePrecoEntity(self,data)
   }
 
 
-  _municipio?: MunicipioEntity
-
-  // Idiomatic facade: `client.municipio.list()` / `client.municipio.load({ id })`.
-  get municipio(): MunicipioEntity {
-    return (this._municipio ??= new MunicipioEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.municipio` instead. */
+  // Entity access: `client.Municipio().list()` / `client.Municipio().load({ id })`.
   Municipio(data?: any) {
     const self = this
     return new MunicipioEntity(self,data)
   }
 
 
-  _ufn?: UfnEntity
-
-  // Idiomatic facade: `client.ufn.list()` / `client.ufn.load({ id })`.
-  get ufn(): UfnEntity {
-    return (this._ufn ??= new UfnEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.ufn` instead. */
+  // Entity access: `client.Ufn().list()` / `client.Ufn().load({ id })`.
   Ufn(data?: any) {
     const self = this
     return new UfnEntity(self,data)
   }
 
 
-  _ufn2?: Ufn2Entity
-
-  // Idiomatic facade: `client.ufn2.list()` / `client.ufn2.load({ id })`.
-  get ufn2(): Ufn2Entity {
-    return (this._ufn2 ??= new Ufn2Entity(this, undefined))
-  }
-
-  /** @deprecated Use `client.ufn2` instead. */
+  // Entity access: `client.Ufn2().list()` / `client.Ufn2().load({ id })`.
   Ufn2(data?: any) {
     const self = this
     return new Ufn2Entity(self,data)

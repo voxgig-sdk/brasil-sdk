@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:bank():list() / client:bank():load({ id = ... })
-function BrasilSDK:bank(data)
+-- Idiomatic facade: client:Bank():list() / client:Bank():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Bank(data)
   local EntityMod = require("entity.bank_entity")
   if data == nil then
     if self._bank == nil then
@@ -256,15 +257,10 @@ function BrasilSDK:bank(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:bank() instead.
-function BrasilSDK:Bank(data)
-  local EntityMod = require("entity.bank_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:cep():list() / client:cep():load({ id = ... })
-function BrasilSDK:cep(data)
+-- Idiomatic facade: client:Cep():list() / client:Cep():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Cep(data)
   local EntityMod = require("entity.cep_entity")
   if data == nil then
     if self._cep == nil then
@@ -275,15 +271,10 @@ function BrasilSDK:cep(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:cep() instead.
-function BrasilSDK:Cep(data)
-  local EntityMod = require("entity.cep_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:cnpj():list() / client:cnpj():load({ id = ... })
-function BrasilSDK:cnpj(data)
+-- Idiomatic facade: client:Cnpj():list() / client:Cnpj():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Cnpj(data)
   local EntityMod = require("entity.cnpj_entity")
   if data == nil then
     if self._cnpj == nil then
@@ -294,15 +285,10 @@ function BrasilSDK:cnpj(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:cnpj() instead.
-function BrasilSDK:Cnpj(data)
-  local EntityMod = require("entity.cnpj_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:ddd():list() / client:ddd():load({ id = ... })
-function BrasilSDK:ddd(data)
+-- Idiomatic facade: client:Ddd():list() / client:Ddd():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Ddd(data)
   local EntityMod = require("entity.ddd_entity")
   if data == nil then
     if self._ddd == nil then
@@ -313,15 +299,10 @@ function BrasilSDK:ddd(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:ddd() instead.
-function BrasilSDK:Ddd(data)
-  local EntityMod = require("entity.ddd_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:feriado():list() / client:feriado():load({ id = ... })
-function BrasilSDK:feriado(data)
+-- Idiomatic facade: client:Feriado():list() / client:Feriado():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Feriado(data)
   local EntityMod = require("entity.feriado_entity")
   if data == nil then
     if self._feriado == nil then
@@ -332,15 +313,10 @@ function BrasilSDK:feriado(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:feriado() instead.
-function BrasilSDK:Feriado(data)
-  local EntityMod = require("entity.feriado_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:fipe_marca():list() / client:fipe_marca():load({ id = ... })
-function BrasilSDK:fipe_marca(data)
+-- Idiomatic facade: client:FipeMarca():list() / client:FipeMarca():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:FipeMarca(data)
   local EntityMod = require("entity.fipe_marca_entity")
   if data == nil then
     if self._fipe_marca == nil then
@@ -351,15 +327,10 @@ function BrasilSDK:fipe_marca(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:fipe_marca() instead.
-function BrasilSDK:FipeMarca(data)
-  local EntityMod = require("entity.fipe_marca_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:fipe_preco():list() / client:fipe_preco():load({ id = ... })
-function BrasilSDK:fipe_preco(data)
+-- Idiomatic facade: client:FipePreco():list() / client:FipePreco():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:FipePreco(data)
   local EntityMod = require("entity.fipe_preco_entity")
   if data == nil then
     if self._fipe_preco == nil then
@@ -370,15 +341,10 @@ function BrasilSDK:fipe_preco(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:fipe_preco() instead.
-function BrasilSDK:FipePreco(data)
-  local EntityMod = require("entity.fipe_preco_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:municipio():list() / client:municipio():load({ id = ... })
-function BrasilSDK:municipio(data)
+-- Idiomatic facade: client:Municipio():list() / client:Municipio():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Municipio(data)
   local EntityMod = require("entity.municipio_entity")
   if data == nil then
     if self._municipio == nil then
@@ -389,15 +355,10 @@ function BrasilSDK:municipio(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:municipio() instead.
-function BrasilSDK:Municipio(data)
-  local EntityMod = require("entity.municipio_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:ufn():list() / client:ufn():load({ id = ... })
-function BrasilSDK:ufn(data)
+-- Idiomatic facade: client:Ufn():list() / client:Ufn():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Ufn(data)
   local EntityMod = require("entity.ufn_entity")
   if data == nil then
     if self._ufn == nil then
@@ -408,15 +369,10 @@ function BrasilSDK:ufn(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:ufn() instead.
-function BrasilSDK:Ufn(data)
-  local EntityMod = require("entity.ufn_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:ufn2():list() / client:ufn2():load({ id = ... })
-function BrasilSDK:ufn2(data)
+-- Idiomatic facade: client:Ufn2():list() / client:Ufn2():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function BrasilSDK:Ufn2(data)
   local EntityMod = require("entity.ufn2_entity")
   if data == nil then
     if self._ufn2 == nil then
@@ -424,12 +380,6 @@ function BrasilSDK:ufn2(data)
     end
     return self._ufn2
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:ufn2() instead.
-function BrasilSDK:Ufn2(data)
-  local EntityMod = require("entity.ufn2_entity")
   return EntityMod.new(self, data)
 end
 

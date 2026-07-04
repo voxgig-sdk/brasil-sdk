@@ -233,7 +233,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.cep`',
+                    'res' => '`body`',
                   ],
                   'index$' => 0,
                 ],
@@ -267,7 +267,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.cep`',
+                    'res' => '`body`',
                   ],
                   'index$' => 1,
                 ],
@@ -451,7 +451,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.cnpj`',
+                    'res' => '`body`',
                   ],
                   'index$' => 0,
                 ],

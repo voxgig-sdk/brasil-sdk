@@ -26,9 +26,11 @@ import { BrasilSDK } from '@voxgig-sdk/brasil'
 
 const client = new BrasilSDK()
 
-// List all banks
-const banks = await client.bank.list()
-console.log(banks.data)
+// List all banks (returns Bank[])
+const banks = await client.Bank().list()
+for (const bank of banks) {
+  console.log(bank)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -92,12 +94,13 @@ from brasil_sdk import BrasilSDK
 
 client = BrasilSDK()
 
-# List all banks
-banks = client.bank.list()
-print(banks)
+# List all banks (returns a list, raises on error)
+banks = client.Bank().list({})
+for bank in banks:
+    print(bank)
 
-# Load a specific bank
-bank = client.bank.load({"id": "example_id"})
+# Load a specific bank (returns the record, raises on error)
+bank = client.Bank().load({"id": "example_id"})
 print(bank)
 ```
 
@@ -109,12 +112,12 @@ require_once 'brasil_sdk.php';
 
 $client = new BrasilSDK();
 
-// List all banks (throws on error)
-$banks = $client->bank()->list();
+// List all banks (returns an array; throws on error)
+$banks = $client->Bank()->list();
 print_r($banks);
 
-// Load a specific bank
-$bank = $client->bank()->load(["id" => "example_id"]);
+// Load a specific bank (returns the bare record; throws on error)
+$bank = $client->Bank()->load(["id" => "example_id"]);
 print_r($bank);
 ```
 
@@ -137,12 +140,12 @@ require_relative "Brasil_sdk"
 
 client = BrasilSDK.new
 
-# List all banks
-banks = client.bank.list
+# List all banks (returns an Array; raises on error)
+banks = client.Bank.list
 puts banks
 
-# Load a specific bank
-bank = client.bank.load({ "id" => "example_id" })
+# Load a specific bank (returns the bare record; raises on error)
+bank = client.Bank.load({ "id" => "example_id" })
 puts bank
 ```
 
@@ -154,11 +157,11 @@ local sdk = require("brasil_sdk")
 local client = sdk.new()
 
 -- List all banks
-local banks, err = client:bank():list()
+local banks, err = client:Bank():list()
 print(banks)
 
 -- Load a specific bank
-local bank, err = client:bank():load({ id = "example_id" })
+local bank, err = client:Bank():load({ id = "example_id" })
 print(bank)
 ```
 
@@ -171,22 +174,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = BrasilSDK.test()
-const result = await client.bank.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const bank = await client.Bank().load({ id: 'test01' })
+// bank is a bare Bank populated with mock data
+console.log(bank)
 ```
 
 ### Python
 
 ```python
 client = BrasilSDK.test()
-result = client.bank.load({"id": "test01"})
+bank = client.Bank().load({"id": "test01"})
+print(bank)
 ```
 
 ### PHP
 
 ```php
-$client = BrasilSDK::test();
-$result = $client->bank()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = BrasilSDK::test([
+    "entity" => ["bank" => ["test01" => ["id" => "test01"]]],
+]);
+$bank = $client->Bank()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -201,15 +209,18 @@ result, err := client.Bank(nil).Load(
 ### Ruby
 
 ```ruby
-client = BrasilSDK.test
-result = client.bank.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = BrasilSDK.test({
+  "entity" => { "bank" => { "test01" => { "id" => "test01" } } },
+})
+bank = client.Bank.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:bank():load({ id = "test01" })
+local result, err = client:Bank():load({ id = "test01" })
 ```
 
 ## How it works
@@ -257,6 +268,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

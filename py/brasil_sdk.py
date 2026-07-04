@@ -220,169 +220,69 @@ class BrasilSDK:
         }
 
 
-    @property
-    def bank(self):
-        """Idiomatic facade: client.bank.list() / client.bank.load({"id": ...})."""
-        from entity.bank_entity import BankEntity
-        cached = getattr(self, "_bank", None)
-        if cached is None:
-            cached = BankEntity(self, None)
-            self._bank = cached
-        return cached
-
-    def Bank(self, data=None):
-        # Deprecated: use client.bank instead.
+    def Bank(self, data=None) -> "BankEntity":
+        """Entity factory: client.Bank().list({}) / client.Bank().load({"id": ...})."""
         from entity.bank_entity import BankEntity
         return BankEntity(self, data)
 
 
-    @property
-    def cep(self):
-        """Idiomatic facade: client.cep.list() / client.cep.load({"id": ...})."""
-        from entity.cep_entity import CepEntity
-        cached = getattr(self, "_cep", None)
-        if cached is None:
-            cached = CepEntity(self, None)
-            self._cep = cached
-        return cached
-
-    def Cep(self, data=None):
-        # Deprecated: use client.cep instead.
+    def Cep(self, data=None) -> "CepEntity":
+        """Entity factory: client.Cep().list({}) / client.Cep().load({"id": ...})."""
         from entity.cep_entity import CepEntity
         return CepEntity(self, data)
 
 
-    @property
-    def cnpj(self):
-        """Idiomatic facade: client.cnpj.list() / client.cnpj.load({"id": ...})."""
-        from entity.cnpj_entity import CnpjEntity
-        cached = getattr(self, "_cnpj", None)
-        if cached is None:
-            cached = CnpjEntity(self, None)
-            self._cnpj = cached
-        return cached
-
-    def Cnpj(self, data=None):
-        # Deprecated: use client.cnpj instead.
+    def Cnpj(self, data=None) -> "CnpjEntity":
+        """Entity factory: client.Cnpj().list({}) / client.Cnpj().load({"id": ...})."""
         from entity.cnpj_entity import CnpjEntity
         return CnpjEntity(self, data)
 
 
-    @property
-    def ddd(self):
-        """Idiomatic facade: client.ddd.list() / client.ddd.load({"id": ...})."""
-        from entity.ddd_entity import DddEntity
-        cached = getattr(self, "_ddd", None)
-        if cached is None:
-            cached = DddEntity(self, None)
-            self._ddd = cached
-        return cached
-
-    def Ddd(self, data=None):
-        # Deprecated: use client.ddd instead.
+    def Ddd(self, data=None) -> "DddEntity":
+        """Entity factory: client.Ddd().list({}) / client.Ddd().load({"id": ...})."""
         from entity.ddd_entity import DddEntity
         return DddEntity(self, data)
 
 
-    @property
-    def feriado(self):
-        """Idiomatic facade: client.feriado.list() / client.feriado.load({"id": ...})."""
-        from entity.feriado_entity import FeriadoEntity
-        cached = getattr(self, "_feriado", None)
-        if cached is None:
-            cached = FeriadoEntity(self, None)
-            self._feriado = cached
-        return cached
-
-    def Feriado(self, data=None):
-        # Deprecated: use client.feriado instead.
+    def Feriado(self, data=None) -> "FeriadoEntity":
+        """Entity factory: client.Feriado().list({}) / client.Feriado().load({"id": ...})."""
         from entity.feriado_entity import FeriadoEntity
         return FeriadoEntity(self, data)
 
 
-    @property
-    def fipe_marca(self):
-        """Idiomatic facade: client.fipe_marca.list() / client.fipe_marca.load({"id": ...})."""
-        from entity.fipe_marca_entity import FipeMarcaEntity
-        cached = getattr(self, "_fipe_marca", None)
-        if cached is None:
-            cached = FipeMarcaEntity(self, None)
-            self._fipe_marca = cached
-        return cached
-
-    def FipeMarca(self, data=None):
-        # Deprecated: use client.fipe_marca instead.
+    def FipeMarca(self, data=None) -> "FipeMarcaEntity":
+        """Entity factory: client.FipeMarca().list({}) / client.FipeMarca().load({"id": ...})."""
         from entity.fipe_marca_entity import FipeMarcaEntity
         return FipeMarcaEntity(self, data)
 
 
-    @property
-    def fipe_preco(self):
-        """Idiomatic facade: client.fipe_preco.list() / client.fipe_preco.load({"id": ...})."""
-        from entity.fipe_preco_entity import FipePrecoEntity
-        cached = getattr(self, "_fipe_preco", None)
-        if cached is None:
-            cached = FipePrecoEntity(self, None)
-            self._fipe_preco = cached
-        return cached
-
-    def FipePreco(self, data=None):
-        # Deprecated: use client.fipe_preco instead.
+    def FipePreco(self, data=None) -> "FipePrecoEntity":
+        """Entity factory: client.FipePreco().list({}) / client.FipePreco().load({"id": ...})."""
         from entity.fipe_preco_entity import FipePrecoEntity
         return FipePrecoEntity(self, data)
 
 
-    @property
-    def municipio(self):
-        """Idiomatic facade: client.municipio.list() / client.municipio.load({"id": ...})."""
-        from entity.municipio_entity import MunicipioEntity
-        cached = getattr(self, "_municipio", None)
-        if cached is None:
-            cached = MunicipioEntity(self, None)
-            self._municipio = cached
-        return cached
-
-    def Municipio(self, data=None):
-        # Deprecated: use client.municipio instead.
+    def Municipio(self, data=None) -> "MunicipioEntity":
+        """Entity factory: client.Municipio().list({}) / client.Municipio().load({"id": ...})."""
         from entity.municipio_entity import MunicipioEntity
         return MunicipioEntity(self, data)
 
 
-    @property
-    def ufn(self):
-        """Idiomatic facade: client.ufn.list() / client.ufn.load({"id": ...})."""
-        from entity.ufn_entity import UfnEntity
-        cached = getattr(self, "_ufn", None)
-        if cached is None:
-            cached = UfnEntity(self, None)
-            self._ufn = cached
-        return cached
-
-    def Ufn(self, data=None):
-        # Deprecated: use client.ufn instead.
+    def Ufn(self, data=None) -> "UfnEntity":
+        """Entity factory: client.Ufn().list({}) / client.Ufn().load({"id": ...})."""
         from entity.ufn_entity import UfnEntity
         return UfnEntity(self, data)
 
 
-    @property
-    def ufn2(self):
-        """Idiomatic facade: client.ufn2.list() / client.ufn2.load({"id": ...})."""
-        from entity.ufn2_entity import Ufn2Entity
-        cached = getattr(self, "_ufn2", None)
-        if cached is None:
-            cached = Ufn2Entity(self, None)
-            self._ufn2 = cached
-        return cached
-
-    def Ufn2(self, data=None):
-        # Deprecated: use client.ufn2 instead.
+    def Ufn2(self, data=None) -> "Ufn2Entity":
+        """Entity factory: client.Ufn2().list({}) / client.Ufn2().load({"id": ...})."""
         from entity.ufn2_entity import Ufn2Entity
         return Ufn2Entity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "BrasilSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -402,3 +302,18 @@ class BrasilSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.bank_entity import BankEntity
+    from entity.cep_entity import CepEntity
+    from entity.cnpj_entity import CnpjEntity
+    from entity.ddd_entity import DddEntity
+    from entity.feriado_entity import FeriadoEntity
+    from entity.fipe_marca_entity import FipeMarcaEntity
+    from entity.fipe_preco_entity import FipePrecoEntity
+    from entity.municipio_entity import MunicipioEntity
+    from entity.ufn_entity import UfnEntity
+    from entity.ufn2_entity import Ufn2Entity

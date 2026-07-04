@@ -233,10 +233,10 @@ class BrasilSDK
 
     private $_bank = null;
 
-    // Idiomatic facade: $client->bank()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Bank() (PHP method
-    // names are case-insensitive).
-    public function bank($data = null)
+    // Canonical facade: $client->Bank()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->bank()
+    // resolves here too.
+    public function Bank($data = null)
     {
         require_once __DIR__ . '/entity/bank_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class BrasilSDK
 
     private $_cep = null;
 
-    // Idiomatic facade: $client->cep()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Cep() (PHP method
-    // names are case-insensitive).
-    public function cep($data = null)
+    // Canonical facade: $client->Cep()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->cep()
+    // resolves here too.
+    public function Cep($data = null)
     {
         require_once __DIR__ . '/entity/cep_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class BrasilSDK
 
     private $_cnpj = null;
 
-    // Idiomatic facade: $client->cnpj()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Cnpj() (PHP method
-    // names are case-insensitive).
-    public function cnpj($data = null)
+    // Canonical facade: $client->Cnpj()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->cnpj()
+    // resolves here too.
+    public function Cnpj($data = null)
     {
         require_once __DIR__ . '/entity/cnpj_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class BrasilSDK
 
     private $_ddd = null;
 
-    // Idiomatic facade: $client->ddd()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Ddd() (PHP method
-    // names are case-insensitive).
-    public function ddd($data = null)
+    // Canonical facade: $client->Ddd()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->ddd()
+    // resolves here too.
+    public function Ddd($data = null)
     {
         require_once __DIR__ . '/entity/ddd_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class BrasilSDK
 
     private $_feriado = null;
 
-    // Idiomatic facade: $client->feriado()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Feriado() (PHP method
-    // names are case-insensitive).
-    public function feriado($data = null)
+    // Canonical facade: $client->Feriado()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->feriado()
+    // resolves here too.
+    public function Feriado($data = null)
     {
         require_once __DIR__ . '/entity/feriado_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class BrasilSDK
 
     private $_fipe_marca = null;
 
-    // Idiomatic facade: $client->fipe_marca()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias FipeMarca() (PHP method
-    // names are case-insensitive).
-    public function fipe_marca($data = null)
+    // Canonical facade: $client->FipeMarca()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->fipe_marca()
+    // resolves here too.
+    public function FipeMarca($data = null)
     {
         require_once __DIR__ . '/entity/fipe_marca_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class BrasilSDK
 
     private $_fipe_preco = null;
 
-    // Idiomatic facade: $client->fipe_preco()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias FipePreco() (PHP method
-    // names are case-insensitive).
-    public function fipe_preco($data = null)
+    // Canonical facade: $client->FipePreco()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->fipe_preco()
+    // resolves here too.
+    public function FipePreco($data = null)
     {
         require_once __DIR__ . '/entity/fipe_preco_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class BrasilSDK
 
     private $_municipio = null;
 
-    // Idiomatic facade: $client->municipio()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Municipio() (PHP method
-    // names are case-insensitive).
-    public function municipio($data = null)
+    // Canonical facade: $client->Municipio()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->municipio()
+    // resolves here too.
+    public function Municipio($data = null)
     {
         require_once __DIR__ . '/entity/municipio_entity.php';
         if ($data === null) {
@@ -377,10 +377,10 @@ class BrasilSDK
 
     private $_ufn = null;
 
-    // Idiomatic facade: $client->ufn()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Ufn() (PHP method
-    // names are case-insensitive).
-    public function ufn($data = null)
+    // Canonical facade: $client->Ufn()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->ufn()
+    // resolves here too.
+    public function Ufn($data = null)
     {
         require_once __DIR__ . '/entity/ufn_entity.php';
         if ($data === null) {
@@ -395,10 +395,10 @@ class BrasilSDK
 
     private $_ufn2 = null;
 
-    // Idiomatic facade: $client->ufn2()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Ufn2() (PHP method
-    // names are case-insensitive).
-    public function ufn2($data = null)
+    // Canonical facade: $client->Ufn2()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->ufn2()
+    // resolves here too.
+    public function Ufn2($data = null)
     {
         require_once __DIR__ . '/entity/ufn2_entity.php';
         if ($data === null) {

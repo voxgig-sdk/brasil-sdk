@@ -121,7 +121,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## BankEntity
 
 ```php
-$bank = $client->bank();
+$bank = $client->Bank();
 ```
 
 ### Fields
@@ -140,7 +140,7 @@ $bank = $client->bank();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->bank()->list([]);
+$results = $client->Bank()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -148,7 +148,7 @@ $results = $client->bank()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->bank()->load(["id" => "bank_id"]);
+$result = $client->Bank()->load(["id" => "bank_id"]);
 ```
 
 ### Common Methods
@@ -184,7 +184,7 @@ Return the entity name.
 ## CepEntity
 
 ```php
-$cep = $client->cep();
+$cep = $client->Cep();
 ```
 
 ### Fields
@@ -206,7 +206,7 @@ $cep = $client->cep();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->cep()->load(["id" => "cep_id"]);
+$result = $client->Cep()->load(["id" => "cep_id"]);
 ```
 
 ### Common Methods
@@ -242,7 +242,7 @@ Return the entity name.
 ## CnpjEntity
 
 ```php
-$cnpj = $client->cnpj();
+$cnpj = $client->Cnpj();
 ```
 
 ### Fields
@@ -275,7 +275,7 @@ $cnpj = $client->cnpj();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->cnpj()->load(["id" => "cnpj_id"]);
+$result = $client->Cnpj()->load(["id" => "cnpj_id"]);
 ```
 
 ### Common Methods
@@ -311,7 +311,7 @@ Return the entity name.
 ## DddEntity
 
 ```php
-$ddd = $client->ddd();
+$ddd = $client->Ddd();
 ```
 
 ### Fields
@@ -328,7 +328,7 @@ $ddd = $client->ddd();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ddd()->load(["id" => "ddd_id"]);
+$result = $client->Ddd()->load(["id" => "ddd_id"]);
 ```
 
 ### Common Methods
@@ -364,7 +364,7 @@ Return the entity name.
 ## FeriadoEntity
 
 ```php
-$feriado = $client->feriado();
+$feriado = $client->Feriado();
 ```
 
 ### Fields
@@ -382,7 +382,7 @@ $feriado = $client->feriado();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->feriado()->load(["id" => "feriado_id"]);
+$result = $client->Feriado()->load(["id" => "feriado_id"]);
 ```
 
 ### Common Methods
@@ -418,7 +418,7 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```php
-$fipe_marca = $client->fipe_marca();
+$fipe_marca = $client->FipeMarca();
 ```
 
 ### Fields
@@ -435,7 +435,7 @@ $fipe_marca = $client->fipe_marca();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->fipe_marca()->load(["id" => "fipe_marca_id"]);
+$result = $client->FipeMarca()->load(["id" => "fipe_marca_id"]);
 ```
 
 ### Common Methods
@@ -471,7 +471,7 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```php
-$fipe_preco = $client->fipe_preco();
+$fipe_preco = $client->FipePreco();
 ```
 
 ### Fields
@@ -495,7 +495,7 @@ $fipe_preco = $client->fipe_preco();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->fipe_preco()->load(["id" => "fipe_preco_id"]);
+$result = $client->FipePreco()->load(["id" => "fipe_preco_id"]);
 ```
 
 ### Common Methods
@@ -531,7 +531,7 @@ Return the entity name.
 ## MunicipioEntity
 
 ```php
-$municipio = $client->municipio();
+$municipio = $client->Municipio();
 ```
 
 ### Fields
@@ -548,7 +548,7 @@ $municipio = $client->municipio();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->municipio()->load(["id" => "municipio_id"]);
+$result = $client->Municipio()->load(["id" => "municipio_id"]);
 ```
 
 ### Common Methods
@@ -584,7 +584,7 @@ Return the entity name.
 ## UfnEntity
 
 ```php
-$ufn = $client->ufn();
+$ufn = $client->Ufn();
 ```
 
 ### Fields
@@ -603,7 +603,7 @@ $ufn = $client->ufn();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->ufn()->list([]);
+$results = $client->Ufn()->list([]);
 ```
 
 ### Common Methods
@@ -639,7 +639,7 @@ Return the entity name.
 ## Ufn2Entity
 
 ```php
-$ufn2 = $client->ufn2();
+$ufn2 = $client->Ufn2();
 ```
 
 ### Fields
@@ -658,7 +658,7 @@ $ufn2 = $client->ufn2();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ufn2()->load(["id" => "ufn2_id"]);
+$result = $client->Ufn2()->load(["id" => "ufn2_id"]);
 ```
 
 ### Common Methods

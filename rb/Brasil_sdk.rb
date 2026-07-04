@@ -208,130 +208,70 @@ class BrasilSDK
   end
 
 
-  # Idiomatic facade: client.bank.list / client.bank.load({ "id" => ... })
-  def bank
-    require_relative 'entity/bank_entity'
-    @bank ||= BankEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.bank instead.
+  # Canonical facade: client.Bank.list / client.Bank.load({ "id" => ... })
   def Bank(data = nil)
     require_relative 'entity/bank_entity'
     BankEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.cep.list / client.cep.load({ "id" => ... })
-  def cep
-    require_relative 'entity/cep_entity'
-    @cep ||= CepEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.cep instead.
+  # Canonical facade: client.Cep.list / client.Cep.load({ "id" => ... })
   def Cep(data = nil)
     require_relative 'entity/cep_entity'
     CepEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.cnpj.list / client.cnpj.load({ "id" => ... })
-  def cnpj
-    require_relative 'entity/cnpj_entity'
-    @cnpj ||= CnpjEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.cnpj instead.
+  # Canonical facade: client.Cnpj.list / client.Cnpj.load({ "id" => ... })
   def Cnpj(data = nil)
     require_relative 'entity/cnpj_entity'
     CnpjEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.ddd.list / client.ddd.load({ "id" => ... })
-  def ddd
-    require_relative 'entity/ddd_entity'
-    @ddd ||= DddEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.ddd instead.
+  # Canonical facade: client.Ddd.list / client.Ddd.load({ "id" => ... })
   def Ddd(data = nil)
     require_relative 'entity/ddd_entity'
     DddEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.feriado.list / client.feriado.load({ "id" => ... })
-  def feriado
-    require_relative 'entity/feriado_entity'
-    @feriado ||= FeriadoEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.feriado instead.
+  # Canonical facade: client.Feriado.list / client.Feriado.load({ "id" => ... })
   def Feriado(data = nil)
     require_relative 'entity/feriado_entity'
     FeriadoEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.fipe_marca.list / client.fipe_marca.load({ "id" => ... })
-  def fipe_marca
-    require_relative 'entity/fipe_marca_entity'
-    @fipe_marca ||= FipeMarcaEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.fipe_marca instead.
+  # Canonical facade: client.FipeMarca.list / client.FipeMarca.load({ "id" => ... })
   def FipeMarca(data = nil)
     require_relative 'entity/fipe_marca_entity'
     FipeMarcaEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.fipe_preco.list / client.fipe_preco.load({ "id" => ... })
-  def fipe_preco
-    require_relative 'entity/fipe_preco_entity'
-    @fipe_preco ||= FipePrecoEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.fipe_preco instead.
+  # Canonical facade: client.FipePreco.list / client.FipePreco.load({ "id" => ... })
   def FipePreco(data = nil)
     require_relative 'entity/fipe_preco_entity'
     FipePrecoEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.municipio.list / client.municipio.load({ "id" => ... })
-  def municipio
-    require_relative 'entity/municipio_entity'
-    @municipio ||= MunicipioEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.municipio instead.
+  # Canonical facade: client.Municipio.list / client.Municipio.load({ "id" => ... })
   def Municipio(data = nil)
     require_relative 'entity/municipio_entity'
     MunicipioEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.ufn.list / client.ufn.load({ "id" => ... })
-  def ufn
-    require_relative 'entity/ufn_entity'
-    @ufn ||= UfnEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.ufn instead.
+  # Canonical facade: client.Ufn.list / client.Ufn.load({ "id" => ... })
   def Ufn(data = nil)
     require_relative 'entity/ufn_entity'
     UfnEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.ufn2.list / client.ufn2.load({ "id" => ... })
-  def ufn2
-    require_relative 'entity/ufn2_entity'
-    @ufn2 ||= Ufn2Entity.new(self, nil)
-  end
-
-  # Deprecated: use client.ufn2 instead.
+  # Canonical facade: client.Ufn2.list / client.Ufn2.load({ "id" => ... })
   def Ufn2(data = nil)
     require_relative 'entity/ufn2_entity'
     Ufn2Entity.new(self, data)

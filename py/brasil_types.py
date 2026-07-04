@@ -4,165 +4,148 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Bank:
-    code: Optional[int] = None
-    full_name: Optional[str] = None
-    ispb: Optional[str] = None
-    name: Optional[str] = None
+class Bank(TypedDict, total=False):
+    code: int
+    full_name: str
+    ispb: str
+    name: str
 
 
-@dataclass
-class BankLoadMatch:
+class BankLoadMatch(TypedDict):
     code: str
 
 
-@dataclass
-class BankListMatch:
-    code: Optional[int] = None
-    full_name: Optional[str] = None
-    ispb: Optional[str] = None
-    name: Optional[str] = None
+class BankListMatch(TypedDict, total=False):
+    code: int
+    full_name: str
+    ispb: str
+    name: str
 
 
-@dataclass
-class Cep:
-    cep: Optional[str] = None
-    city: Optional[str] = None
-    location: Optional[dict] = None
-    neighborhood: Optional[str] = None
-    service: Optional[str] = None
-    state: Optional[str] = None
-    street: Optional[str] = None
+class Cep(TypedDict, total=False):
+    cep: str
+    city: str
+    location: dict
+    neighborhood: str
+    service: str
+    state: str
+    street: str
 
 
-@dataclass
-class CepLoadMatch:
+class CepLoadMatch(TypedDict):
     cep: str
 
 
-@dataclass
-class Cnpj:
-    bairro: Optional[str] = None
-    capital_social: Optional[float] = None
-    cep: Optional[str] = None
-    cnae_fiscal: Optional[int] = None
-    cnae_fiscal_descricao: Optional[str] = None
-    cnpj: Optional[str] = None
-    complemento: Optional[str] = None
-    data_inicio_atividade: Optional[str] = None
-    ddd_telefone_1: Optional[str] = None
-    logradouro: Optional[str] = None
-    municipio: Optional[str] = None
-    natureza_juridica: Optional[str] = None
-    nome_fantasia: Optional[str] = None
-    numero: Optional[str] = None
-    porte: Optional[str] = None
-    qsa: Optional[list] = None
-    razao_social: Optional[str] = None
-    uf: Optional[str] = None
+class Cnpj(TypedDict, total=False):
+    bairro: str
+    capital_social: float
+    cep: str
+    cnae_fiscal: int
+    cnae_fiscal_descricao: str
+    cnpj: str
+    complemento: str
+    data_inicio_atividade: str
+    ddd_telefone_1: str
+    logradouro: str
+    municipio: str
+    natureza_juridica: str
+    nome_fantasia: str
+    numero: str
+    porte: str
+    qsa: list
+    razao_social: str
+    uf: str
 
 
-@dataclass
-class CnpjLoadMatch:
+class CnpjLoadMatch(TypedDict):
     cnpj: str
 
 
-@dataclass
-class Ddd:
-    city: Optional[list] = None
-    state: Optional[str] = None
+class Ddd(TypedDict, total=False):
+    city: list
+    state: str
 
 
-@dataclass
-class DddLoadMatch:
+class DddLoadMatch(TypedDict):
     ddd: str
 
 
-@dataclass
-class Feriado:
-    date: Optional[str] = None
-    name: Optional[str] = None
-    type: Optional[str] = None
+class Feriado(TypedDict, total=False):
+    date: str
+    name: str
+    type: str
 
 
-@dataclass
-class FeriadoLoadMatch:
+class FeriadoLoadMatch(TypedDict):
     ano: int
 
 
-@dataclass
-class FipeMarca:
-    nome: Optional[str] = None
-    valor: Optional[str] = None
+class FipeMarca(TypedDict, total=False):
+    nome: str
+    valor: str
 
 
-@dataclass
-class FipeMarcaLoadMatch:
+class FipeMarcaLoadMatch(TypedDict):
     tipo_veiculo: str
 
 
-@dataclass
-class FipePreco:
-    ano_modelo: Optional[int] = None
-    codigo_fipe: Optional[str] = None
-    combustivel: Optional[str] = None
-    marca: Optional[str] = None
-    mes_referencia: Optional[str] = None
-    modelo: Optional[str] = None
-    sigla_combustivel: Optional[str] = None
-    tipo_veiculo: Optional[int] = None
-    valor: Optional[str] = None
+class FipePreco(TypedDict, total=False):
+    ano_modelo: int
+    codigo_fipe: str
+    combustivel: str
+    marca: str
+    mes_referencia: str
+    modelo: str
+    sigla_combustivel: str
+    tipo_veiculo: int
+    valor: str
 
 
-@dataclass
-class FipePrecoLoadMatch:
+class FipePrecoLoadMatch(TypedDict):
     codigo_fipe: str
 
 
-@dataclass
-class Municipio:
-    codigo_ibge: Optional[str] = None
-    nome: Optional[str] = None
+class Municipio(TypedDict, total=False):
+    codigo_ibge: str
+    nome: str
 
 
-@dataclass
-class MunicipioLoadMatch:
+class MunicipioLoadMatch(TypedDict):
     sigla_uf: str
 
 
-@dataclass
-class Ufn:
-    id: Optional[int] = None
-    nome: Optional[str] = None
-    regiao: Optional[dict] = None
-    sigla: Optional[str] = None
+class Ufn(TypedDict, total=False):
+    id: int
+    nome: str
+    regiao: dict
+    sigla: str
 
 
-@dataclass
-class UfnListMatch:
-    id: Optional[int] = None
-    nome: Optional[str] = None
-    regiao: Optional[dict] = None
-    sigla: Optional[str] = None
+class UfnListMatch(TypedDict, total=False):
+    id: int
+    nome: str
+    regiao: dict
+    sigla: str
 
 
-@dataclass
-class Ufn2:
-    id: Optional[int] = None
-    nome: Optional[str] = None
-    regiao: Optional[dict] = None
-    sigla: Optional[str] = None
+class Ufn2(TypedDict, total=False):
+    id: int
+    nome: str
+    regiao: dict
+    sigla: str
 
 
-@dataclass
-class Ufn2LoadMatch:
+class Ufn2LoadMatch(TypedDict):
     sigla_uf: str
-

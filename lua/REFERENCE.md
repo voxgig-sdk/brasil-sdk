@@ -119,7 +119,7 @@ same parameters as `direct()`.
 ## BankEntity
 
 ```lua
-local bank = client:bank(nil)
+local bank = client:Bank(nil)
 ```
 
 ### Fields
@@ -138,7 +138,7 @@ local bank = client:bank(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:bank():list()
+local results, err = client:Bank():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -146,7 +146,7 @@ local results, err = client:bank():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:bank():load({ id = "bank_id" })
+local result, err = client:Bank():load({ id = "bank_id" })
 ```
 
 ### Common Methods
@@ -182,7 +182,7 @@ Return the entity name.
 ## CepEntity
 
 ```lua
-local cep = client:cep(nil)
+local cep = client:Cep(nil)
 ```
 
 ### Fields
@@ -204,7 +204,7 @@ local cep = client:cep(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:cep():load({ id = "cep_id" })
+local result, err = client:Cep():load({ id = "cep_id" })
 ```
 
 ### Common Methods
@@ -240,7 +240,7 @@ Return the entity name.
 ## CnpjEntity
 
 ```lua
-local cnpj = client:cnpj(nil)
+local cnpj = client:Cnpj(nil)
 ```
 
 ### Fields
@@ -273,7 +273,7 @@ local cnpj = client:cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:cnpj():load({ id = "cnpj_id" })
+local result, err = client:Cnpj():load({ id = "cnpj_id" })
 ```
 
 ### Common Methods
@@ -309,7 +309,7 @@ Return the entity name.
 ## DddEntity
 
 ```lua
-local ddd = client:ddd(nil)
+local ddd = client:Ddd(nil)
 ```
 
 ### Fields
@@ -326,7 +326,7 @@ local ddd = client:ddd(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ddd():load({ id = "ddd_id" })
+local result, err = client:Ddd():load({ id = "ddd_id" })
 ```
 
 ### Common Methods
@@ -362,7 +362,7 @@ Return the entity name.
 ## FeriadoEntity
 
 ```lua
-local feriado = client:feriado(nil)
+local feriado = client:Feriado(nil)
 ```
 
 ### Fields
@@ -380,7 +380,7 @@ local feriado = client:feriado(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:feriado():load({ id = "feriado_id" })
+local result, err = client:Feriado():load({ id = "feriado_id" })
 ```
 
 ### Common Methods
@@ -416,7 +416,7 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```lua
-local fipe_marca = client:fipe_marca(nil)
+local fipe_marca = client:FipeMarca(nil)
 ```
 
 ### Fields
@@ -433,7 +433,7 @@ local fipe_marca = client:fipe_marca(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:fipe_marca():load({ id = "fipe_marca_id" })
+local result, err = client:FipeMarca():load({ id = "fipe_marca_id" })
 ```
 
 ### Common Methods
@@ -469,7 +469,7 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```lua
-local fipe_preco = client:fipe_preco(nil)
+local fipe_preco = client:FipePreco(nil)
 ```
 
 ### Fields
@@ -493,7 +493,7 @@ local fipe_preco = client:fipe_preco(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:fipe_preco():load({ id = "fipe_preco_id" })
+local result, err = client:FipePreco():load({ id = "fipe_preco_id" })
 ```
 
 ### Common Methods
@@ -529,7 +529,7 @@ Return the entity name.
 ## MunicipioEntity
 
 ```lua
-local municipio = client:municipio(nil)
+local municipio = client:Municipio(nil)
 ```
 
 ### Fields
@@ -546,7 +546,7 @@ local municipio = client:municipio(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:municipio():load({ id = "municipio_id" })
+local result, err = client:Municipio():load({ id = "municipio_id" })
 ```
 
 ### Common Methods
@@ -582,7 +582,7 @@ Return the entity name.
 ## UfnEntity
 
 ```lua
-local ufn = client:ufn(nil)
+local ufn = client:Ufn(nil)
 ```
 
 ### Fields
@@ -601,7 +601,7 @@ local ufn = client:ufn(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:ufn():list()
+local results, err = client:Ufn():list()
 ```
 
 ### Common Methods
@@ -637,7 +637,7 @@ Return the entity name.
 ## Ufn2Entity
 
 ```lua
-local ufn2 = client:ufn2(nil)
+local ufn2 = client:Ufn2(nil)
 ```
 
 ### Fields
@@ -656,7 +656,7 @@ local ufn2 = client:ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ufn2():load({ id = "ufn2_id" })
+local result, err = client:Ufn2():load({ id = "ufn2_id" })
 ```
 
 ### Common Methods

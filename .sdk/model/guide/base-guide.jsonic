@@ -18,18 +18,15 @@ guide: {
   entity: cep: {
     path: "/cep/v1/{cep}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.cep`")|top
     }
     path: "/cep/v2/{cep}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.cep`")|top
     }
   }
 
   entity: cnpj: {
     path: "/cnpj/v1/{cnpj}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.cnpj`")|top
     }
   }
 

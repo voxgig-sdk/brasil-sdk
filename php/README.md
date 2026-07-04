@@ -29,18 +29,16 @@ require_once 'brasil_sdk.php';
 $client = new BrasilSDK();
 ```
 
-### 2. List banks
+### 2. List bank records
 
 ```php
 try {
-    $result = $client->bank()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Bank records — iterate directly.
+    $banks = $client->Bank()->list();
+    foreach ($banks as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->bank()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Bank record (throws on error).
+    $bank = $client->Bank()->load(["id" => "example_id"]);
+    print_r($bank);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = BrasilSDK::test();
+$client = BrasilSDK::test([
+    "entity" => ["bank" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->bank()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$bank = $client->Bank()->load(["id" => "test01"]);
+print_r($bank);
 ```
 
 ### Use a custom fetch function
@@ -190,8 +193,8 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `FipeMarca` | `($data): FipeMarcaEntity` | Create a FipeMarca entity instance. |
 | `FipePreco` | `($data): FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `($data): MunicipioEntity` | Create a Municipio entity instance. |
-| `Ufn` | `($data): UfnEntity` | Create a Ufn entity instance. |
-| `Ufn2` | `($data): Ufn2Entity` | Create a Ufn2 entity instance. |
+| `Ufn` | `($data): UfnEntity` | Create an Ufn entity instance. |
+| `Ufn2` | `($data): Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -383,7 +386,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.bank`
+Create an instance: `$bank = $client->Bank();`
 
 #### Operations
 
@@ -403,20 +406,22 @@ Create an instance: `const bank = client.bank`
 
 #### Example: Load
 
-```ts
-const bank = await client.bank.load({ id: 'bank_id' })
+```php
+// load() returns the bare Bank record (throws on error).
+$bank = $client->Bank()->load(["id" => "bank_id"]);
 ```
 
 #### Example: List
 
-```ts
-const banks = await client.bank.list()
+```php
+// list() returns an array of Bank records (throws on error).
+$banks = $client->Bank()->list();
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.cep`
+Create an instance: `$cep = $client->Cep();`
 
 #### Operations
 
@@ -438,14 +443,15 @@ Create an instance: `const cep = client.cep`
 
 #### Example: Load
 
-```ts
-const cep = await client.cep.load({ id: 'cep_id' })
+```php
+// load() returns the bare Cep record (throws on error).
+$cep = $client->Cep()->load(["id" => "cep_id"]);
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.cnpj`
+Create an instance: `$cnpj = $client->Cnpj();`
 
 #### Operations
 
@@ -478,14 +484,15 @@ Create an instance: `const cnpj = client.cnpj`
 
 #### Example: Load
 
-```ts
-const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
+```php
+// load() returns the bare Cnpj record (throws on error).
+$cnpj = $client->Cnpj()->load(["id" => "cnpj_id"]);
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.ddd`
+Create an instance: `$ddd = $client->Ddd();`
 
 #### Operations
 
@@ -502,14 +509,15 @@ Create an instance: `const ddd = client.ddd`
 
 #### Example: Load
 
-```ts
-const ddd = await client.ddd.load({ id: 'ddd_id' })
+```php
+// load() returns the bare Ddd record (throws on error).
+$ddd = $client->Ddd()->load(["id" => "ddd_id"]);
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.feriado`
+Create an instance: `$feriado = $client->Feriado();`
 
 #### Operations
 
@@ -527,14 +535,15 @@ Create an instance: `const feriado = client.feriado`
 
 #### Example: Load
 
-```ts
-const feriado = await client.feriado.load({ id: 'feriado_id' })
+```php
+// load() returns the bare Feriado record (throws on error).
+$feriado = $client->Feriado()->load(["id" => "feriado_id"]);
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.fipe_marca`
+Create an instance: `$fipe_marca = $client->FipeMarca();`
 
 #### Operations
 
@@ -551,14 +560,15 @@ Create an instance: `const fipe_marca = client.fipe_marca`
 
 #### Example: Load
 
-```ts
-const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
+```php
+// load() returns the bare FipeMarca record (throws on error).
+$fipe_marca = $client->FipeMarca()->load(["id" => "fipe_marca_id"]);
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.fipe_preco`
+Create an instance: `$fipe_preco = $client->FipePreco();`
 
 #### Operations
 
@@ -582,14 +592,15 @@ Create an instance: `const fipe_preco = client.fipe_preco`
 
 #### Example: Load
 
-```ts
-const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
+```php
+// load() returns the bare FipePreco record (throws on error).
+$fipe_preco = $client->FipePreco()->load(["id" => "fipe_preco_id"]);
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.municipio`
+Create an instance: `$municipio = $client->Municipio();`
 
 #### Operations
 
@@ -606,14 +617,15 @@ Create an instance: `const municipio = client.municipio`
 
 #### Example: Load
 
-```ts
-const municipio = await client.municipio.load({ id: 'municipio_id' })
+```php
+// load() returns the bare Municipio record (throws on error).
+$municipio = $client->Municipio()->load(["id" => "municipio_id"]);
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.ufn`
+Create an instance: `$ufn = $client->Ufn();`
 
 #### Operations
 
@@ -632,14 +644,15 @@ Create an instance: `const ufn = client.ufn`
 
 #### Example: List
 
-```ts
-const ufns = await client.ufn.list()
+```php
+// list() returns an array of Ufn records (throws on error).
+$ufns = $client->Ufn()->list();
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.ufn2`
+Create an instance: `$ufn2 = $client->Ufn2();`
 
 #### Operations
 
@@ -658,8 +671,9 @@ Create an instance: `const ufn2 = client.ufn2`
 
 #### Example: Load
 
-```ts
-const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
+```php
+// load() returns the bare Ufn2 record (throws on error).
+$ufn2 = $client->Ufn2()->load(["id" => "ufn2_id"]);
 ```
 
 
@@ -734,7 +748,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$bank = $client->bank();
+$bank = $client->Bank();
 $bank->load(["id" => "example_id"]);
 
 // $bank->dataGet() now returns the loaded bank data

@@ -31,24 +31,28 @@ from brasil_sdk import BrasilSDK
 client = BrasilSDK()
 ```
 
-### 2. List banks
+### 2. List bank records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.bank.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    banks = client.Bank().list({})
+    for bank in banks:
+        print(bank)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a bank
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.bank.load({"id": "example_id"})
-    print(result)
+    bank = client.Bank().load({"id": "example_id"})
+    print(bank)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = BrasilSDK.test()
 
-result = client.bank.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+bank = client.Bank().load({"id": "test01"})
+# bank contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -181,8 +186,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `FipeMarca` | `(data) -> FipeMarcaEntity` | Create a FipeMarca entity instance. |
 | `FipePreco` | `(data) -> FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data) -> MunicipioEntity` | Create a Municipio entity instance. |
-| `Ufn` | `(data) -> UfnEntity` | Create a Ufn entity instance. |
-| `Ufn2` | `(data) -> Ufn2Entity` | Create a Ufn2 entity instance. |
+| `Ufn` | `(data) -> UfnEntity` | Create an Ufn entity instance. |
+| `Ufn2` | `(data) -> Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -374,7 +379,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.bank`
+Create an instance: `bank = client.Bank()`
 
 #### Operations
 
@@ -394,20 +399,20 @@ Create an instance: `const bank = client.bank`
 
 #### Example: Load
 
-```ts
-const bank = await client.bank.load({ id: 'bank_id' })
+```python
+bank = client.Bank().load({"id": "bank_id"})
 ```
 
 #### Example: List
 
-```ts
-const banks = await client.bank.list()
+```python
+banks = client.Bank().list({})
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.cep`
+Create an instance: `cep = client.Cep()`
 
 #### Operations
 
@@ -429,14 +434,14 @@ Create an instance: `const cep = client.cep`
 
 #### Example: Load
 
-```ts
-const cep = await client.cep.load({ id: 'cep_id' })
+```python
+cep = client.Cep().load({"id": "cep_id"})
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.cnpj`
+Create an instance: `cnpj = client.Cnpj()`
 
 #### Operations
 
@@ -469,14 +474,14 @@ Create an instance: `const cnpj = client.cnpj`
 
 #### Example: Load
 
-```ts
-const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
+```python
+cnpj = client.Cnpj().load({"id": "cnpj_id"})
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.ddd`
+Create an instance: `ddd = client.Ddd()`
 
 #### Operations
 
@@ -493,14 +498,14 @@ Create an instance: `const ddd = client.ddd`
 
 #### Example: Load
 
-```ts
-const ddd = await client.ddd.load({ id: 'ddd_id' })
+```python
+ddd = client.Ddd().load({"id": "ddd_id"})
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.feriado`
+Create an instance: `feriado = client.Feriado()`
 
 #### Operations
 
@@ -518,14 +523,14 @@ Create an instance: `const feriado = client.feriado`
 
 #### Example: Load
 
-```ts
-const feriado = await client.feriado.load({ id: 'feriado_id' })
+```python
+feriado = client.Feriado().load({"id": "feriado_id"})
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.fipe_marca`
+Create an instance: `fipe_marca = client.FipeMarca()`
 
 #### Operations
 
@@ -542,14 +547,14 @@ Create an instance: `const fipe_marca = client.fipe_marca`
 
 #### Example: Load
 
-```ts
-const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
+```python
+fipe_marca = client.FipeMarca().load({"id": "fipe_marca_id"})
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.fipe_preco`
+Create an instance: `fipe_preco = client.FipePreco()`
 
 #### Operations
 
@@ -573,14 +578,14 @@ Create an instance: `const fipe_preco = client.fipe_preco`
 
 #### Example: Load
 
-```ts
-const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
+```python
+fipe_preco = client.FipePreco().load({"id": "fipe_preco_id"})
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.municipio`
+Create an instance: `municipio = client.Municipio()`
 
 #### Operations
 
@@ -597,14 +602,14 @@ Create an instance: `const municipio = client.municipio`
 
 #### Example: Load
 
-```ts
-const municipio = await client.municipio.load({ id: 'municipio_id' })
+```python
+municipio = client.Municipio().load({"id": "municipio_id"})
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.ufn`
+Create an instance: `ufn = client.Ufn()`
 
 #### Operations
 
@@ -623,14 +628,14 @@ Create an instance: `const ufn = client.ufn`
 
 #### Example: List
 
-```ts
-const ufns = await client.ufn.list()
+```python
+ufns = client.Ufn().list({})
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.ufn2`
+Create an instance: `ufn2 = client.Ufn2()`
 
 #### Operations
 
@@ -649,8 +654,8 @@ Create an instance: `const ufn2 = client.ufn2`
 
 #### Example: Load
 
-```ts
-const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
+```python
+ufn2 = client.Ufn2().load({"id": "ufn2_id"})
 ```
 
 
@@ -724,7 +729,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-bank = client.bank
+bank = client.Bank()
 bank.load({"id": "example_id"})
 
 # bank.data_get() now returns the loaded bank data

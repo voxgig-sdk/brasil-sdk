@@ -209,7 +209,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.cep`"
+                    "res": "`body`"
                   }
                 },
                 {
@@ -241,7 +241,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.cep`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -408,7 +408,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.cnpj`"
+                    "res": "`body`"
                   }
                 }
               ]
