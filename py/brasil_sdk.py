@@ -144,16 +144,23 @@ class BrasilSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class BrasilSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,60 +212,170 @@ class BrasilSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def bank(self):
+        """Idiomatic facade: client.bank.list() / client.bank.load({"id": ...})."""
+        from entity.bank_entity import BankEntity
+        cached = getattr(self, "_bank", None)
+        if cached is None:
+            cached = BankEntity(self, None)
+            self._bank = cached
+        return cached
 
     def Bank(self, data=None):
+        # Deprecated: use client.bank instead.
         from entity.bank_entity import BankEntity
         return BankEntity(self, data)
 
 
+    @property
+    def cep(self):
+        """Idiomatic facade: client.cep.list() / client.cep.load({"id": ...})."""
+        from entity.cep_entity import CepEntity
+        cached = getattr(self, "_cep", None)
+        if cached is None:
+            cached = CepEntity(self, None)
+            self._cep = cached
+        return cached
+
     def Cep(self, data=None):
+        # Deprecated: use client.cep instead.
         from entity.cep_entity import CepEntity
         return CepEntity(self, data)
 
 
+    @property
+    def cnpj(self):
+        """Idiomatic facade: client.cnpj.list() / client.cnpj.load({"id": ...})."""
+        from entity.cnpj_entity import CnpjEntity
+        cached = getattr(self, "_cnpj", None)
+        if cached is None:
+            cached = CnpjEntity(self, None)
+            self._cnpj = cached
+        return cached
+
     def Cnpj(self, data=None):
+        # Deprecated: use client.cnpj instead.
         from entity.cnpj_entity import CnpjEntity
         return CnpjEntity(self, data)
 
 
+    @property
+    def ddd(self):
+        """Idiomatic facade: client.ddd.list() / client.ddd.load({"id": ...})."""
+        from entity.ddd_entity import DddEntity
+        cached = getattr(self, "_ddd", None)
+        if cached is None:
+            cached = DddEntity(self, None)
+            self._ddd = cached
+        return cached
+
     def Ddd(self, data=None):
+        # Deprecated: use client.ddd instead.
         from entity.ddd_entity import DddEntity
         return DddEntity(self, data)
 
 
+    @property
+    def feriado(self):
+        """Idiomatic facade: client.feriado.list() / client.feriado.load({"id": ...})."""
+        from entity.feriado_entity import FeriadoEntity
+        cached = getattr(self, "_feriado", None)
+        if cached is None:
+            cached = FeriadoEntity(self, None)
+            self._feriado = cached
+        return cached
+
     def Feriado(self, data=None):
+        # Deprecated: use client.feriado instead.
         from entity.feriado_entity import FeriadoEntity
         return FeriadoEntity(self, data)
 
 
+    @property
+    def fipe_marca(self):
+        """Idiomatic facade: client.fipe_marca.list() / client.fipe_marca.load({"id": ...})."""
+        from entity.fipe_marca_entity import FipeMarcaEntity
+        cached = getattr(self, "_fipe_marca", None)
+        if cached is None:
+            cached = FipeMarcaEntity(self, None)
+            self._fipe_marca = cached
+        return cached
+
     def FipeMarca(self, data=None):
+        # Deprecated: use client.fipe_marca instead.
         from entity.fipe_marca_entity import FipeMarcaEntity
         return FipeMarcaEntity(self, data)
 
 
+    @property
+    def fipe_preco(self):
+        """Idiomatic facade: client.fipe_preco.list() / client.fipe_preco.load({"id": ...})."""
+        from entity.fipe_preco_entity import FipePrecoEntity
+        cached = getattr(self, "_fipe_preco", None)
+        if cached is None:
+            cached = FipePrecoEntity(self, None)
+            self._fipe_preco = cached
+        return cached
+
     def FipePreco(self, data=None):
+        # Deprecated: use client.fipe_preco instead.
         from entity.fipe_preco_entity import FipePrecoEntity
         return FipePrecoEntity(self, data)
 
 
+    @property
+    def municipio(self):
+        """Idiomatic facade: client.municipio.list() / client.municipio.load({"id": ...})."""
+        from entity.municipio_entity import MunicipioEntity
+        cached = getattr(self, "_municipio", None)
+        if cached is None:
+            cached = MunicipioEntity(self, None)
+            self._municipio = cached
+        return cached
+
     def Municipio(self, data=None):
+        # Deprecated: use client.municipio instead.
         from entity.municipio_entity import MunicipioEntity
         return MunicipioEntity(self, data)
 
 
+    @property
+    def ufn(self):
+        """Idiomatic facade: client.ufn.list() / client.ufn.load({"id": ...})."""
+        from entity.ufn_entity import UfnEntity
+        cached = getattr(self, "_ufn", None)
+        if cached is None:
+            cached = UfnEntity(self, None)
+            self._ufn = cached
+        return cached
+
     def Ufn(self, data=None):
+        # Deprecated: use client.ufn instead.
         from entity.ufn_entity import UfnEntity
         return UfnEntity(self, data)
 
 
+    @property
+    def ufn2(self):
+        """Idiomatic facade: client.ufn2.list() / client.ufn2.load({"id": ...})."""
+        from entity.ufn2_entity import Ufn2Entity
+        cached = getattr(self, "_ufn2", None)
+        if cached is None:
+            cached = Ufn2Entity(self, None)
+            self._ufn2 = cached
+        return cached
+
     def Ufn2(self, data=None):
+        # Deprecated: use client.ufn2 instead.
         from entity.ufn2_entity import Ufn2Entity
         return Ufn2Entity(self, data)
 

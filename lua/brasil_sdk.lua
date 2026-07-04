@@ -244,60 +244,190 @@ end
 
 
 
+-- Idiomatic facade: client:bank():list() / client:bank():load({ id = ... })
+function BrasilSDK:bank(data)
+  local EntityMod = require("entity.bank_entity")
+  if data == nil then
+    if self._bank == nil then
+      self._bank = EntityMod.new(self, nil)
+    end
+    return self._bank
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:bank() instead.
 function BrasilSDK:Bank(data)
   local EntityMod = require("entity.bank_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:cep():list() / client:cep():load({ id = ... })
+function BrasilSDK:cep(data)
+  local EntityMod = require("entity.cep_entity")
+  if data == nil then
+    if self._cep == nil then
+      self._cep = EntityMod.new(self, nil)
+    end
+    return self._cep
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:cep() instead.
 function BrasilSDK:Cep(data)
   local EntityMod = require("entity.cep_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:cnpj():list() / client:cnpj():load({ id = ... })
+function BrasilSDK:cnpj(data)
+  local EntityMod = require("entity.cnpj_entity")
+  if data == nil then
+    if self._cnpj == nil then
+      self._cnpj = EntityMod.new(self, nil)
+    end
+    return self._cnpj
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:cnpj() instead.
 function BrasilSDK:Cnpj(data)
   local EntityMod = require("entity.cnpj_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:ddd():list() / client:ddd():load({ id = ... })
+function BrasilSDK:ddd(data)
+  local EntityMod = require("entity.ddd_entity")
+  if data == nil then
+    if self._ddd == nil then
+      self._ddd = EntityMod.new(self, nil)
+    end
+    return self._ddd
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:ddd() instead.
 function BrasilSDK:Ddd(data)
   local EntityMod = require("entity.ddd_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:feriado():list() / client:feriado():load({ id = ... })
+function BrasilSDK:feriado(data)
+  local EntityMod = require("entity.feriado_entity")
+  if data == nil then
+    if self._feriado == nil then
+      self._feriado = EntityMod.new(self, nil)
+    end
+    return self._feriado
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:feriado() instead.
 function BrasilSDK:Feriado(data)
   local EntityMod = require("entity.feriado_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:fipe_marca():list() / client:fipe_marca():load({ id = ... })
+function BrasilSDK:fipe_marca(data)
+  local EntityMod = require("entity.fipe_marca_entity")
+  if data == nil then
+    if self._fipe_marca == nil then
+      self._fipe_marca = EntityMod.new(self, nil)
+    end
+    return self._fipe_marca
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:fipe_marca() instead.
 function BrasilSDK:FipeMarca(data)
   local EntityMod = require("entity.fipe_marca_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:fipe_preco():list() / client:fipe_preco():load({ id = ... })
+function BrasilSDK:fipe_preco(data)
+  local EntityMod = require("entity.fipe_preco_entity")
+  if data == nil then
+    if self._fipe_preco == nil then
+      self._fipe_preco = EntityMod.new(self, nil)
+    end
+    return self._fipe_preco
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:fipe_preco() instead.
 function BrasilSDK:FipePreco(data)
   local EntityMod = require("entity.fipe_preco_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:municipio():list() / client:municipio():load({ id = ... })
+function BrasilSDK:municipio(data)
+  local EntityMod = require("entity.municipio_entity")
+  if data == nil then
+    if self._municipio == nil then
+      self._municipio = EntityMod.new(self, nil)
+    end
+    return self._municipio
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:municipio() instead.
 function BrasilSDK:Municipio(data)
   local EntityMod = require("entity.municipio_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:ufn():list() / client:ufn():load({ id = ... })
+function BrasilSDK:ufn(data)
+  local EntityMod = require("entity.ufn_entity")
+  if data == nil then
+    if self._ufn == nil then
+      self._ufn = EntityMod.new(self, nil)
+    end
+    return self._ufn
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:ufn() instead.
 function BrasilSDK:Ufn(data)
   local EntityMod = require("entity.ufn_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:ufn2():list() / client:ufn2():load({ id = ... })
+function BrasilSDK:ufn2(data)
+  local EntityMod = require("entity.ufn2_entity")
+  if data == nil then
+    if self._ufn2 == nil then
+      self._ufn2 = EntityMod.new(self, nil)
+    end
+    return self._ufn2
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:ufn2() instead.
 function BrasilSDK:Ufn2(data)
   local EntityMod = require("entity.ufn2_entity")
   return EntityMod.new(self, data)

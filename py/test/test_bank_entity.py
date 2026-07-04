@@ -50,14 +50,12 @@ class TestBankEntity:
         bank_ref01_ent = client.Bank(None)
         bank_ref01_match = {}
 
-        bank_ref01_list_result, err = bank_ref01_ent.list(bank_ref01_match, None)
-        assert err is None
+        bank_ref01_list_result = bank_ref01_ent.list(bank_ref01_match, None)
         assert isinstance(bank_ref01_list_result, list)
 
         # LOAD
         bank_ref01_match_dt0 = {}
-        bank_ref01_data_dt0_loaded, err = bank_ref01_ent.load(bank_ref01_match_dt0, None)
-        assert err is None
+        bank_ref01_data_dt0_loaded = bank_ref01_ent.load(bank_ref01_match_dt0, None)
         assert bank_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _bank_basic_setup(extra):
         "BRASIL_TEST_BANK_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _bank_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `$options` | `array` | SDK configuration options. |
-| `$options["apikey"]` | `string` | API key for authentication. |
 | `$options["base"]` | `string` | Base URL for API requests. |
 | `$options["prefix"]` | `string` | URL prefix appended after base. |
 | `$options["suffix"]` | `string` | URL suffix appended after path. |
@@ -92,7 +91,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -106,11 +108,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -118,7 +121,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## BankEntity
 
 ```php
-$bank = $client->Bank();
+$bank = $client->bank();
 ```
 
 ### Fields
@@ -132,20 +135,20 @@ $bank = $client->Bank();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Bank()->list([]);
+$results = $client->bank()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Bank()->load(["id" => "bank_id"]);
+$result = $client->bank()->load(["id" => "bank_id"]);
 ```
 
 ### Common Methods
@@ -181,7 +184,7 @@ Return the entity name.
 ## CepEntity
 
 ```php
-$cep = $client->Cep();
+$cep = $client->cep();
 ```
 
 ### Fields
@@ -198,12 +201,12 @@ $cep = $client->Cep();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Cep()->load(["id" => "cep_id"]);
+$result = $client->cep()->load(["id" => "cep_id"]);
 ```
 
 ### Common Methods
@@ -239,7 +242,7 @@ Return the entity name.
 ## CnpjEntity
 
 ```php
-$cnpj = $client->Cnpj();
+$cnpj = $client->cnpj();
 ```
 
 ### Fields
@@ -267,12 +270,12 @@ $cnpj = $client->Cnpj();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Cnpj()->load(["id" => "cnpj_id"]);
+$result = $client->cnpj()->load(["id" => "cnpj_id"]);
 ```
 
 ### Common Methods
@@ -308,7 +311,7 @@ Return the entity name.
 ## DddEntity
 
 ```php
-$ddd = $client->Ddd();
+$ddd = $client->ddd();
 ```
 
 ### Fields
@@ -320,12 +323,12 @@ $ddd = $client->Ddd();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Ddd()->load(["id" => "ddd_id"]);
+$result = $client->ddd()->load(["id" => "ddd_id"]);
 ```
 
 ### Common Methods
@@ -361,7 +364,7 @@ Return the entity name.
 ## FeriadoEntity
 
 ```php
-$feriado = $client->Feriado();
+$feriado = $client->feriado();
 ```
 
 ### Fields
@@ -374,12 +377,12 @@ $feriado = $client->Feriado();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Feriado()->load(["id" => "feriado_id"]);
+$result = $client->feriado()->load(["id" => "feriado_id"]);
 ```
 
 ### Common Methods
@@ -415,7 +418,7 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```php
-$fipe_marca = $client->FipeMarca();
+$fipe_marca = $client->fipe_marca();
 ```
 
 ### Fields
@@ -427,12 +430,12 @@ $fipe_marca = $client->FipeMarca();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->FipeMarca()->load(["id" => "fipe_marca_id"]);
+$result = $client->fipe_marca()->load(["id" => "fipe_marca_id"]);
 ```
 
 ### Common Methods
@@ -468,7 +471,7 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```php
-$fipe_preco = $client->FipePreco();
+$fipe_preco = $client->fipe_preco();
 ```
 
 ### Fields
@@ -487,12 +490,12 @@ $fipe_preco = $client->FipePreco();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->FipePreco()->load(["id" => "fipe_preco_id"]);
+$result = $client->fipe_preco()->load(["id" => "fipe_preco_id"]);
 ```
 
 ### Common Methods
@@ -528,7 +531,7 @@ Return the entity name.
 ## MunicipioEntity
 
 ```php
-$municipio = $client->Municipio();
+$municipio = $client->municipio();
 ```
 
 ### Fields
@@ -540,12 +543,12 @@ $municipio = $client->Municipio();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Municipio()->load(["id" => "municipio_id"]);
+$result = $client->municipio()->load(["id" => "municipio_id"]);
 ```
 
 ### Common Methods
@@ -581,7 +584,7 @@ Return the entity name.
 ## UfnEntity
 
 ```php
-$ufn = $client->Ufn();
+$ufn = $client->ufn();
 ```
 
 ### Fields
@@ -595,12 +598,12 @@ $ufn = $client->Ufn();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Ufn()->list([]);
+$results = $client->ufn()->list([]);
 ```
 
 ### Common Methods
@@ -636,7 +639,7 @@ Return the entity name.
 ## Ufn2Entity
 
 ```php
-$ufn2 = $client->Ufn2();
+$ufn2 = $client->ufn2();
 ```
 
 ### Fields
@@ -650,12 +653,12 @@ $ufn2 = $client->Ufn2();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Ufn2()->load(["id" => "ufn2_id"]);
+$result = $client->ufn2()->load(["id" => "ufn2_id"]);
 ```
 
 ### Common Methods

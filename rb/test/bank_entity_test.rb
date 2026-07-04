@@ -43,14 +43,12 @@ class BankEntityTest < Minitest::Test
     bank_ref01_ent = client.Bank(nil)
     bank_ref01_match = {}
 
-    bank_ref01_list_result, err = bank_ref01_ent.list(bank_ref01_match, nil)
-    assert_nil err
+    bank_ref01_list_result = bank_ref01_ent.list(bank_ref01_match, nil)
     assert bank_ref01_list_result.is_a?(Array)
 
     # LOAD
     bank_ref01_match_dt0 = {}
-    bank_ref01_data_dt0_loaded, err = bank_ref01_ent.load(bank_ref01_match_dt0, nil)
-    assert_nil err
+    bank_ref01_data_dt0_loaded = bank_ref01_ent.load(bank_ref01_match_dt0, nil)
     assert !bank_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def bank_basic_setup(extra)
     "BRASIL_TEST_BANK_ENTID" => idmap,
     "BRASIL_TEST_LIVE" => "FALSE",
     "BRASIL_TEST_EXPLAIN" => "FALSE",
-    "BRASIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def bank_basic_setup(extra)
   if env["BRASIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["BRASIL_APIKEY"],
       },
       extra || {},
     ])

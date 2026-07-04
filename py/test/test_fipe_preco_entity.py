@@ -49,8 +49,7 @@ class TestFipePrecoEntity:
         # LOAD
         fipe_preco_ref01_ent = client.FipePreco(None)
         fipe_preco_ref01_match_dt0 = {}
-        fipe_preco_ref01_data_dt0_loaded, err = fipe_preco_ref01_ent.load(fipe_preco_ref01_match_dt0, None)
-        assert err is None
+        fipe_preco_ref01_data_dt0_loaded = fipe_preco_ref01_ent.load(fipe_preco_ref01_match_dt0, None)
         assert fipe_preco_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _fipe_preco_basic_setup(extra):
         "BRASIL_TEST_FIPE_PRECO_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _fipe_preco_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

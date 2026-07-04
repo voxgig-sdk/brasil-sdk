@@ -103,7 +103,7 @@ class BrasilSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class BrasilSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class BrasilSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,87 +216,197 @@ class BrasilSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Bank($data = null)
+    private $_bank = null;
+
+    // Idiomatic facade: $client->bank()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Bank() (PHP method
+    // names are case-insensitive).
+    public function bank($data = null)
     {
         require_once __DIR__ . '/entity/bank_entity.php';
+        if ($data === null) {
+            if ($this->_bank === null) {
+                $this->_bank = new BankEntity($this, null);
+            }
+            return $this->_bank;
+        }
         return new BankEntity($this, $data);
     }
 
 
-    public function Cep($data = null)
+    private $_cep = null;
+
+    // Idiomatic facade: $client->cep()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Cep() (PHP method
+    // names are case-insensitive).
+    public function cep($data = null)
     {
         require_once __DIR__ . '/entity/cep_entity.php';
+        if ($data === null) {
+            if ($this->_cep === null) {
+                $this->_cep = new CepEntity($this, null);
+            }
+            return $this->_cep;
+        }
         return new CepEntity($this, $data);
     }
 
 
-    public function Cnpj($data = null)
+    private $_cnpj = null;
+
+    // Idiomatic facade: $client->cnpj()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Cnpj() (PHP method
+    // names are case-insensitive).
+    public function cnpj($data = null)
     {
         require_once __DIR__ . '/entity/cnpj_entity.php';
+        if ($data === null) {
+            if ($this->_cnpj === null) {
+                $this->_cnpj = new CnpjEntity($this, null);
+            }
+            return $this->_cnpj;
+        }
         return new CnpjEntity($this, $data);
     }
 
 
-    public function Ddd($data = null)
+    private $_ddd = null;
+
+    // Idiomatic facade: $client->ddd()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Ddd() (PHP method
+    // names are case-insensitive).
+    public function ddd($data = null)
     {
         require_once __DIR__ . '/entity/ddd_entity.php';
+        if ($data === null) {
+            if ($this->_ddd === null) {
+                $this->_ddd = new DddEntity($this, null);
+            }
+            return $this->_ddd;
+        }
         return new DddEntity($this, $data);
     }
 
 
-    public function Feriado($data = null)
+    private $_feriado = null;
+
+    // Idiomatic facade: $client->feriado()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Feriado() (PHP method
+    // names are case-insensitive).
+    public function feriado($data = null)
     {
         require_once __DIR__ . '/entity/feriado_entity.php';
+        if ($data === null) {
+            if ($this->_feriado === null) {
+                $this->_feriado = new FeriadoEntity($this, null);
+            }
+            return $this->_feriado;
+        }
         return new FeriadoEntity($this, $data);
     }
 
 
-    public function FipeMarca($data = null)
+    private $_fipe_marca = null;
+
+    // Idiomatic facade: $client->fipe_marca()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias FipeMarca() (PHP method
+    // names are case-insensitive).
+    public function fipe_marca($data = null)
     {
         require_once __DIR__ . '/entity/fipe_marca_entity.php';
+        if ($data === null) {
+            if ($this->_fipe_marca === null) {
+                $this->_fipe_marca = new FipeMarcaEntity($this, null);
+            }
+            return $this->_fipe_marca;
+        }
         return new FipeMarcaEntity($this, $data);
     }
 
 
-    public function FipePreco($data = null)
+    private $_fipe_preco = null;
+
+    // Idiomatic facade: $client->fipe_preco()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias FipePreco() (PHP method
+    // names are case-insensitive).
+    public function fipe_preco($data = null)
     {
         require_once __DIR__ . '/entity/fipe_preco_entity.php';
+        if ($data === null) {
+            if ($this->_fipe_preco === null) {
+                $this->_fipe_preco = new FipePrecoEntity($this, null);
+            }
+            return $this->_fipe_preco;
+        }
         return new FipePrecoEntity($this, $data);
     }
 
 
-    public function Municipio($data = null)
+    private $_municipio = null;
+
+    // Idiomatic facade: $client->municipio()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Municipio() (PHP method
+    // names are case-insensitive).
+    public function municipio($data = null)
     {
         require_once __DIR__ . '/entity/municipio_entity.php';
+        if ($data === null) {
+            if ($this->_municipio === null) {
+                $this->_municipio = new MunicipioEntity($this, null);
+            }
+            return $this->_municipio;
+        }
         return new MunicipioEntity($this, $data);
     }
 
 
-    public function Ufn($data = null)
+    private $_ufn = null;
+
+    // Idiomatic facade: $client->ufn()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Ufn() (PHP method
+    // names are case-insensitive).
+    public function ufn($data = null)
     {
         require_once __DIR__ . '/entity/ufn_entity.php';
+        if ($data === null) {
+            if ($this->_ufn === null) {
+                $this->_ufn = new UfnEntity($this, null);
+            }
+            return $this->_ufn;
+        }
         return new UfnEntity($this, $data);
     }
 
 
-    public function Ufn2($data = null)
+    private $_ufn2 = null;
+
+    // Idiomatic facade: $client->ufn2()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Ufn2() (PHP method
+    // names are case-insensitive).
+    public function ufn2($data = null)
     {
         require_once __DIR__ . '/entity/ufn2_entity.php';
+        if ($data === null) {
+            if ($this->_ufn2 === null) {
+                $this->_ufn2 = new Ufn2Entity($this, null);
+            }
+            return $this->_ufn2;
+        }
         return new Ufn2Entity($this, $data);
     }
 

@@ -50,8 +50,7 @@ class TestUfnEntity:
         ufn_ref01_ent = client.Ufn(None)
         ufn_ref01_match = {}
 
-        ufn_ref01_list_result, err = ufn_ref01_ent.list(ufn_ref01_match, None)
-        assert err is None
+        ufn_ref01_list_result = ufn_ref01_ent.list(ufn_ref01_match, None)
         assert isinstance(ufn_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _ufn_basic_setup(extra):
         "BRASIL_TEST_UFN_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _ufn_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

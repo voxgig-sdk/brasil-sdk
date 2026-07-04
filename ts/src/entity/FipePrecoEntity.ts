@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  FipePreco,
+  FipePrecoLoadMatch,
+} from '../BrasilTypes'
 
 // TODO: needs Entity superclass
-class FipePrecoEntity extends BrasilEntityBase {
+class FipePrecoEntity extends BrasilEntityBase<FipePreco> {
 
   constructor(client: BrasilSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class FipePrecoEntity extends BrasilEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: FipePrecoLoadMatch, ctrl?: Control): Promise<FipePreco> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class FipePrecoEntity extends BrasilEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<FipePreco> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

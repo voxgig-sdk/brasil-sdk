@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Municipio,
+  MunicipioLoadMatch,
+} from '../BrasilTypes'
 
 // TODO: needs Entity superclass
-class MunicipioEntity extends BrasilEntityBase {
+class MunicipioEntity extends BrasilEntityBase<Municipio> {
 
   constructor(client: BrasilSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class MunicipioEntity extends BrasilEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: MunicipioLoadMatch, ctrl?: Control): Promise<Municipio> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class MunicipioEntity extends BrasilEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Municipio> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

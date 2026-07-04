@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Brasil_types'
+
 
 class BrasilSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class BrasilSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class BrasilSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue BrasilError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = BrasilHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class BrasilSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,70 +198,140 @@ class BrasilSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.bank.list / client.bank.load({ "id" => ... })
+  def bank
+    require_relative 'entity/bank_entity'
+    @bank ||= BankEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.bank instead.
   def Bank(data = nil)
     require_relative 'entity/bank_entity'
     BankEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.cep.list / client.cep.load({ "id" => ... })
+  def cep
+    require_relative 'entity/cep_entity'
+    @cep ||= CepEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.cep instead.
   def Cep(data = nil)
     require_relative 'entity/cep_entity'
     CepEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.cnpj.list / client.cnpj.load({ "id" => ... })
+  def cnpj
+    require_relative 'entity/cnpj_entity'
+    @cnpj ||= CnpjEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.cnpj instead.
   def Cnpj(data = nil)
     require_relative 'entity/cnpj_entity'
     CnpjEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.ddd.list / client.ddd.load({ "id" => ... })
+  def ddd
+    require_relative 'entity/ddd_entity'
+    @ddd ||= DddEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.ddd instead.
   def Ddd(data = nil)
     require_relative 'entity/ddd_entity'
     DddEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.feriado.list / client.feriado.load({ "id" => ... })
+  def feriado
+    require_relative 'entity/feriado_entity'
+    @feriado ||= FeriadoEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.feriado instead.
   def Feriado(data = nil)
     require_relative 'entity/feriado_entity'
     FeriadoEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.fipe_marca.list / client.fipe_marca.load({ "id" => ... })
+  def fipe_marca
+    require_relative 'entity/fipe_marca_entity'
+    @fipe_marca ||= FipeMarcaEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.fipe_marca instead.
   def FipeMarca(data = nil)
     require_relative 'entity/fipe_marca_entity'
     FipeMarcaEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.fipe_preco.list / client.fipe_preco.load({ "id" => ... })
+  def fipe_preco
+    require_relative 'entity/fipe_preco_entity'
+    @fipe_preco ||= FipePrecoEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.fipe_preco instead.
   def FipePreco(data = nil)
     require_relative 'entity/fipe_preco_entity'
     FipePrecoEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.municipio.list / client.municipio.load({ "id" => ... })
+  def municipio
+    require_relative 'entity/municipio_entity'
+    @municipio ||= MunicipioEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.municipio instead.
   def Municipio(data = nil)
     require_relative 'entity/municipio_entity'
     MunicipioEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.ufn.list / client.ufn.load({ "id" => ... })
+  def ufn
+    require_relative 'entity/ufn_entity'
+    @ufn ||= UfnEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.ufn instead.
   def Ufn(data = nil)
     require_relative 'entity/ufn_entity'
     UfnEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.ufn2.list / client.ufn2.load({ "id" => ... })
+  def ufn2
+    require_relative 'entity/ufn2_entity'
+    @ufn2 ||= Ufn2Entity.new(self, nil)
+  end
+
+  # Deprecated: use client.ufn2 instead.
   def Ufn2(data = nil)
     require_relative 'entity/ufn2_entity'
     Ufn2Entity.new(self, data)

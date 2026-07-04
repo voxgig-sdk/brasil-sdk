@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Feriado,
+  FeriadoLoadMatch,
+} from '../BrasilTypes'
 
 // TODO: needs Entity superclass
-class FeriadoEntity extends BrasilEntityBase {
+class FeriadoEntity extends BrasilEntityBase<Feriado> {
 
   constructor(client: BrasilSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class FeriadoEntity extends BrasilEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: FeriadoLoadMatch, ctrl?: Control): Promise<Feriado> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class FeriadoEntity extends BrasilEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Feriado> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://brasilapi.com.br/api',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -156,7 +152,8 @@ class Config {
                     "name": "code",
                     "orig": "code",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -259,7 +256,8 @@ class Config {
                     "name": "cep",
                     "orig": "cep",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -292,7 +290,8 @@ class Config {
                     "name": "cep",
                     "orig": "cep",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -475,7 +474,8 @@ class Config {
                     "name": "cnpj",
                     "orig": "cnpj",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -543,7 +543,8 @@ class Config {
                     "name": "ddd",
                     "orig": "ddd",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -618,7 +619,8 @@ class Config {
                     "name": "ano",
                     "orig": "ano",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },
@@ -686,7 +688,8 @@ class Config {
                     "name": "tipo_veiculo",
                     "orig": "tipo_veiculo",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -809,7 +812,8 @@ class Config {
                     "name": "codigo_fipe",
                     "orig": "codigo_fipe",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -883,7 +887,8 @@ class Config {
                     "name": "sigla_uf",
                     "orig": "sigla_uf",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -1035,7 +1040,8 @@ class Config {
                     "name": "sigla_uf",
                     "orig": "sigla_uf",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

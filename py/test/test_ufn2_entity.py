@@ -51,8 +51,7 @@ class TestUfn2Entity:
         ufn2_ref01_match_dt0 = {
             "id": ufn2_ref01_data["id"],
         }
-        ufn2_ref01_data_dt0_loaded, err = ufn2_ref01_ent.load(ufn2_ref01_match_dt0, None)
-        assert err is None
+        ufn2_ref01_data_dt0_loaded = ufn2_ref01_ent.load(ufn2_ref01_match_dt0, None)
         ufn2_ref01_data_dt0_load_result = helpers.to_map(ufn2_ref01_data_dt0_loaded)
         assert ufn2_ref01_data_dt0_load_result is not None
         assert ufn2_ref01_data_dt0_load_result["id"] == ufn2_ref01_data["id"]
@@ -95,7 +94,6 @@ def _ufn2_basic_setup(extra):
         "BRASIL_TEST_UFN__ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _ufn2_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

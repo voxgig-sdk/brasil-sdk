@@ -117,7 +117,6 @@ func fipe_precoBasicSetup(extra map[string]any) *entityTestSetup {
 		"BRASIL_TEST_FIPE_PRECO_ENTID": idmap,
 		"BRASIL_TEST_LIVE":      "FALSE",
 		"BRASIL_TEST_EXPLAIN":   "FALSE",
-		"BRASIL_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["BRASIL_TEST_FIPE_PRECO_ENTID"])
@@ -128,7 +127,6 @@ func fipe_precoBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["BRASIL_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["BRASIL_APIKEY"],
 			},
 			extra,
 		})

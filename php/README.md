@@ -9,9 +9,10 @@ The PHP SDK for the Brasil API — an entity-oriented client using PHP conventio
 
 
 ## Install
-```bash
-composer require voxgig-sdk/brasil
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/brasil-sdk/releases](https://github.com/voxgig-sdk/brasil-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,31 +26,34 @@ loading a specific record.
 <?php
 require_once 'brasil_sdk.php';
 
-$client = new BrasilSDK([
-    "apikey" => getenv("BRASIL_APIKEY"),
-]);
+$client = new BrasilSDK();
 ```
 
 ### 2. List banks
 
 ```php
-[$result, $err] = $client->Bank()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->bank()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
 ### 3. Load a bank
 
 ```php
-[$result, $err] = $client->Bank()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->bank()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -60,28 +64,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -95,7 +102,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = BrasilSDK::test();
 
-[$result, $err] = $client->Brasil()->load(["id" => "test01"]);
+$result = $client->bank()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -130,7 +137,6 @@ Create a `.env.local` file at the project root:
 
 ```
 BRASIL_TEST_LIVE=TRUE
-BRASIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -153,7 +159,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -208,8 +213,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -374,7 +383,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.Bank()`
+Create an instance: `const bank = client.bank`
 
 #### Operations
 
@@ -395,19 +404,19 @@ Create an instance: `const bank = client.Bank()`
 #### Example: Load
 
 ```ts
-const bank = await client.Bank().load({ id: 'bank_id' })
+const bank = await client.bank.load({ id: 'bank_id' })
 ```
 
 #### Example: List
 
 ```ts
-const banks = await client.Bank().list()
+const banks = await client.bank.list()
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.Cep()`
+Create an instance: `const cep = client.cep`
 
 #### Operations
 
@@ -430,13 +439,13 @@ Create an instance: `const cep = client.Cep()`
 #### Example: Load
 
 ```ts
-const cep = await client.Cep().load({ id: 'cep_id' })
+const cep = await client.cep.load({ id: 'cep_id' })
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.Cnpj()`
+Create an instance: `const cnpj = client.cnpj`
 
 #### Operations
 
@@ -470,13 +479,13 @@ Create an instance: `const cnpj = client.Cnpj()`
 #### Example: Load
 
 ```ts
-const cnpj = await client.Cnpj().load({ id: 'cnpj_id' })
+const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.Ddd()`
+Create an instance: `const ddd = client.ddd`
 
 #### Operations
 
@@ -494,13 +503,13 @@ Create an instance: `const ddd = client.Ddd()`
 #### Example: Load
 
 ```ts
-const ddd = await client.Ddd().load({ id: 'ddd_id' })
+const ddd = await client.ddd.load({ id: 'ddd_id' })
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.Feriado()`
+Create an instance: `const feriado = client.feriado`
 
 #### Operations
 
@@ -519,13 +528,13 @@ Create an instance: `const feriado = client.Feriado()`
 #### Example: Load
 
 ```ts
-const feriado = await client.Feriado().load({ id: 'feriado_id' })
+const feriado = await client.feriado.load({ id: 'feriado_id' })
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.FipeMarca()`
+Create an instance: `const fipe_marca = client.fipe_marca`
 
 #### Operations
 
@@ -543,13 +552,13 @@ Create an instance: `const fipe_marca = client.FipeMarca()`
 #### Example: Load
 
 ```ts
-const fipe_marca = await client.FipeMarca().load({ id: 'fipe_marca_id' })
+const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.FipePreco()`
+Create an instance: `const fipe_preco = client.fipe_preco`
 
 #### Operations
 
@@ -574,13 +583,13 @@ Create an instance: `const fipe_preco = client.FipePreco()`
 #### Example: Load
 
 ```ts
-const fipe_preco = await client.FipePreco().load({ id: 'fipe_preco_id' })
+const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.Municipio()`
+Create an instance: `const municipio = client.municipio`
 
 #### Operations
 
@@ -598,13 +607,13 @@ Create an instance: `const municipio = client.Municipio()`
 #### Example: Load
 
 ```ts
-const municipio = await client.Municipio().load({ id: 'municipio_id' })
+const municipio = await client.municipio.load({ id: 'municipio_id' })
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.Ufn()`
+Create an instance: `const ufn = client.ufn`
 
 #### Operations
 
@@ -624,13 +633,13 @@ Create an instance: `const ufn = client.Ufn()`
 #### Example: List
 
 ```ts
-const ufns = await client.Ufn().list()
+const ufns = await client.ufn.list()
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.Ufn2()`
+Create an instance: `const ufn2 = client.ufn2`
 
 #### Operations
 
@@ -650,7 +659,7 @@ Create an instance: `const ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```ts
-const ufn2 = await client.Ufn2().load({ id: 'ufn2_id' })
+const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
 ```
 
 
@@ -725,11 +734,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$bank = $client->bank();
+$bank->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $bank->dataGet() now returns the loaded bank data
+// $bank->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

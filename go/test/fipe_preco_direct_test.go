@@ -110,14 +110,12 @@ func fipe_precoDirectSetup(mockres any) *fipe_precoDirectSetupResult {
 	env := envOverride(map[string]any{
 		"BRASIL_TEST_FIPE_PRECO_ENTID": map[string]any{},
 		"BRASIL_TEST_LIVE":    "FALSE",
-		"BRASIL_APIKEY":       "NONE",
 	})
 
 	live := env["BRASIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["BRASIL_APIKEY"],
 		}
 		client := sdk.NewBrasilSDK(mergedOpts)
 

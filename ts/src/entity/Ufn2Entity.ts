@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Ufn2,
+  Ufn2LoadMatch,
+} from '../BrasilTypes'
 
 // TODO: needs Entity superclass
-class Ufn2Entity extends BrasilEntityBase {
+class Ufn2Entity extends BrasilEntityBase<Ufn2> {
 
   constructor(client: BrasilSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class Ufn2Entity extends BrasilEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: Ufn2LoadMatch, ctrl?: Control): Promise<Ufn2> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class Ufn2Entity extends BrasilEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Ufn2> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

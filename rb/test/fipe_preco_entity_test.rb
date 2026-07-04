@@ -42,8 +42,7 @@ class FipePrecoEntityTest < Minitest::Test
     # LOAD
     fipe_preco_ref01_ent = client.FipePreco(nil)
     fipe_preco_ref01_match_dt0 = {}
-    fipe_preco_ref01_data_dt0_loaded, err = fipe_preco_ref01_ent.load(fipe_preco_ref01_match_dt0, nil)
-    assert_nil err
+    fipe_preco_ref01_data_dt0_loaded = fipe_preco_ref01_ent.load(fipe_preco_ref01_match_dt0, nil)
     assert !fipe_preco_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def fipe_preco_basic_setup(extra)
     "BRASIL_TEST_FIPE_PRECO_ENTID" => idmap,
     "BRASIL_TEST_LIVE" => "FALSE",
     "BRASIL_TEST_EXPLAIN" => "FALSE",
-    "BRASIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def fipe_preco_basic_setup(extra)
   if env["BRASIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["BRASIL_APIKEY"],
       },
       extra || {},
     ])

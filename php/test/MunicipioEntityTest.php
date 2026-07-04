@@ -49,8 +49,7 @@ class MunicipioEntityTest extends TestCase
         // LOAD
         $municipio_ref01_ent = $client->Municipio(null);
         $municipio_ref01_match_dt0 = [];
-        [$municipio_ref01_data_dt0_loaded, $err] = $municipio_ref01_ent->load($municipio_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $municipio_ref01_data_dt0_loaded = $municipio_ref01_ent->load($municipio_ref01_match_dt0, null);
         $this->assertNotNull($municipio_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function municipio_basic_setup($extra)
         "BRASIL_TEST_MUNICIPIO_ENTID" => $idmap,
         "BRASIL_TEST_LIVE" => "FALSE",
         "BRASIL_TEST_EXPLAIN" => "FALSE",
-        "BRASIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function municipio_basic_setup($extra)
     if ($env["BRASIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["BRASIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

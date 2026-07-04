@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch UfnListMatch
+---@param ctrl? table
+---@return Ufn[]
+---@return string? err
 function UfnEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

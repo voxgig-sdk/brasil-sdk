@@ -45,6 +45,7 @@ class UfnEntity
     end
   end
 
+  # @return [Ufn, Hash] the current Ufn data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class UfnEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Ufn fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class UfnEntity
   
 
   
+  # List Ufn items matching the given filter.
+  #
+  # @param reqmatch [UfnListMatch, Hash, nil] match filter (any subset of Ufn fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Ufn>, Array] the matching Ufn items; raises BrasilError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

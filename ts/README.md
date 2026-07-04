@@ -9,9 +9,12 @@ The TypeScript SDK for the Brasil API — a type-safe, entity-oriented client wi
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/brasil
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/brasil-sdk/releases](https://github.com/voxgig-sdk/brasil-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { BrasilSDK } from 'brasil'
+import { BrasilSDK } from '@voxgig-sdk/brasil'
 
-const client = new BrasilSDK({
-  apikey: process.env.BRASIL_APIKEY,
-})
+const client = new BrasilSDK()
 ```
 
 ### 2. List banks
 
 ```ts
-const result = await client.Bank().list()
+const result = await client.bank.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +43,7 @@ if (result.ok) {
 ### 3. Load a bank
 
 ```ts
-const result = await client.Bank().load({ id: 'example_id' })
+const result = await client.bank.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -91,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = BrasilSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.bank.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -99,7 +100,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new BrasilSDK({ apikey: '...' })
+const client = new BrasilSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +109,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.bank
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,7 +136,6 @@ const logger = {
 }
 
 const client = new BrasilSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -146,7 +146,6 @@ Create a `.env.local` file at the project root:
 
 ```
 BRASIL_TEST_LIVE=TRUE
-BRASIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -164,7 +163,6 @@ cd ts && npm test
 
 ```ts
 new BrasilSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -175,7 +173,6 @@ new BrasilSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -422,7 +419,7 @@ API path: `/ibge/uf/v1/{siglaUF}`
 
 ### Bank
 
-Create an instance: `const bank = client.Bank()`
+Create an instance: `const bank = client.bank`
 
 #### Operations
 
@@ -443,19 +440,19 @@ Create an instance: `const bank = client.Bank()`
 #### Example: Load
 
 ```ts
-const bank = await client.Bank().load({ id: 'bank_id' })
+const bank = await client.bank.load({ id: 'bank_id' })
 ```
 
 #### Example: List
 
 ```ts
-const banks = await client.Bank().list()
+const banks = await client.bank.list()
 ```
 
 
 ### Cep
 
-Create an instance: `const cep = client.Cep()`
+Create an instance: `const cep = client.cep`
 
 #### Operations
 
@@ -478,13 +475,13 @@ Create an instance: `const cep = client.Cep()`
 #### Example: Load
 
 ```ts
-const cep = await client.Cep().load({ id: 'cep_id' })
+const cep = await client.cep.load({ id: 'cep_id' })
 ```
 
 
 ### Cnpj
 
-Create an instance: `const cnpj = client.Cnpj()`
+Create an instance: `const cnpj = client.cnpj`
 
 #### Operations
 
@@ -518,13 +515,13 @@ Create an instance: `const cnpj = client.Cnpj()`
 #### Example: Load
 
 ```ts
-const cnpj = await client.Cnpj().load({ id: 'cnpj_id' })
+const cnpj = await client.cnpj.load({ id: 'cnpj_id' })
 ```
 
 
 ### Ddd
 
-Create an instance: `const ddd = client.Ddd()`
+Create an instance: `const ddd = client.ddd`
 
 #### Operations
 
@@ -542,13 +539,13 @@ Create an instance: `const ddd = client.Ddd()`
 #### Example: Load
 
 ```ts
-const ddd = await client.Ddd().load({ id: 'ddd_id' })
+const ddd = await client.ddd.load({ id: 'ddd_id' })
 ```
 
 
 ### Feriado
 
-Create an instance: `const feriado = client.Feriado()`
+Create an instance: `const feriado = client.feriado`
 
 #### Operations
 
@@ -567,13 +564,13 @@ Create an instance: `const feriado = client.Feriado()`
 #### Example: Load
 
 ```ts
-const feriado = await client.Feriado().load({ id: 'feriado_id' })
+const feriado = await client.feriado.load({ id: 'feriado_id' })
 ```
 
 
 ### FipeMarca
 
-Create an instance: `const fipe_marca = client.FipeMarca()`
+Create an instance: `const fipe_marca = client.fipe_marca`
 
 #### Operations
 
@@ -591,13 +588,13 @@ Create an instance: `const fipe_marca = client.FipeMarca()`
 #### Example: Load
 
 ```ts
-const fipe_marca = await client.FipeMarca().load({ id: 'fipe_marca_id' })
+const fipe_marca = await client.fipe_marca.load({ id: 'fipe_marca_id' })
 ```
 
 
 ### FipePreco
 
-Create an instance: `const fipe_preco = client.FipePreco()`
+Create an instance: `const fipe_preco = client.fipe_preco`
 
 #### Operations
 
@@ -622,13 +619,13 @@ Create an instance: `const fipe_preco = client.FipePreco()`
 #### Example: Load
 
 ```ts
-const fipe_preco = await client.FipePreco().load({ id: 'fipe_preco_id' })
+const fipe_preco = await client.fipe_preco.load({ id: 'fipe_preco_id' })
 ```
 
 
 ### Municipio
 
-Create an instance: `const municipio = client.Municipio()`
+Create an instance: `const municipio = client.municipio`
 
 #### Operations
 
@@ -646,13 +643,13 @@ Create an instance: `const municipio = client.Municipio()`
 #### Example: Load
 
 ```ts
-const municipio = await client.Municipio().load({ id: 'municipio_id' })
+const municipio = await client.municipio.load({ id: 'municipio_id' })
 ```
 
 
 ### Ufn
 
-Create an instance: `const ufn = client.Ufn()`
+Create an instance: `const ufn = client.ufn`
 
 #### Operations
 
@@ -672,13 +669,13 @@ Create an instance: `const ufn = client.Ufn()`
 #### Example: List
 
 ```ts
-const ufns = await client.Ufn().list()
+const ufns = await client.ufn.list()
 ```
 
 
 ### Ufn2
 
-Create an instance: `const ufn2 = client.Ufn2()`
+Create an instance: `const ufn2 = client.ufn2`
 
 #### Operations
 
@@ -698,7 +695,7 @@ Create an instance: `const ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```ts
-const ufn2 = await client.Ufn2().load({ id: 'ufn2_id' })
+const ufn2 = await client.ufn2.load({ id: 'ufn2_id' })
 ```
 
 
@@ -759,7 +756,7 @@ brasil/
 Import the SDK from the package root:
 
 ```ts
-import { BrasilSDK } from 'brasil'
+import { BrasilSDK } from '@voxgig-sdk/brasil'
 ```
 
 ### Entity state
@@ -769,11 +766,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const bank = client.bank
+await bank.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// bank.data() now returns the loaded bank data
+// bank.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

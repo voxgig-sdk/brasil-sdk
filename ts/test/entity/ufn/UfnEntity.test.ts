@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'BRASIL_TEST_UFN_ENTID': idmap,
     'BRASIL_TEST_LIVE': 'FALSE',
     'BRASIL_TEST_EXPLAIN': 'FALSE',
-    'BRASIL_APIKEY': 'NONE',
   })
 
   idmap = env['BRASIL_TEST_UFN_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new BrasilSDK(merge([
       {
-        apikey: env.BRASIL_APIKEY,
       },
       extra
     ]))

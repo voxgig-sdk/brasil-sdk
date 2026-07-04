@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch FeriadoLoadMatch
+---@param ctrl? table
+---@return Feriado
+---@return string? err
 function FeriadoEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

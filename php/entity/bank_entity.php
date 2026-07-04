@@ -55,6 +55,9 @@ class BankEntity
         return new BankEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Bank|array $args Bank data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class BankEntity
         }
     }
 
+    /**
+     * @return Bank|array The current Bank data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Bank fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class BankEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Bank fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class BankEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Bank.
+     *
+     * @param BankLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed BankLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Bank|array The loaded Bank as an assoc-array at the
+     *   SDK boundary; throws BrasilError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class BankEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Bank items matching the given filter.
+     *
+     * @param BankListMatch|array|null $reqmatch Match filter (any subset
+     *   of Bank fields) as an assoc-array; BankListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Bank[]|array A list of Bank items as assoc-arrays at
+     *   the SDK boundary; throws BrasilError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class BankEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

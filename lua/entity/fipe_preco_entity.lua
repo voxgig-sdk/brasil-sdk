@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch FipePrecoLoadMatch
+---@param ctrl? table
+---@return FipePreco
+---@return string? err
 function FipePrecoEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

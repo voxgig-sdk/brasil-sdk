@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -90,9 +89,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -105,11 +104,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -117,7 +116,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## BankEntity
 
 ```python
-bank = client.Bank()
+bank = client.bank
 ```
 
 ### Fields
@@ -131,20 +130,20 @@ bank = client.Bank()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Bank().list({})
+results = client.bank.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Bank().load({"id": "bank_id"})
+result = client.bank.load({"id": "bank_id"})
 ```
 
 ### Common Methods
@@ -179,7 +178,7 @@ Return the entity name.
 ## CepEntity
 
 ```python
-cep = client.Cep()
+cep = client.cep
 ```
 
 ### Fields
@@ -196,12 +195,12 @@ cep = client.Cep()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Cep().load({"id": "cep_id"})
+result = client.cep.load({"id": "cep_id"})
 ```
 
 ### Common Methods
@@ -236,7 +235,7 @@ Return the entity name.
 ## CnpjEntity
 
 ```python
-cnpj = client.Cnpj()
+cnpj = client.cnpj
 ```
 
 ### Fields
@@ -264,12 +263,12 @@ cnpj = client.Cnpj()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Cnpj().load({"id": "cnpj_id"})
+result = client.cnpj.load({"id": "cnpj_id"})
 ```
 
 ### Common Methods
@@ -304,7 +303,7 @@ Return the entity name.
 ## DddEntity
 
 ```python
-ddd = client.Ddd()
+ddd = client.ddd
 ```
 
 ### Fields
@@ -316,12 +315,12 @@ ddd = client.Ddd()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Ddd().load({"id": "ddd_id"})
+result = client.ddd.load({"id": "ddd_id"})
 ```
 
 ### Common Methods
@@ -356,7 +355,7 @@ Return the entity name.
 ## FeriadoEntity
 
 ```python
-feriado = client.Feriado()
+feriado = client.feriado
 ```
 
 ### Fields
@@ -369,12 +368,12 @@ feriado = client.Feriado()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Feriado().load({"id": "feriado_id"})
+result = client.feriado.load({"id": "feriado_id"})
 ```
 
 ### Common Methods
@@ -409,7 +408,7 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```python
-fipe_marca = client.FipeMarca()
+fipe_marca = client.fipe_marca
 ```
 
 ### Fields
@@ -421,12 +420,12 @@ fipe_marca = client.FipeMarca()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.FipeMarca().load({"id": "fipe_marca_id"})
+result = client.fipe_marca.load({"id": "fipe_marca_id"})
 ```
 
 ### Common Methods
@@ -461,7 +460,7 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```python
-fipe_preco = client.FipePreco()
+fipe_preco = client.fipe_preco
 ```
 
 ### Fields
@@ -480,12 +479,12 @@ fipe_preco = client.FipePreco()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.FipePreco().load({"id": "fipe_preco_id"})
+result = client.fipe_preco.load({"id": "fipe_preco_id"})
 ```
 
 ### Common Methods
@@ -520,7 +519,7 @@ Return the entity name.
 ## MunicipioEntity
 
 ```python
-municipio = client.Municipio()
+municipio = client.municipio
 ```
 
 ### Fields
@@ -532,12 +531,12 @@ municipio = client.Municipio()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Municipio().load({"id": "municipio_id"})
+result = client.municipio.load({"id": "municipio_id"})
 ```
 
 ### Common Methods
@@ -572,7 +571,7 @@ Return the entity name.
 ## UfnEntity
 
 ```python
-ufn = client.Ufn()
+ufn = client.ufn
 ```
 
 ### Fields
@@ -586,12 +585,12 @@ ufn = client.Ufn()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Ufn().list({})
+results = client.ufn.list({})
 ```
 
 ### Common Methods
@@ -626,7 +625,7 @@ Return the entity name.
 ## Ufn2Entity
 
 ```python
-ufn2 = client.Ufn2()
+ufn2 = client.ufn2
 ```
 
 ### Fields
@@ -640,12 +639,12 @@ ufn2 = client.Ufn2()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Ufn2().load({"id": "ufn2_id"})
+result = client.ufn2.load({"id": "ufn2_id"})
 ```
 
 ### Common Methods

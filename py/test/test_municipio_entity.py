@@ -49,8 +49,7 @@ class TestMunicipioEntity:
         # LOAD
         municipio_ref01_ent = client.Municipio(None)
         municipio_ref01_match_dt0 = {}
-        municipio_ref01_data_dt0_loaded, err = municipio_ref01_ent.load(municipio_ref01_match_dt0, None)
-        assert err is None
+        municipio_ref01_data_dt0_loaded = municipio_ref01_ent.load(municipio_ref01_match_dt0, None)
         assert municipio_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _municipio_basic_setup(extra):
         "BRASIL_TEST_MUNICIPIO_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _municipio_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

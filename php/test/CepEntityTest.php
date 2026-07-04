@@ -49,8 +49,7 @@ class CepEntityTest extends TestCase
         // LOAD
         $cep_ref01_ent = $client->Cep(null);
         $cep_ref01_match_dt0 = [];
-        [$cep_ref01_data_dt0_loaded, $err] = $cep_ref01_ent->load($cep_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $cep_ref01_data_dt0_loaded = $cep_ref01_ent->load($cep_ref01_match_dt0, null);
         $this->assertNotNull($cep_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function cep_basic_setup($extra)
         "BRASIL_TEST_CEP_ENTID" => $idmap,
         "BRASIL_TEST_LIVE" => "FALSE",
         "BRASIL_TEST_EXPLAIN" => "FALSE",
-        "BRASIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function cep_basic_setup($extra)
     if ($env["BRASIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["BRASIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

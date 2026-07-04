@@ -49,8 +49,7 @@ class TestCnpjEntity:
         # LOAD
         cnpj_ref01_ent = client.Cnpj(None)
         cnpj_ref01_match_dt0 = {}
-        cnpj_ref01_data_dt0_loaded, err = cnpj_ref01_ent.load(cnpj_ref01_match_dt0, None)
-        assert err is None
+        cnpj_ref01_data_dt0_loaded = cnpj_ref01_ent.load(cnpj_ref01_match_dt0, None)
         assert cnpj_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _cnpj_basic_setup(extra):
         "BRASIL_TEST_CNPJ_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _cnpj_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

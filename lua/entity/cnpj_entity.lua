@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CnpjLoadMatch
+---@param ctrl? table
+---@return Cnpj
+---@return string? err
 function CnpjEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

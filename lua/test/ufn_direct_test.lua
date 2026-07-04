@@ -63,14 +63,12 @@ function ufn_direct_setup(mockres)
   local env = runner.env_override({
     ["BRASIL_TEST_UFN_ENTID"] = {},
     ["BRASIL_TEST_LIVE"] = "FALSE",
-    ["BRASIL_APIKEY"] = "NONE",
   })
 
   local live = env["BRASIL_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["BRASIL_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

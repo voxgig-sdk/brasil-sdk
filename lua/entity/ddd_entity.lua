@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch DddLoadMatch
+---@param ctrl? table
+---@return Ddd
+---@return string? err
 function DddEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

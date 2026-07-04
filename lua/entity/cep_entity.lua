@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CepLoadMatch
+---@param ctrl? table
+---@return Cep
+---@return string? err
 function CepEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -49,8 +49,7 @@ class CnpjEntityTest extends TestCase
         // LOAD
         $cnpj_ref01_ent = $client->Cnpj(null);
         $cnpj_ref01_match_dt0 = [];
-        [$cnpj_ref01_data_dt0_loaded, $err] = $cnpj_ref01_ent->load($cnpj_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $cnpj_ref01_data_dt0_loaded = $cnpj_ref01_ent->load($cnpj_ref01_match_dt0, null);
         $this->assertNotNull($cnpj_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function cnpj_basic_setup($extra)
         "BRASIL_TEST_CNPJ_ENTID" => $idmap,
         "BRASIL_TEST_LIVE" => "FALSE",
         "BRASIL_TEST_EXPLAIN" => "FALSE",
-        "BRASIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function cnpj_basic_setup($extra)
     if ($env["BRASIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["BRASIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

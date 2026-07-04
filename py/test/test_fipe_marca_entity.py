@@ -49,8 +49,7 @@ class TestFipeMarcaEntity:
         # LOAD
         fipe_marca_ref01_ent = client.FipeMarca(None)
         fipe_marca_ref01_match_dt0 = {}
-        fipe_marca_ref01_data_dt0_loaded, err = fipe_marca_ref01_ent.load(fipe_marca_ref01_match_dt0, None)
-        assert err is None
+        fipe_marca_ref01_data_dt0_loaded = fipe_marca_ref01_ent.load(fipe_marca_ref01_match_dt0, None)
         assert fipe_marca_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _fipe_marca_basic_setup(extra):
         "BRASIL_TEST_FIPE_MARCA_ENTID": idmap,
         "BRASIL_TEST_LIVE": "FALSE",
         "BRASIL_TEST_EXPLAIN": "FALSE",
-        "BRASIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _fipe_marca_basic_setup(extra):
     if env.get("BRASIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BRASIL_APIKEY"),
             },
             extra or {},
         ])

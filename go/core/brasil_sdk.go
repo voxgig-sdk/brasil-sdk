@@ -245,51 +245,81 @@ func (sdk *BrasilSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// Bank returns a Bank entity bound to this client.
+// Idiomatic usage: client.Bank(nil).List(nil, nil) or
+// client.Bank(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Bank(data map[string]any) BrasilEntity {
 	return NewBankEntityFunc(sdk, data)
 }
 
 
+// Cep returns a Cep entity bound to this client.
+// Idiomatic usage: client.Cep(nil).List(nil, nil) or
+// client.Cep(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Cep(data map[string]any) BrasilEntity {
 	return NewCepEntityFunc(sdk, data)
 }
 
 
+// Cnpj returns a Cnpj entity bound to this client.
+// Idiomatic usage: client.Cnpj(nil).List(nil, nil) or
+// client.Cnpj(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Cnpj(data map[string]any) BrasilEntity {
 	return NewCnpjEntityFunc(sdk, data)
 }
 
 
+// Ddd returns a Ddd entity bound to this client.
+// Idiomatic usage: client.Ddd(nil).List(nil, nil) or
+// client.Ddd(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Ddd(data map[string]any) BrasilEntity {
 	return NewDddEntityFunc(sdk, data)
 }
 
 
+// Feriado returns a Feriado entity bound to this client.
+// Idiomatic usage: client.Feriado(nil).List(nil, nil) or
+// client.Feriado(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Feriado(data map[string]any) BrasilEntity {
 	return NewFeriadoEntityFunc(sdk, data)
 }
 
 
+// FipeMarca returns a FipeMarca entity bound to this client.
+// Idiomatic usage: client.FipeMarca(nil).List(nil, nil) or
+// client.FipeMarca(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) FipeMarca(data map[string]any) BrasilEntity {
 	return NewFipeMarcaEntityFunc(sdk, data)
 }
 
 
+// FipePreco returns a FipePreco entity bound to this client.
+// Idiomatic usage: client.FipePreco(nil).List(nil, nil) or
+// client.FipePreco(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) FipePreco(data map[string]any) BrasilEntity {
 	return NewFipePrecoEntityFunc(sdk, data)
 }
 
 
+// Municipio returns a Municipio entity bound to this client.
+// Idiomatic usage: client.Municipio(nil).List(nil, nil) or
+// client.Municipio(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Municipio(data map[string]any) BrasilEntity {
 	return NewMunicipioEntityFunc(sdk, data)
 }
 
 
+// Ufn returns a Ufn entity bound to this client.
+// Idiomatic usage: client.Ufn(nil).List(nil, nil) or
+// client.Ufn(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Ufn(data map[string]any) BrasilEntity {
 	return NewUfnEntityFunc(sdk, data)
 }
 
 
+// Ufn2 returns a Ufn2 entity bound to this client.
+// Idiomatic usage: client.Ufn2(nil).List(nil, nil) or
+// client.Ufn2(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *BrasilSDK) Ufn2(data map[string]any) BrasilEntity {
 	return NewUfn2EntityFunc(sdk, data)
 }

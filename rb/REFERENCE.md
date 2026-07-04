@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `Hash` | SDK configuration options. |
-| `options["apikey"]` | `String` | API key for authentication. |
 | `options["base"]` | `String` | Base URL for API requests. |
 | `options["prefix"]` | `String` | URL prefix appended after base. |
 | `options["suffix"]` | `String` | URL suffix appended after path. |
@@ -90,9 +89,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -106,14 +107,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -121,7 +122,7 @@ same parameters as `direct()`.
 ## BankEntity
 
 ```ruby
-bank = client.Bank
+bank = client.bank
 ```
 
 ### Fields
@@ -135,20 +136,20 @@ bank = client.Bank
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.Bank.list(nil)
+results = client.bank.list(nil)
 ```
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Bank.load({ "id" => "bank_id" })
+result = client.bank.load({ "id" => "bank_id" })
 ```
 
 ### Common Methods
@@ -184,7 +185,7 @@ Return the entity name.
 ## CepEntity
 
 ```ruby
-cep = client.Cep
+cep = client.cep
 ```
 
 ### Fields
@@ -201,12 +202,12 @@ cep = client.Cep
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Cep.load({ "id" => "cep_id" })
+result = client.cep.load({ "id" => "cep_id" })
 ```
 
 ### Common Methods
@@ -242,7 +243,7 @@ Return the entity name.
 ## CnpjEntity
 
 ```ruby
-cnpj = client.Cnpj
+cnpj = client.cnpj
 ```
 
 ### Fields
@@ -270,12 +271,12 @@ cnpj = client.Cnpj
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Cnpj.load({ "id" => "cnpj_id" })
+result = client.cnpj.load({ "id" => "cnpj_id" })
 ```
 
 ### Common Methods
@@ -311,7 +312,7 @@ Return the entity name.
 ## DddEntity
 
 ```ruby
-ddd = client.Ddd
+ddd = client.ddd
 ```
 
 ### Fields
@@ -323,12 +324,12 @@ ddd = client.Ddd
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Ddd.load({ "id" => "ddd_id" })
+result = client.ddd.load({ "id" => "ddd_id" })
 ```
 
 ### Common Methods
@@ -364,7 +365,7 @@ Return the entity name.
 ## FeriadoEntity
 
 ```ruby
-feriado = client.Feriado
+feriado = client.feriado
 ```
 
 ### Fields
@@ -377,12 +378,12 @@ feriado = client.Feriado
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Feriado.load({ "id" => "feriado_id" })
+result = client.feriado.load({ "id" => "feriado_id" })
 ```
 
 ### Common Methods
@@ -418,7 +419,7 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```ruby
-fipe_marca = client.FipeMarca
+fipe_marca = client.fipe_marca
 ```
 
 ### Fields
@@ -430,12 +431,12 @@ fipe_marca = client.FipeMarca
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.FipeMarca.load({ "id" => "fipe_marca_id" })
+result = client.fipe_marca.load({ "id" => "fipe_marca_id" })
 ```
 
 ### Common Methods
@@ -471,7 +472,7 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```ruby
-fipe_preco = client.FipePreco
+fipe_preco = client.fipe_preco
 ```
 
 ### Fields
@@ -490,12 +491,12 @@ fipe_preco = client.FipePreco
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.FipePreco.load({ "id" => "fipe_preco_id" })
+result = client.fipe_preco.load({ "id" => "fipe_preco_id" })
 ```
 
 ### Common Methods
@@ -531,7 +532,7 @@ Return the entity name.
 ## MunicipioEntity
 
 ```ruby
-municipio = client.Municipio
+municipio = client.municipio
 ```
 
 ### Fields
@@ -543,12 +544,12 @@ municipio = client.Municipio
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Municipio.load({ "id" => "municipio_id" })
+result = client.municipio.load({ "id" => "municipio_id" })
 ```
 
 ### Common Methods
@@ -584,7 +585,7 @@ Return the entity name.
 ## UfnEntity
 
 ```ruby
-ufn = client.Ufn
+ufn = client.ufn
 ```
 
 ### Fields
@@ -598,12 +599,12 @@ ufn = client.Ufn
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.Ufn.list(nil)
+results = client.ufn.list(nil)
 ```
 
 ### Common Methods
@@ -639,7 +640,7 @@ Return the entity name.
 ## Ufn2Entity
 
 ```ruby
-ufn2 = client.Ufn2
+ufn2 = client.ufn2
 ```
 
 ### Fields
@@ -653,12 +654,12 @@ ufn2 = client.Ufn2
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Ufn2.load({ "id" => "ufn2_id" })
+result = client.ufn2.load({ "id" => "ufn2_id" })
 ```
 
 ### Common Methods

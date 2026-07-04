@@ -42,8 +42,7 @@ class MunicipioEntityTest < Minitest::Test
     # LOAD
     municipio_ref01_ent = client.Municipio(nil)
     municipio_ref01_match_dt0 = {}
-    municipio_ref01_data_dt0_loaded, err = municipio_ref01_ent.load(municipio_ref01_match_dt0, nil)
-    assert_nil err
+    municipio_ref01_data_dt0_loaded = municipio_ref01_ent.load(municipio_ref01_match_dt0, nil)
     assert !municipio_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def municipio_basic_setup(extra)
     "BRASIL_TEST_MUNICIPIO_ENTID" => idmap,
     "BRASIL_TEST_LIVE" => "FALSE",
     "BRASIL_TEST_EXPLAIN" => "FALSE",
-    "BRASIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def municipio_basic_setup(extra)
   if env["BRASIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["BRASIL_APIKEY"],
       },
       extra || {},
     ])
