@@ -123,19 +123,19 @@ bank = client.Bank()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$INTEGER`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `ispb` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `code` | `int` | No |  |
+| `full_name` | `str` | No |  |
+| `ispb` | `str` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Bank().list({})
+results = client.Bank().list()
 for bank in results:
     print(bank)
 ```
@@ -145,7 +145,7 @@ for bank in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Bank().load({"id": "bank_id"})
+result = client.Bank().load()
 ```
 
 ### Common Methods
@@ -187,13 +187,13 @@ cep = client.Cep()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | ``$STRING`` | No |  |
-| `city` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `neighborhood` | ``$STRING`` | No |  |
-| `service` | ``$STRING`` | No |  |
-| `state` | ``$STRING`` | No |  |
-| `street` | ``$STRING`` | No |  |
+| `cep` | `str` | No |  |
+| `city` | `str` | No |  |
+| `location` | `dict` | No |  |
+| `neighborhood` | `str` | No |  |
+| `service` | `str` | No |  |
+| `state` | `str` | No |  |
+| `street` | `str` | No |  |
 
 ### Operations
 
@@ -202,7 +202,7 @@ cep = client.Cep()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Cep().load({"id": "cep_id"})
+result = client.Cep().load()
 ```
 
 ### Common Methods
@@ -244,24 +244,24 @@ cnpj = client.Cnpj()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | ``$STRING`` | No |  |
-| `capital_social` | ``$NUMBER`` | No |  |
-| `cep` | ``$STRING`` | No |  |
-| `cnae_fiscal` | ``$INTEGER`` | No |  |
-| `cnae_fiscal_descricao` | ``$STRING`` | No |  |
-| `cnpj` | ``$STRING`` | No |  |
-| `complemento` | ``$STRING`` | No |  |
-| `data_inicio_atividade` | ``$STRING`` | No |  |
-| `ddd_telefone_1` | ``$STRING`` | No |  |
-| `logradouro` | ``$STRING`` | No |  |
-| `municipio` | ``$STRING`` | No |  |
-| `natureza_juridica` | ``$STRING`` | No |  |
-| `nome_fantasia` | ``$STRING`` | No |  |
-| `numero` | ``$STRING`` | No |  |
-| `porte` | ``$STRING`` | No |  |
-| `qsa` | ``$ARRAY`` | No |  |
-| `razao_social` | ``$STRING`` | No |  |
-| `uf` | ``$STRING`` | No |  |
+| `bairro` | `str` | No |  |
+| `capital_social` | `float` | No |  |
+| `cep` | `str` | No |  |
+| `cnae_fiscal` | `int` | No |  |
+| `cnae_fiscal_descricao` | `str` | No |  |
+| `cnpj` | `str` | No |  |
+| `complemento` | `str` | No |  |
+| `data_inicio_atividade` | `str` | No |  |
+| `ddd_telefone_1` | `str` | No |  |
+| `logradouro` | `str` | No |  |
+| `municipio` | `str` | No |  |
+| `natureza_juridica` | `str` | No |  |
+| `nome_fantasia` | `str` | No |  |
+| `numero` | `str` | No |  |
+| `porte` | `str` | No |  |
+| `qsa` | `list` | No |  |
+| `razao_social` | `str` | No |  |
+| `uf` | `str` | No |  |
 
 ### Operations
 
@@ -270,7 +270,7 @@ cnpj = client.Cnpj()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Cnpj().load({"id": "cnpj_id"})
+result = client.Cnpj().load()
 ```
 
 ### Common Methods
@@ -312,8 +312,8 @@ ddd = client.Ddd()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `state` | ``$STRING`` | No |  |
+| `city` | `list` | No |  |
+| `state` | `str` | No |  |
 
 ### Operations
 
@@ -322,7 +322,7 @@ ddd = client.Ddd()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Ddd().load({"id": "ddd_id"})
+result = client.Ddd().load()
 ```
 
 ### Common Methods
@@ -364,9 +364,9 @@ feriado = client.Feriado()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `date` | `str` | No |  |
+| `name` | `str` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
@@ -375,7 +375,7 @@ feriado = client.Feriado()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Feriado().load({"id": "feriado_id"})
+result = client.Feriado().load()
 ```
 
 ### Common Methods
@@ -417,8 +417,8 @@ fipe_marca = client.FipeMarca()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | ``$STRING`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `nome` | `str` | No |  |
+| `valor` | `str` | No |  |
 
 ### Operations
 
@@ -427,7 +427,7 @@ fipe_marca = client.FipeMarca()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.FipeMarca().load({"id": "fipe_marca_id"})
+result = client.FipeMarca().load()
 ```
 
 ### Common Methods
@@ -469,15 +469,15 @@ fipe_preco = client.FipePreco()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` | No |  |
-| `codigo_fipe` | ``$STRING`` | No |  |
-| `combustivel` | ``$STRING`` | No |  |
-| `marca` | ``$STRING`` | No |  |
-| `mes_referencia` | ``$STRING`` | No |  |
-| `modelo` | ``$STRING`` | No |  |
-| `sigla_combustivel` | ``$STRING`` | No |  |
-| `tipo_veiculo` | ``$INTEGER`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `ano_modelo` | `int` | No |  |
+| `codigo_fipe` | `str` | No |  |
+| `combustivel` | `str` | No |  |
+| `marca` | `str` | No |  |
+| `mes_referencia` | `str` | No |  |
+| `modelo` | `str` | No |  |
+| `sigla_combustivel` | `str` | No |  |
+| `tipo_veiculo` | `int` | No |  |
+| `valor` | `str` | No |  |
 
 ### Operations
 
@@ -486,7 +486,7 @@ fipe_preco = client.FipePreco()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.FipePreco().load({"id": "fipe_preco_id"})
+result = client.FipePreco().load()
 ```
 
 ### Common Methods
@@ -528,8 +528,8 @@ municipio = client.Municipio()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` | No |  |
-| `nome` | ``$STRING`` | No |  |
+| `codigo_ibge` | `str` | No |  |
+| `nome` | `str` | No |  |
 
 ### Operations
 
@@ -538,7 +538,7 @@ municipio = client.Municipio()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Municipio().load({"id": "municipio_id"})
+result = client.Municipio().load()
 ```
 
 ### Common Methods
@@ -580,19 +580,19 @@ ufn = client.Ufn()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `str` | No |  |
+| `regiao` | `dict` | No |  |
+| `sigla` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Ufn().list({})
+results = client.Ufn().list()
 for ufn in results:
     print(ufn)
 ```
@@ -636,10 +636,10 @@ ufn2 = client.Ufn2()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `str` | No |  |
+| `regiao` | `dict` | No |  |
+| `sigla` | `str` | No |  |
 
 ### Operations
 
@@ -648,7 +648,7 @@ ufn2 = client.Ufn2()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Ufn2().load({"id": "ufn2_id"})
+result = client.Ufn2().load()
 ```
 
 ### Common Methods

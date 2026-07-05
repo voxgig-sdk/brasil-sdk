@@ -4,6 +4,11 @@
 
 The Python SDK for the Brasil API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Bank()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    banks = client.Bank().list({})
+    banks = client.Bank().list()
     for bank in banks:
         print(bank)
 except Exception as err:
@@ -51,10 +56,38 @@ except Exception as err:
 
 ```python
 try:
-    bank = client.Bank().load({"id": "example_id"})
+    bank = client.Bank().load()
     print(bank)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    banks = client.Bank().list()
+    print(banks)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -75,7 +108,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -101,7 +137,7 @@ Create a mock client for unit testing — no server required:
 client = BrasilSDK.test()
 
 # Entity ops return the bare record and raise on error.
-bank = client.Bank().load({"id": "test01"})
+bank = client.Bank().list()
 # bank contains the mock response record
 ```
 
@@ -197,9 +233,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -385,28 +418,28 @@ Create an instance: `bank = client.Bank()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$INTEGER`` |  |
-| `full_name` | ``$STRING`` |  |
-| `ispb` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `code` | `int` |  |
+| `full_name` | `str` |  |
+| `ispb` | `str` |  |
+| `name` | `str` |  |
 
 #### Example: Load
 
 ```python
-bank = client.Bank().load({"id": "bank_id"})
+bank = client.Bank().load()
 ```
 
 #### Example: List
 
 ```python
-banks = client.Bank().list({})
+banks = client.Bank().list()
 ```
 
 
@@ -424,18 +457,18 @@ Create an instance: `cep = client.Cep()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | ``$STRING`` |  |
-| `city` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `neighborhood` | ``$STRING`` |  |
-| `service` | ``$STRING`` |  |
-| `state` | ``$STRING`` |  |
-| `street` | ``$STRING`` |  |
+| `cep` | `str` |  |
+| `city` | `str` |  |
+| `location` | `dict` |  |
+| `neighborhood` | `str` |  |
+| `service` | `str` |  |
+| `state` | `str` |  |
+| `street` | `str` |  |
 
 #### Example: Load
 
 ```python
-cep = client.Cep().load({"id": "cep_id"})
+cep = client.Cep().load()
 ```
 
 
@@ -453,29 +486,29 @@ Create an instance: `cnpj = client.Cnpj()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | ``$STRING`` |  |
-| `capital_social` | ``$NUMBER`` |  |
-| `cep` | ``$STRING`` |  |
-| `cnae_fiscal` | ``$INTEGER`` |  |
-| `cnae_fiscal_descricao` | ``$STRING`` |  |
-| `cnpj` | ``$STRING`` |  |
-| `complemento` | ``$STRING`` |  |
-| `data_inicio_atividade` | ``$STRING`` |  |
-| `ddd_telefone_1` | ``$STRING`` |  |
-| `logradouro` | ``$STRING`` |  |
-| `municipio` | ``$STRING`` |  |
-| `natureza_juridica` | ``$STRING`` |  |
-| `nome_fantasia` | ``$STRING`` |  |
-| `numero` | ``$STRING`` |  |
-| `porte` | ``$STRING`` |  |
-| `qsa` | ``$ARRAY`` |  |
-| `razao_social` | ``$STRING`` |  |
-| `uf` | ``$STRING`` |  |
+| `bairro` | `str` |  |
+| `capital_social` | `float` |  |
+| `cep` | `str` |  |
+| `cnae_fiscal` | `int` |  |
+| `cnae_fiscal_descricao` | `str` |  |
+| `cnpj` | `str` |  |
+| `complemento` | `str` |  |
+| `data_inicio_atividade` | `str` |  |
+| `ddd_telefone_1` | `str` |  |
+| `logradouro` | `str` |  |
+| `municipio` | `str` |  |
+| `natureza_juridica` | `str` |  |
+| `nome_fantasia` | `str` |  |
+| `numero` | `str` |  |
+| `porte` | `str` |  |
+| `qsa` | `list` |  |
+| `razao_social` | `str` |  |
+| `uf` | `str` |  |
 
 #### Example: Load
 
 ```python
-cnpj = client.Cnpj().load({"id": "cnpj_id"})
+cnpj = client.Cnpj().load()
 ```
 
 
@@ -493,13 +526,13 @@ Create an instance: `ddd = client.Ddd()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `state` | ``$STRING`` |  |
+| `city` | `list` |  |
+| `state` | `str` |  |
 
 #### Example: Load
 
 ```python
-ddd = client.Ddd().load({"id": "ddd_id"})
+ddd = client.Ddd().load()
 ```
 
 
@@ -517,14 +550,14 @@ Create an instance: `feriado = client.Feriado()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `date` | `str` |  |
+| `name` | `str` |  |
+| `type` | `str` |  |
 
 #### Example: Load
 
 ```python
-feriado = client.Feriado().load({"id": "feriado_id"})
+feriado = client.Feriado().load()
 ```
 
 
@@ -542,13 +575,13 @@ Create an instance: `fipe_marca = client.FipeMarca()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | ``$STRING`` |  |
-| `valor` | ``$STRING`` |  |
+| `nome` | `str` |  |
+| `valor` | `str` |  |
 
 #### Example: Load
 
 ```python
-fipe_marca = client.FipeMarca().load({"id": "fipe_marca_id"})
+fipe_marca = client.FipeMarca().load()
 ```
 
 
@@ -566,20 +599,20 @@ Create an instance: `fipe_preco = client.FipePreco()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` |  |
-| `codigo_fipe` | ``$STRING`` |  |
-| `combustivel` | ``$STRING`` |  |
-| `marca` | ``$STRING`` |  |
-| `mes_referencia` | ``$STRING`` |  |
-| `modelo` | ``$STRING`` |  |
-| `sigla_combustivel` | ``$STRING`` |  |
-| `tipo_veiculo` | ``$INTEGER`` |  |
-| `valor` | ``$STRING`` |  |
+| `ano_modelo` | `int` |  |
+| `codigo_fipe` | `str` |  |
+| `combustivel` | `str` |  |
+| `marca` | `str` |  |
+| `mes_referencia` | `str` |  |
+| `modelo` | `str` |  |
+| `sigla_combustivel` | `str` |  |
+| `tipo_veiculo` | `int` |  |
+| `valor` | `str` |  |
 
 #### Example: Load
 
 ```python
-fipe_preco = client.FipePreco().load({"id": "fipe_preco_id"})
+fipe_preco = client.FipePreco().load()
 ```
 
 
@@ -597,13 +630,13 @@ Create an instance: `municipio = client.Municipio()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` |  |
-| `nome` | ``$STRING`` |  |
+| `codigo_ibge` | `str` |  |
+| `nome` | `str` |  |
 
 #### Example: Load
 
 ```python
-municipio = client.Municipio().load({"id": "municipio_id"})
+municipio = client.Municipio().load()
 ```
 
 
@@ -615,21 +648,21 @@ Create an instance: `ufn = client.Ufn()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `int` |  |
+| `nome` | `str` |  |
+| `regiao` | `dict` |  |
+| `sigla` | `str` |  |
 
 #### Example: List
 
 ```python
-ufns = client.Ufn().list({})
+ufns = client.Ufn().list()
 ```
 
 
@@ -647,24 +680,28 @@ Create an instance: `ufn2 = client.Ufn2()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `int` |  |
+| `nome` | `str` |  |
+| `regiao` | `dict` |  |
+| `sigla` | `str` |  |
 
 #### Example: Load
 
 ```python
-ufn2 = client.Ufn2().load({"id": "ufn2_id"})
+ufn2 = client.Ufn2().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -681,8 +718,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -725,14 +763,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 bank = client.Bank()
-bank.load({"id": "example_id"})
+bank.list()
 
-# bank.data_get() now returns the loaded bank data
+# bank.data_get() now returns the bank data from the last list
 # bank.match_get() returns the last match criteria
 ```
 

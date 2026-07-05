@@ -81,11 +81,11 @@ Create a new `UfnEntity` instance. Pass `null` for no initial data.
 
 Create a new `Ufn2Entity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): BrasilUtility`
 
 Return a copy of the SDK utility object.
 
@@ -128,19 +128,19 @@ $bank = $client->Bank();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$INTEGER`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `ispb` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `code` | `int` | No |  |
+| `full_name` | `string` | No |  |
+| `ispb` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Bank()->list([]);
+$results = $client->Bank()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -148,24 +148,24 @@ $results = $client->Bank()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Bank()->load(["id" => "bank_id"]);
+$result = $client->Bank()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -174,7 +174,7 @@ Set the entity match criteria.
 Create a new `BankEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -191,13 +191,13 @@ $cep = $client->Cep();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | ``$STRING`` | No |  |
-| `city` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `neighborhood` | ``$STRING`` | No |  |
-| `service` | ``$STRING`` | No |  |
-| `state` | ``$STRING`` | No |  |
-| `street` | ``$STRING`` | No |  |
+| `cep` | `string` | No |  |
+| `city` | `string` | No |  |
+| `location` | `array` | No |  |
+| `neighborhood` | `string` | No |  |
+| `service` | `string` | No |  |
+| `state` | `string` | No |  |
+| `street` | `string` | No |  |
 
 ### Operations
 
@@ -206,24 +206,24 @@ $cep = $client->Cep();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Cep()->load(["id" => "cep_id"]);
+$result = $client->Cep()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -232,7 +232,7 @@ Set the entity match criteria.
 Create a new `CepEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -249,24 +249,24 @@ $cnpj = $client->Cnpj();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | ``$STRING`` | No |  |
-| `capital_social` | ``$NUMBER`` | No |  |
-| `cep` | ``$STRING`` | No |  |
-| `cnae_fiscal` | ``$INTEGER`` | No |  |
-| `cnae_fiscal_descricao` | ``$STRING`` | No |  |
-| `cnpj` | ``$STRING`` | No |  |
-| `complemento` | ``$STRING`` | No |  |
-| `data_inicio_atividade` | ``$STRING`` | No |  |
-| `ddd_telefone_1` | ``$STRING`` | No |  |
-| `logradouro` | ``$STRING`` | No |  |
-| `municipio` | ``$STRING`` | No |  |
-| `natureza_juridica` | ``$STRING`` | No |  |
-| `nome_fantasia` | ``$STRING`` | No |  |
-| `numero` | ``$STRING`` | No |  |
-| `porte` | ``$STRING`` | No |  |
-| `qsa` | ``$ARRAY`` | No |  |
-| `razao_social` | ``$STRING`` | No |  |
-| `uf` | ``$STRING`` | No |  |
+| `bairro` | `string` | No |  |
+| `capital_social` | `float` | No |  |
+| `cep` | `string` | No |  |
+| `cnae_fiscal` | `int` | No |  |
+| `cnae_fiscal_descricao` | `string` | No |  |
+| `cnpj` | `string` | No |  |
+| `complemento` | `string` | No |  |
+| `data_inicio_atividade` | `string` | No |  |
+| `ddd_telefone_1` | `string` | No |  |
+| `logradouro` | `string` | No |  |
+| `municipio` | `string` | No |  |
+| `natureza_juridica` | `string` | No |  |
+| `nome_fantasia` | `string` | No |  |
+| `numero` | `string` | No |  |
+| `porte` | `string` | No |  |
+| `qsa` | `array` | No |  |
+| `razao_social` | `string` | No |  |
+| `uf` | `string` | No |  |
 
 ### Operations
 
@@ -275,24 +275,24 @@ $cnpj = $client->Cnpj();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Cnpj()->load(["id" => "cnpj_id"]);
+$result = $client->Cnpj()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -301,7 +301,7 @@ Set the entity match criteria.
 Create a new `CnpjEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -318,8 +318,8 @@ $ddd = $client->Ddd();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `state` | ``$STRING`` | No |  |
+| `city` | `array` | No |  |
+| `state` | `string` | No |  |
 
 ### Operations
 
@@ -328,24 +328,24 @@ $ddd = $client->Ddd();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Ddd()->load(["id" => "ddd_id"]);
+$result = $client->Ddd()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -354,7 +354,7 @@ Set the entity match criteria.
 Create a new `DddEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -371,9 +371,9 @@ $feriado = $client->Feriado();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `date` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -382,24 +382,24 @@ $feriado = $client->Feriado();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Feriado()->load(["id" => "feriado_id"]);
+$result = $client->Feriado()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -408,7 +408,7 @@ Set the entity match criteria.
 Create a new `FeriadoEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -425,8 +425,8 @@ $fipe_marca = $client->FipeMarca();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | ``$STRING`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `nome` | `string` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -435,24 +435,24 @@ $fipe_marca = $client->FipeMarca();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->FipeMarca()->load(["id" => "fipe_marca_id"]);
+$result = $client->FipeMarca()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -461,7 +461,7 @@ Set the entity match criteria.
 Create a new `FipeMarcaEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -478,15 +478,15 @@ $fipe_preco = $client->FipePreco();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` | No |  |
-| `codigo_fipe` | ``$STRING`` | No |  |
-| `combustivel` | ``$STRING`` | No |  |
-| `marca` | ``$STRING`` | No |  |
-| `mes_referencia` | ``$STRING`` | No |  |
-| `modelo` | ``$STRING`` | No |  |
-| `sigla_combustivel` | ``$STRING`` | No |  |
-| `tipo_veiculo` | ``$INTEGER`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `ano_modelo` | `int` | No |  |
+| `codigo_fipe` | `string` | No |  |
+| `combustivel` | `string` | No |  |
+| `marca` | `string` | No |  |
+| `mes_referencia` | `string` | No |  |
+| `modelo` | `string` | No |  |
+| `sigla_combustivel` | `string` | No |  |
+| `tipo_veiculo` | `int` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -495,24 +495,24 @@ $fipe_preco = $client->FipePreco();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->FipePreco()->load(["id" => "fipe_preco_id"]);
+$result = $client->FipePreco()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -521,7 +521,7 @@ Set the entity match criteria.
 Create a new `FipePrecoEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -538,8 +538,8 @@ $municipio = $client->Municipio();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` | No |  |
-| `nome` | ``$STRING`` | No |  |
+| `codigo_ibge` | `string` | No |  |
+| `nome` | `string` | No |  |
 
 ### Operations
 
@@ -548,24 +548,24 @@ $municipio = $client->Municipio();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Municipio()->load(["id" => "municipio_id"]);
+$result = $client->Municipio()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -574,7 +574,7 @@ Set the entity match criteria.
 Create a new `MunicipioEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -591,36 +591,36 @@ $ufn = $client->Ufn();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `array` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Ufn()->list([]);
+$results = $client->Ufn()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -629,7 +629,7 @@ Set the entity match criteria.
 Create a new `UfnEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -646,10 +646,10 @@ $ufn2 = $client->Ufn2();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `array` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
@@ -658,24 +658,24 @@ $ufn2 = $client->Ufn2();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Ufn2()->load(["id" => "ufn2_id"]);
+$result = $client->Ufn2()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -684,7 +684,7 @@ Set the entity match criteria.
 Create a new `Ufn2Entity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

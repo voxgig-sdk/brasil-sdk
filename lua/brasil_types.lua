@@ -16,6 +16,10 @@
 ---@field code string
 
 ---@class BankListMatch
+---@field code? number
+---@field full_name? string
+---@field ispb? string
+---@field name? string
 
 ---@class Cep
 ---@field cep? string
@@ -102,6 +106,10 @@
 ---@field sigla? string
 
 ---@class UfnListMatch
+---@field id? number
+---@field nome? string
+---@field regiao? table
+---@field sigla? string
 
 ---@class Ufn2
 ---@field id? number

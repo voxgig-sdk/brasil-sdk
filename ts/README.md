@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the Brasil API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Bank()` — each with a small set of operations (`list`, `load`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -46,10 +51,39 @@ for (const bank of banks) {
 
 ```ts
 try {
-  const bank = await client.Bank().load({ id: 'example_id' })
+  const bank = await client.Bank().load()
   console.log(bank)
 } catch (err) {
   console.error('load failed:', err)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const banks = await client.Bank().list()
+  console.log(banks)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -98,7 +132,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = BrasilSDK.test()
 
-const bank = await client.Bank().load({ id: 'test01' })
+const bank = await client.Bank().list()
 // bank is a bare entity populated with mock response data
 console.log(bank)
 ```
@@ -117,12 +151,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Bank()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -221,11 +255,8 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): BrasilSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -235,10 +266,9 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
+- `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -439,15 +469,15 @@ Create an instance: `const bank = client.Bank()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$INTEGER`` |  |
-| `full_name` | ``$STRING`` |  |
-| `ispb` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `code` | `number` |  |
+| `full_name` | `string` |  |
+| `ispb` | `string` |  |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const bank = await client.Bank().load({ id: 'bank_id' })
+const bank = await client.Bank().load()
 ```
 
 #### Example: List
@@ -471,18 +501,18 @@ Create an instance: `const cep = client.Cep()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | ``$STRING`` |  |
-| `city` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `neighborhood` | ``$STRING`` |  |
-| `service` | ``$STRING`` |  |
-| `state` | ``$STRING`` |  |
-| `street` | ``$STRING`` |  |
+| `cep` | `string` |  |
+| `city` | `string` |  |
+| `location` | `Record<string, any>` |  |
+| `neighborhood` | `string` |  |
+| `service` | `string` |  |
+| `state` | `string` |  |
+| `street` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const cep = await client.Cep().load({ id: 'cep_id' })
+const cep = await client.Cep().load()
 ```
 
 
@@ -500,29 +530,29 @@ Create an instance: `const cnpj = client.Cnpj()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | ``$STRING`` |  |
-| `capital_social` | ``$NUMBER`` |  |
-| `cep` | ``$STRING`` |  |
-| `cnae_fiscal` | ``$INTEGER`` |  |
-| `cnae_fiscal_descricao` | ``$STRING`` |  |
-| `cnpj` | ``$STRING`` |  |
-| `complemento` | ``$STRING`` |  |
-| `data_inicio_atividade` | ``$STRING`` |  |
-| `ddd_telefone_1` | ``$STRING`` |  |
-| `logradouro` | ``$STRING`` |  |
-| `municipio` | ``$STRING`` |  |
-| `natureza_juridica` | ``$STRING`` |  |
-| `nome_fantasia` | ``$STRING`` |  |
-| `numero` | ``$STRING`` |  |
-| `porte` | ``$STRING`` |  |
-| `qsa` | ``$ARRAY`` |  |
-| `razao_social` | ``$STRING`` |  |
-| `uf` | ``$STRING`` |  |
+| `bairro` | `string` |  |
+| `capital_social` | `number` |  |
+| `cep` | `string` |  |
+| `cnae_fiscal` | `number` |  |
+| `cnae_fiscal_descricao` | `string` |  |
+| `cnpj` | `string` |  |
+| `complemento` | `string` |  |
+| `data_inicio_atividade` | `string` |  |
+| `ddd_telefone_1` | `string` |  |
+| `logradouro` | `string` |  |
+| `municipio` | `string` |  |
+| `natureza_juridica` | `string` |  |
+| `nome_fantasia` | `string` |  |
+| `numero` | `string` |  |
+| `porte` | `string` |  |
+| `qsa` | `any[]` |  |
+| `razao_social` | `string` |  |
+| `uf` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const cnpj = await client.Cnpj().load({ id: 'cnpj_id' })
+const cnpj = await client.Cnpj().load()
 ```
 
 
@@ -540,13 +570,13 @@ Create an instance: `const ddd = client.Ddd()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `state` | ``$STRING`` |  |
+| `city` | `any[]` |  |
+| `state` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const ddd = await client.Ddd().load({ id: 'ddd_id' })
+const ddd = await client.Ddd().load()
 ```
 
 
@@ -564,14 +594,14 @@ Create an instance: `const feriado = client.Feriado()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `date` | `string` |  |
+| `name` | `string` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const feriado = await client.Feriado().load({ id: 'feriado_id' })
+const feriado = await client.Feriado().load()
 ```
 
 
@@ -589,13 +619,13 @@ Create an instance: `const fipe_marca = client.FipeMarca()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | ``$STRING`` |  |
-| `valor` | ``$STRING`` |  |
+| `nome` | `string` |  |
+| `valor` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const fipe_marca = await client.FipeMarca().load({ id: 'fipe_marca_id' })
+const fipe_marca = await client.FipeMarca().load()
 ```
 
 
@@ -613,20 +643,20 @@ Create an instance: `const fipe_preco = client.FipePreco()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` |  |
-| `codigo_fipe` | ``$STRING`` |  |
-| `combustivel` | ``$STRING`` |  |
-| `marca` | ``$STRING`` |  |
-| `mes_referencia` | ``$STRING`` |  |
-| `modelo` | ``$STRING`` |  |
-| `sigla_combustivel` | ``$STRING`` |  |
-| `tipo_veiculo` | ``$INTEGER`` |  |
-| `valor` | ``$STRING`` |  |
+| `ano_modelo` | `number` |  |
+| `codigo_fipe` | `string` |  |
+| `combustivel` | `string` |  |
+| `marca` | `string` |  |
+| `mes_referencia` | `string` |  |
+| `modelo` | `string` |  |
+| `sigla_combustivel` | `string` |  |
+| `tipo_veiculo` | `number` |  |
+| `valor` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const fipe_preco = await client.FipePreco().load({ id: 'fipe_preco_id' })
+const fipe_preco = await client.FipePreco().load()
 ```
 
 
@@ -644,13 +674,13 @@ Create an instance: `const municipio = client.Municipio()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` |  |
-| `nome` | ``$STRING`` |  |
+| `codigo_ibge` | `string` |  |
+| `nome` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const municipio = await client.Municipio().load({ id: 'municipio_id' })
+const municipio = await client.Municipio().load()
 ```
 
 
@@ -668,10 +698,10 @@ Create an instance: `const ufn = client.Ufn()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `number` |  |
+| `nome` | `string` |  |
+| `regiao` | `Record<string, any>` |  |
+| `sigla` | `string` |  |
 
 #### Example: List
 
@@ -694,24 +724,28 @@ Create an instance: `const ufn2 = client.Ufn2()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `number` |  |
+| `nome` | `string` |  |
+| `regiao` | `Record<string, any>` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const ufn2 = await client.Ufn2().load({ id: 'ufn2_id' })
+const ufn2 = await client.Ufn2().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -728,11 +762,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -768,16 +800,16 @@ import { BrasilSDK } from '@voxgig-sdk/brasil'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const bank = client.Bank()
-await bank.load({ id: "example_id" })
+await bank.list()
 
-// bank.data() now returns the loaded bank data
-// bank.match() returns { id: "example_id" }
+// bank.data() now returns the bank data from the last `list`
+// bank.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

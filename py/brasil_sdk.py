@@ -221,61 +221,61 @@ class BrasilSDK:
 
 
     def Bank(self, data=None) -> "BankEntity":
-        """Entity factory: client.Bank().list({}) / client.Bank().load({"id": ...})."""
+        """Entity factory: client.Bank().list() / client.Bank().load({"id": ...})."""
         from entity.bank_entity import BankEntity
         return BankEntity(self, data)
 
 
     def Cep(self, data=None) -> "CepEntity":
-        """Entity factory: client.Cep().list({}) / client.Cep().load({"id": ...})."""
+        """Entity factory: client.Cep().list() / client.Cep().load({"id": ...})."""
         from entity.cep_entity import CepEntity
         return CepEntity(self, data)
 
 
     def Cnpj(self, data=None) -> "CnpjEntity":
-        """Entity factory: client.Cnpj().list({}) / client.Cnpj().load({"id": ...})."""
+        """Entity factory: client.Cnpj().list() / client.Cnpj().load({"id": ...})."""
         from entity.cnpj_entity import CnpjEntity
         return CnpjEntity(self, data)
 
 
     def Ddd(self, data=None) -> "DddEntity":
-        """Entity factory: client.Ddd().list({}) / client.Ddd().load({"id": ...})."""
+        """Entity factory: client.Ddd().list() / client.Ddd().load({"id": ...})."""
         from entity.ddd_entity import DddEntity
         return DddEntity(self, data)
 
 
     def Feriado(self, data=None) -> "FeriadoEntity":
-        """Entity factory: client.Feriado().list({}) / client.Feriado().load({"id": ...})."""
+        """Entity factory: client.Feriado().list() / client.Feriado().load({"id": ...})."""
         from entity.feriado_entity import FeriadoEntity
         return FeriadoEntity(self, data)
 
 
     def FipeMarca(self, data=None) -> "FipeMarcaEntity":
-        """Entity factory: client.FipeMarca().list({}) / client.FipeMarca().load({"id": ...})."""
+        """Entity factory: client.FipeMarca().list() / client.FipeMarca().load({"id": ...})."""
         from entity.fipe_marca_entity import FipeMarcaEntity
         return FipeMarcaEntity(self, data)
 
 
     def FipePreco(self, data=None) -> "FipePrecoEntity":
-        """Entity factory: client.FipePreco().list({}) / client.FipePreco().load({"id": ...})."""
+        """Entity factory: client.FipePreco().list() / client.FipePreco().load({"id": ...})."""
         from entity.fipe_preco_entity import FipePrecoEntity
         return FipePrecoEntity(self, data)
 
 
     def Municipio(self, data=None) -> "MunicipioEntity":
-        """Entity factory: client.Municipio().list({}) / client.Municipio().load({"id": ...})."""
+        """Entity factory: client.Municipio().list() / client.Municipio().load({"id": ...})."""
         from entity.municipio_entity import MunicipioEntity
         return MunicipioEntity(self, data)
 
 
     def Ufn(self, data=None) -> "UfnEntity":
-        """Entity factory: client.Ufn().list({}) / client.Ufn().load({"id": ...})."""
+        """Entity factory: client.Ufn().list() / client.Ufn().load({"id": ...})."""
         from entity.ufn_entity import UfnEntity
         return UfnEntity(self, data)
 
 
     def Ufn2(self, data=None) -> "Ufn2Entity":
-        """Entity factory: client.Ufn2().list({}) / client.Ufn2().load({"id": ...})."""
+        """Entity factory: client.Ufn2().list() / client.Ufn2().load({"id": ...})."""
         from entity.ufn2_entity import Ufn2Entity
         return Ufn2Entity(self, data)
 

@@ -21,8 +21,7 @@ type BankLoadMatch struct {
 	Code string `json:"code"`
 }
 
-// BankListMatch mirrors the bank fields as an all-optional match
-// filter (Go analog of Partial<Bank>).
+// BankListMatch is the typed request payload for Bank.ListTyped.
 type BankListMatch struct {
 	Code *int `json:"code,omitempty"`
 	FullName *string `json:"full_name,omitempty"`
@@ -144,8 +143,7 @@ type Ufn struct {
 	Sigla *string `json:"sigla,omitempty"`
 }
 
-// UfnListMatch mirrors the ufn fields as an all-optional match
-// filter (Go analog of Partial<Ufn>).
+// UfnListMatch is the typed request payload for Ufn.ListTyped.
 type UfnListMatch struct {
 	Id *int `json:"id,omitempty"`
 	Nome *string `json:"nome,omitempty"`

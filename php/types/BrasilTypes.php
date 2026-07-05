@@ -27,7 +27,7 @@ class BankLoadMatch
     public string $code;
 }
 
-/** Match filter for Bank#list (any subset of Bank fields). */
+/** Request payload for Bank#list. */
 class BankListMatch
 {
     public ?int $code = null;
@@ -165,7 +165,7 @@ class Ufn
     public ?string $sigla = null;
 }
 
-/** Match filter for Ufn#list (any subset of Ufn fields). */
+/** Request payload for Ufn#list. */
 class UfnListMatch
 {
     public ?int $id = null;

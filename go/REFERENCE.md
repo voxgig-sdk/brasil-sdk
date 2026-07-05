@@ -133,10 +133,10 @@ bank := client.Bank(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$INTEGER`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `ispb` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `code` | `int` | No |  |
+| `full_name` | `string` | No |  |
+| `ispb` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -153,7 +153,7 @@ results, err := client.Bank(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Bank(nil).Load(map[string]any{"id": "bank_id"}, nil)
+result, err := client.Bank(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -190,13 +190,13 @@ cep := client.Cep(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | ``$STRING`` | No |  |
-| `city` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `neighborhood` | ``$STRING`` | No |  |
-| `service` | ``$STRING`` | No |  |
-| `state` | ``$STRING`` | No |  |
-| `street` | ``$STRING`` | No |  |
+| `cep` | `string` | No |  |
+| `city` | `string` | No |  |
+| `location` | `map[string]any` | No |  |
+| `neighborhood` | `string` | No |  |
+| `service` | `string` | No |  |
+| `state` | `string` | No |  |
+| `street` | `string` | No |  |
 
 ### Operations
 
@@ -205,7 +205,7 @@ cep := client.Cep(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Cep(nil).Load(map[string]any{"id": "cep_id"}, nil)
+result, err := client.Cep(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -242,24 +242,24 @@ cnpj := client.Cnpj(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | ``$STRING`` | No |  |
-| `capital_social` | ``$NUMBER`` | No |  |
-| `cep` | ``$STRING`` | No |  |
-| `cnae_fiscal` | ``$INTEGER`` | No |  |
-| `cnae_fiscal_descricao` | ``$STRING`` | No |  |
-| `cnpj` | ``$STRING`` | No |  |
-| `complemento` | ``$STRING`` | No |  |
-| `data_inicio_atividade` | ``$STRING`` | No |  |
-| `ddd_telefone_1` | ``$STRING`` | No |  |
-| `logradouro` | ``$STRING`` | No |  |
-| `municipio` | ``$STRING`` | No |  |
-| `natureza_juridica` | ``$STRING`` | No |  |
-| `nome_fantasia` | ``$STRING`` | No |  |
-| `numero` | ``$STRING`` | No |  |
-| `porte` | ``$STRING`` | No |  |
-| `qsa` | ``$ARRAY`` | No |  |
-| `razao_social` | ``$STRING`` | No |  |
-| `uf` | ``$STRING`` | No |  |
+| `bairro` | `string` | No |  |
+| `capital_social` | `float64` | No |  |
+| `cep` | `string` | No |  |
+| `cnae_fiscal` | `int` | No |  |
+| `cnae_fiscal_descricao` | `string` | No |  |
+| `cnpj` | `string` | No |  |
+| `complemento` | `string` | No |  |
+| `data_inicio_atividade` | `string` | No |  |
+| `ddd_telefone_1` | `string` | No |  |
+| `logradouro` | `string` | No |  |
+| `municipio` | `string` | No |  |
+| `natureza_juridica` | `string` | No |  |
+| `nome_fantasia` | `string` | No |  |
+| `numero` | `string` | No |  |
+| `porte` | `string` | No |  |
+| `qsa` | `[]any` | No |  |
+| `razao_social` | `string` | No |  |
+| `uf` | `string` | No |  |
 
 ### Operations
 
@@ -268,7 +268,7 @@ cnpj := client.Cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Cnpj(nil).Load(map[string]any{"id": "cnpj_id"}, nil)
+result, err := client.Cnpj(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -305,8 +305,8 @@ ddd := client.Ddd(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `state` | ``$STRING`` | No |  |
+| `city` | `[]any` | No |  |
+| `state` | `string` | No |  |
 
 ### Operations
 
@@ -315,7 +315,7 @@ ddd := client.Ddd(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ddd(nil).Load(map[string]any{"id": "ddd_id"}, nil)
+result, err := client.Ddd(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -352,9 +352,9 @@ feriado := client.Feriado(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `date` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -363,7 +363,7 @@ feriado := client.Feriado(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Feriado(nil).Load(map[string]any{"id": "feriado_id"}, nil)
+result, err := client.Feriado(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -400,8 +400,8 @@ fipe_marca := client.FipeMarca(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | ``$STRING`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `nome` | `string` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -410,7 +410,7 @@ fipe_marca := client.FipeMarca(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.FipeMarca(nil).Load(map[string]any{"id": "fipe_marca_id"}, nil)
+result, err := client.FipeMarca(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -447,15 +447,15 @@ fipe_preco := client.FipePreco(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` | No |  |
-| `codigo_fipe` | ``$STRING`` | No |  |
-| `combustivel` | ``$STRING`` | No |  |
-| `marca` | ``$STRING`` | No |  |
-| `mes_referencia` | ``$STRING`` | No |  |
-| `modelo` | ``$STRING`` | No |  |
-| `sigla_combustivel` | ``$STRING`` | No |  |
-| `tipo_veiculo` | ``$INTEGER`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `ano_modelo` | `int` | No |  |
+| `codigo_fipe` | `string` | No |  |
+| `combustivel` | `string` | No |  |
+| `marca` | `string` | No |  |
+| `mes_referencia` | `string` | No |  |
+| `modelo` | `string` | No |  |
+| `sigla_combustivel` | `string` | No |  |
+| `tipo_veiculo` | `int` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -464,7 +464,7 @@ fipe_preco := client.FipePreco(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.FipePreco(nil).Load(map[string]any{"id": "fipe_preco_id"}, nil)
+result, err := client.FipePreco(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -501,8 +501,8 @@ municipio := client.Municipio(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` | No |  |
-| `nome` | ``$STRING`` | No |  |
+| `codigo_ibge` | `string` | No |  |
+| `nome` | `string` | No |  |
 
 ### Operations
 
@@ -511,7 +511,7 @@ municipio := client.Municipio(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Municipio(nil).Load(map[string]any{"id": "municipio_id"}, nil)
+result, err := client.Municipio(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -548,10 +548,10 @@ ufn := client.Ufn(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `map[string]any` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
@@ -597,10 +597,10 @@ ufn2 := client.Ufn2(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `int` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `map[string]any` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
@@ -609,7 +609,7 @@ ufn2 := client.Ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ufn2(nil).Load(map[string]any{"id": "ufn2_id"}, nil)
+result, err := client.Ufn2(nil).Load(nil, nil)
 ```
 
 ### Common Methods

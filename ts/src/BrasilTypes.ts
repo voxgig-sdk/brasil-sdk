@@ -16,7 +16,12 @@ export interface BankLoadMatch {
   code: string
 }
 
-export type BankListMatch = Partial<Bank>
+export interface BankListMatch {
+  code?: number
+  full_name?: string
+  ispb?: string
+  name?: string
+}
 
 export interface Cep {
   cep?: string
@@ -117,7 +122,12 @@ export interface Ufn {
   sigla?: string
 }
 
-export type UfnListMatch = Partial<Ufn>
+export interface UfnListMatch {
+  id?: number
+  nome?: string
+  regiao?: Record<string, any>
+  sigla?: string
+}
 
 export interface Ufn2 {
   id?: number

@@ -38,7 +38,7 @@ BankLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Bank#list (any subset of Bank fields).
+# Request payload for Bank#list.
 #
 # @!attribute [rw] code
 #   @return [Integer, nil]
@@ -350,7 +350,7 @@ Ufn = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Ufn#list (any subset of Ufn fields).
+# Request payload for Ufn#list.
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]

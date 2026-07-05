@@ -4,6 +4,8 @@
 
 The Ruby SDK for the Brasil API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Bank` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,7 +37,7 @@ begin
   # list returns an Array of Bank records — iterate directly.
   banks = client.Bank.list
   banks.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["code"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -47,11 +49,38 @@ end
 ```ruby
 begin
   # load returns the bare Bank record (raises on error).
-  bank = client.Bank.load({ "id" => "example_id" })
+  bank = client.Bank.load()
   puts bank
 rescue => err
   warn "load failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  banks = client.Bank.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -72,7 +101,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -95,16 +126,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = BrasilSDK.test({
-  "entity" => { "bank" => { "test01" => { "id" => "test01" } } },
-})
+client = BrasilSDK.test
 
-# load returns the bare mock record (raises on error).
-bank = client.Bank.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+bank = client.Bank.list()
 puts bank
 ```
 
@@ -199,10 +227,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -394,16 +419,16 @@ Create an instance: `bank = client.Bank`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$INTEGER`` |  |
-| `full_name` | ``$STRING`` |  |
-| `ispb` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `code` | `Integer` |  |
+| `full_name` | `String` |  |
+| `ispb` | `String` |  |
+| `name` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Bank record (raises on error).
-bank = client.Bank.load({ "id" => "bank_id" })
+bank = client.Bank.load()
 ```
 
 #### Example: List
@@ -428,19 +453,19 @@ Create an instance: `cep = client.Cep`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | ``$STRING`` |  |
-| `city` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `neighborhood` | ``$STRING`` |  |
-| `service` | ``$STRING`` |  |
-| `state` | ``$STRING`` |  |
-| `street` | ``$STRING`` |  |
+| `cep` | `String` |  |
+| `city` | `String` |  |
+| `location` | `Hash` |  |
+| `neighborhood` | `String` |  |
+| `service` | `String` |  |
+| `state` | `String` |  |
+| `street` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Cep record (raises on error).
-cep = client.Cep.load({ "id" => "cep_id" })
+cep = client.Cep.load()
 ```
 
 
@@ -458,30 +483,30 @@ Create an instance: `cnpj = client.Cnpj`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | ``$STRING`` |  |
-| `capital_social` | ``$NUMBER`` |  |
-| `cep` | ``$STRING`` |  |
-| `cnae_fiscal` | ``$INTEGER`` |  |
-| `cnae_fiscal_descricao` | ``$STRING`` |  |
-| `cnpj` | ``$STRING`` |  |
-| `complemento` | ``$STRING`` |  |
-| `data_inicio_atividade` | ``$STRING`` |  |
-| `ddd_telefone_1` | ``$STRING`` |  |
-| `logradouro` | ``$STRING`` |  |
-| `municipio` | ``$STRING`` |  |
-| `natureza_juridica` | ``$STRING`` |  |
-| `nome_fantasia` | ``$STRING`` |  |
-| `numero` | ``$STRING`` |  |
-| `porte` | ``$STRING`` |  |
-| `qsa` | ``$ARRAY`` |  |
-| `razao_social` | ``$STRING`` |  |
-| `uf` | ``$STRING`` |  |
+| `bairro` | `String` |  |
+| `capital_social` | `Float` |  |
+| `cep` | `String` |  |
+| `cnae_fiscal` | `Integer` |  |
+| `cnae_fiscal_descricao` | `String` |  |
+| `cnpj` | `String` |  |
+| `complemento` | `String` |  |
+| `data_inicio_atividade` | `String` |  |
+| `ddd_telefone_1` | `String` |  |
+| `logradouro` | `String` |  |
+| `municipio` | `String` |  |
+| `natureza_juridica` | `String` |  |
+| `nome_fantasia` | `String` |  |
+| `numero` | `String` |  |
+| `porte` | `String` |  |
+| `qsa` | `Array` |  |
+| `razao_social` | `String` |  |
+| `uf` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Cnpj record (raises on error).
-cnpj = client.Cnpj.load({ "id" => "cnpj_id" })
+cnpj = client.Cnpj.load()
 ```
 
 
@@ -499,14 +524,14 @@ Create an instance: `ddd = client.Ddd`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `state` | ``$STRING`` |  |
+| `city` | `Array` |  |
+| `state` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Ddd record (raises on error).
-ddd = client.Ddd.load({ "id" => "ddd_id" })
+ddd = client.Ddd.load()
 ```
 
 
@@ -524,15 +549,15 @@ Create an instance: `feriado = client.Feriado`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `date` | `String` |  |
+| `name` | `String` |  |
+| `type` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Feriado record (raises on error).
-feriado = client.Feriado.load({ "id" => "feriado_id" })
+feriado = client.Feriado.load()
 ```
 
 
@@ -550,14 +575,14 @@ Create an instance: `fipe_marca = client.FipeMarca`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | ``$STRING`` |  |
-| `valor` | ``$STRING`` |  |
+| `nome` | `String` |  |
+| `valor` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare FipeMarca record (raises on error).
-fipe_marca = client.FipeMarca.load({ "id" => "fipe_marca_id" })
+fipe_marca = client.FipeMarca.load()
 ```
 
 
@@ -575,21 +600,21 @@ Create an instance: `fipe_preco = client.FipePreco`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` |  |
-| `codigo_fipe` | ``$STRING`` |  |
-| `combustivel` | ``$STRING`` |  |
-| `marca` | ``$STRING`` |  |
-| `mes_referencia` | ``$STRING`` |  |
-| `modelo` | ``$STRING`` |  |
-| `sigla_combustivel` | ``$STRING`` |  |
-| `tipo_veiculo` | ``$INTEGER`` |  |
-| `valor` | ``$STRING`` |  |
+| `ano_modelo` | `Integer` |  |
+| `codigo_fipe` | `String` |  |
+| `combustivel` | `String` |  |
+| `marca` | `String` |  |
+| `mes_referencia` | `String` |  |
+| `modelo` | `String` |  |
+| `sigla_combustivel` | `String` |  |
+| `tipo_veiculo` | `Integer` |  |
+| `valor` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare FipePreco record (raises on error).
-fipe_preco = client.FipePreco.load({ "id" => "fipe_preco_id" })
+fipe_preco = client.FipePreco.load()
 ```
 
 
@@ -607,14 +632,14 @@ Create an instance: `municipio = client.Municipio`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` |  |
-| `nome` | ``$STRING`` |  |
+| `codigo_ibge` | `String` |  |
+| `nome` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Municipio record (raises on error).
-municipio = client.Municipio.load({ "id" => "municipio_id" })
+municipio = client.Municipio.load()
 ```
 
 
@@ -632,10 +657,10 @@ Create an instance: `ufn = client.Ufn`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `Integer` |  |
+| `nome` | `String` |  |
+| `regiao` | `Hash` |  |
+| `sigla` | `String` |  |
 
 #### Example: List
 
@@ -659,25 +684,29 @@ Create an instance: `ufn2 = client.Ufn2`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `Integer` |  |
+| `nome` | `String` |  |
+| `regiao` | `Hash` |  |
+| `sigla` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Ufn2 record (raises on error).
-ufn2 = client.Ufn2.load({ "id" => "ufn2_id" })
+ufn2 = client.Ufn2.load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -694,8 +723,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -739,14 +769,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 bank = client.Bank
-bank.load({ "id" => "example_id" })
+bank.list()
 
-# bank.data_get now returns the loaded bank data
+# bank.data_get now returns the bank data from the last list
 # bank.match_get returns the last match criteria
 ```
 

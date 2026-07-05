@@ -8,7 +8,7 @@ Complete API reference for the Brasil Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'brasil_sdk'
+require_relative 'Brasil_sdk'
 
 client = BrasilSDK.new(options)
 ```
@@ -129,19 +129,19 @@ bank = client.Bank
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$INTEGER`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `ispb` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `code` | `Integer` | No |  |
+| `full_name` | `String` | No |  |
+| `ispb` | `String` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Bank.list(nil)
+results = client.Bank.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -149,7 +149,7 @@ results = client.Bank.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Bank.load({ "id" => "bank_id" })
+result = client.Bank.load()
 ```
 
 ### Common Methods
@@ -192,13 +192,13 @@ cep = client.Cep
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | ``$STRING`` | No |  |
-| `city` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `neighborhood` | ``$STRING`` | No |  |
-| `service` | ``$STRING`` | No |  |
-| `state` | ``$STRING`` | No |  |
-| `street` | ``$STRING`` | No |  |
+| `cep` | `String` | No |  |
+| `city` | `String` | No |  |
+| `location` | `Hash` | No |  |
+| `neighborhood` | `String` | No |  |
+| `service` | `String` | No |  |
+| `state` | `String` | No |  |
+| `street` | `String` | No |  |
 
 ### Operations
 
@@ -207,7 +207,7 @@ cep = client.Cep
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Cep.load({ "id" => "cep_id" })
+result = client.Cep.load()
 ```
 
 ### Common Methods
@@ -250,24 +250,24 @@ cnpj = client.Cnpj
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | ``$STRING`` | No |  |
-| `capital_social` | ``$NUMBER`` | No |  |
-| `cep` | ``$STRING`` | No |  |
-| `cnae_fiscal` | ``$INTEGER`` | No |  |
-| `cnae_fiscal_descricao` | ``$STRING`` | No |  |
-| `cnpj` | ``$STRING`` | No |  |
-| `complemento` | ``$STRING`` | No |  |
-| `data_inicio_atividade` | ``$STRING`` | No |  |
-| `ddd_telefone_1` | ``$STRING`` | No |  |
-| `logradouro` | ``$STRING`` | No |  |
-| `municipio` | ``$STRING`` | No |  |
-| `natureza_juridica` | ``$STRING`` | No |  |
-| `nome_fantasia` | ``$STRING`` | No |  |
-| `numero` | ``$STRING`` | No |  |
-| `porte` | ``$STRING`` | No |  |
-| `qsa` | ``$ARRAY`` | No |  |
-| `razao_social` | ``$STRING`` | No |  |
-| `uf` | ``$STRING`` | No |  |
+| `bairro` | `String` | No |  |
+| `capital_social` | `Float` | No |  |
+| `cep` | `String` | No |  |
+| `cnae_fiscal` | `Integer` | No |  |
+| `cnae_fiscal_descricao` | `String` | No |  |
+| `cnpj` | `String` | No |  |
+| `complemento` | `String` | No |  |
+| `data_inicio_atividade` | `String` | No |  |
+| `ddd_telefone_1` | `String` | No |  |
+| `logradouro` | `String` | No |  |
+| `municipio` | `String` | No |  |
+| `natureza_juridica` | `String` | No |  |
+| `nome_fantasia` | `String` | No |  |
+| `numero` | `String` | No |  |
+| `porte` | `String` | No |  |
+| `qsa` | `Array` | No |  |
+| `razao_social` | `String` | No |  |
+| `uf` | `String` | No |  |
 
 ### Operations
 
@@ -276,7 +276,7 @@ cnpj = client.Cnpj
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Cnpj.load({ "id" => "cnpj_id" })
+result = client.Cnpj.load()
 ```
 
 ### Common Methods
@@ -319,8 +319,8 @@ ddd = client.Ddd
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `state` | ``$STRING`` | No |  |
+| `city` | `Array` | No |  |
+| `state` | `String` | No |  |
 
 ### Operations
 
@@ -329,7 +329,7 @@ ddd = client.Ddd
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Ddd.load({ "id" => "ddd_id" })
+result = client.Ddd.load()
 ```
 
 ### Common Methods
@@ -372,9 +372,9 @@ feriado = client.Feriado
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `date` | `String` | No |  |
+| `name` | `String` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
@@ -383,7 +383,7 @@ feriado = client.Feriado
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Feriado.load({ "id" => "feriado_id" })
+result = client.Feriado.load()
 ```
 
 ### Common Methods
@@ -426,8 +426,8 @@ fipe_marca = client.FipeMarca
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | ``$STRING`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `nome` | `String` | No |  |
+| `valor` | `String` | No |  |
 
 ### Operations
 
@@ -436,7 +436,7 @@ fipe_marca = client.FipeMarca
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.FipeMarca.load({ "id" => "fipe_marca_id" })
+result = client.FipeMarca.load()
 ```
 
 ### Common Methods
@@ -479,15 +479,15 @@ fipe_preco = client.FipePreco
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` | No |  |
-| `codigo_fipe` | ``$STRING`` | No |  |
-| `combustivel` | ``$STRING`` | No |  |
-| `marca` | ``$STRING`` | No |  |
-| `mes_referencia` | ``$STRING`` | No |  |
-| `modelo` | ``$STRING`` | No |  |
-| `sigla_combustivel` | ``$STRING`` | No |  |
-| `tipo_veiculo` | ``$INTEGER`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `ano_modelo` | `Integer` | No |  |
+| `codigo_fipe` | `String` | No |  |
+| `combustivel` | `String` | No |  |
+| `marca` | `String` | No |  |
+| `mes_referencia` | `String` | No |  |
+| `modelo` | `String` | No |  |
+| `sigla_combustivel` | `String` | No |  |
+| `tipo_veiculo` | `Integer` | No |  |
+| `valor` | `String` | No |  |
 
 ### Operations
 
@@ -496,7 +496,7 @@ fipe_preco = client.FipePreco
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.FipePreco.load({ "id" => "fipe_preco_id" })
+result = client.FipePreco.load()
 ```
 
 ### Common Methods
@@ -539,8 +539,8 @@ municipio = client.Municipio
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` | No |  |
-| `nome` | ``$STRING`` | No |  |
+| `codigo_ibge` | `String` | No |  |
+| `nome` | `String` | No |  |
 
 ### Operations
 
@@ -549,7 +549,7 @@ municipio = client.Municipio
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Municipio.load({ "id" => "municipio_id" })
+result = client.Municipio.load()
 ```
 
 ### Common Methods
@@ -592,19 +592,19 @@ ufn = client.Ufn
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `Integer` | No |  |
+| `nome` | `String` | No |  |
+| `regiao` | `Hash` | No |  |
+| `sigla` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Ufn.list(nil)
+results = client.Ufn.list
 ```
 
 ### Common Methods
@@ -647,10 +647,10 @@ ufn2 = client.Ufn2
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `Integer` | No |  |
+| `nome` | `String` | No |  |
+| `regiao` | `Hash` | No |  |
+| `sigla` | `String` | No |  |
 
 ### Operations
 
@@ -659,7 +659,7 @@ ufn2 = client.Ufn2
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Ufn2.load({ "id" => "ufn2_id" })
+result = client.Ufn2.load()
 ```
 
 ### Common Methods

@@ -4,6 +4,8 @@
 
 The Golang SDK for the Brasil API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Bank(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -58,12 +60,41 @@ func main() {
     }
 
     // Load a single bank — the value is the loaded record.
-    bank, err := client.Bank(nil).Load(map[string]any{"id": "example_id"}, nil)
+    bank, err := client.Bank(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(bank)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+banks, err := client.Bank(nil).List(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = banks
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -113,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-bank, err := client.Bank(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+bank, err := client.Bank(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(bank) // the loaded mock data
+fmt.Println(bank) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -215,9 +246,6 @@ All entities implement the `BrasilEntity` interface.
 | --- | --- | --- |
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -230,16 +258,16 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    bank, err := client.Bank(nil).Load(map[string]any{"id": "example_id"}, nil)
+    bank, err := client.Bank(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // bank is the loaded record
+    // bank is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -411,15 +439,15 @@ Create an instance: `bank := client.Bank(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$INTEGER`` |  |
-| `full_name` | ``$STRING`` |  |
-| `ispb` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `code` | `int` |  |
+| `full_name` | `string` |  |
+| `ispb` | `string` |  |
+| `name` | `string` |  |
 
 #### Example: Load
 
 ```go
-bank, err := client.Bank(nil).Load(map[string]any{"id": "bank_id"}, nil)
+bank, err := client.Bank(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -451,18 +479,18 @@ Create an instance: `cep := client.Cep(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | ``$STRING`` |  |
-| `city` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `neighborhood` | ``$STRING`` |  |
-| `service` | ``$STRING`` |  |
-| `state` | ``$STRING`` |  |
-| `street` | ``$STRING`` |  |
+| `cep` | `string` |  |
+| `city` | `string` |  |
+| `location` | `map[string]any` |  |
+| `neighborhood` | `string` |  |
+| `service` | `string` |  |
+| `state` | `string` |  |
+| `street` | `string` |  |
 
 #### Example: Load
 
 ```go
-cep, err := client.Cep(nil).Load(map[string]any{"id": "cep_id"}, nil)
+cep, err := client.Cep(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -484,29 +512,29 @@ Create an instance: `cnpj := client.Cnpj(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | ``$STRING`` |  |
-| `capital_social` | ``$NUMBER`` |  |
-| `cep` | ``$STRING`` |  |
-| `cnae_fiscal` | ``$INTEGER`` |  |
-| `cnae_fiscal_descricao` | ``$STRING`` |  |
-| `cnpj` | ``$STRING`` |  |
-| `complemento` | ``$STRING`` |  |
-| `data_inicio_atividade` | ``$STRING`` |  |
-| `ddd_telefone_1` | ``$STRING`` |  |
-| `logradouro` | ``$STRING`` |  |
-| `municipio` | ``$STRING`` |  |
-| `natureza_juridica` | ``$STRING`` |  |
-| `nome_fantasia` | ``$STRING`` |  |
-| `numero` | ``$STRING`` |  |
-| `porte` | ``$STRING`` |  |
-| `qsa` | ``$ARRAY`` |  |
-| `razao_social` | ``$STRING`` |  |
-| `uf` | ``$STRING`` |  |
+| `bairro` | `string` |  |
+| `capital_social` | `float64` |  |
+| `cep` | `string` |  |
+| `cnae_fiscal` | `int` |  |
+| `cnae_fiscal_descricao` | `string` |  |
+| `cnpj` | `string` |  |
+| `complemento` | `string` |  |
+| `data_inicio_atividade` | `string` |  |
+| `ddd_telefone_1` | `string` |  |
+| `logradouro` | `string` |  |
+| `municipio` | `string` |  |
+| `natureza_juridica` | `string` |  |
+| `nome_fantasia` | `string` |  |
+| `numero` | `string` |  |
+| `porte` | `string` |  |
+| `qsa` | `[]any` |  |
+| `razao_social` | `string` |  |
+| `uf` | `string` |  |
 
 #### Example: Load
 
 ```go
-cnpj, err := client.Cnpj(nil).Load(map[string]any{"id": "cnpj_id"}, nil)
+cnpj, err := client.Cnpj(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -528,13 +556,13 @@ Create an instance: `ddd := client.Ddd(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | ``$ARRAY`` |  |
-| `state` | ``$STRING`` |  |
+| `city` | `[]any` |  |
+| `state` | `string` |  |
 
 #### Example: Load
 
 ```go
-ddd, err := client.Ddd(nil).Load(map[string]any{"id": "ddd_id"}, nil)
+ddd, err := client.Ddd(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -556,14 +584,14 @@ Create an instance: `feriado := client.Feriado(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
+| `date` | `string` |  |
+| `name` | `string` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
 ```go
-feriado, err := client.Feriado(nil).Load(map[string]any{"id": "feriado_id"}, nil)
+feriado, err := client.Feriado(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -585,13 +613,13 @@ Create an instance: `fipe_marca := client.FipeMarca(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | ``$STRING`` |  |
-| `valor` | ``$STRING`` |  |
+| `nome` | `string` |  |
+| `valor` | `string` |  |
 
 #### Example: Load
 
 ```go
-fipe_marca, err := client.FipeMarca(nil).Load(map[string]any{"id": "fipe_marca_id"}, nil)
+fipe_marca, err := client.FipeMarca(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -613,20 +641,20 @@ Create an instance: `fipe_preco := client.FipePreco(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` |  |
-| `codigo_fipe` | ``$STRING`` |  |
-| `combustivel` | ``$STRING`` |  |
-| `marca` | ``$STRING`` |  |
-| `mes_referencia` | ``$STRING`` |  |
-| `modelo` | ``$STRING`` |  |
-| `sigla_combustivel` | ``$STRING`` |  |
-| `tipo_veiculo` | ``$INTEGER`` |  |
-| `valor` | ``$STRING`` |  |
+| `ano_modelo` | `int` |  |
+| `codigo_fipe` | `string` |  |
+| `combustivel` | `string` |  |
+| `marca` | `string` |  |
+| `mes_referencia` | `string` |  |
+| `modelo` | `string` |  |
+| `sigla_combustivel` | `string` |  |
+| `tipo_veiculo` | `int` |  |
+| `valor` | `string` |  |
 
 #### Example: Load
 
 ```go
-fipe_preco, err := client.FipePreco(nil).Load(map[string]any{"id": "fipe_preco_id"}, nil)
+fipe_preco, err := client.FipePreco(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -648,13 +676,13 @@ Create an instance: `municipio := client.Municipio(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` |  |
-| `nome` | ``$STRING`` |  |
+| `codigo_ibge` | `string` |  |
+| `nome` | `string` |  |
 
 #### Example: Load
 
 ```go
-municipio, err := client.Municipio(nil).Load(map[string]any{"id": "municipio_id"}, nil)
+municipio, err := client.Municipio(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -676,10 +704,10 @@ Create an instance: `ufn := client.Ufn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `int` |  |
+| `nome` | `string` |  |
+| `regiao` | `map[string]any` |  |
+| `sigla` | `string` |  |
 
 #### Example: List
 
@@ -706,15 +734,15 @@ Create an instance: `ufn2 := client.Ufn2(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `nome` | ``$STRING`` |  |
-| `regiao` | ``$OBJECT`` |  |
-| `sigla` | ``$STRING`` |  |
+| `id` | `int` |  |
+| `nome` | `string` |  |
+| `regiao` | `map[string]any` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
 ```go
-ufn2, err := client.Ufn2(nil).Load(map[string]any{"id": "ufn2_id"}, nil)
+ufn2, err := client.Ufn2(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -722,12 +750,16 @@ fmt.Println(ufn2) // the loaded record
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -744,9 +776,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -787,14 +819,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 bank := client.Bank(nil)
-bank.Load(map[string]any{"id": "example_id"}, nil)
+bank.List(nil, nil)
 
-// bank.Data() now returns the loaded bank data
+// bank.Data() now returns the bank data from the last list
 // bank.Match() returns the last match criteria
 ```
 

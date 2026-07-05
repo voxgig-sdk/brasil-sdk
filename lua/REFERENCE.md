@@ -126,10 +126,10 @@ local bank = client:Bank(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$INTEGER`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `ispb` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `code` | `number` | No |  |
+| `full_name` | `string` | No |  |
+| `ispb` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -146,7 +146,7 @@ local results, err = client:Bank():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Bank():load({ id = "bank_id" })
+local result, err = client:Bank():load()
 ```
 
 ### Common Methods
@@ -189,13 +189,13 @@ local cep = client:Cep(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | ``$STRING`` | No |  |
-| `city` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `neighborhood` | ``$STRING`` | No |  |
-| `service` | ``$STRING`` | No |  |
-| `state` | ``$STRING`` | No |  |
-| `street` | ``$STRING`` | No |  |
+| `cep` | `string` | No |  |
+| `city` | `string` | No |  |
+| `location` | `table` | No |  |
+| `neighborhood` | `string` | No |  |
+| `service` | `string` | No |  |
+| `state` | `string` | No |  |
+| `street` | `string` | No |  |
 
 ### Operations
 
@@ -204,7 +204,7 @@ local cep = client:Cep(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cep():load({ id = "cep_id" })
+local result, err = client:Cep():load()
 ```
 
 ### Common Methods
@@ -247,24 +247,24 @@ local cnpj = client:Cnpj(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | ``$STRING`` | No |  |
-| `capital_social` | ``$NUMBER`` | No |  |
-| `cep` | ``$STRING`` | No |  |
-| `cnae_fiscal` | ``$INTEGER`` | No |  |
-| `cnae_fiscal_descricao` | ``$STRING`` | No |  |
-| `cnpj` | ``$STRING`` | No |  |
-| `complemento` | ``$STRING`` | No |  |
-| `data_inicio_atividade` | ``$STRING`` | No |  |
-| `ddd_telefone_1` | ``$STRING`` | No |  |
-| `logradouro` | ``$STRING`` | No |  |
-| `municipio` | ``$STRING`` | No |  |
-| `natureza_juridica` | ``$STRING`` | No |  |
-| `nome_fantasia` | ``$STRING`` | No |  |
-| `numero` | ``$STRING`` | No |  |
-| `porte` | ``$STRING`` | No |  |
-| `qsa` | ``$ARRAY`` | No |  |
-| `razao_social` | ``$STRING`` | No |  |
-| `uf` | ``$STRING`` | No |  |
+| `bairro` | `string` | No |  |
+| `capital_social` | `number` | No |  |
+| `cep` | `string` | No |  |
+| `cnae_fiscal` | `number` | No |  |
+| `cnae_fiscal_descricao` | `string` | No |  |
+| `cnpj` | `string` | No |  |
+| `complemento` | `string` | No |  |
+| `data_inicio_atividade` | `string` | No |  |
+| `ddd_telefone_1` | `string` | No |  |
+| `logradouro` | `string` | No |  |
+| `municipio` | `string` | No |  |
+| `natureza_juridica` | `string` | No |  |
+| `nome_fantasia` | `string` | No |  |
+| `numero` | `string` | No |  |
+| `porte` | `string` | No |  |
+| `qsa` | `table` | No |  |
+| `razao_social` | `string` | No |  |
+| `uf` | `string` | No |  |
 
 ### Operations
 
@@ -273,7 +273,7 @@ local cnpj = client:Cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cnpj():load({ id = "cnpj_id" })
+local result, err = client:Cnpj():load()
 ```
 
 ### Common Methods
@@ -316,8 +316,8 @@ local ddd = client:Ddd(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | ``$ARRAY`` | No |  |
-| `state` | ``$STRING`` | No |  |
+| `city` | `table` | No |  |
+| `state` | `string` | No |  |
 
 ### Operations
 
@@ -326,7 +326,7 @@ local ddd = client:Ddd(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ddd():load({ id = "ddd_id" })
+local result, err = client:Ddd():load()
 ```
 
 ### Common Methods
@@ -369,9 +369,9 @@ local feriado = client:Feriado(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `date` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -380,7 +380,7 @@ local feriado = client:Feriado(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Feriado():load({ id = "feriado_id" })
+local result, err = client:Feriado():load()
 ```
 
 ### Common Methods
@@ -423,8 +423,8 @@ local fipe_marca = client:FipeMarca(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | ``$STRING`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `nome` | `string` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -433,7 +433,7 @@ local fipe_marca = client:FipeMarca(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipeMarca():load({ id = "fipe_marca_id" })
+local result, err = client:FipeMarca():load()
 ```
 
 ### Common Methods
@@ -476,15 +476,15 @@ local fipe_preco = client:FipePreco(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | ``$INTEGER`` | No |  |
-| `codigo_fipe` | ``$STRING`` | No |  |
-| `combustivel` | ``$STRING`` | No |  |
-| `marca` | ``$STRING`` | No |  |
-| `mes_referencia` | ``$STRING`` | No |  |
-| `modelo` | ``$STRING`` | No |  |
-| `sigla_combustivel` | ``$STRING`` | No |  |
-| `tipo_veiculo` | ``$INTEGER`` | No |  |
-| `valor` | ``$STRING`` | No |  |
+| `ano_modelo` | `number` | No |  |
+| `codigo_fipe` | `string` | No |  |
+| `combustivel` | `string` | No |  |
+| `marca` | `string` | No |  |
+| `mes_referencia` | `string` | No |  |
+| `modelo` | `string` | No |  |
+| `sigla_combustivel` | `string` | No |  |
+| `tipo_veiculo` | `number` | No |  |
+| `valor` | `string` | No |  |
 
 ### Operations
 
@@ -493,7 +493,7 @@ local fipe_preco = client:FipePreco(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipePreco():load({ id = "fipe_preco_id" })
+local result, err = client:FipePreco():load()
 ```
 
 ### Common Methods
@@ -536,8 +536,8 @@ local municipio = client:Municipio(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | ``$STRING`` | No |  |
-| `nome` | ``$STRING`` | No |  |
+| `codigo_ibge` | `string` | No |  |
+| `nome` | `string` | No |  |
 
 ### Operations
 
@@ -546,7 +546,7 @@ local municipio = client:Municipio(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Municipio():load({ id = "municipio_id" })
+local result, err = client:Municipio():load()
 ```
 
 ### Common Methods
@@ -589,10 +589,10 @@ local ufn = client:Ufn(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `number` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `table` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
@@ -644,10 +644,10 @@ local ufn2 = client:Ufn2(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `nome` | ``$STRING`` | No |  |
-| `regiao` | ``$OBJECT`` | No |  |
-| `sigla` | ``$STRING`` | No |  |
+| `id` | `number` | No |  |
+| `nome` | `string` | No |  |
+| `regiao` | `table` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 
@@ -656,7 +656,7 @@ local ufn2 = client:Ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ufn2():load({ id = "ufn2_id" })
+local result, err = client:Ufn2():load()
 ```
 
 ### Common Methods
