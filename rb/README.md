@@ -46,10 +46,12 @@ end
 
 ### 3. Load a bank
 
+Bank is nested under code, so provide the `code`.
+
 ```ruby
 begin
   # load returns the bare Bank record (raises on error).
-  bank = client.Bank.load()
+  bank = client.Bank.load({ "code" => "example_code" })
   puts bank
 rescue => err
   warn "load failed: #{err}"
@@ -428,7 +430,7 @@ Create an instance: `bank = client.Bank`
 
 ```ruby
 # load returns the bare Bank record (raises on error).
-bank = client.Bank.load()
+bank = client.Bank.load({ "code" => "code" })
 ```
 
 #### Example: List
@@ -465,7 +467,7 @@ Create an instance: `cep = client.Cep`
 
 ```ruby
 # load returns the bare Cep record (raises on error).
-cep = client.Cep.load()
+cep = client.Cep.load({ "cep" => "cep" })
 ```
 
 
@@ -506,7 +508,7 @@ Create an instance: `cnpj = client.Cnpj`
 
 ```ruby
 # load returns the bare Cnpj record (raises on error).
-cnpj = client.Cnpj.load()
+cnpj = client.Cnpj.load({ "cnpj" => "cnpj" })
 ```
 
 
@@ -531,7 +533,7 @@ Create an instance: `ddd = client.Ddd`
 
 ```ruby
 # load returns the bare Ddd record (raises on error).
-ddd = client.Ddd.load()
+ddd = client.Ddd.load({ "ddd" => "ddd" })
 ```
 
 
@@ -557,7 +559,7 @@ Create an instance: `feriado = client.Feriado`
 
 ```ruby
 # load returns the bare Feriado record (raises on error).
-feriado = client.Feriado.load()
+feriado = client.Feriado.load({ "ano" => 1 })
 ```
 
 
@@ -582,7 +584,7 @@ Create an instance: `fipe_marca = client.FipeMarca`
 
 ```ruby
 # load returns the bare FipeMarca record (raises on error).
-fipe_marca = client.FipeMarca.load()
+fipe_marca = client.FipeMarca.load({ "tipo_veiculo" => "tipo_veiculo" })
 ```
 
 
@@ -614,7 +616,7 @@ Create an instance: `fipe_preco = client.FipePreco`
 
 ```ruby
 # load returns the bare FipePreco record (raises on error).
-fipe_preco = client.FipePreco.load()
+fipe_preco = client.FipePreco.load({ "codigo_fipe" => "codigo_fipe" })
 ```
 
 
@@ -639,7 +641,7 @@ Create an instance: `municipio = client.Municipio`
 
 ```ruby
 # load returns the bare Municipio record (raises on error).
-municipio = client.Municipio.load()
+municipio = client.Municipio.load({ "sigla_uf" => "sigla_uf" })
 ```
 
 
@@ -693,7 +695,7 @@ Create an instance: `ufn2 = client.Ufn2`
 
 ```ruby
 # load returns the bare Ufn2 record (raises on error).
-ufn2 = client.Ufn2.load()
+ufn2 = client.Ufn2.load({ "sigla_uf" => "sigla_uf" })
 ```
 
 

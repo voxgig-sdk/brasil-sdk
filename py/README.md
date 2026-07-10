@@ -52,11 +52,12 @@ except Exception as err:
 
 ### 3. Load a bank
 
+Bank is nested under code, so provide the `code`.
 `load()` returns the bare record (a `dict`) and raises on error.
 
 ```python
 try:
-    bank = client.Bank().load()
+    bank = client.Bank().load({"code": "example_code"})
     print(bank)
 except Exception as err:
     print(f"load failed: {err}")
@@ -433,7 +434,7 @@ Create an instance: `bank = client.Bank()`
 #### Example: Load
 
 ```python
-bank = client.Bank().load()
+bank = client.Bank().load({"code": "code"})
 ```
 
 #### Example: List
@@ -468,7 +469,7 @@ Create an instance: `cep = client.Cep()`
 #### Example: Load
 
 ```python
-cep = client.Cep().load()
+cep = client.Cep().load({"cep": "cep"})
 ```
 
 
@@ -508,7 +509,7 @@ Create an instance: `cnpj = client.Cnpj()`
 #### Example: Load
 
 ```python
-cnpj = client.Cnpj().load()
+cnpj = client.Cnpj().load({"cnpj": "cnpj"})
 ```
 
 
@@ -532,7 +533,7 @@ Create an instance: `ddd = client.Ddd()`
 #### Example: Load
 
 ```python
-ddd = client.Ddd().load()
+ddd = client.Ddd().load({"ddd": "ddd"})
 ```
 
 
@@ -557,7 +558,7 @@ Create an instance: `feriado = client.Feriado()`
 #### Example: Load
 
 ```python
-feriado = client.Feriado().load()
+feriado = client.Feriado().load({"ano": 1})
 ```
 
 
@@ -581,7 +582,7 @@ Create an instance: `fipe_marca = client.FipeMarca()`
 #### Example: Load
 
 ```python
-fipe_marca = client.FipeMarca().load()
+fipe_marca = client.FipeMarca().load({"tipo_veiculo": "tipo_veiculo"})
 ```
 
 
@@ -612,7 +613,7 @@ Create an instance: `fipe_preco = client.FipePreco()`
 #### Example: Load
 
 ```python
-fipe_preco = client.FipePreco().load()
+fipe_preco = client.FipePreco().load({"codigo_fipe": "codigo_fipe"})
 ```
 
 
@@ -636,7 +637,7 @@ Create an instance: `municipio = client.Municipio()`
 #### Example: Load
 
 ```python
-municipio = client.Municipio().load()
+municipio = client.Municipio().load({"sigla_uf": "sigla_uf"})
 ```
 
 
@@ -688,7 +689,7 @@ Create an instance: `ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```python
-ufn2 = client.Ufn2().load()
+ufn2 = client.Ufn2().load({"sigla_uf": "sigla_uf"})
 ```
 
 

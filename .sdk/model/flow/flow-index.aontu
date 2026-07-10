@@ -1,0 +1,12 @@
+# Flows
+
+@"BasicBankFlow.aontu"
+@"BasicCepFlow.aontu"
+@"BasicCnpjFlow.aontu"
+@"BasicDddFlow.aontu"
+@"BasicFeriadoFlow.aontu"
+@"BasicFipeMarcaFlow.aontu"
+@"BasicFipePrecoFlow.aontu"
+@"BasicMunicipioFlow.aontu"
+@"BasicUfn2Flow.aontu"
+@"BasicUfnFlow.aontu"

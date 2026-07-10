@@ -20,9 +20,9 @@ main: {
           url: "https://brasilapi.com.br/api"
         }
       ]
+      summary: "Acesso programático de informações relacionadas a CEPs, bancos, CNPJ, IBGE, feriados nacionais, tabela FIPE e muito mais, fornecendo endpoints modernos com baixa latência."
       title: "Brasil API"
       version: "1.0.0"
+      website: "https://brasilapi.com.br"
     }
   }
-}
-

@@ -1,0 +1,12 @@
+# Entity Models
+
+@"bank.aontu"
+@"cep.aontu"
+@"cnpj.aontu"
+@"ddd.aontu"
+@"feriado.aontu"
+@"fipe_marca.aontu"
+@"fipe_preco.aontu"
+@"municipio.aontu"
+@"ufn.aontu"
+@"ufn2.aontu"

@@ -60,7 +60,7 @@ func main() {
     }
 
     // Load a single bank — the value is the loaded record.
-    bank, err := client.Bank(nil).Load(nil, nil)
+    bank, err := client.Bank(nil).Load(map[string]any{"code": "example_code"}, nil)
     if err != nil {
         panic(err)
     }
@@ -447,7 +447,7 @@ Create an instance: `bank := client.Bank(nil)`
 #### Example: Load
 
 ```go
-bank, err := client.Bank(nil).Load(nil, nil)
+bank, err := client.Bank(nil).Load(map[string]any{"code": "code"}, nil)
 if err != nil {
     panic(err)
 }
@@ -490,7 +490,7 @@ Create an instance: `cep := client.Cep(nil)`
 #### Example: Load
 
 ```go
-cep, err := client.Cep(nil).Load(nil, nil)
+cep, err := client.Cep(nil).Load(map[string]any{"cep": "cep"}, nil)
 if err != nil {
     panic(err)
 }
@@ -534,7 +534,7 @@ Create an instance: `cnpj := client.Cnpj(nil)`
 #### Example: Load
 
 ```go
-cnpj, err := client.Cnpj(nil).Load(nil, nil)
+cnpj, err := client.Cnpj(nil).Load(map[string]any{"cnpj": "cnpj"}, nil)
 if err != nil {
     panic(err)
 }
@@ -562,7 +562,7 @@ Create an instance: `ddd := client.Ddd(nil)`
 #### Example: Load
 
 ```go
-ddd, err := client.Ddd(nil).Load(nil, nil)
+ddd, err := client.Ddd(nil).Load(map[string]any{"ddd": "ddd"}, nil)
 if err != nil {
     panic(err)
 }
@@ -591,7 +591,7 @@ Create an instance: `feriado := client.Feriado(nil)`
 #### Example: Load
 
 ```go
-feriado, err := client.Feriado(nil).Load(nil, nil)
+feriado, err := client.Feriado(nil).Load(map[string]any{"ano": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -601,7 +601,7 @@ fmt.Println(feriado) // the loaded record
 
 ### FipeMarca
 
-Create an instance: `fipe_marca := client.FipeMarca(nil)`
+Create an instance: `fipeMarca := client.FipeMarca(nil)`
 
 #### Operations
 
@@ -619,17 +619,17 @@ Create an instance: `fipe_marca := client.FipeMarca(nil)`
 #### Example: Load
 
 ```go
-fipe_marca, err := client.FipeMarca(nil).Load(nil, nil)
+fipeMarca, err := client.FipeMarca(nil).Load(map[string]any{"tipo_veiculo": "tipo_veiculo"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(fipe_marca) // the loaded record
+fmt.Println(fipeMarca) // the loaded record
 ```
 
 
 ### FipePreco
 
-Create an instance: `fipe_preco := client.FipePreco(nil)`
+Create an instance: `fipePreco := client.FipePreco(nil)`
 
 #### Operations
 
@@ -654,11 +654,11 @@ Create an instance: `fipe_preco := client.FipePreco(nil)`
 #### Example: Load
 
 ```go
-fipe_preco, err := client.FipePreco(nil).Load(nil, nil)
+fipePreco, err := client.FipePreco(nil).Load(map[string]any{"codigo_fipe": "codigo_fipe"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(fipe_preco) // the loaded record
+fmt.Println(fipePreco) // the loaded record
 ```
 
 
@@ -682,7 +682,7 @@ Create an instance: `municipio := client.Municipio(nil)`
 #### Example: Load
 
 ```go
-municipio, err := client.Municipio(nil).Load(nil, nil)
+municipio, err := client.Municipio(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
 if err != nil {
     panic(err)
 }
@@ -742,7 +742,7 @@ Create an instance: `ufn2 := client.Ufn2(nil)`
 #### Example: Load
 
 ```go
-ufn2, err := client.Ufn2(nil).Load(nil, nil)
+ufn2, err := client.Ufn2(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
 if err != nil {
     panic(err)
 }

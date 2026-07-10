@@ -49,8 +49,10 @@ end
 
 ### 3. Load a bank
 
+Bank is nested under code, so provide the `code`.
+
 ```lua
-local bank, err = client:Bank():load()
+local bank, err = client:Bank():load({ code = "example_code" })
 if err then error(err) end
 print(bank)
 ```
@@ -419,7 +421,7 @@ Create an instance: `local bank = client:Bank(nil)`
 #### Example: Load
 
 ```lua
-local bank, err = client:Bank():load()
+local bank, err = client:Bank():load({ code = "code" })
 ```
 
 #### Example: List
@@ -454,7 +456,7 @@ Create an instance: `local cep = client:Cep(nil)`
 #### Example: Load
 
 ```lua
-local cep, err = client:Cep():load()
+local cep, err = client:Cep():load({ cep = "cep" })
 ```
 
 
@@ -494,7 +496,7 @@ Create an instance: `local cnpj = client:Cnpj(nil)`
 #### Example: Load
 
 ```lua
-local cnpj, err = client:Cnpj():load()
+local cnpj, err = client:Cnpj():load({ cnpj = "cnpj" })
 ```
 
 
@@ -518,7 +520,7 @@ Create an instance: `local ddd = client:Ddd(nil)`
 #### Example: Load
 
 ```lua
-local ddd, err = client:Ddd():load()
+local ddd, err = client:Ddd():load({ ddd = "ddd" })
 ```
 
 
@@ -543,7 +545,7 @@ Create an instance: `local feriado = client:Feriado(nil)`
 #### Example: Load
 
 ```lua
-local feriado, err = client:Feriado():load()
+local feriado, err = client:Feriado():load({ ano = 1 })
 ```
 
 
@@ -567,7 +569,7 @@ Create an instance: `local fipe_marca = client:FipeMarca(nil)`
 #### Example: Load
 
 ```lua
-local fipe_marca, err = client:FipeMarca():load()
+local fipe_marca, err = client:FipeMarca():load({ tipo_veiculo = "tipo_veiculo" })
 ```
 
 
@@ -598,7 +600,7 @@ Create an instance: `local fipe_preco = client:FipePreco(nil)`
 #### Example: Load
 
 ```lua
-local fipe_preco, err = client:FipePreco():load()
+local fipe_preco, err = client:FipePreco():load({ codigo_fipe = "codigo_fipe" })
 ```
 
 
@@ -622,7 +624,7 @@ Create an instance: `local municipio = client:Municipio(nil)`
 #### Example: Load
 
 ```lua
-local municipio, err = client:Municipio():load()
+local municipio, err = client:Municipio():load({ sigla_uf = "sigla_uf" })
 ```
 
 
@@ -674,7 +676,7 @@ Create an instance: `local ufn2 = client:Ufn2(nil)`
 #### Example: Load
 
 ```lua
-local ufn2, err = client:Ufn2():load()
+local ufn2, err = client:Ufn2():load({ sigla_uf = "sigla_uf" })
 ```
 
 

@@ -127,6 +127,7 @@ same parameters as `Direct()`.
 
 ```go
 bank := client.Bank(nil)
+fmt.Println(bank.GetName()) // "bank"
 ```
 
 ### Fields
@@ -146,6 +147,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Bank(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -153,7 +158,11 @@ results, err := client.Bank(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Bank(nil).Load(nil, nil)
+result, err := client.Bank(nil).Load(map[string]any{"code": "code"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -184,6 +193,7 @@ Return the entity name.
 
 ```go
 cep := client.Cep(nil)
+fmt.Println(cep.GetName()) // "cep"
 ```
 
 ### Fields
@@ -205,7 +215,11 @@ cep := client.Cep(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Cep(nil).Load(nil, nil)
+result, err := client.Cep(nil).Load(map[string]any{"cep": "cep"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -236,6 +250,7 @@ Return the entity name.
 
 ```go
 cnpj := client.Cnpj(nil)
+fmt.Println(cnpj.GetName()) // "cnpj"
 ```
 
 ### Fields
@@ -268,7 +283,11 @@ cnpj := client.Cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Cnpj(nil).Load(nil, nil)
+result, err := client.Cnpj(nil).Load(map[string]any{"cnpj": "cnpj"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -299,6 +318,7 @@ Return the entity name.
 
 ```go
 ddd := client.Ddd(nil)
+fmt.Println(ddd.GetName()) // "ddd"
 ```
 
 ### Fields
@@ -315,7 +335,11 @@ ddd := client.Ddd(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ddd(nil).Load(nil, nil)
+result, err := client.Ddd(nil).Load(map[string]any{"ddd": "ddd"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -346,6 +370,7 @@ Return the entity name.
 
 ```go
 feriado := client.Feriado(nil)
+fmt.Println(feriado.GetName()) // "feriado"
 ```
 
 ### Fields
@@ -363,7 +388,11 @@ feriado := client.Feriado(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Feriado(nil).Load(nil, nil)
+result, err := client.Feriado(nil).Load(map[string]any{"ano": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -393,7 +422,8 @@ Return the entity name.
 ## FipeMarcaEntity
 
 ```go
-fipe_marca := client.FipeMarca(nil)
+fipeMarca := client.FipeMarca(nil)
+fmt.Println(fipeMarca.GetName()) // "fipe_marca"
 ```
 
 ### Fields
@@ -410,7 +440,11 @@ fipe_marca := client.FipeMarca(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.FipeMarca(nil).Load(nil, nil)
+result, err := client.FipeMarca(nil).Load(map[string]any{"tipo_veiculo": "tipo_veiculo"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -440,7 +474,8 @@ Return the entity name.
 ## FipePrecoEntity
 
 ```go
-fipe_preco := client.FipePreco(nil)
+fipePreco := client.FipePreco(nil)
+fmt.Println(fipePreco.GetName()) // "fipe_preco"
 ```
 
 ### Fields
@@ -464,7 +499,11 @@ fipe_preco := client.FipePreco(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.FipePreco(nil).Load(nil, nil)
+result, err := client.FipePreco(nil).Load(map[string]any{"codigo_fipe": "codigo_fipe"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -495,6 +534,7 @@ Return the entity name.
 
 ```go
 municipio := client.Municipio(nil)
+fmt.Println(municipio.GetName()) // "municipio"
 ```
 
 ### Fields
@@ -511,7 +551,11 @@ municipio := client.Municipio(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Municipio(nil).Load(nil, nil)
+result, err := client.Municipio(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -542,6 +586,7 @@ Return the entity name.
 
 ```go
 ufn := client.Ufn(nil)
+fmt.Println(ufn.GetName()) // "ufn"
 ```
 
 ### Fields
@@ -561,6 +606,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Ufn(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -591,6 +640,7 @@ Return the entity name.
 
 ```go
 ufn2 := client.Ufn2(nil)
+fmt.Println(ufn2.GetName()) // "ufn2"
 ```
 
 ### Fields
@@ -609,7 +659,11 @@ ufn2 := client.Ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ufn2(nil).Load(nil, nil)
+result, err := client.Ufn2(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

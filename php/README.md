@@ -47,10 +47,12 @@ try {
 
 ### 3. Load a bank
 
+Bank is nested under code, so provide the `code`.
+
 ```php
 try {
     // load() returns the bare Bank record (throws on error).
-    $bank = $client->Bank()->load();
+    $bank = $client->Bank()->load(["code" => "example_code"]);
     print_r($bank);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -438,7 +440,7 @@ Create an instance: `$bank = $client->Bank();`
 
 ```php
 // load() returns the bare Bank record (throws on error).
-$bank = $client->Bank()->load();
+$bank = $client->Bank()->load(["code" => "code"]);
 ```
 
 #### Example: List
@@ -475,7 +477,7 @@ Create an instance: `$cep = $client->Cep();`
 
 ```php
 // load() returns the bare Cep record (throws on error).
-$cep = $client->Cep()->load();
+$cep = $client->Cep()->load(["cep" => "cep"]);
 ```
 
 
@@ -516,7 +518,7 @@ Create an instance: `$cnpj = $client->Cnpj();`
 
 ```php
 // load() returns the bare Cnpj record (throws on error).
-$cnpj = $client->Cnpj()->load();
+$cnpj = $client->Cnpj()->load(["cnpj" => "cnpj"]);
 ```
 
 
@@ -541,7 +543,7 @@ Create an instance: `$ddd = $client->Ddd();`
 
 ```php
 // load() returns the bare Ddd record (throws on error).
-$ddd = $client->Ddd()->load();
+$ddd = $client->Ddd()->load(["ddd" => "ddd"]);
 ```
 
 
@@ -567,7 +569,7 @@ Create an instance: `$feriado = $client->Feriado();`
 
 ```php
 // load() returns the bare Feriado record (throws on error).
-$feriado = $client->Feriado()->load();
+$feriado = $client->Feriado()->load(["ano" => 1]);
 ```
 
 
@@ -592,7 +594,7 @@ Create an instance: `$fipe_marca = $client->FipeMarca();`
 
 ```php
 // load() returns the bare FipeMarca record (throws on error).
-$fipe_marca = $client->FipeMarca()->load();
+$fipe_marca = $client->FipeMarca()->load(["tipo_veiculo" => "tipo_veiculo"]);
 ```
 
 
@@ -624,7 +626,7 @@ Create an instance: `$fipe_preco = $client->FipePreco();`
 
 ```php
 // load() returns the bare FipePreco record (throws on error).
-$fipe_preco = $client->FipePreco()->load();
+$fipe_preco = $client->FipePreco()->load(["codigo_fipe" => "codigo_fipe"]);
 ```
 
 
@@ -649,7 +651,7 @@ Create an instance: `$municipio = $client->Municipio();`
 
 ```php
 // load() returns the bare Municipio record (throws on error).
-$municipio = $client->Municipio()->load();
+$municipio = $client->Municipio()->load(["sigla_uf" => "sigla_uf"]);
 ```
 
 
@@ -703,7 +705,7 @@ Create an instance: `$ufn2 = $client->Ufn2();`
 
 ```php
 // load() returns the bare Ufn2 record (throws on error).
-$ufn2 = $client->Ufn2()->load();
+$ufn2 = $client->Ufn2()->load(["sigla_uf" => "sigla_uf"]);
 ```
 
 

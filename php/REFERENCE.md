@@ -148,7 +148,7 @@ $results = $client->Bank()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Bank()->load();
+$result = $client->Bank()->load(["code" => "code"]);
 ```
 
 ### Common Methods
@@ -206,7 +206,7 @@ $cep = $client->Cep();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Cep()->load();
+$result = $client->Cep()->load(["cep" => "cep"]);
 ```
 
 ### Common Methods
@@ -275,7 +275,7 @@ $cnpj = $client->Cnpj();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Cnpj()->load();
+$result = $client->Cnpj()->load(["cnpj" => "cnpj"]);
 ```
 
 ### Common Methods
@@ -328,7 +328,7 @@ $ddd = $client->Ddd();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Ddd()->load();
+$result = $client->Ddd()->load(["ddd" => "ddd"]);
 ```
 
 ### Common Methods
@@ -382,7 +382,7 @@ $feriado = $client->Feriado();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Feriado()->load();
+$result = $client->Feriado()->load(["ano" => 1]);
 ```
 
 ### Common Methods
@@ -435,7 +435,7 @@ $fipe_marca = $client->FipeMarca();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->FipeMarca()->load();
+$result = $client->FipeMarca()->load(["tipo_veiculo" => "tipo_veiculo"]);
 ```
 
 ### Common Methods
@@ -495,7 +495,7 @@ $fipe_preco = $client->FipePreco();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->FipePreco()->load();
+$result = $client->FipePreco()->load(["codigo_fipe" => "codigo_fipe"]);
 ```
 
 ### Common Methods
@@ -548,7 +548,7 @@ $municipio = $client->Municipio();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Municipio()->load();
+$result = $client->Municipio()->load(["sigla_uf" => "sigla_uf"]);
 ```
 
 ### Common Methods
@@ -658,7 +658,7 @@ $ufn2 = $client->Ufn2();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Ufn2()->load();
+$result = $client->Ufn2()->load(["sigla_uf" => "sigla_uf"]);
 ```
 
 ### Common Methods

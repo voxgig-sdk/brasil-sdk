@@ -47,11 +47,14 @@ for (const bank of banks) {
 
 ### 3. Load a bank
 
+Bank is nested under code, so provide the `code`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const bank = await client.Bank().load()
+  const bank = await client.Bank().load({
+    code: 'example_code',
+  })
   console.log(bank)
 } catch (err) {
   console.error('load failed:', err)
@@ -477,7 +480,7 @@ Create an instance: `const bank = client.Bank()`
 #### Example: Load
 
 ```ts
-const bank = await client.Bank().load()
+const bank = await client.Bank().load({ code: 'code' })
 ```
 
 #### Example: List
@@ -512,7 +515,7 @@ Create an instance: `const cep = client.Cep()`
 #### Example: Load
 
 ```ts
-const cep = await client.Cep().load()
+const cep = await client.Cep().load({ cep: 'cep' })
 ```
 
 
@@ -552,7 +555,7 @@ Create an instance: `const cnpj = client.Cnpj()`
 #### Example: Load
 
 ```ts
-const cnpj = await client.Cnpj().load()
+const cnpj = await client.Cnpj().load({ cnpj: 'cnpj' })
 ```
 
 
@@ -576,7 +579,7 @@ Create an instance: `const ddd = client.Ddd()`
 #### Example: Load
 
 ```ts
-const ddd = await client.Ddd().load()
+const ddd = await client.Ddd().load({ ddd: 'ddd' })
 ```
 
 
@@ -601,7 +604,7 @@ Create an instance: `const feriado = client.Feriado()`
 #### Example: Load
 
 ```ts
-const feriado = await client.Feriado().load()
+const feriado = await client.Feriado().load({ ano: 1 })
 ```
 
 
@@ -625,7 +628,7 @@ Create an instance: `const fipe_marca = client.FipeMarca()`
 #### Example: Load
 
 ```ts
-const fipe_marca = await client.FipeMarca().load()
+const fipe_marca = await client.FipeMarca().load({ tipo_veiculo: 'tipo_veiculo' })
 ```
 
 
@@ -656,7 +659,7 @@ Create an instance: `const fipe_preco = client.FipePreco()`
 #### Example: Load
 
 ```ts
-const fipe_preco = await client.FipePreco().load()
+const fipe_preco = await client.FipePreco().load({ codigo_fipe: 'codigo_fipe' })
 ```
 
 
@@ -680,7 +683,7 @@ Create an instance: `const municipio = client.Municipio()`
 #### Example: Load
 
 ```ts
-const municipio = await client.Municipio().load()
+const municipio = await client.Municipio().load({ sigla_uf: 'sigla_uf' })
 ```
 
 
@@ -732,7 +735,7 @@ Create an instance: `const ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```ts
-const ufn2 = await client.Ufn2().load()
+const ufn2 = await client.Ufn2().load({ sigla_uf: 'sigla_uf' })
 ```
 
 

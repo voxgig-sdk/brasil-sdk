@@ -146,7 +146,7 @@ local results, err = client:Bank():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Bank():load()
+local result, err = client:Bank():load({ code = "code" })
 ```
 
 ### Common Methods
@@ -204,7 +204,7 @@ local cep = client:Cep(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cep():load()
+local result, err = client:Cep():load({ cep = "cep" })
 ```
 
 ### Common Methods
@@ -273,7 +273,7 @@ local cnpj = client:Cnpj(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cnpj():load()
+local result, err = client:Cnpj():load({ cnpj = "cnpj" })
 ```
 
 ### Common Methods
@@ -326,7 +326,7 @@ local ddd = client:Ddd(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ddd():load()
+local result, err = client:Ddd():load({ ddd = "ddd" })
 ```
 
 ### Common Methods
@@ -380,7 +380,7 @@ local feriado = client:Feriado(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Feriado():load()
+local result, err = client:Feriado():load({ ano = 1 })
 ```
 
 ### Common Methods
@@ -433,7 +433,7 @@ local fipe_marca = client:FipeMarca(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipeMarca():load()
+local result, err = client:FipeMarca():load({ tipo_veiculo = "tipo_veiculo" })
 ```
 
 ### Common Methods
@@ -493,7 +493,7 @@ local fipe_preco = client:FipePreco(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FipePreco():load()
+local result, err = client:FipePreco():load({ codigo_fipe = "codigo_fipe" })
 ```
 
 ### Common Methods
@@ -546,7 +546,7 @@ local municipio = client:Municipio(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Municipio():load()
+local result, err = client:Municipio():load({ sigla_uf = "sigla_uf" })
 ```
 
 ### Common Methods
@@ -656,7 +656,7 @@ local ufn2 = client:Ufn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ufn2():load()
+local result, err = client:Ufn2():load({ sigla_uf = "sigla_uf" })
 ```
 
 ### Common Methods

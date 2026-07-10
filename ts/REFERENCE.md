@@ -244,7 +244,7 @@ const results = await client.Bank().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Bank().load()
+const result = await client.Bank().load({ code: 'code' })
 ```
 
 ### Common Methods
@@ -300,7 +300,7 @@ const cep = client.Cep()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Cep().load()
+const result = await client.Cep().load({ cep: 'cep' })
 ```
 
 ### Common Methods
@@ -367,7 +367,7 @@ const cnpj = client.Cnpj()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Cnpj().load()
+const result = await client.Cnpj().load({ cnpj: 'cnpj' })
 ```
 
 ### Common Methods
@@ -418,7 +418,7 @@ const ddd = client.Ddd()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Ddd().load()
+const result = await client.Ddd().load({ ddd: 'ddd' })
 ```
 
 ### Common Methods
@@ -470,7 +470,7 @@ const feriado = client.Feriado()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Feriado().load()
+const result = await client.Feriado().load({ ano: 1 })
 ```
 
 ### Common Methods
@@ -521,7 +521,7 @@ const fipe_marca = client.FipeMarca()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.FipeMarca().load()
+const result = await client.FipeMarca().load({ tipo_veiculo: 'tipo_veiculo' })
 ```
 
 ### Common Methods
@@ -579,7 +579,7 @@ const fipe_preco = client.FipePreco()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.FipePreco().load()
+const result = await client.FipePreco().load({ codigo_fipe: 'codigo_fipe' })
 ```
 
 ### Common Methods
@@ -630,7 +630,7 @@ const municipio = client.Municipio()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Municipio().load()
+const result = await client.Municipio().load({ sigla_uf: 'sigla_uf' })
 ```
 
 ### Common Methods
@@ -736,7 +736,7 @@ const ufn2 = client.Ufn2()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Ufn2().load()
+const result = await client.Ufn2().load({ sigla_uf: 'sigla_uf' })
 ```
 
 ### Common Methods
