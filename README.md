@@ -16,8 +16,8 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as a small set of **semantic entities** — Bank, Cep, Cnpj, Ddd, Feriado, FipeMarca, FipePreco, Municipio, Ufn and Ufn2 — that you
-call directly, instead of assembling URL paths and query strings. Entities are
+This SDK exposes the API as **10 semantic entities** that you
+call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`):
 
