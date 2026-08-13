@@ -6,7 +6,7 @@ main: kit: entity: ddd: {
 
   fields: [
     {
-      name: "city"
+      name: "cities"
       req: false
       type: "`$ARRAY`"
     }

@@ -51,7 +51,7 @@ Bank is nested under code, so provide the `code`.
 
 ```php
 try {
-    // load() returns the bare Bank record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Bank record (throws on error).
     $bank = $client->Bank()->load(["code" => "example_code"]);
     print_r($bank);
 } catch (\Throwable $err) {
@@ -139,7 +139,8 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = BrasilSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $bank = $client->Bank()->list();
 print_r($bank);
 ```
@@ -229,7 +230,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `FipePreco` | `($data): FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `($data): MunicipioEntity` | Create a Municipio entity instance. |
 | `Ufn` | `($data): UfnEntity` | Create an Ufn entity instance. |
-| `Ufn2` | `($data): Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -248,7 +248,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -271,7 +271,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `code` |  |
-| `full_name` |  |
+| `fullName` |  |
 | `ispb` |  |
 | `name` |  |
 
@@ -283,13 +283,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `cep` |  |
-| `city` |  |
-| `location` |  |
-| `neighborhood` |  |
-| `service` |  |
-| `state` |  |
-| `street` |  |
+| `coordinates` |  |
+| `type` |  |
 
 Operations: Load.
 
@@ -326,7 +321,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `state` |  |
 
 Operations: Load.
@@ -360,14 +355,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `ano_modelo` |  |
-| `codigo_fipe` |  |
+| `anoModelo` |  |
+| `codigoFipe` |  |
 | `combustivel` |  |
 | `marca` |  |
-| `mes_referencia` |  |
+| `mesReferencia` |  |
 | `modelo` |  |
-| `sigla_combustivel` |  |
-| `tipo_veiculo` |  |
+| `siglaCombustivel` |  |
+| `tipoVeiculo` |  |
 | `valor` |  |
 
 Operations: Load.
@@ -394,22 +389,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `regiao` |  |
 | `sigla` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `id` |  |
-| `nome` |  |
-| `regiao` |  |
-| `sigla` |  |
-
-Operations: Load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -432,14 +414,14 @@ Create an instance: `$bank = $client->Bank();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `int` |  |
-| `full_name` | `string` |  |
+| `fullName` | `string` |  |
 | `ispb` | `string` |  |
 | `name` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Bank record (throws on error).
+// load() returns the ENTITY — call data_get() for the Bank record (throws on error).
 $bank = $client->Bank()->load(["code" => "code"]);
 ```
 
@@ -465,18 +447,13 @@ Create an instance: `$cep = $client->Cep();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `string` |  |
-| `city` | `string` |  |
-| `location` | `array` |  |
-| `neighborhood` | `string` |  |
-| `service` | `string` |  |
-| `state` | `string` |  |
-| `street` | `string` |  |
+| `coordinates` | `array` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Cep record (throws on error).
+// load() returns the ENTITY — call data_get() for the Cep record (throws on error).
 $cep = $client->Cep()->load(["cep" => "cep"]);
 ```
 
@@ -517,7 +494,7 @@ Create an instance: `$cnpj = $client->Cnpj();`
 #### Example: Load
 
 ```php
-// load() returns the bare Cnpj record (throws on error).
+// load() returns the ENTITY — call data_get() for the Cnpj record (throws on error).
 $cnpj = $client->Cnpj()->load(["cnpj" => "cnpj"]);
 ```
 
@@ -536,13 +513,13 @@ Create an instance: `$ddd = $client->Ddd();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `array` |  |
+| `cities` | `array` |  |
 | `state` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Ddd record (throws on error).
+// load() returns the ENTITY — call data_get() for the Ddd record (throws on error).
 $ddd = $client->Ddd()->load(["ddd" => "ddd"]);
 ```
 
@@ -568,7 +545,7 @@ Create an instance: `$feriado = $client->Feriado();`
 #### Example: Load
 
 ```php
-// load() returns the bare Feriado record (throws on error).
+// load() returns the ENTITY — call data_get() for the Feriado record (throws on error).
 $feriado = $client->Feriado()->load(["ano" => 1]);
 ```
 
@@ -593,7 +570,7 @@ Create an instance: `$fipe_marca = $client->FipeMarca();`
 #### Example: Load
 
 ```php
-// load() returns the bare FipeMarca record (throws on error).
+// load() returns the ENTITY — call data_get() for the FipeMarca record (throws on error).
 $fipe_marca = $client->FipeMarca()->load(["tipo_veiculo" => "tipo_veiculo"]);
 ```
 
@@ -612,20 +589,20 @@ Create an instance: `$fipe_preco = $client->FipePreco();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `int` |  |
-| `codigo_fipe` | `string` |  |
+| `anoModelo` | `int` |  |
+| `codigoFipe` | `string` |  |
 | `combustivel` | `string` |  |
 | `marca` | `string` |  |
-| `mes_referencia` | `string` |  |
+| `mesReferencia` | `string` |  |
 | `modelo` | `string` |  |
-| `sigla_combustivel` | `string` |  |
-| `tipo_veiculo` | `int` |  |
+| `siglaCombustivel` | `string` |  |
+| `tipoVeiculo` | `int` |  |
 | `valor` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare FipePreco record (throws on error).
+// load() returns the ENTITY — call data_get() for the FipePreco record (throws on error).
 $fipe_preco = $client->FipePreco()->load(["codigo_fipe" => "codigo_fipe"]);
 ```
 
@@ -650,7 +627,7 @@ Create an instance: `$municipio = $client->Municipio();`
 #### Example: Load
 
 ```php
-// load() returns the bare Municipio record (throws on error).
+// load() returns the ENTITY — call data_get() for the Municipio record (throws on error).
 $municipio = $client->Municipio()->load(["sigla_uf" => "sigla_uf"]);
 ```
 
@@ -664,32 +641,6 @@ Create an instance: `$ufn = $client->Ufn();`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `int` |  |
-| `nome` | `string` |  |
-| `regiao` | `array` |  |
-| `sigla` | `string` |  |
-
-#### Example: List
-
-```php
-// list() returns an array of Ufn records (throws on error).
-$ufns = $client->Ufn()->list();
-```
-
-
-### Ufn2
-
-Create an instance: `$ufn2 = $client->Ufn2();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -704,8 +655,15 @@ Create an instance: `$ufn2 = $client->Ufn2();`
 #### Example: Load
 
 ```php
-// load() returns the bare Ufn2 record (throws on error).
-$ufn2 = $client->Ufn2()->load(["sigla_uf" => "sigla_uf"]);
+// load() returns the ENTITY — call data_get() for the Ufn record (throws on error).
+$ufn = $client->Ufn()->load(["sigla_uf" => "sigla_uf"]);
+```
+
+#### Example: List
+
+```php
+// list() returns an array of Ufn records (throws on error).
+$ufns = $client->Ufn()->list();
 ```
 
 

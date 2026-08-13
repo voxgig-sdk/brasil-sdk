@@ -39,7 +39,7 @@ describe('UfnEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.BRASIL_TEST_LIVE
-    for (const op of ['list']) {
+    for (const op of ['list', 'load']) {
       if (maybeSkipControl(t, 'entityOp', 'ufn.' + op, live)) return
     }
 
@@ -63,7 +63,14 @@ describe('UfnEntity', async () => {
     const ufn_ref01_ent = client.Ufn()
     const ufn_ref01_match: any = {}
 
-    const ufn_ref01_list = await ufn_ref01_ent.list(ufn_ref01_match)
+    const ufn_ref01_list = (await ufn_ref01_ent.list(ufn_ref01_match)).map((e: any) => e.data())
+
+
+    // LOAD
+    const ufn_ref01_match_dt0: any = {}
+    ufn_ref01_match_dt0.id = ufn_ref01_data.id
+    const ufn_ref01_data_dt0 = (await ufn_ref01_ent.load(ufn_ref01_match_dt0)).data()
+    assert(ufn_ref01_data_dt0.id === ufn_ref01_data.id)
 
 
   })
@@ -94,7 +101,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['ufn01','ufn02','ufn03'],
+    ['ufn01','ufn02','ufn03','v101','v102','v103'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

@@ -51,6 +51,58 @@ class UfnDirectTest < Minitest::Test
     end
   end
 
+  def test_direct_load_ufn
+    setup = ufn_direct_setup({ "id" => "direct01" })
+    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-load-ufn", setup[:live] ? "live" : "unit")
+    if _should_skip
+      skip(_reason || "skipped via sdk-test-control.json")
+      return
+    end
+    client = setup[:client]
+
+    params = {}
+    query = {}
+    if setup[:live]
+      params["sigla_uf"] = "SP"
+    else
+      params["sigla_uf"] = "direct01"
+    end
+
+    result = client.direct({
+      "path" => "ibge/uf/v1/{sigla_uf}",
+      "method" => "GET",
+      "params" => params,
+      "query" => query,
+    })
+    if setup[:live]
+      # Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
+      # than fail when the load endpoint isn't reachable with the IDs
+      # we can construct from setup.idmap.
+      if !result["err"].nil?
+        skip("load call failed (likely synthetic IDs against live API): #{result["err"]}")
+        return
+      end
+      unless result["ok"]
+        skip("load call not ok (likely synthetic IDs against live API)")
+        return
+      end
+      status = Helpers.to_int(result["status"])
+      if status < 200 || status >= 300
+        skip("expected 2xx status, got #{status}")
+        return
+      end
+    else
+      assert_nil result["err"]
+      assert result["ok"]
+      assert_equal 200, Helpers.to_int(result["status"])
+      assert !result["data"].nil?
+      if result["data"].is_a?(Hash)
+        assert_equal "direct01", result["data"]["id"]
+      end
+      assert_equal 1, setup[:calls].length
+    end
+  end
+
 end
 
 

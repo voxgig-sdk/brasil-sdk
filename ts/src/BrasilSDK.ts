@@ -9,7 +9,6 @@ import { FipeMarcaEntity } from './entity/FipeMarcaEntity'
 import { FipePrecoEntity } from './entity/FipePrecoEntity'
 import { MunicipioEntity } from './entity/MunicipioEntity'
 import { UfnEntity } from './entity/UfnEntity'
-import { Ufn2Entity } from './entity/Ufn2Entity'
 
 export type * from './BrasilTypes'
 
@@ -155,8 +154,29 @@ class BrasilSDK {
   }
 
 
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
   async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('BrasilSDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
     const utility = this._utility
+
     const fetcher = utility.fetcher
     const makeContext = utility.makeContext
 
@@ -217,73 +237,138 @@ class BrasilSDK {
 
 
 
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('BrasilSDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('BrasilSDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
   // Entity access: `client.Bank().list()` / `client.Bank().load({ id })`.
-  Bank(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Bank(entopts?: Record<string, any>) {
     const self = this
-    return new BankEntity(self,data)
+    return new BankEntity(self, entopts)
   }
 
 
   // Entity access: `client.Cep().list()` / `client.Cep().load({ id })`.
-  Cep(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Cep(entopts?: Record<string, any>) {
     const self = this
-    return new CepEntity(self,data)
+    return new CepEntity(self, entopts)
   }
 
 
   // Entity access: `client.Cnpj().list()` / `client.Cnpj().load({ id })`.
-  Cnpj(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Cnpj(entopts?: Record<string, any>) {
     const self = this
-    return new CnpjEntity(self,data)
+    return new CnpjEntity(self, entopts)
   }
 
 
   // Entity access: `client.Ddd().list()` / `client.Ddd().load({ id })`.
-  Ddd(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Ddd(entopts?: Record<string, any>) {
     const self = this
-    return new DddEntity(self,data)
+    return new DddEntity(self, entopts)
   }
 
 
   // Entity access: `client.Feriado().list()` / `client.Feriado().load({ id })`.
-  Feriado(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Feriado(entopts?: Record<string, any>) {
     const self = this
-    return new FeriadoEntity(self,data)
+    return new FeriadoEntity(self, entopts)
   }
 
 
   // Entity access: `client.FipeMarca().list()` / `client.FipeMarca().load({ id })`.
-  FipeMarca(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  FipeMarca(entopts?: Record<string, any>) {
     const self = this
-    return new FipeMarcaEntity(self,data)
+    return new FipeMarcaEntity(self, entopts)
   }
 
 
   // Entity access: `client.FipePreco().list()` / `client.FipePreco().load({ id })`.
-  FipePreco(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  FipePreco(entopts?: Record<string, any>) {
     const self = this
-    return new FipePrecoEntity(self,data)
+    return new FipePrecoEntity(self, entopts)
   }
 
 
   // Entity access: `client.Municipio().list()` / `client.Municipio().load({ id })`.
-  Municipio(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Municipio(entopts?: Record<string, any>) {
     const self = this
-    return new MunicipioEntity(self,data)
+    return new MunicipioEntity(self, entopts)
   }
 
 
   // Entity access: `client.Ufn().list()` / `client.Ufn().load({ id })`.
-  Ufn(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Ufn(entopts?: Record<string, any>) {
     const self = this
-    return new UfnEntity(self,data)
-  }
-
-
-  // Entity access: `client.Ufn2().list()` / `client.Ufn2().load({ id })`.
-  Ufn2(data?: any) {
-    const self = this
-    return new Ufn2Entity(self,data)
+    return new UfnEntity(self, entopts)
   }
 
 

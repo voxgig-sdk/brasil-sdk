@@ -77,10 +77,6 @@ Create a new `Municipio` entity instance. Pass `nil` for no initial data.
 
 Create a new `Ufn` entity instance. Pass `nil` for no initial data.
 
-#### `Ufn2(data = nil)`
-
-Create a new `Ufn2` entity instance. Pass `nil` for no initial data.
-
 #### `options_map -> Hash`
 
 Return a deep copy of the current SDK options.
@@ -130,7 +126,7 @@ bank = client.Bank
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `code` | `Integer` | No |  |
-| `full_name` | `String` | No |  |
+| `fullName` | `String` | No |  |
 | `ispb` | `String` | No |  |
 | `name` | `String` | No |  |
 
@@ -192,13 +188,8 @@ cep = client.Cep
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | `String` | No |  |
-| `city` | `String` | No |  |
-| `location` | `Hash` | No |  |
-| `neighborhood` | `String` | No |  |
-| `service` | `String` | No |  |
-| `state` | `String` | No |  |
-| `street` | `String` | No |  |
+| `coordinates` | `Hash` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
@@ -319,7 +310,7 @@ ddd = client.Ddd
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `Array` | No |  |
+| `cities` | `Array` | No |  |
 | `state` | `String` | No |  |
 
 ### Operations
@@ -479,14 +470,14 @@ fipe_preco = client.FipePreco
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | `Integer` | No |  |
-| `codigo_fipe` | `String` | No |  |
+| `anoModelo` | `Integer` | No |  |
+| `codigoFipe` | `String` | No |  |
 | `combustivel` | `String` | No |  |
 | `marca` | `String` | No |  |
-| `mes_referencia` | `String` | No |  |
+| `mesReferencia` | `String` | No |  |
 | `modelo` | `String` | No |  |
-| `sigla_combustivel` | `String` | No |  |
-| `tipo_veiculo` | `Integer` | No |  |
+| `siglaCombustivel` | `String` | No |  |
+| `tipoVeiculo` | `Integer` | No |  |
 | `valor` | `String` | No |  |
 
 ### Operations
@@ -607,6 +598,14 @@ List entities matching the given criteria (call with no argument to list all). R
 results = client.Ufn.list
 ```
 
+#### `load(reqmatch, ctrl = nil) -> result`
+
+Load a single entity matching the given criteria. Raises on error.
+
+```ruby
+result = client.Ufn.load({ "sigla_uf" => "sigla_uf" })
+```
+
 ### Common Methods
 
 #### `data_get -> Hash`
@@ -628,61 +627,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `UfnEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## Ufn2Entity
-
-```ruby
-ufn2 = client.Ufn2
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `Integer` | No |  |
-| `nome` | `String` | No |  |
-| `regiao` | `Hash` | No |  |
-| `sigla` | `String` | No |  |
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Raises on error.
-
-```ruby
-result = client.Ufn2.load({ "sigla_uf" => "sigla_uf" })
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `Ufn2Entity` instance with the same client and
 options.
 
 #### `get_name -> String`

@@ -60,7 +60,7 @@ describe("UfnEntity", function()
     local setup = ufn_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list"}) do
+    for _, _op in ipairs({"list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "ufn." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -91,6 +91,16 @@ describe("UfnEntity", function()
     assert.is_nil(err)
     assert.is_table(ufn_ref01_list_result)
 
+    -- LOAD
+    local ufn_ref01_match_dt0 = {
+      id = ufn_ref01_data["id"],
+    }
+    local ufn_ref01_data_dt0_loaded, err = ufn_ref01_ent:load(ufn_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local ufn_ref01_data_dt0_load_result = helpers.to_map(type(ufn_ref01_data_dt0_loaded) == 'table' and ufn_ref01_data_dt0_loaded.data_get and ufn_ref01_data_dt0_loaded:data_get() or ufn_ref01_data_dt0_loaded)
+    assert.is_not_nil(ufn_ref01_data_dt0_load_result)
+    assert.are.equal(ufn_ref01_data_dt0_load_result["id"], ufn_ref01_data["id"])
+
   end)
 end)
 
@@ -114,7 +124,7 @@ function ufn_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "ufn01", "ufn02", "ufn03" },
+    { "ufn01", "ufn02", "ufn03", "v101", "v102", "v103" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

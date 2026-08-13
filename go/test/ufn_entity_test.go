@@ -80,7 +80,7 @@ func TestUfnEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"list"} {
+		for _, _op := range []string{"list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "ufn." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -120,6 +120,22 @@ func TestUfnEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", ufnRef01ListResult)
 		}
 
+		// LOAD
+		ufnRef01MatchDt0 := map[string]any{
+			"id": ufnRef01Data["id"],
+		}
+		ufnRef01DataDt0Loaded, err := ufnRef01Ent.Load(ufnRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		ufnRef01DataDt0LoadResult := core.ToMapAny(entityData(ufnRef01DataDt0Loaded))
+		if ufnRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if ufnRef01DataDt0LoadResult["id"] != ufnRef01Data["id"] {
+			t.Fatal("expected load result id to match")
+		}
+
 	})
 }
 
@@ -148,7 +164,7 @@ func ufnBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap := vs.Transform(
-		[]any{"ufn01", "ufn02", "ufn03"},
+		[]any{"ufn01", "ufn02", "ufn03", "v101", "v102", "v103"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

@@ -17,6 +17,28 @@ main: kit: flow: BasicUfnFlow:
         }
       ]
     }
+
+    {
+      input: {
+        ref: "ufn_ref01",
+        srcdatavar: "ufn_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "ufn01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-ufn_ref01"
+          }
+        }
+      ]
+    }
   ],
   "key$": "BasicUfnFlow"
 }

@@ -77,10 +77,6 @@ Create a new `MunicipioEntity` instance. Pass `None` for no initial data.
 
 Create a new `UfnEntity` instance. Pass `None` for no initial data.
 
-#### `Ufn2(data=None)`
-
-Create a new `Ufn2Entity` instance. Pass `None` for no initial data.
-
 #### `options_map() -> dict`
 
 Return a deep copy of the current SDK options.
@@ -124,7 +120,7 @@ bank = client.Bank()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `code` | `int` | No |  |
-| `full_name` | `str` | No |  |
+| `fullName` | `str` | No |  |
 | `ispb` | `str` | No |  |
 | `name` | `str` | No |  |
 
@@ -187,13 +183,8 @@ cep = client.Cep()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | `str` | No |  |
-| `city` | `str` | No |  |
-| `location` | `dict` | No |  |
-| `neighborhood` | `str` | No |  |
-| `service` | `str` | No |  |
-| `state` | `str` | No |  |
-| `street` | `str` | No |  |
+| `coordinates` | `dict` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
@@ -312,7 +303,7 @@ ddd = client.Ddd()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `list` | No |  |
+| `cities` | `list` | No |  |
 | `state` | `str` | No |  |
 
 ### Operations
@@ -469,14 +460,14 @@ fipe_preco = client.FipePreco()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | `int` | No |  |
-| `codigo_fipe` | `str` | No |  |
+| `anoModelo` | `int` | No |  |
+| `codigoFipe` | `str` | No |  |
 | `combustivel` | `str` | No |  |
 | `marca` | `str` | No |  |
-| `mes_referencia` | `str` | No |  |
+| `mesReferencia` | `str` | No |  |
 | `modelo` | `str` | No |  |
-| `sigla_combustivel` | `str` | No |  |
-| `tipo_veiculo` | `int` | No |  |
+| `siglaCombustivel` | `str` | No |  |
+| `tipoVeiculo` | `int` | No |  |
 | `valor` | `str` | No |  |
 
 ### Operations
@@ -597,6 +588,14 @@ for ufn in results:
     print(ufn)
 ```
 
+#### `load(reqmatch, ctrl=None) -> dict`
+
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
+
+```python
+result = client.Ufn().load({"sigla_uf": "sigla_uf"})
+```
+
 ### Common Methods
 
 #### `data_get() -> dict`
@@ -618,60 +617,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `UfnEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## Ufn2Entity
-
-```python
-ufn2 = client.Ufn2()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `nome` | `str` | No |  |
-| `regiao` | `dict` | No |  |
-| `sigla` | `str` | No |  |
-
-### Operations
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
-
-```python
-result = client.Ufn2().load({"sigla_uf": "sigla_uf"})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `Ufn2Entity` instance with the same options.
 
 #### `get_name() -> str`
 

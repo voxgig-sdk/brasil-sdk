@@ -53,7 +53,7 @@ except Exception as err:
 ### 3. Load a bank
 
 Bank is nested under code, so provide the `code`.
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -137,7 +137,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = BrasilSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 bank = client.Bank().list()
 # bank contains the mock response record
 ```
@@ -224,7 +225,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `FipePreco` | `(data) -> FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data) -> MunicipioEntity` | Create a Municipio entity instance. |
 | `Ufn` | `(data) -> UfnEntity` | Create an Ufn entity instance. |
-| `Ufn2` | `(data) -> Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -243,7 +243,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -266,7 +266,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `code` |  |
-| `full_name` |  |
+| `fullName` |  |
 | `ispb` |  |
 | `name` |  |
 
@@ -278,13 +278,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `cep` |  |
-| `city` |  |
-| `location` |  |
-| `neighborhood` |  |
-| `service` |  |
-| `state` |  |
-| `street` |  |
+| `coordinates` |  |
+| `type` |  |
 
 Operations: Load.
 
@@ -321,7 +316,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `state` |  |
 
 Operations: Load.
@@ -355,14 +350,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `ano_modelo` |  |
-| `codigo_fipe` |  |
+| `anoModelo` |  |
+| `codigoFipe` |  |
 | `combustivel` |  |
 | `marca` |  |
-| `mes_referencia` |  |
+| `mesReferencia` |  |
 | `modelo` |  |
-| `sigla_combustivel` |  |
-| `tipo_veiculo` |  |
+| `siglaCombustivel` |  |
+| `tipoVeiculo` |  |
 | `valor` |  |
 
 Operations: Load.
@@ -389,22 +384,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `regiao` |  |
 | `sigla` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `id` |  |
-| `nome` |  |
-| `regiao` |  |
-| `sigla` |  |
-
-Operations: Load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -427,7 +409,7 @@ Create an instance: `bank = client.Bank()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `int` |  |
-| `full_name` | `str` |  |
+| `fullName` | `str` |  |
 | `ispb` | `str` |  |
 | `name` | `str` |  |
 
@@ -458,13 +440,8 @@ Create an instance: `cep = client.Cep()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `str` |  |
-| `city` | `str` |  |
-| `location` | `dict` |  |
-| `neighborhood` | `str` |  |
-| `service` | `str` |  |
-| `state` | `str` |  |
-| `street` | `str` |  |
+| `coordinates` | `dict` |  |
+| `type` | `str` |  |
 
 #### Example: Load
 
@@ -527,7 +504,7 @@ Create an instance: `ddd = client.Ddd()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `list` |  |
+| `cities` | `list` |  |
 | `state` | `str` |  |
 
 #### Example: Load
@@ -600,14 +577,14 @@ Create an instance: `fipe_preco = client.FipePreco()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `int` |  |
-| `codigo_fipe` | `str` |  |
+| `anoModelo` | `int` |  |
+| `codigoFipe` | `str` |  |
 | `combustivel` | `str` |  |
 | `marca` | `str` |  |
-| `mes_referencia` | `str` |  |
+| `mesReferencia` | `str` |  |
 | `modelo` | `str` |  |
-| `sigla_combustivel` | `str` |  |
-| `tipo_veiculo` | `int` |  |
+| `siglaCombustivel` | `str` |  |
+| `tipoVeiculo` | `int` |  |
 | `valor` | `str` |  |
 
 #### Example: Load
@@ -650,31 +627,6 @@ Create an instance: `ufn = client.Ufn()`
 | Method | Description |
 | --- | --- |
 | `list()` | List entities, optionally matching the given criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `int` |  |
-| `nome` | `str` |  |
-| `regiao` | `dict` |  |
-| `sigla` | `str` |  |
-
-#### Example: List
-
-```python
-ufns = client.Ufn().list()
-```
-
-
-### Ufn2
-
-Create an instance: `ufn2 = client.Ufn2()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -689,7 +641,13 @@ Create an instance: `ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```python
-ufn2 = client.Ufn2().load({"sigla_uf": "sigla_uf"})
+ufn = client.Ufn().load({"sigla_uf": "sigla_uf"})
+```
+
+#### Example: List
+
+```python
+ufns = client.Ufn().list()
 ```
 
 

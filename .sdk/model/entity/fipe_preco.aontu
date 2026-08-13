@@ -6,12 +6,12 @@ main: kit: entity: fipe_preco: {
 
   fields: [
     {
-      name: "ano_modelo"
+      name: "anoModelo"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "codigo_fipe"
+      name: "codigoFipe"
       req: false
       type: "`$STRING`"
     }
@@ -26,7 +26,7 @@ main: kit: entity: fipe_preco: {
       type: "`$STRING`"
     }
     {
-      name: "mes_referencia"
+      name: "mesReferencia"
       req: false
       type: "`$STRING`"
     }
@@ -36,12 +36,12 @@ main: kit: entity: fipe_preco: {
       type: "`$STRING`"
     }
     {
-      name: "sigla_combustivel"
+      name: "siglaCombustivel"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "tipo_veiculo"
+      name: "tipoVeiculo"
       req: false
       type: "`$INTEGER`"
     }

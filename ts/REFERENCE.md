@@ -156,18 +156,6 @@ Create a new `Ufn` entity instance.
 
 **Returns:** `UfnEntity` instance.
 
-#### `Ufn2(data?: object)`
-
-Create a new `Ufn2` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `Ufn2Entity` instance.
-
 #### `options()`
 
 Return a deep copy of the current SDK options.
@@ -225,9 +213,29 @@ const bank = client.Bank()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `code` | `number` | No |  |
-| `full_name` | `string` | No |  |
+| `fullName` | `string` | No |  |
 | `ispb` | `string` | No |  |
 | `name` | `string` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `v1` | `/banks/v1` | `client.Bank().list({ $action: 'v1', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Bank record — check the API definition for its shape.
+
+```ts
+const result = await client.Bank().list({
+  $action: 'v1',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -285,13 +293,8 @@ const cep = client.Cep()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | `string` | No |  |
-| `city` | `string` | No |  |
-| `location` | `Record<string, any>` | No |  |
-| `neighborhood` | `string` | No |  |
-| `service` | `string` | No |  |
-| `state` | `string` | No |  |
-| `street` | `string` | No |  |
+| `coordinates` | `Record<string, any>` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -408,7 +411,7 @@ const ddd = client.Ddd()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `any[]` | No |  |
+| `cities` | `any[]` | No |  |
 | `state` | `string` | No |  |
 
 ### Operations
@@ -562,14 +565,14 @@ const fipe_preco = client.FipePreco()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | `number` | No |  |
-| `codigo_fipe` | `string` | No |  |
+| `anoModelo` | `number` | No |  |
+| `codigoFipe` | `string` | No |  |
 | `combustivel` | `string` | No |  |
 | `marca` | `string` | No |  |
-| `mes_referencia` | `string` | No |  |
+| `mesReferencia` | `string` | No |  |
 | `modelo` | `string` | No |  |
-| `sigla_combustivel` | `string` | No |  |
-| `tipo_veiculo` | `number` | No |  |
+| `siglaCombustivel` | `string` | No |  |
+| `tipoVeiculo` | `number` | No |  |
 | `valor` | `string` | No |  |
 
 ### Operations
@@ -676,6 +679,26 @@ const ufn = client.Ufn()
 | `regiao` | `Record<string, any>` | No |  |
 | `sigla` | `string` | No |  |
 
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `v1` | `/ibge/uf/v1` | `client.Ufn().list({ $action: 'v1', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Ufn record — check the API definition for its shape.
+
+```ts
+const result = await client.Ufn().list({
+  $action: 'v1',
+  /* ...the action's own arguments */
+})
+```
+
 ### Operations
 
 #### `list(match: object, ctrl?: object)`
@@ -684,6 +707,14 @@ List entities matching the given criteria. Returns an array.
 
 ```ts
 const results = await client.Ufn().list()
+```
+
+#### `load(match: object, ctrl?: object)`
+
+Load a single entity matching the given criteria.
+
+```ts
+const result = await client.Ufn().load({ sigla_uf: 'sigla_uf' })
 ```
 
 ### Common Methods
@@ -701,59 +732,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `UfnEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `BrasilSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## Ufn2Entity
-
-```ts
-const ufn2 = client.Ufn2()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `number` | No |  |
-| `nome` | `string` | No |  |
-| `regiao` | `Record<string, any>` | No |  |
-| `sigla` | `string` | No |  |
-
-### Operations
-
-#### `load(match: object, ctrl?: object)`
-
-Load a single entity matching the given criteria.
-
-```ts
-const result = await client.Ufn2().load({ sigla_uf: 'sigla_uf' })
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `Ufn2Entity` instance with the same client and
 options.
 
 #### `client()`

@@ -16,7 +16,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"bank | cep | cnpj | ddd | feriado | fipe_marca | fipe_preco | municipio | ufn | ufn2"`
+	Entity string         `json:"entity" jsonschema:"bank | cep | cnpj | ddd | feriado | fipe_marca | fipe_preco | municipio | ufn"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -95,8 +95,6 @@ func entityFor(client *sdk.BrasilSDK, name string) (sdk.BrasilEntity, error) {
 		return client.Municipio(nil), nil
 	case "ufn":
 		return client.Ufn(nil), nil
-	case "ufn2":
-		return client.Ufn2(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

@@ -11,7 +11,7 @@ main: kit: entity: bank: {
       type: "`$INTEGER`"
     }
     {
-      name: "full_name"
+      name: "fullName"
       req: false
       type: "`$STRING`"
     }

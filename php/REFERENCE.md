@@ -77,10 +77,6 @@ Create a new `MunicipioEntity` instance. Pass `null` for no initial data.
 
 Create a new `UfnEntity` instance. Pass `null` for no initial data.
 
-#### `Ufn2($data = null)`
-
-Create a new `Ufn2Entity` instance. Pass `null` for no initial data.
-
 #### `options_map(): array`
 
 Return a deep copy of the current SDK options.
@@ -129,7 +125,7 @@ $bank = $client->Bank();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `code` | `int` | No |  |
-| `full_name` | `string` | No |  |
+| `fullName` | `string` | No |  |
 | `ispb` | `string` | No |  |
 | `name` | `string` | No |  |
 
@@ -191,13 +187,8 @@ $cep = $client->Cep();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | `string` | No |  |
-| `city` | `string` | No |  |
-| `location` | `array` | No |  |
-| `neighborhood` | `string` | No |  |
-| `service` | `string` | No |  |
-| `state` | `string` | No |  |
-| `street` | `string` | No |  |
+| `coordinates` | `array` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -318,7 +309,7 @@ $ddd = $client->Ddd();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `array` | No |  |
+| `cities` | `array` | No |  |
 | `state` | `string` | No |  |
 
 ### Operations
@@ -478,14 +469,14 @@ $fipe_preco = $client->FipePreco();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | `int` | No |  |
-| `codigo_fipe` | `string` | No |  |
+| `anoModelo` | `int` | No |  |
+| `codigoFipe` | `string` | No |  |
 | `combustivel` | `string` | No |  |
 | `marca` | `string` | No |  |
-| `mes_referencia` | `string` | No |  |
+| `mesReferencia` | `string` | No |  |
 | `modelo` | `string` | No |  |
-| `sigla_combustivel` | `string` | No |  |
-| `tipo_veiculo` | `int` | No |  |
+| `siglaCombustivel` | `string` | No |  |
+| `tipoVeiculo` | `int` | No |  |
 | `valor` | `string` | No |  |
 
 ### Operations
@@ -606,6 +597,14 @@ List entities matching the given criteria (call with no argument to list all). R
 $results = $client->Ufn()->list();
 ```
 
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
+
+Load a single entity matching the given criteria. Throws on error.
+
+```php
+$result = $client->Ufn()->load(["sigla_uf" => "sigla_uf"]);
+```
+
 ### Common Methods
 
 #### `data_get(): array`
@@ -627,61 +626,6 @@ Set the entity match criteria.
 #### `make(): UfnEntity`
 
 Create a new `UfnEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## Ufn2Entity
-
-```php
-$ufn2 = $client->Ufn2();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `nome` | `string` | No |  |
-| `regiao` | `array` | No |  |
-| `sigla` | `string` | No |  |
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Throws on error.
-
-```php
-$result = $client->Ufn2()->load(["sigla_uf" => "sigla_uf"]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): Ufn2Entity`
-
-Create a new `Ufn2Entity` instance with the same client and
 options.
 
 #### `get_name(): string`

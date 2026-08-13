@@ -83,10 +83,6 @@ Create a new `Municipio` entity instance. Pass `nil` for no initial data.
 
 Create a new `Ufn` entity instance. Pass `nil` for no initial data.
 
-#### `Ufn2(data map[string]any) BrasilEntity`
-
-Create a new `Ufn2` entity instance. Pass `nil` for no initial data.
-
 #### `OptionsMap() map[string]any`
 
 Return a deep copy of the current SDK options.
@@ -135,7 +131,7 @@ fmt.Println(bank.GetName()) // "bank"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `code` | `int` | No |  |
-| `full_name` | `string` | No |  |
+| `fullName` | `string` | No |  |
 | `ispb` | `string` | No |  |
 | `name` | `string` | No |  |
 
@@ -200,13 +196,8 @@ fmt.Println(cep.GetName()) // "cep"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cep` | `string` | No |  |
-| `city` | `string` | No |  |
-| `location` | `map[string]any` | No |  |
-| `neighborhood` | `string` | No |  |
-| `service` | `string` | No |  |
-| `state` | `string` | No |  |
-| `street` | `string` | No |  |
+| `coordinates` | `map[string]any` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -325,7 +316,7 @@ fmt.Println(ddd.GetName()) // "ddd"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `city` | `[]any` | No |  |
+| `cities` | `[]any` | No |  |
 | `state` | `string` | No |  |
 
 ### Operations
@@ -482,14 +473,14 @@ fmt.Println(fipePreco.GetName()) // "fipe_preco"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `ano_modelo` | `int` | No |  |
-| `codigo_fipe` | `string` | No |  |
+| `anoModelo` | `int` | No |  |
+| `codigoFipe` | `string` | No |  |
 | `combustivel` | `string` | No |  |
 | `marca` | `string` | No |  |
-| `mes_referencia` | `string` | No |  |
+| `mesReferencia` | `string` | No |  |
 | `modelo` | `string` | No |  |
-| `sigla_combustivel` | `string` | No |  |
-| `tipo_veiculo` | `int` | No |  |
+| `siglaCombustivel` | `string` | No |  |
+| `tipoVeiculo` | `int` | No |  |
 | `valor` | `string` | No |  |
 
 ### Operations
@@ -612,54 +603,12 @@ if err != nil {
 fmt.Println(results)
 ```
 
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `UfnEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## Ufn2Entity
-
-```go
-ufn2 := client.Ufn2(nil)
-fmt.Println(ufn2.GetName()) // "ufn2"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `nome` | `string` | No |  |
-| `regiao` | `map[string]any` | No |  |
-| `sigla` | `string` | No |  |
-
-### Operations
-
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ufn2(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
+result, err := client.Ufn(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
 if err != nil {
     panic(err)
 }
@@ -680,7 +629,7 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 #### `Make() Entity`
 
-Create a new `Ufn2Entity` instance with the same client and
+Create a new `UfnEntity` instance with the same client and
 options.
 
 #### `GetName() string`

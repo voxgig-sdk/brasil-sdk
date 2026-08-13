@@ -236,7 +236,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `FipePreco` | `(data map[string]any) BrasilEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data map[string]any) BrasilEntity` | Create a Municipio entity instance. |
 | `Ufn` | `(data map[string]any) BrasilEntity` | Create an Ufn entity instance. |
-| `Ufn2` | `(data map[string]any) BrasilEntity` | Create an Ufn2 entity instance. |
 
 ### Entity interface (BrasilEntity)
 
@@ -279,7 +278,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"code"` |  |
-| `"full_name"` |  |
+| `"fullName"` |  |
 | `"ispb"` |  |
 | `"name"` |  |
 
@@ -291,13 +290,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `"cep"` |  |
-| `"city"` |  |
-| `"location"` |  |
-| `"neighborhood"` |  |
-| `"service"` |  |
-| `"state"` |  |
-| `"street"` |  |
+| `"coordinates"` |  |
+| `"type"` |  |
 
 Operations: Load.
 
@@ -334,7 +328,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `"city"` |  |
+| `"cities"` |  |
 | `"state"` |  |
 
 Operations: Load.
@@ -368,14 +362,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `"ano_modelo"` |  |
-| `"codigo_fipe"` |  |
+| `"anoModelo"` |  |
+| `"codigoFipe"` |  |
 | `"combustivel"` |  |
 | `"marca"` |  |
-| `"mes_referencia"` |  |
+| `"mesReferencia"` |  |
 | `"modelo"` |  |
-| `"sigla_combustivel"` |  |
-| `"tipo_veiculo"` |  |
+| `"siglaCombustivel"` |  |
+| `"tipoVeiculo"` |  |
 | `"valor"` |  |
 
 Operations: Load.
@@ -402,22 +396,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `"regiao"` |  |
 | `"sigla"` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `"id"` |  |
-| `"nome"` |  |
-| `"regiao"` |  |
-| `"sigla"` |  |
-
-Operations: Load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -440,7 +421,7 @@ Create an instance: `bank := client.Bank(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `int` |  |
-| `full_name` | `string` |  |
+| `fullName` | `string` |  |
 | `ispb` | `string` |  |
 | `name` | `string` |  |
 
@@ -479,13 +460,8 @@ Create an instance: `cep := client.Cep(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `string` |  |
-| `city` | `string` |  |
-| `location` | `map[string]any` |  |
-| `neighborhood` | `string` |  |
-| `service` | `string` |  |
-| `state` | `string` |  |
-| `street` | `string` |  |
+| `coordinates` | `map[string]any` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
@@ -556,7 +532,7 @@ Create an instance: `ddd := client.Ddd(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `[]any` |  |
+| `cities` | `[]any` |  |
 | `state` | `string` |  |
 
 #### Example: Load
@@ -641,14 +617,14 @@ Create an instance: `fipePreco := client.FipePreco(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `int` |  |
-| `codigo_fipe` | `string` |  |
+| `anoModelo` | `int` |  |
+| `codigoFipe` | `string` |  |
 | `combustivel` | `string` |  |
 | `marca` | `string` |  |
-| `mes_referencia` | `string` |  |
+| `mesReferencia` | `string` |  |
 | `modelo` | `string` |  |
-| `sigla_combustivel` | `string` |  |
-| `tipo_veiculo` | `int` |  |
+| `siglaCombustivel` | `string` |  |
+| `tipoVeiculo` | `int` |  |
 | `valor` | `string` |  |
 
 #### Example: Load
@@ -699,35 +675,6 @@ Create an instance: `ufn := client.Ufn(nil)`
 | Method | Description |
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `int` |  |
-| `nome` | `string` |  |
-| `regiao` | `map[string]any` |  |
-| `sigla` | `string` |  |
-
-#### Example: List
-
-```go
-ufns, err := client.Ufn(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(ufns) // the array of records
-```
-
-
-### Ufn2
-
-Create an instance: `ufn2 := client.Ufn2(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -742,11 +689,21 @@ Create an instance: `ufn2 := client.Ufn2(nil)`
 #### Example: Load
 
 ```go
-ufn2, err := client.Ufn2(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
+ufn, err := client.Ufn(nil).Load(map[string]any{"sigla_uf": "sigla_uf"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(ufn2) // the loaded record
+fmt.Println(ufn) // the loaded record
+```
+
+#### Example: List
+
+```go
+ufns, err := client.Ufn(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ufns) // the array of records
 ```
 
 

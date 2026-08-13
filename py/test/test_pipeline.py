@@ -16,11 +16,11 @@
 import pytest
 
 from brasil_sdk import BrasilSDK
-from core.error import BrasilError
-from core.result import BrasilResult
-from core.response import BrasilResponse
-from core.spec import BrasilSpec
-from feature.base_feature import BrasilBaseFeature
+from brasil_sdk.core.error import BrasilError
+from brasil_sdk.core.result import BrasilResult
+from brasil_sdk.core.response import BrasilResponse
+from brasil_sdk.core.spec import BrasilSpec
+from brasil_sdk.feature.base_feature import BrasilBaseFeature
 
 
 def _client():

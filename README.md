@@ -16,7 +16,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **10 semantic entities** that you
+This SDK exposes the API as **9 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`):
@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = BrasilSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = BrasilSDK.test({
+  entity: {
+    bank: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const banks = await client.Bank().list()
-// banks is an array of bare Bank records populated with mock data
+// banks is an array of Bank entities, populated with mock data
+// — call banks[0].data() for the record itself
 console.log(banks)
 ```
 
@@ -110,7 +119,7 @@ import { BrasilSDK } from '@voxgig-sdk/brasil'
 
 const client = new BrasilSDK()
 
-// List all banks (returns Bank[])
+// List all banks (returns BankEntity[] — .data() for the record)
 const banks = await client.Bank().list()
 for (const bank of banks) {
   console.log(bank)
@@ -157,7 +166,7 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 10 entities:
+The API exposes 9 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
@@ -169,8 +178,7 @@ The API exposes 10 entities:
 | **FipeMarca** | The FipeMarca entity (load). | `/fipe/marcas/v1/{tipoVeiculo}` |
 | **FipePreco** | The FipePreco entity (load). | `/fipe/preco/v1/{codigoFipe}` |
 | **Municipio** | The Municipio entity (load). | `/ibge/municipios/v1/{siglaUF}` |
-| **Ufn** | The Ufn entity (list). | `/ibge/uf/v1` |
-| **Ufn2** | The Ufn2 entity (load). | `/ibge/uf/v1/{siglaUF}` |
+| **Ufn** | The Ufn entity (list, load). | `/ibge/uf/v1` |
 
 The operations available across these entities are **load**, **list** — see each entity's
 own list above for exactly which it supports.
@@ -206,7 +214,7 @@ $client = new BrasilSDK();
 $banks = $client->Bank()->list();
 print_r($banks);
 
-// Load a specific bank (returns the bare record; throws on error)
+// Load a specific bank (returns the ENTITY; call data_get() for the record; throws on error)
 $bank = $client->Bank()->load(["code" => "example_code"]);
 print_r($bank);
 ```
@@ -246,7 +254,7 @@ client = BrasilSDK.new
 banks = client.Bank.list
 puts banks
 
-# Load a specific bank (returns the bare record; raises on error)
+# Load a specific bank (returns the ENTITY; call data_get for the record)
 bank = client.Bank.load({ "code" => "example_code" })
 puts bank
 ```
@@ -383,6 +391,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://brasilapi.com.br/docs](https://brasilapi.com.br/docs)
 

@@ -24,12 +24,54 @@ describe('UfnDirect', async () => {
 
   test('direct-exists', async () => {
     const sdk = new BrasilSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
     assert('function' === typeof sdk.prepare)
   })
 
+
+  test('direct-load-ufn', async (t: any) => {
+    const setup = directSetup({ id: 'direct01' })
+    if (maybeSkipControl(t, 'direct', 'direct-load-ufn', setup.live)) return
+    const { client, calls } = setup
+
+    const params: any = {}
+    const query: any = {}
+    if (setup.live) {
+      params.sigla_uf = "SP"
+    } else {
+      params.sigla_uf = 'direct01'
+    }
+
+    const result: any = await client.direct({
+      path: 'ibge/uf/v1/{sigla_uf}',
+      method: 'GET',
+      params,
+      query,
+    })
+
+    if (setup.live) {
+      // Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
+      // than fail when the load endpoint isn't reachable with the IDs we
+      // can construct from setup.idmap.
+      if (!result.ok || result.status < 200 || result.status >= 300) {
+        return
+      }
+    } else {
+      assert(result.ok === true)
+      assert(result.status === 200)
+      assert(null != result.data)
+      assert(result.data.id === 'direct01')
+      assert(calls.length === 1)
+      assert(calls[0].init.method === 'GET')
+      assert(calls[0].url.includes('direct01'))
+    }
+  })
 
   test('direct-list-ufn', async (t: any) => {
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])

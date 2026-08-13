@@ -52,7 +52,7 @@ class UfnEntityTest < Minitest::Test
     setup = ufn_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list"].each do |_op|
+    ["list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "ufn." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -82,6 +82,15 @@ class UfnEntityTest < Minitest::Test
     ufn_ref01_list_result = ufn_ref01_ent.list(ufn_ref01_match, nil)
     assert ufn_ref01_list_result.is_a?(Array)
 
+    # LOAD
+    ufn_ref01_match_dt0 = {
+      "id" => ufn_ref01_data["id"],
+    }
+    ufn_ref01_data_dt0_loaded = ufn_ref01_ent.load(ufn_ref01_match_dt0, nil)
+    ufn_ref01_data_dt0_load_result = Helpers.to_map(ufn_ref01_data_dt0_loaded.respond_to?(:data_get) ? ufn_ref01_data_dt0_loaded.data_get : ufn_ref01_data_dt0_loaded)
+    assert !ufn_ref01_data_dt0_load_result.nil?
+    assert_equal ufn_ref01_data_dt0_load_result["id"], ufn_ref01_data["id"]
+
   end
 end
 
@@ -99,7 +108,7 @@ def ufn_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["ufn01", "ufn02", "ufn03"],
+    ["ufn01", "ufn02", "ufn03", "v101", "v102", "v103"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

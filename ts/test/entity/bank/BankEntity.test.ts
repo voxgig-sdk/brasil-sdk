@@ -63,7 +63,7 @@ describe('BankEntity', async () => {
     const bank_ref01_ent = client.Bank()
     const bank_ref01_match: any = {}
 
-    const bank_ref01_list = await bank_ref01_ent.list(bank_ref01_match)
+    const bank_ref01_list = (await bank_ref01_ent.list(bank_ref01_match)).map((e: any) => e.data())
 
 
 

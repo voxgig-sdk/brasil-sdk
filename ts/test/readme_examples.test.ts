@@ -37,7 +37,7 @@ const SDK_NAME = 'BrasilSDK'
 
 // A fixture for every entity, so list()/load() resolve offline with no
 // network. Snippet client construction is rewritten to seed this.
-const TEST_SEED = {"entity":{"bank":{"test01":{"id":"test01"}},"cep":{"test01":{"id":"test01"}},"cnpj":{"test01":{"id":"test01"}},"ddd":{"test01":{"id":"test01"}},"feriado":{"test01":{"id":"test01"}},"fipe_marca":{"test01":{"id":"test01"}},"fipe_preco":{"test01":{"id":"test01"}},"municipio":{"test01":{"id":"test01"}},"ufn":{"test01":{"id":"test01"}},"ufn2":{"test01":{"id":"test01"}}}}
+const TEST_SEED = {"entity":{"bank":{"test01":{"id":"test01"}},"cep":{"test01":{"id":"test01"}},"cnpj":{"test01":{"id":"test01"}},"ddd":{"test01":{"id":"test01"}},"feriado":{"test01":{"id":"test01"}},"fipe_marca":{"test01":{"id":"test01"}},"fipe_preco":{"test01":{"id":"test01"}},"municipio":{"test01":{"id":"test01"}},"ufn":{"test01":{"id":"test01"}}}}
 const SEED_ARG = JSON.stringify(TEST_SEED)
 const SEEDED_CTOR = SDK_NAME + '.test(' + SEED_ARG + ')'
 

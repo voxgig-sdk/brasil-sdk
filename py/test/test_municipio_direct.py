@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from brasil_sdk.utility.voxgig_struct import voxgig_struct as vs
 from brasil_sdk import BrasilSDK
-from core import helpers
+from brasil_sdk.core import helpers
 from test import runner
 
 

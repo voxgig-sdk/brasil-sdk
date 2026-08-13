@@ -1,7 +1,7 @@
 # Guide
 
 guide: {
-  metrics: count: entity: 10
+  metrics: count: entity: 9
   metrics: count: path: 12
   metrics: count: method: 12
 
@@ -18,9 +18,11 @@ guide: {
   entity: cep: {
     path: "/cep/v1/{cep}": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.location`")|top
     }
     path: "/cep/v2/{cep}": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.location`")|top
     }
   }
 
@@ -68,12 +70,10 @@ guide: {
       action: "v1": {}
       op: list: method: *GET
     }
-  }
-
-  entity: ufn2: {
     path: "/ibge/uf/v1/{siglaUF}": {
       rename: param: "siglaUF": *"sigla_uf"
       op: load: method: *GET
+      op: load: transform: res: *("`body.regiao`")|top
     }
   }
 

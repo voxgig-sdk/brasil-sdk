@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "bank": {
           "active": true,
@@ -33,7 +38,7 @@
             },
             {
               "active": true,
-              "name": "full_name",
+              "name": "fullName",
               "req": false,
               "type": "`$STRING`"
             },
@@ -59,6 +64,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/banks/v1",
                   "parts": [
@@ -94,6 +100,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/banks/v1/{code}",
                   "parts": [
@@ -130,43 +137,13 @@
           "fields": [
             {
               "active": true,
-              "name": "cep",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "city",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "location",
+              "name": "coordinates",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "neighborhood",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "service",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "state",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "street",
+              "name": "type",
               "req": false,
               "type": "`$STRING`"
             }
@@ -192,6 +169,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/cep/v1/{cep}",
                   "parts": [
@@ -206,7 +184,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.location`"
                   }
                 },
                 {
@@ -224,6 +202,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/cep/v2/{cep}",
                   "parts": [
@@ -238,7 +217,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.location`"
                   }
                 }
               ]
@@ -391,6 +370,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/cnpj/v1/{cnpj}",
                   "parts": [
@@ -427,7 +407,7 @@
           "fields": [
             {
               "active": true,
-              "name": "city",
+              "name": "cities",
               "req": false,
               "type": "`$ARRAY`"
             },
@@ -459,6 +439,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/ddd/v1/{ddd}",
                   "parts": [
@@ -533,6 +514,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/feriados/v1/{ano}",
                   "parts": [
@@ -601,6 +583,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/fipe/marcas/v1/{tipoVeiculo}",
                   "parts": [
@@ -643,13 +626,13 @@
           "fields": [
             {
               "active": true,
-              "name": "ano_modelo",
+              "name": "anoModelo",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "codigo_fipe",
+              "name": "codigoFipe",
               "req": false,
               "type": "`$STRING`"
             },
@@ -667,7 +650,7 @@
             },
             {
               "active": true,
-              "name": "mes_referencia",
+              "name": "mesReferencia",
               "req": false,
               "type": "`$STRING`"
             },
@@ -679,13 +662,13 @@
             },
             {
               "active": true,
-              "name": "sigla_combustivel",
+              "name": "siglaCombustivel",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "tipo_veiculo",
+              "name": "tipoVeiculo",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -717,6 +700,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/fipe/preco/v1/{codigoFipe}",
                   "parts": [
@@ -791,6 +775,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/ibge/municipios/v1/{siglaUF}",
                   "parts": [
@@ -869,6 +854,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/ibge/uf/v1",
                   "parts": [
@@ -885,49 +871,7 @@
                   }
                 }
               ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "ufn2": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "nome",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "regiao",
-              "req": false,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "sigla",
-              "req": false,
-              "type": "`$STRING`"
-            }
-          ],
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "ufn2",
-          "op": {
             "load": {
               "input": "data",
               "name": "load",
@@ -947,6 +891,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/ibge/uf/v1/{siglaUF}",
                   "parts": [
@@ -967,7 +912,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.regiao`"
                   }
                 }
               ]
@@ -1348,38 +1293,6 @@
             }
           ]
         },
-        "BasicUfn2Flow": {
-          "active": true,
-          "entity": "ufn2",
-          "key$": "BasicUfn2Flow",
-          "kind": "basic",
-          "name": "BasicUfn2Flow",
-          "param": {},
-          "step": [
-            {
-              "active": true,
-              "data": {},
-              "input": {
-                "ref": "ufn2_ref01",
-                "srcdatavar": "ufn2_ref01_data",
-                "suffix": "_dt0"
-              },
-              "match": {
-                "id": "ufn201"
-              },
-              "op": "load",
-              "spec": [],
-              "valid": [
-                {
-                  "apply": "TextFieldMark",
-                  "def": {
-                    "mark": "Mark01-ufn2_ref01"
-                  }
-                }
-              ]
-            }
-          ]
-        },
         "BasicUfnFlow": {
           "active": true,
           "entity": "ufn",
@@ -1400,6 +1313,28 @@
                   "apply": "ItemExists",
                   "def": {
                     "ref": "ufn_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "active": true,
+              "data": {},
+              "input": {
+                "ref": "ufn_ref01",
+                "srcdatavar": "ufn_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "ufn01"
+              },
+              "op": "load",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-ufn_ref01"
                   }
                 }
               ]
@@ -1431,18 +1366,41 @@
         "website": "https://brasilapi.com.br"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1464,22 +1422,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1518,21 +1494,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1571,12 +1565,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -1588,10 +1587,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1613,22 +1625,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1650,13 +1680,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1668,10 +1703,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1693,13 +1741,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1716,10 +1769,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1741,13 +1807,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1770,10 +1841,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "brasil"
+            "goversion": "",
+            "name": "brasil",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1795,9 +1879,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

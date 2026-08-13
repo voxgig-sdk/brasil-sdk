@@ -8,7 +8,7 @@
 
 ---@class Bank
 ---@field code? number
----@field full_name? string
+---@field fullName? string
 ---@field ispb? string
 ---@field name? string
 
@@ -17,18 +17,13 @@
 
 ---@class BankListMatch
 ---@field code? number
----@field full_name? string
+---@field fullName? string
 ---@field ispb? string
 ---@field name? string
 
 ---@class Cep
----@field cep? string
----@field city? string
----@field location? table
----@field neighborhood? string
----@field service? string
----@field state? string
----@field street? string
+---@field coordinates? table
+---@field type? string
 
 ---@class CepLoadMatch
 ---@field cep string
@@ -57,7 +52,7 @@
 ---@field cnpj string
 
 ---@class Ddd
----@field city? table
+---@field cities? table
 ---@field state? string
 
 ---@class DddLoadMatch
@@ -79,14 +74,14 @@
 ---@field tipo_veiculo string
 
 ---@class FipePreco
----@field ano_modelo? number
----@field codigo_fipe? string
+---@field anoModelo? number
+---@field codigoFipe? string
 ---@field combustivel? string
 ---@field marca? string
----@field mes_referencia? string
+---@field mesReferencia? string
 ---@field modelo? string
----@field sigla_combustivel? string
----@field tipo_veiculo? number
+---@field siglaCombustivel? string
+---@field tipoVeiculo? number
 ---@field valor? string
 
 ---@class FipePrecoLoadMatch
@@ -105,20 +100,14 @@
 ---@field regiao? table
 ---@field sigla? string
 
+---@class UfnLoadMatch
+---@field sigla_uf string
+
 ---@class UfnListMatch
 ---@field id? number
 ---@field nome? string
 ---@field regiao? table
 ---@field sigla? string
-
----@class Ufn2
----@field id? number
----@field nome? string
----@field regiao? table
----@field sigla? string
-
----@class Ufn2LoadMatch
----@field sigla_uf string
 
 local M = {}
 

@@ -33,7 +33,6 @@ class BrasilConfig
                     "fipe_preco" => [],
                     "municipio" => [],
                     "ufn" => [],
-                    "ufn2" => [],
                 ],
             ],
             "entity" => [
@@ -48,7 +47,7 @@ class BrasilConfig
             ],
             [
               'active' => true,
-              'name' => 'full_name',
+              'name' => 'fullName',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
@@ -77,6 +76,7 @@ class BrasilConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/banks/v1',
                   'parts' => [
@@ -115,6 +115,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/banks/v1/{code}',
                   'parts' => [
@@ -149,52 +150,17 @@ class BrasilConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'cep',
+              'name' => 'coordinates',
               'req' => false,
-              'type' => '`$STRING`',
+              'type' => '`$OBJECT`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'city',
+              'name' => 'type',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
-            ],
-            [
-              'active' => true,
-              'name' => 'location',
-              'req' => false,
-              'type' => '`$OBJECT`',
-              'index$' => 2,
-            ],
-            [
-              'active' => true,
-              'name' => 'neighborhood',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 3,
-            ],
-            [
-              'active' => true,
-              'name' => 'service',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 4,
-            ],
-            [
-              'active' => true,
-              'name' => 'state',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 5,
-            ],
-            [
-              'active' => true,
-              'name' => 'street',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 6,
             ],
           ],
           'name' => 'cep',
@@ -219,6 +185,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cep/v1/{cep}',
                   'parts' => [
@@ -233,7 +200,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.location`',
                   ],
                   'index$' => 0,
                 ],
@@ -253,6 +220,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cep/v2/{cep}',
                   'parts' => [
@@ -267,7 +235,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.location`',
                   ],
                   'index$' => 1,
                 ],
@@ -437,6 +405,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cnpj/v1/{cnpj}',
                   'parts' => [
@@ -471,7 +440,7 @@ class BrasilConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'city',
+              'name' => 'cities',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 0,
@@ -506,6 +475,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ddd/v1/{ddd}',
                   'parts' => [
@@ -582,6 +552,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/feriados/v1/{ano}',
                   'parts' => [
@@ -651,6 +622,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/fipe/marcas/v1/{tipoVeiculo}',
                   'parts' => [
@@ -691,14 +663,14 @@ class BrasilConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'ano_modelo',
+              'name' => 'anoModelo',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'codigo_fipe',
+              'name' => 'codigoFipe',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
@@ -719,7 +691,7 @@ class BrasilConfig
             ],
             [
               'active' => true,
-              'name' => 'mes_referencia',
+              'name' => 'mesReferencia',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 4,
@@ -733,14 +705,14 @@ class BrasilConfig
             ],
             [
               'active' => true,
-              'name' => 'sigla_combustivel',
+              'name' => 'siglaCombustivel',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 6,
             ],
             [
               'active' => true,
-              'name' => 'tipo_veiculo',
+              'name' => 'tipoVeiculo',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 7,
@@ -775,6 +747,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/fipe/preco/v1/{codigoFipe}',
                   'parts' => [
@@ -850,6 +823,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/municipios/v1/{siglaUF}',
                   'parts' => [
@@ -926,6 +900,7 @@ class BrasilConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/uf/v1',
                   'parts' => [
@@ -945,44 +920,6 @@ class BrasilConfig
               ],
               'key$' => 'list',
             ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'ufn2' => [
-          'fields' => [
-            [
-              'active' => true,
-              'name' => 'id',
-              'req' => false,
-              'type' => '`$INTEGER`',
-              'index$' => 0,
-            ],
-            [
-              'active' => true,
-              'name' => 'nome',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 1,
-            ],
-            [
-              'active' => true,
-              'name' => 'regiao',
-              'req' => false,
-              'type' => '`$OBJECT`',
-              'index$' => 2,
-            ],
-            [
-              'active' => true,
-              'name' => 'sigla',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 3,
-            ],
-          ],
-          'name' => 'ufn2',
-          'op' => [
             'load' => [
               'input' => 'data',
               'name' => 'load',
@@ -1003,6 +940,7 @@ class BrasilConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/uf/v1/{siglaUF}',
                   'parts' => [
@@ -1023,7 +961,7 @@ class BrasilConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.regiao`',
                   ],
                   'index$' => 0,
                 ],

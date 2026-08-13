@@ -35,7 +35,9 @@ const client = new BrasilSDK()
 
 ### 2. List bank records
 
-`list()` resolves to an array of Bank objects — iterate it directly:
+`list()` resolves to an array of Bank ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const banks = await client.Bank().list()
@@ -136,7 +138,8 @@ Create a mock client for unit testing — no server required:
 const client = BrasilSDK.test()
 
 const bank = await client.Bank().list()
-// bank is a bare entity populated with mock response data
+// bank is the entity, populated with mock response data
+// — call bank.data() for the record itself
 console.log(bank)
 ```
 
@@ -239,7 +242,6 @@ new BrasilSDK(options?: {
 | `FipePreco(data?)` | `FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio(data?)` | `MunicipioEntity` | Create a Municipio entity instance. |
 | `Ufn(data?)` | `UfnEntity` | Create an Ufn entity instance. |
-| `Ufn2(data?)` | `Ufn2Entity` | Create an Ufn2 entity instance. |
 | `tester(testopts?, sdkopts?)` | `BrasilSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -312,7 +314,7 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `code` |  |
-| `full_name` |  |
+| `fullName` |  |
 | `ispb` |  |
 | `name` |  |
 
@@ -324,13 +326,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `cep` |  |
-| `city` |  |
-| `location` |  |
-| `neighborhood` |  |
-| `service` |  |
-| `state` |  |
-| `street` |  |
+| `coordinates` |  |
+| `type` |  |
 
 Operations: load.
 
@@ -367,7 +364,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `state` |  |
 
 Operations: load.
@@ -401,14 +398,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `ano_modelo` |  |
-| `codigo_fipe` |  |
+| `anoModelo` |  |
+| `codigoFipe` |  |
 | `combustivel` |  |
 | `marca` |  |
-| `mes_referencia` |  |
+| `mesReferencia` |  |
 | `modelo` |  |
-| `sigla_combustivel` |  |
-| `tipo_veiculo` |  |
+| `siglaCombustivel` |  |
+| `tipoVeiculo` |  |
 | `valor` |  |
 
 Operations: load.
@@ -435,22 +432,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `regiao` |  |
 | `sigla` |  |
 
-Operations: list.
+Operations: list, load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `id` |  |
-| `nome` |  |
-| `regiao` |  |
-| `sigla` |  |
-
-Operations: load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -473,7 +457,7 @@ Create an instance: `const bank = client.Bank()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `number` |  |
-| `full_name` | `string` |  |
+| `fullName` | `string` |  |
 | `ispb` | `string` |  |
 | `name` | `string` |  |
 
@@ -504,13 +488,8 @@ Create an instance: `const cep = client.Cep()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `string` |  |
-| `city` | `string` |  |
-| `location` | `Record<string, any>` |  |
-| `neighborhood` | `string` |  |
-| `service` | `string` |  |
-| `state` | `string` |  |
-| `street` | `string` |  |
+| `coordinates` | `Record<string, any>` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
@@ -573,7 +552,7 @@ Create an instance: `const ddd = client.Ddd()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `any[]` |  |
+| `cities` | `any[]` |  |
 | `state` | `string` |  |
 
 #### Example: Load
@@ -646,14 +625,14 @@ Create an instance: `const fipe_preco = client.FipePreco()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `number` |  |
-| `codigo_fipe` | `string` |  |
+| `anoModelo` | `number` |  |
+| `codigoFipe` | `string` |  |
 | `combustivel` | `string` |  |
 | `marca` | `string` |  |
-| `mes_referencia` | `string` |  |
+| `mesReferencia` | `string` |  |
 | `modelo` | `string` |  |
-| `sigla_combustivel` | `string` |  |
-| `tipo_veiculo` | `number` |  |
+| `siglaCombustivel` | `string` |  |
+| `tipoVeiculo` | `number` |  |
 | `valor` | `string` |  |
 
 #### Example: Load
@@ -696,31 +675,6 @@ Create an instance: `const ufn = client.Ufn()`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `number` |  |
-| `nome` | `string` |  |
-| `regiao` | `Record<string, any>` |  |
-| `sigla` | `string` |  |
-
-#### Example: List
-
-```ts
-const ufns = await client.Ufn().list()
-```
-
-
-### Ufn2
-
-Create an instance: `const ufn2 = client.Ufn2()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -735,7 +689,13 @@ Create an instance: `const ufn2 = client.Ufn2()`
 #### Example: Load
 
 ```ts
-const ufn2 = await client.Ufn2().load({ sigla_uf: 'sigla_uf' })
+const ufn = await client.Ufn().load({ sigla_uf: 'sigla_uf' })
+```
+
+#### Example: List
+
+```ts
+const ufns = await client.Ufn().list()
 ```
 
 

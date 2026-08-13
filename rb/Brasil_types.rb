@@ -13,7 +13,7 @@
 # @!attribute [rw] code
 #   @return [Integer, nil]
 #
-# @!attribute [rw] full_name
+# @!attribute [rw] fullName
 #   @return [String, nil]
 #
 # @!attribute [rw] ispb
@@ -23,7 +23,7 @@
 #   @return [String, nil]
 Bank = Struct.new(
   :code,
-  :full_name,
+  :fullName,
   :ispb,
   :name,
   keyword_init: true
@@ -43,7 +43,7 @@ BankLoadMatch = Struct.new(
 # @!attribute [rw] code
 #   @return [Integer, nil]
 #
-# @!attribute [rw] full_name
+# @!attribute [rw] fullName
 #   @return [String, nil]
 #
 # @!attribute [rw] ispb
@@ -53,7 +53,7 @@ BankLoadMatch = Struct.new(
 #   @return [String, nil]
 BankListMatch = Struct.new(
   :code,
-  :full_name,
+  :fullName,
   :ispb,
   :name,
   keyword_init: true
@@ -61,34 +61,14 @@ BankListMatch = Struct.new(
 
 # Cep entity data model.
 #
-# @!attribute [rw] cep
-#   @return [String, nil]
-#
-# @!attribute [rw] city
-#   @return [String, nil]
-#
-# @!attribute [rw] location
+# @!attribute [rw] coordinates
 #   @return [Hash, nil]
 #
-# @!attribute [rw] neighborhood
-#   @return [String, nil]
-#
-# @!attribute [rw] service
-#   @return [String, nil]
-#
-# @!attribute [rw] state
-#   @return [String, nil]
-#
-# @!attribute [rw] street
+# @!attribute [rw] type
 #   @return [String, nil]
 Cep = Struct.new(
-  :cep,
-  :city,
-  :location,
-  :neighborhood,
-  :service,
-  :state,
-  :street,
+  :coordinates,
+  :type,
   keyword_init: true
 )
 
@@ -189,13 +169,13 @@ CnpjLoadMatch = Struct.new(
 
 # Ddd entity data model.
 #
-# @!attribute [rw] city
+# @!attribute [rw] cities
 #   @return [Array, nil]
 #
 # @!attribute [rw] state
 #   @return [String, nil]
 Ddd = Struct.new(
-  :city,
+  :cities,
   :state,
   keyword_init: true
 )
@@ -259,10 +239,10 @@ FipeMarcaLoadMatch = Struct.new(
 
 # FipePreco entity data model.
 #
-# @!attribute [rw] ano_modelo
+# @!attribute [rw] anoModelo
 #   @return [Integer, nil]
 #
-# @!attribute [rw] codigo_fipe
+# @!attribute [rw] codigoFipe
 #   @return [String, nil]
 #
 # @!attribute [rw] combustivel
@@ -271,29 +251,29 @@ FipeMarcaLoadMatch = Struct.new(
 # @!attribute [rw] marca
 #   @return [String, nil]
 #
-# @!attribute [rw] mes_referencia
+# @!attribute [rw] mesReferencia
 #   @return [String, nil]
 #
 # @!attribute [rw] modelo
 #   @return [String, nil]
 #
-# @!attribute [rw] sigla_combustivel
+# @!attribute [rw] siglaCombustivel
 #   @return [String, nil]
 #
-# @!attribute [rw] tipo_veiculo
+# @!attribute [rw] tipoVeiculo
 #   @return [Integer, nil]
 #
 # @!attribute [rw] valor
 #   @return [String, nil]
 FipePreco = Struct.new(
-  :ano_modelo,
-  :codigo_fipe,
+  :anoModelo,
+  :codigoFipe,
   :combustivel,
   :marca,
-  :mes_referencia,
+  :mesReferencia,
   :modelo,
-  :sigla_combustivel,
-  :tipo_veiculo,
+  :siglaCombustivel,
+  :tipoVeiculo,
   :valor,
   keyword_init: true
 )
@@ -350,6 +330,15 @@ Ufn = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Ufn#load.
+#
+# @!attribute [rw] sigla_uf
+#   @return [String]
+UfnLoadMatch = Struct.new(
+  :sigla_uf,
+  keyword_init: true
+)
+
 # Request payload for Ufn#list.
 #
 # @!attribute [rw] id
@@ -368,36 +357,6 @@ UfnListMatch = Struct.new(
   :nome,
   :regiao,
   :sigla,
-  keyword_init: true
-)
-
-# Ufn2 entity data model.
-#
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] nome
-#   @return [String, nil]
-#
-# @!attribute [rw] regiao
-#   @return [Hash, nil]
-#
-# @!attribute [rw] sigla
-#   @return [String, nil]
-Ufn2 = Struct.new(
-  :id,
-  :nome,
-  :regiao,
-  :sigla,
-  keyword_init: true
-)
-
-# Request payload for Ufn2#load.
-#
-# @!attribute [rw] sigla_uf
-#   @return [String]
-Ufn2LoadMatch = Struct.new(
-  :sigla_uf,
   keyword_init: true
 )
 

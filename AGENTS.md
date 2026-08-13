@@ -31,7 +31,7 @@ Each feature is generated into every SDK target — as a directory
 `<lang>/src/feature/<name>/` (ts/js) or a flat file in the `<lang>/feature/`
 package (other languages). Each target's guide documents its features.
 
-**Entities** (10): `Bank`, `Cep`, `Cnpj`, `Ddd`, `Feriado`, `FipeMarca`, `FipePreco`, `Municipio`, `Ufn`, `Ufn2`.
+**Entities** (9): `Bank`, `Cep`, `Cnpj`, `Ddd`, `Feriado`, `FipeMarca`, `FipePreco`, `Municipio`, `Ufn`.
 
 ## Generating and updating the SDK
 

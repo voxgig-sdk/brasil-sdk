@@ -27,7 +27,6 @@ func MakeConfig() map[string]any {
 				"fipe_preco": map[string]any{},
 				"municipio": map[string]any{},
 				"ufn": map[string]any{},
-				"ufn2": map[string]any{},
 			},
 		},
 		"entity": map[string]any{
@@ -42,7 +41,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "full_name",
+						"name": "fullName",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -71,6 +70,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/banks/v1",
 								"parts": []any{
@@ -87,7 +87,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -109,6 +108,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/banks/v1/{code}",
 								"parts": []any{
@@ -128,7 +128,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -143,52 +142,17 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "cep",
+						"name": "coordinates",
 						"req": false,
-						"type": "`$STRING`",
+						"type": "`$OBJECT`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "city",
+						"name": "type",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "location",
-						"req": false,
-						"type": "`$OBJECT`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "neighborhood",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 3,
-					},
-					map[string]any{
-						"active": true,
-						"name": "service",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 4,
-					},
-					map[string]any{
-						"active": true,
-						"name": "state",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 5,
-					},
-					map[string]any{
-						"active": true,
-						"name": "street",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 6,
 					},
 				},
 				"name": "cep",
@@ -213,6 +177,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cep/v1/{cep}",
 								"parts": []any{
@@ -227,7 +192,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.location`",
 								},
 								"index$": 0,
 							},
@@ -247,6 +212,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cep/v2/{cep}",
 								"parts": []any{
@@ -261,12 +227,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.location`",
 								},
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -431,6 +396,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/cnpj/v1/{cnpj}",
 								"parts": []any{
@@ -450,7 +416,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -465,7 +430,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "city",
+						"name": "cities",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 0,
@@ -500,6 +465,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ddd/v1/{ddd}",
 								"parts": []any{
@@ -519,7 +485,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -576,6 +541,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/feriados/v1/{ano}",
 								"parts": []any{
@@ -595,7 +561,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -645,6 +610,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/fipe/marcas/v1/{tipoVeiculo}",
 								"parts": []any{
@@ -670,7 +636,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -685,14 +650,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "ano_modelo",
+						"name": "anoModelo",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "codigo_fipe",
+						"name": "codigoFipe",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -713,7 +678,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "mes_referencia",
+						"name": "mesReferencia",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
@@ -727,14 +692,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "sigla_combustivel",
+						"name": "siglaCombustivel",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 6,
 					},
 					map[string]any{
 						"active": true,
-						"name": "tipo_veiculo",
+						"name": "tipoVeiculo",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 7,
@@ -769,6 +734,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/fipe/preco/v1/{codigoFipe}",
 								"parts": []any{
@@ -794,7 +760,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -844,6 +809,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ibge/municipios/v1/{siglaUF}",
 								"parts": []any{
@@ -869,7 +835,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -920,6 +885,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ibge/uf/v1",
 								"parts": []any{
@@ -937,46 +903,7 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"ufn2": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"active": true,
-						"name": "id",
-						"req": false,
-						"type": "`$INTEGER`",
-						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "nome",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "regiao",
-						"req": false,
-						"type": "`$OBJECT`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "sigla",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 3,
-					},
-				},
-				"name": "ufn2",
-				"op": map[string]any{
 					"load": map[string]any{
 						"input": "data",
 						"name": "load",
@@ -997,6 +924,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ibge/uf/v1/{siglaUF}",
 								"parts": []any{
@@ -1017,12 +945,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.regiao`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

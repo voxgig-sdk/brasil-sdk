@@ -27,7 +27,6 @@ local function make_config()
         ["fipe_preco"] = {},
         ["municipio"] = {},
         ["ufn"] = {},
-        ["ufn2"] = {},
       },
     },
     entity = {
@@ -42,7 +41,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "full_name",
+            ["name"] = "fullName",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
@@ -71,6 +70,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/banks/v1",
                 ["parts"] = {
@@ -109,6 +109,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/banks/v1/{code}",
                 ["parts"] = {
@@ -143,52 +144,17 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "cep",
+            ["name"] = "coordinates",
             ["req"] = false,
-            ["type"] = "`$STRING`",
+            ["type"] = "`$OBJECT`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "city",
+            ["name"] = "type",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "location",
-            ["req"] = false,
-            ["type"] = "`$OBJECT`",
-            ["index$"] = 2,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "neighborhood",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 3,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "service",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 4,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "state",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 5,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "street",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
         },
         ["name"] = "cep",
@@ -213,6 +179,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cep/v1/{cep}",
                 ["parts"] = {
@@ -227,7 +194,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.location`",
                 },
                 ["index$"] = 0,
               },
@@ -247,6 +214,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cep/v2/{cep}",
                 ["parts"] = {
@@ -261,7 +229,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.location`",
                 },
                 ["index$"] = 1,
               },
@@ -431,6 +399,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cnpj/v1/{cnpj}",
                 ["parts"] = {
@@ -465,7 +434,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "city",
+            ["name"] = "cities",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -500,6 +469,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ddd/v1/{ddd}",
                 ["parts"] = {
@@ -576,6 +546,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/feriados/v1/{ano}",
                 ["parts"] = {
@@ -645,6 +616,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/fipe/marcas/v1/{tipoVeiculo}",
                 ["parts"] = {
@@ -685,14 +657,14 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "ano_modelo",
+            ["name"] = "anoModelo",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "codigo_fipe",
+            ["name"] = "codigoFipe",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
@@ -713,7 +685,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "mes_referencia",
+            ["name"] = "mesReferencia",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 4,
@@ -727,14 +699,14 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "sigla_combustivel",
+            ["name"] = "siglaCombustivel",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 6,
           },
           {
             ["active"] = true,
-            ["name"] = "tipo_veiculo",
+            ["name"] = "tipoVeiculo",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 7,
@@ -769,6 +741,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/fipe/preco/v1/{codigoFipe}",
                 ["parts"] = {
@@ -844,6 +817,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ibge/municipios/v1/{siglaUF}",
                 ["parts"] = {
@@ -920,6 +894,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ibge/uf/v1",
                 ["parts"] = {
@@ -939,44 +914,6 @@ local function make_config()
             },
             ["key$"] = "list",
           },
-        },
-        ["relations"] = {
-          ["ancestors"] = {},
-        },
-      },
-      ["ufn2"] = {
-        ["fields"] = {
-          {
-            ["active"] = true,
-            ["name"] = "id",
-            ["req"] = false,
-            ["type"] = "`$INTEGER`",
-            ["index$"] = 0,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "nome",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 1,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "regiao",
-            ["req"] = false,
-            ["type"] = "`$OBJECT`",
-            ["index$"] = 2,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "sigla",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 3,
-          },
-        },
-        ["name"] = "ufn2",
-        ["op"] = {
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
@@ -997,6 +934,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ibge/uf/v1/{siglaUF}",
                 ["parts"] = {
@@ -1017,7 +955,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.regiao`",
                 },
                 ["index$"] = 0,
               },

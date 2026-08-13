@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from brasil_sdk.utility.voxgig_struct import voxgig_struct as vs
 from brasil_sdk import BrasilSDK
-from core import helpers
+from brasil_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -42,7 +42,7 @@ class TestUfnEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from config import make_config
+        from brasil_sdk.config import make_config
         cfg = make_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = BrasilSDK.test(
@@ -61,7 +61,7 @@ class TestUfnEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list"]:
+        for _op in ["list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "ufn." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -87,6 +87,15 @@ class TestUfnEntity:
         ufn_ref01_list_result = ufn_ref01_ent.list(ufn_ref01_match, None)
         assert isinstance(ufn_ref01_list_result, list)
 
+        # LOAD
+        ufn_ref01_match_dt0 = {
+            "id": ufn_ref01_data["id"],
+        }
+        ufn_ref01_data_dt0_loaded = ufn_ref01_ent.load(ufn_ref01_match_dt0, None)
+        ufn_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(ufn_ref01_data_dt0_loaded))
+        assert ufn_ref01_data_dt0_load_result is not None
+        assert ufn_ref01_data_dt0_load_result["id"] == ufn_ref01_data["id"]
+
 
 
 def _ufn_basic_setup(extra):
@@ -105,7 +114,7 @@ def _ufn_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["ufn01", "ufn02", "ufn03"],
+        ["ufn01", "ufn02", "ufn03", "v101", "v102", "v103"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

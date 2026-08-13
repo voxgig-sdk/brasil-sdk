@@ -49,7 +49,6 @@ class ReadmeExamplesTest extends TestCase
         "FipePreco" => "fipe_preco",
         "Municipio" => "municipio",
         "Ufn" => "ufn",
-        "Ufn2" => "ufn2",
     ];
 
     // Documented SDK method names — used only to recognise the NARROW

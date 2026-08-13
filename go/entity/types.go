@@ -6,12 +6,16 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/brasil-sdk/go/core"
+)
 
 // Bank is the typed data model for the bank entity.
 type Bank struct {
 	Code *int `json:"code,omitempty"`
-	FullName *string `json:"full_name,omitempty"`
+	FullName *string `json:"fullName,omitempty"`
 	Ispb *string `json:"ispb,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
@@ -24,20 +28,15 @@ type BankLoadMatch struct {
 // BankListMatch is the typed request payload for Bank.ListTyped.
 type BankListMatch struct {
 	Code *int `json:"code,omitempty"`
-	FullName *string `json:"full_name,omitempty"`
+	FullName *string `json:"fullName,omitempty"`
 	Ispb *string `json:"ispb,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
 // Cep is the typed data model for the cep entity.
 type Cep struct {
-	Cep *string `json:"cep,omitempty"`
-	City *string `json:"city,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	Neighborhood *string `json:"neighborhood,omitempty"`
-	Service *string `json:"service,omitempty"`
-	State *string `json:"state,omitempty"`
-	Street *string `json:"street,omitempty"`
+	Coordinates *map[string]any `json:"coordinates,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 // CepLoadMatch is the typed request payload for Cep.LoadTyped.
@@ -74,7 +73,7 @@ type CnpjLoadMatch struct {
 
 // Ddd is the typed data model for the ddd entity.
 type Ddd struct {
-	City *[]any `json:"city,omitempty"`
+	Cities *[]any `json:"cities,omitempty"`
 	State *string `json:"state,omitempty"`
 }
 
@@ -108,14 +107,14 @@ type FipeMarcaLoadMatch struct {
 
 // FipePreco is the typed data model for the fipe_preco entity.
 type FipePreco struct {
-	AnoModelo *int `json:"ano_modelo,omitempty"`
-	CodigoFipe *string `json:"codigo_fipe,omitempty"`
+	AnoModelo *int `json:"anoModelo,omitempty"`
+	CodigoFipe *string `json:"codigoFipe,omitempty"`
 	Combustivel *string `json:"combustivel,omitempty"`
 	Marca *string `json:"marca,omitempty"`
-	MesReferencia *string `json:"mes_referencia,omitempty"`
+	MesReferencia *string `json:"mesReferencia,omitempty"`
 	Modelo *string `json:"modelo,omitempty"`
-	SiglaCombustivel *string `json:"sigla_combustivel,omitempty"`
-	TipoVeiculo *int `json:"tipo_veiculo,omitempty"`
+	SiglaCombustivel *string `json:"siglaCombustivel,omitempty"`
+	TipoVeiculo *int `json:"tipoVeiculo,omitempty"`
 	Valor *string `json:"valor,omitempty"`
 }
 
@@ -143,25 +142,17 @@ type Ufn struct {
 	Sigla *string `json:"sigla,omitempty"`
 }
 
+// UfnLoadMatch is the typed request payload for Ufn.LoadTyped.
+type UfnLoadMatch struct {
+	SiglaUf string `json:"sigla_uf"`
+}
+
 // UfnListMatch is the typed request payload for Ufn.ListTyped.
 type UfnListMatch struct {
 	Id *int `json:"id,omitempty"`
 	Nome *string `json:"nome,omitempty"`
 	Regiao *map[string]any `json:"regiao,omitempty"`
 	Sigla *string `json:"sigla,omitempty"`
-}
-
-// Ufn2 is the typed data model for the ufn2 entity.
-type Ufn2 struct {
-	Id *int `json:"id,omitempty"`
-	Nome *string `json:"nome,omitempty"`
-	Regiao *map[string]any `json:"regiao,omitempty"`
-	Sigla *string `json:"sigla,omitempty"`
-}
-
-// Ufn2LoadMatch is the typed request payload for Ufn2.LoadTyped.
-type Ufn2LoadMatch struct {
-	SiglaUf string `json:"sigla_uf"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the
@@ -176,12 +167,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -193,12 +198,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

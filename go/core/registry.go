@@ -24,5 +24,3 @@ var NewMunicipioEntityFunc func(client *BrasilSDK, entopts map[string]any) Brasi
 
 var NewUfnEntityFunc func(client *BrasilSDK, entopts map[string]any) BrasilEntity
 
-var NewUfn2EntityFunc func(client *BrasilSDK, entopts map[string]any) BrasilEntity
-

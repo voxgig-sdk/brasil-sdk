@@ -85,7 +85,6 @@ _ENTITIES = {
     "FipePreco": "fipe_preco",
     "Municipio": "municipio",
     "Ufn": "ufn",
-    "Ufn2": "ufn2",
 }
 
 # The three documents held to the gate, tagged by human label.

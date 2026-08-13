@@ -129,7 +129,7 @@ Both tools take the same argument object:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `entity` | string | One of the 10 supported entities (see below). |
+| `entity` | string | One of the 9 supported entities (see below). |
 | `query` | object | Optional match map. `{"id":N}` for load; omit or `{}` for list. |
 
 JSON schemas are emitted by the SDK from the `Args` struct's `json` /
@@ -151,9 +151,9 @@ JSON schemas are emitted by the SDK from the `Args` struct's `json` /
 
 ### Entities
 
-The 10 entities valid as the `entity` argument:
+The 9 entities valid as the `entity` argument:
 
-bank | cep | cnpj | ddd | feriado | fipe_marca | fipe_preco | municipio | ufn | ufn2
+bank | cep | cnpj | ddd | feriado | fipe_marca | fipe_preco | municipio | ufn
 
 ### Smoke test via HTTP (raw JSON-RPC)
 

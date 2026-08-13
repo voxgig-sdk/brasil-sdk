@@ -59,9 +59,6 @@ func init() {
 	core.NewUfnEntityFunc = func(client *core.BrasilSDK, entopts map[string]any) core.BrasilEntity {
 		return entity.NewUfnEntity(client, entopts)
 	}
-	core.NewUfn2EntityFunc = func(client *core.BrasilSDK, entopts map[string]any) core.BrasilEntity {
-		return entity.NewUfn2Entity(client, entopts)
-	}
 }
 
 // Constructor re-exports.

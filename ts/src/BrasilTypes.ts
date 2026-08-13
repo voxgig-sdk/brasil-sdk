@@ -7,7 +7,7 @@
 
 export interface Bank {
   code?: number
-  full_name?: string
+  fullName?: string
   ispb?: string
   name?: string
 }
@@ -18,19 +18,20 @@ export interface BankLoadMatch {
 
 export interface BankListMatch {
   code?: number
-  full_name?: string
+  fullName?: string
   ispb?: string
   name?: string
+
+  // Selects a custom action instead of the plain list:
+  //   'v1'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface Cep {
-  cep?: string
-  city?: string
-  location?: Record<string, any>
-  neighborhood?: string
-  service?: string
-  state?: string
-  street?: string
+  coordinates?: Record<string, any>
+  type?: string
 }
 
 export interface CepLoadMatch {
@@ -63,7 +64,7 @@ export interface CnpjLoadMatch {
 }
 
 export interface Ddd {
-  city?: any[]
+  cities?: any[]
   state?: string
 }
 
@@ -91,14 +92,14 @@ export interface FipeMarcaLoadMatch {
 }
 
 export interface FipePreco {
-  ano_modelo?: number
-  codigo_fipe?: string
+  anoModelo?: number
+  codigoFipe?: string
   combustivel?: string
   marca?: string
-  mes_referencia?: string
+  mesReferencia?: string
   modelo?: string
-  sigla_combustivel?: string
-  tipo_veiculo?: number
+  siglaCombustivel?: string
+  tipoVeiculo?: number
   valor?: string
 }
 
@@ -122,21 +123,20 @@ export interface Ufn {
   sigla?: string
 }
 
+export interface UfnLoadMatch {
+  sigla_uf: string
+}
+
 export interface UfnListMatch {
   id?: number
   nome?: string
   regiao?: Record<string, any>
   sigla?: string
-}
 
-export interface Ufn2 {
-  id?: number
-  nome?: string
-  regiao?: Record<string, any>
-  sigla?: string
-}
-
-export interface Ufn2LoadMatch {
-  sigla_uf: string
+  // Selects a custom action instead of the plain list:
+  //   'v1'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 

@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ BrasilUtility::setRegistrar(function (BrasilUtility $u): void {
     $u->prepare_params = [BrasilPrepareParams::class, 'call'];
     $u->prepare_path = [BrasilPreparePath::class, 'call'];
     $u->prepare_query = [BrasilPrepareQuery::class, 'call'];
+    $u->graphql_body = [BrasilGraphql::class, 'body'];
+    $u->graphql_errors = [BrasilGraphql::class, 'errors'];
     $u->result_basic = [BrasilResultBasic::class, 'call'];
     $u->result_body = [BrasilResultBody::class, 'call'];
     $u->result_headers = [BrasilResultHeaders::class, 'call'];

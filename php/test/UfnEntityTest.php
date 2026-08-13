@@ -62,7 +62,7 @@ class UfnEntityTest extends TestCase
         $setup = ufn_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list"] as $_op) {
+        foreach (["list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "ufn." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -92,6 +92,15 @@ class UfnEntityTest extends TestCase
         $ufn_ref01_list_result = $ufn_ref01_ent->list($ufn_ref01_match, null);
         $this->assertIsArray($ufn_ref01_list_result);
 
+        // LOAD
+        $ufn_ref01_match_dt0 = [
+            "id" => $ufn_ref01_data["id"],
+        ];
+        $ufn_ref01_data_dt0_loaded = $ufn_ref01_ent->load($ufn_ref01_match_dt0, null);
+        $ufn_ref01_data_dt0_load_result = Helpers::to_map(is_object($ufn_ref01_data_dt0_loaded) && method_exists($ufn_ref01_data_dt0_loaded, 'data_get') ? $ufn_ref01_data_dt0_loaded->data_get() : $ufn_ref01_data_dt0_loaded);
+        $this->assertNotNull($ufn_ref01_data_dt0_load_result);
+        $this->assertEquals($ufn_ref01_data_dt0_load_result["id"], $ufn_ref01_data["id"]);
+
     }
 }
 
@@ -110,7 +119,7 @@ function ufn_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["ufn01", "ufn02", "ufn03"] as $k) {
+    foreach (["ufn01", "ufn02", "ufn03", "v101", "v102", "v103"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

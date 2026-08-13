@@ -50,7 +50,7 @@ Bank is nested under code, so provide the `code`.
 
 ```ruby
 begin
-  # load returns the bare Bank record (raises on error).
+  # load returns the ENTITY — call data_get for the Bank record (raises on error).
   bank = client.Bank.load({ "code" => "example_code" })
   puts bank
 rescue => err
@@ -133,7 +133,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = BrasilSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 bank = client.Bank.list()
 puts bank
 ```
@@ -220,7 +221,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `FipePreco` | `(data) -> FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data) -> MunicipioEntity` | Create a Municipio entity instance. |
 | `Ufn` | `(data) -> UfnEntity` | Create an Ufn entity instance. |
-| `Ufn2` | `(data) -> Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -261,7 +261,7 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `code` |  |
-| `full_name` |  |
+| `fullName` |  |
 | `ispb` |  |
 | `name` |  |
 
@@ -273,13 +273,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `cep` |  |
-| `city` |  |
-| `location` |  |
-| `neighborhood` |  |
-| `service` |  |
-| `state` |  |
-| `street` |  |
+| `coordinates` |  |
+| `type` |  |
 
 Operations: Load.
 
@@ -316,7 +311,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `state` |  |
 
 Operations: Load.
@@ -350,14 +345,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `ano_modelo` |  |
-| `codigo_fipe` |  |
+| `anoModelo` |  |
+| `codigoFipe` |  |
 | `combustivel` |  |
 | `marca` |  |
-| `mes_referencia` |  |
+| `mesReferencia` |  |
 | `modelo` |  |
-| `sigla_combustivel` |  |
-| `tipo_veiculo` |  |
+| `siglaCombustivel` |  |
+| `tipoVeiculo` |  |
 | `valor` |  |
 
 Operations: Load.
@@ -384,22 +379,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `regiao` |  |
 | `sigla` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `id` |  |
-| `nome` |  |
-| `regiao` |  |
-| `sigla` |  |
-
-Operations: Load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -422,14 +404,14 @@ Create an instance: `bank = client.Bank`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `Integer` |  |
-| `full_name` | `String` |  |
+| `fullName` | `String` |  |
 | `ispb` | `String` |  |
 | `name` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Bank record (raises on error).
+# load returns the ENTITY — call data_get for the Bank record (raises on error).
 bank = client.Bank.load({ "code" => "code" })
 ```
 
@@ -455,18 +437,13 @@ Create an instance: `cep = client.Cep`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `String` |  |
-| `city` | `String` |  |
-| `location` | `Hash` |  |
-| `neighborhood` | `String` |  |
-| `service` | `String` |  |
-| `state` | `String` |  |
-| `street` | `String` |  |
+| `coordinates` | `Hash` |  |
+| `type` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Cep record (raises on error).
+# load returns the ENTITY — call data_get for the Cep record (raises on error).
 cep = client.Cep.load({ "cep" => "cep" })
 ```
 
@@ -507,7 +484,7 @@ Create an instance: `cnpj = client.Cnpj`
 #### Example: Load
 
 ```ruby
-# load returns the bare Cnpj record (raises on error).
+# load returns the ENTITY — call data_get for the Cnpj record (raises on error).
 cnpj = client.Cnpj.load({ "cnpj" => "cnpj" })
 ```
 
@@ -526,13 +503,13 @@ Create an instance: `ddd = client.Ddd`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `Array` |  |
+| `cities` | `Array` |  |
 | `state` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Ddd record (raises on error).
+# load returns the ENTITY — call data_get for the Ddd record (raises on error).
 ddd = client.Ddd.load({ "ddd" => "ddd" })
 ```
 
@@ -558,7 +535,7 @@ Create an instance: `feriado = client.Feriado`
 #### Example: Load
 
 ```ruby
-# load returns the bare Feriado record (raises on error).
+# load returns the ENTITY — call data_get for the Feriado record (raises on error).
 feriado = client.Feriado.load({ "ano" => 1 })
 ```
 
@@ -583,7 +560,7 @@ Create an instance: `fipe_marca = client.FipeMarca`
 #### Example: Load
 
 ```ruby
-# load returns the bare FipeMarca record (raises on error).
+# load returns the ENTITY — call data_get for the FipeMarca record (raises on error).
 fipe_marca = client.FipeMarca.load({ "tipo_veiculo" => "tipo_veiculo" })
 ```
 
@@ -602,20 +579,20 @@ Create an instance: `fipe_preco = client.FipePreco`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `Integer` |  |
-| `codigo_fipe` | `String` |  |
+| `anoModelo` | `Integer` |  |
+| `codigoFipe` | `String` |  |
 | `combustivel` | `String` |  |
 | `marca` | `String` |  |
-| `mes_referencia` | `String` |  |
+| `mesReferencia` | `String` |  |
 | `modelo` | `String` |  |
-| `sigla_combustivel` | `String` |  |
-| `tipo_veiculo` | `Integer` |  |
+| `siglaCombustivel` | `String` |  |
+| `tipoVeiculo` | `Integer` |  |
 | `valor` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare FipePreco record (raises on error).
+# load returns the ENTITY — call data_get for the FipePreco record (raises on error).
 fipe_preco = client.FipePreco.load({ "codigo_fipe" => "codigo_fipe" })
 ```
 
@@ -640,7 +617,7 @@ Create an instance: `municipio = client.Municipio`
 #### Example: Load
 
 ```ruby
-# load returns the bare Municipio record (raises on error).
+# load returns the ENTITY — call data_get for the Municipio record (raises on error).
 municipio = client.Municipio.load({ "sigla_uf" => "sigla_uf" })
 ```
 
@@ -654,32 +631,6 @@ Create an instance: `ufn = client.Ufn`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `Integer` |  |
-| `nome` | `String` |  |
-| `regiao` | `Hash` |  |
-| `sigla` | `String` |  |
-
-#### Example: List
-
-```ruby
-# list returns an Array of Ufn records (raises on error).
-ufns = client.Ufn.list
-```
-
-
-### Ufn2
-
-Create an instance: `ufn2 = client.Ufn2`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -694,8 +645,15 @@ Create an instance: `ufn2 = client.Ufn2`
 #### Example: Load
 
 ```ruby
-# load returns the bare Ufn2 record (raises on error).
-ufn2 = client.Ufn2.load({ "sigla_uf" => "sigla_uf" })
+# load returns the ENTITY — call data_get for the Ufn record (raises on error).
+ufn = client.Ufn.load({ "sigla_uf" => "sigla_uf" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Ufn records (raises on error).
+ufns = client.Ufn.list
 ```
 
 

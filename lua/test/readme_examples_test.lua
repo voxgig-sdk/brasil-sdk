@@ -20,7 +20,7 @@ local SDK_MODULE = "brasil_sdk"
 -- A test-mode client seeded with a fixture for every entity. The constructor
 -- of each runnable snippet is rewritten to this form so the offline mock has
 -- data to return.
-local TEST_SEED = '{ entity = { ["bank"] = { ["test01"] = { id = "test01" } }, ["cep"] = { ["test01"] = { id = "test01" } }, ["cnpj"] = { ["test01"] = { id = "test01" } }, ["ddd"] = { ["test01"] = { id = "test01" } }, ["feriado"] = { ["test01"] = { id = "test01" } }, ["fipe_marca"] = { ["test01"] = { id = "test01" } }, ["fipe_preco"] = { ["test01"] = { id = "test01" } }, ["municipio"] = { ["test01"] = { id = "test01" } }, ["ufn"] = { ["test01"] = { id = "test01" } }, ["ufn2"] = { ["test01"] = { id = "test01" } } } }'
+local TEST_SEED = '{ entity = { ["bank"] = { ["test01"] = { id = "test01" } }, ["cep"] = { ["test01"] = { id = "test01" } }, ["cnpj"] = { ["test01"] = { id = "test01" } }, ["ddd"] = { ["test01"] = { id = "test01" } }, ["feriado"] = { ["test01"] = { id = "test01" } }, ["fipe_marca"] = { ["test01"] = { id = "test01" } }, ["fipe_preco"] = { ["test01"] = { id = "test01" } }, ["municipio"] = { ["test01"] = { id = "test01" } }, ["ufn"] = { ["test01"] = { id = "test01" } } } }'
 local TEST_CTOR = "sdk.test(" .. TEST_SEED .. ")"
 
 local function script_dir()

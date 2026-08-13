@@ -43,7 +43,7 @@ local banks, err = client:Bank():list()
 if err then error(err) end
 
 for _, item in ipairs(banks) do
-  print(item["full_name"])
+  print(item["fullName"])
 end
 ```
 
@@ -210,7 +210,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `FipePreco` | `(data) -> FipePrecoEntity` | Create a FipePreco entity instance. |
 | `Municipio` | `(data) -> MunicipioEntity` | Create a Municipio entity instance. |
 | `Ufn` | `(data) -> UfnEntity` | Create an Ufn entity instance. |
-| `Ufn2` | `(data) -> Ufn2Entity` | Create an Ufn2 entity instance. |
 
 ### Entity interface
 
@@ -253,7 +252,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `code` |  |
-| `full_name` |  |
+| `fullName` |  |
 | `ispb` |  |
 | `name` |  |
 
@@ -265,13 +264,8 @@ API path: `/banks/v1`
 
 | Field | Description |
 | --- | --- |
-| `cep` |  |
-| `city` |  |
-| `location` |  |
-| `neighborhood` |  |
-| `service` |  |
-| `state` |  |
-| `street` |  |
+| `coordinates` |  |
+| `type` |  |
 
 Operations: Load.
 
@@ -308,7 +302,7 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `city` |  |
+| `cities` |  |
 | `state` |  |
 
 Operations: Load.
@@ -342,14 +336,14 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `ano_modelo` |  |
-| `codigo_fipe` |  |
+| `anoModelo` |  |
+| `codigoFipe` |  |
 | `combustivel` |  |
 | `marca` |  |
-| `mes_referencia` |  |
+| `mesReferencia` |  |
 | `modelo` |  |
-| `sigla_combustivel` |  |
-| `tipo_veiculo` |  |
+| `siglaCombustivel` |  |
+| `tipoVeiculo` |  |
 | `valor` |  |
 
 Operations: Load.
@@ -376,22 +370,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 | `regiao` |  |
 | `sigla` |  |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/ibge/uf/v1`
-
-#### Ufn2
-
-| Field | Description |
-| --- | --- |
-| `id` |  |
-| `nome` |  |
-| `regiao` |  |
-| `sigla` |  |
-
-Operations: Load.
-
-API path: `/ibge/uf/v1/{siglaUF}`
 
 
 
@@ -414,7 +395,7 @@ Create an instance: `local bank = client:Bank(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `code` | `number` |  |
-| `full_name` | `string` |  |
+| `fullName` | `string` |  |
 | `ispb` | `string` |  |
 | `name` | `string` |  |
 
@@ -445,13 +426,8 @@ Create an instance: `local cep = client:Cep(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cep` | `string` |  |
-| `city` | `string` |  |
-| `location` | `table` |  |
-| `neighborhood` | `string` |  |
-| `service` | `string` |  |
-| `state` | `string` |  |
-| `street` | `string` |  |
+| `coordinates` | `table` |  |
+| `type` | `string` |  |
 
 #### Example: Load
 
@@ -514,7 +490,7 @@ Create an instance: `local ddd = client:Ddd(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `city` | `table` |  |
+| `cities` | `table` |  |
 | `state` | `string` |  |
 
 #### Example: Load
@@ -587,14 +563,14 @@ Create an instance: `local fipe_preco = client:FipePreco(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `ano_modelo` | `number` |  |
-| `codigo_fipe` | `string` |  |
+| `anoModelo` | `number` |  |
+| `codigoFipe` | `string` |  |
 | `combustivel` | `string` |  |
 | `marca` | `string` |  |
-| `mes_referencia` | `string` |  |
+| `mesReferencia` | `string` |  |
 | `modelo` | `string` |  |
-| `sigla_combustivel` | `string` |  |
-| `tipo_veiculo` | `number` |  |
+| `siglaCombustivel` | `string` |  |
+| `tipoVeiculo` | `number` |  |
 | `valor` | `string` |  |
 
 #### Example: Load
@@ -637,31 +613,6 @@ Create an instance: `local ufn = client:Ufn(nil)`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `number` |  |
-| `nome` | `string` |  |
-| `regiao` | `table` |  |
-| `sigla` | `string` |  |
-
-#### Example: List
-
-```lua
-local ufns, err = client:Ufn():list()
-```
-
-
-### Ufn2
-
-Create an instance: `local ufn2 = client:Ufn2(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
@@ -676,7 +627,13 @@ Create an instance: `local ufn2 = client:Ufn2(nil)`
 #### Example: Load
 
 ```lua
-local ufn2, err = client:Ufn2():load({ sigla_uf = "sigla_uf" })
+local ufn, err = client:Ufn():load({ sigla_uf = "sigla_uf" })
+```
+
+#### Example: List
+
+```lua
+local ufns, err = client:Ufn():list()
 ```
 
 

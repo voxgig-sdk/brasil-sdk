@@ -16,7 +16,7 @@ declare(strict_types=1);
 class Bank
 {
     public ?int $code = null;
-    public ?string $full_name = null;
+    public ?string $fullName = null;
     public ?string $ispb = null;
     public ?string $name = null;
 }
@@ -31,7 +31,7 @@ class BankLoadMatch
 class BankListMatch
 {
     public ?int $code = null;
-    public ?string $full_name = null;
+    public ?string $fullName = null;
     public ?string $ispb = null;
     public ?string $name = null;
 }
@@ -39,13 +39,8 @@ class BankListMatch
 /** Cep entity data model. */
 class Cep
 {
-    public ?string $cep = null;
-    public ?string $city = null;
-    public ?array $location = null;
-    public ?string $neighborhood = null;
-    public ?string $service = null;
-    public ?string $state = null;
-    public ?string $street = null;
+    public ?array $coordinates = null;
+    public ?string $type = null;
 }
 
 /** Request payload for Cep#load. */
@@ -86,7 +81,7 @@ class CnpjLoadMatch
 /** Ddd entity data model. */
 class Ddd
 {
-    public ?array $city = null;
+    public ?array $cities = null;
     public ?string $state = null;
 }
 
@@ -126,14 +121,14 @@ class FipeMarcaLoadMatch
 /** FipePreco entity data model. */
 class FipePreco
 {
-    public ?int $ano_modelo = null;
-    public ?string $codigo_fipe = null;
+    public ?int $anoModelo = null;
+    public ?string $codigoFipe = null;
     public ?string $combustivel = null;
     public ?string $marca = null;
-    public ?string $mes_referencia = null;
+    public ?string $mesReferencia = null;
     public ?string $modelo = null;
-    public ?string $sigla_combustivel = null;
-    public ?int $tipo_veiculo = null;
+    public ?string $siglaCombustivel = null;
+    public ?int $tipoVeiculo = null;
     public ?string $valor = null;
 }
 
@@ -165,6 +160,12 @@ class Ufn
     public ?string $sigla = null;
 }
 
+/** Request payload for Ufn#load. */
+class UfnLoadMatch
+{
+    public string $sigla_uf;
+}
+
 /** Request payload for Ufn#list. */
 class UfnListMatch
 {
@@ -172,20 +173,5 @@ class UfnListMatch
     public ?string $nome = null;
     public ?array $regiao = null;
     public ?string $sigla = null;
-}
-
-/** Ufn2 entity data model. */
-class Ufn2
-{
-    public ?int $id = null;
-    public ?string $nome = null;
-    public ?array $regiao = null;
-    public ?string $sigla = null;
-}
-
-/** Request payload for Ufn2#load. */
-class Ufn2LoadMatch
-{
-    public string $sigla_uf;
 }
 

@@ -55,6 +55,55 @@ main: kit: entity: ufn: {
         }
       ]
     }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "SP"
+                kind: "param"
+                name: "sigla_uf"
+                orig: "sigla_uf"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ibge/uf/v1/{siglaUF}"
+          parts: [
+            "ibge"
+            "uf"
+            "v1"
+            "{sigla_uf}"
+          ]
+          rename: {
+            param: {
+              siglaUF: "sigla_uf"
+            }
+          }
+          select: {
+            exist: [
+              "sigla_uf"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.regiao`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
   }
 
 
