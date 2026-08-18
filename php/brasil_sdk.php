@@ -40,7 +40,7 @@ class BrasilSDK
         $utility = new BrasilUtility();
         $this->_utility = $utility;
 
-        $config = BrasilConfig::make_config();
+        $config = BrasilConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

@@ -1,7 +1,30 @@
 # Brasil SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "Brasil",
@@ -34,32 +57,20 @@ def make_config():
       "bank": {
         "fields": [
           {
-            "active": True,
             "name": "code",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "fullName",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "ispb",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
         ],
         "name": "bank",
@@ -69,7 +80,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -85,28 +95,23 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "001",
                       "kind": "param",
                       "name": "code",
                       "orig": "code",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -127,10 +132,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -144,18 +147,12 @@ def make_config():
       "cep": {
         "fields": [
           {
-            "active": True,
             "name": "coordinates",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "type",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
         ],
         "name": "cep",
@@ -165,18 +162,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "01310100",
                       "kind": "param",
                       "name": "cep",
                       "orig": "cep",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -197,21 +191,17 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.location`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "01310100",
                       "kind": "param",
                       "name": "cep",
                       "orig": "cep",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -232,10 +222,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.location`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -252,130 +240,76 @@ def make_config():
       "cnpj": {
         "fields": [
           {
-            "active": True,
             "name": "bairro",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "capital_social",
-            "req": False,
             "type": "`$NUMBER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "cep",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "cnae_fiscal",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "cnae_fiscal_descricao",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "cnpj",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "complemento",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "data_inicio_atividade",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "ddd_telefone_1",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "logradouro",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "municipio",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "natureza_juridica",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "nome_fantasia",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "numero",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 13,
           },
           {
-            "active": True,
             "name": "porte",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 14,
           },
           {
-            "active": True,
             "name": "qsa",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 15,
           },
           {
-            "active": True,
             "name": "razao_social",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 16,
           },
           {
-            "active": True,
             "name": "uf",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 17,
           },
         ],
         "name": "cnpj",
@@ -385,18 +319,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "00000000000191",
                       "kind": "param",
                       "name": "cnpj",
                       "orig": "cnpj",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -417,10 +348,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -434,18 +363,12 @@ def make_config():
       "ddd": {
         "fields": [
           {
-            "active": True,
             "name": "cities",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "state",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
         ],
         "name": "ddd",
@@ -455,18 +378,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "11",
                       "kind": "param",
                       "name": "ddd",
                       "orig": "ddd",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -487,10 +407,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -504,25 +422,16 @@ def make_config():
       "feriado": {
         "fields": [
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "type",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
         ],
         "name": "feriado",
@@ -532,18 +441,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": 2024,
                       "kind": "param",
                       "name": "ano",
                       "orig": "ano",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -564,10 +470,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -581,18 +485,12 @@ def make_config():
       "fipe_marca": {
         "fields": [
           {
-            "active": True,
             "name": "nome",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "valor",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
         ],
         "name": "fipe_marca",
@@ -602,18 +500,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "carros",
                       "kind": "param",
                       "name": "tipo_veiculo",
                       "orig": "tipo_veiculo",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -640,10 +535,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -657,67 +550,40 @@ def make_config():
       "fipe_preco": {
         "fields": [
           {
-            "active": True,
             "name": "anoModelo",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "codigoFipe",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "combustivel",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "marca",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "mesReferencia",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "modelo",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "siglaCombustivel",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "tipoVeiculo",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "valor",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 8,
           },
         ],
         "name": "fipe_preco",
@@ -727,18 +593,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "001004-1",
                       "kind": "param",
                       "name": "codigo_fipe",
                       "orig": "codigo_fipe",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -765,10 +628,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -782,18 +643,12 @@ def make_config():
       "municipio": {
         "fields": [
           {
-            "active": True,
             "name": "codigo_ibge",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "nome",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
         ],
         "name": "municipio",
@@ -803,18 +658,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "SP",
                       "kind": "param",
                       "name": "sigla_uf",
                       "orig": "sigla_uf",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -841,10 +693,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -858,32 +708,20 @@ def make_config():
       "ufn": {
         "fields": [
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "nome",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "regiao",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "sigla",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
         ],
         "name": "ufn",
@@ -893,7 +731,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -910,28 +747,23 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "SP",
                       "kind": "param",
                       "name": "sigla_uf",
                       "orig": "sigla_uf",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -958,10 +790,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.regiao`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

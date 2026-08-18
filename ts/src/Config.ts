@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://brasilapi.com.br/api',
+    base: "https://brasilapi.com.br/api",
 
     headers: {
       "content-type": "application/json"
@@ -79,32 +79,20 @@ class Config {
     "bank": {
       "fields": [
         {
-          "active": true,
           "name": "code",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "fullName",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "ispb",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         }
       ],
       "name": "bank",
@@ -114,7 +102,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -129,29 +116,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "001",
                     "kind": "param",
                     "name": "code",
                     "orig": "code",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -171,11 +153,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -189,18 +169,12 @@ class Config {
     "cep": {
       "fields": [
         {
-          "active": true,
           "name": "coordinates",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "type",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "cep",
@@ -210,18 +184,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "01310100",
                     "kind": "param",
                     "name": "cep",
                     "orig": "cep",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -241,22 +212,18 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.location`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "01310100",
                     "kind": "param",
                     "name": "cep",
                     "orig": "cep",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -276,11 +243,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.location`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -297,130 +262,76 @@ class Config {
     "cnpj": {
       "fields": [
         {
-          "active": true,
           "name": "bairro",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "capital_social",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 1
+          "type": "`$NUMBER`"
         },
         {
-          "active": true,
           "name": "cep",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "cnae_fiscal",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "cnae_fiscal_descricao",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "cnpj",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "complemento",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "data_inicio_atividade",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 7
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "ddd_telefone_1",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "logradouro",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 9
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "municipio",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 10
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "natureza_juridica",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 11
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "nome_fantasia",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 12
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "numero",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 13
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "porte",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 14
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "qsa",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 15
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "razao_social",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 16
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "uf",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 17
+          "type": "`$STRING`"
         }
       ],
       "name": "cnpj",
@@ -430,18 +341,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "00000000000191",
                     "kind": "param",
                     "name": "cnpj",
                     "orig": "cnpj",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -461,11 +369,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -479,18 +385,12 @@ class Config {
     "ddd": {
       "fields": [
         {
-          "active": true,
           "name": "cities",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 0
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "state",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "ddd",
@@ -500,18 +400,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "11",
                     "kind": "param",
                     "name": "ddd",
                     "orig": "ddd",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -531,11 +428,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -549,25 +444,16 @@ class Config {
     "feriado": {
       "fields": [
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "type",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         }
       ],
       "name": "feriado",
@@ -577,18 +463,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": 2024,
                     "kind": "param",
                     "name": "ano",
                     "orig": "ano",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -608,11 +491,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -626,18 +507,12 @@ class Config {
     "fipe_marca": {
       "fields": [
         {
-          "active": true,
           "name": "nome",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "valor",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "fipe_marca",
@@ -647,18 +522,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "carros",
                     "kind": "param",
                     "name": "tipo_veiculo",
                     "orig": "tipo_veiculo",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -684,11 +556,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -702,67 +572,40 @@ class Config {
     "fipe_preco": {
       "fields": [
         {
-          "active": true,
           "name": "anoModelo",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "codigoFipe",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "combustivel",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "marca",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "mesReferencia",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "modelo",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "siglaCombustivel",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "tipoVeiculo",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "valor",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "type": "`$STRING`"
         }
       ],
       "name": "fipe_preco",
@@ -772,18 +615,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "001004-1",
                     "kind": "param",
                     "name": "codigo_fipe",
                     "orig": "codigo_fipe",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -809,11 +649,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -827,18 +665,12 @@ class Config {
     "municipio": {
       "fields": [
         {
-          "active": true,
           "name": "codigo_ibge",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "nome",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "municipio",
@@ -848,18 +680,15 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "SP",
                     "kind": "param",
                     "name": "sigla_uf",
                     "orig": "sigla_uf",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -885,11 +714,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -903,32 +730,20 @@ class Config {
     "ufn": {
       "fields": [
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "nome",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "regiao",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "sigla",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         }
       ],
       "name": "ufn",
@@ -938,7 +753,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -954,29 +768,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "SP",
                     "kind": "param",
                     "name": "sigla_uf",
                     "orig": "sigla_uf",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -1002,11 +811,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.regiao`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

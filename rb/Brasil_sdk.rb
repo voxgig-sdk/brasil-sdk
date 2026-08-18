@@ -28,7 +28,7 @@ class BrasilSDK
     utility = BrasilUtility.new
     @_utility = utility
 
-    config = BrasilConfig.make_config
+    config = BrasilConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

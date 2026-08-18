@@ -1,5 +1,8 @@
 -- Brasil SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -33,32 +36,20 @@ local function make_config()
       ["bank"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "code",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "fullName",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "ispb",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
         },
         ["name"] = "bank",
@@ -68,7 +59,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -84,28 +74,23 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "001",
                       ["kind"] = "param",
                       ["name"] = "code",
                       ["orig"] = "code",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -126,10 +111,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -143,18 +126,12 @@ local function make_config()
       ["cep"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "coordinates",
-            ["req"] = false,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "type",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
         },
         ["name"] = "cep",
@@ -164,18 +141,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "01310100",
                       ["kind"] = "param",
                       ["name"] = "cep",
                       ["orig"] = "cep",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -196,21 +170,17 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.location`",
                 },
-                ["index$"] = 0,
               },
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "01310100",
                       ["kind"] = "param",
                       ["name"] = "cep",
                       ["orig"] = "cep",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -231,10 +201,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.location`",
                 },
-                ["index$"] = 1,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -251,130 +219,76 @@ local function make_config()
       ["cnpj"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "bairro",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "capital_social",
-            ["req"] = false,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "cep",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "cnae_fiscal",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "cnae_fiscal_descricao",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "cnpj",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "complemento",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "data_inicio_atividade",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "ddd_telefone_1",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "logradouro",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "municipio",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "natureza_juridica",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "nome_fantasia",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "numero",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 13,
           },
           {
-            ["active"] = true,
             ["name"] = "porte",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 14,
           },
           {
-            ["active"] = true,
             ["name"] = "qsa",
-            ["req"] = false,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 15,
           },
           {
-            ["active"] = true,
             ["name"] = "razao_social",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 16,
           },
           {
-            ["active"] = true,
             ["name"] = "uf",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 17,
           },
         },
         ["name"] = "cnpj",
@@ -384,18 +298,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "00000000000191",
                       ["kind"] = "param",
                       ["name"] = "cnpj",
                       ["orig"] = "cnpj",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -416,10 +327,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -433,18 +342,12 @@ local function make_config()
       ["ddd"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "cities",
-            ["req"] = false,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "state",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
         },
         ["name"] = "ddd",
@@ -454,18 +357,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "11",
                       ["kind"] = "param",
                       ["name"] = "ddd",
                       ["orig"] = "ddd",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -486,10 +386,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -503,25 +401,16 @@ local function make_config()
       ["feriado"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "date",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "type",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
         },
         ["name"] = "feriado",
@@ -531,18 +420,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = 2024,
                       ["kind"] = "param",
                       ["name"] = "ano",
                       ["orig"] = "ano",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -563,10 +449,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -580,18 +464,12 @@ local function make_config()
       ["fipe_marca"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "nome",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "valor",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
         },
         ["name"] = "fipe_marca",
@@ -601,18 +479,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "carros",
                       ["kind"] = "param",
                       ["name"] = "tipo_veiculo",
                       ["orig"] = "tipo_veiculo",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -639,10 +514,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -656,67 +529,40 @@ local function make_config()
       ["fipe_preco"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "anoModelo",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "codigoFipe",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "combustivel",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "marca",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "mesReferencia",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "modelo",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "siglaCombustivel",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "tipoVeiculo",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "valor",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 8,
           },
         },
         ["name"] = "fipe_preco",
@@ -726,18 +572,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "001004-1",
                       ["kind"] = "param",
                       ["name"] = "codigo_fipe",
                       ["orig"] = "codigo_fipe",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -764,10 +607,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -781,18 +622,12 @@ local function make_config()
       ["municipio"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "codigo_ibge",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "nome",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
         },
         ["name"] = "municipio",
@@ -802,18 +637,15 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "SP",
                       ["kind"] = "param",
                       ["name"] = "sigla_uf",
                       ["orig"] = "sigla_uf",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -840,10 +672,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -857,32 +687,20 @@ local function make_config()
       ["ufn"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "id",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "nome",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "regiao",
-            ["req"] = false,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "sigla",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
         },
         ["name"] = "ufn",
@@ -892,7 +710,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -909,28 +726,23 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
           ["load"] = {
             ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "SP",
                       ["kind"] = "param",
                       ["name"] = "sigla_uf",
                       ["orig"] = "sigla_uf",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -957,10 +769,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.regiao`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {

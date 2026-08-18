@@ -15,7 +15,7 @@ require_relative "../Brasil_sdk"
 module BrasilFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = BrasilConfig.make_config["feature"]
+    f = BrasilConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
