@@ -1,0 +1,71 @@
+# Entity: ddd
+
+main: kit: entity: ddd: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "cities"
+      req: false
+      short: "Lista de cidades com este DDD"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "state"
+      req: false
+      short: "Sigla do estado"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "ddd"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "11"
+                kind: "param"
+                name: "ddd"
+                orig: "ddd"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ddd/v1/{ddd}"
+          parts: [
+            "ddd"
+            "v1"
+            "{ddd}"
+          ]
+          select: {
+            exist: [
+              "ddd"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

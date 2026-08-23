@@ -6,7 +6,7 @@ The Golang SDK for the Brasil API — an entity-oriented client using standard G
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Bank(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -277,10 +277,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"code"` |  |
-| `"fullName"` |  |
-| `"ispb"` |  |
-| `"name"` |  |
+| `"code"` | Código do banco |
+| `"fullName"` | Nome completo do banco |
+| `"ispb"` | Identificador único do banco |
+| `"name"` | Nome do banco |
 
 Operations: List, Load.
 
@@ -301,24 +301,24 @@ API path: `/cep/v1/{cep}`
 
 | Field | Description |
 | --- | --- |
-| `"bairro"` |  |
-| `"capital_social"` |  |
-| `"cep"` |  |
-| `"cnae_fiscal"` |  |
-| `"cnae_fiscal_descricao"` |  |
-| `"cnpj"` |  |
-| `"complemento"` |  |
-| `"data_inicio_atividade"` |  |
-| `"ddd_telefone_1"` |  |
-| `"logradouro"` |  |
-| `"municipio"` |  |
-| `"natureza_juridica"` |  |
-| `"nome_fantasia"` |  |
-| `"numero"` |  |
-| `"porte"` |  |
-| `"qsa"` |  |
-| `"razao_social"` |  |
-| `"uf"` |  |
+| `"bairro"` | Bairro |
+| `"capital_social"` | Capital social da empresa |
+| `"cep"` | CEP |
+| `"cnae_fiscal"` | CNAE fiscal principal |
+| `"cnae_fiscal_descricao"` | Descrição do CNAE fiscal |
+| `"cnpj"` | CNPJ consultado |
+| `"complemento"` | Complemento do endereço |
+| `"data_inicio_atividade"` | Data de início das atividades |
+| `"ddd_telefone_1"` | Telefone principal |
+| `"logradouro"` | Logradouro do endereço |
+| `"municipio"` | Município |
+| `"natureza_juridica"` | Código da natureza jurídica |
+| `"nome_fantasia"` | Nome fantasia da empresa |
+| `"numero"` | Número do endereço |
+| `"porte"` | Porte da empresa |
+| `"qsa"` | Quadro de sócios e administradores |
+| `"razao_social"` | Razão social da empresa |
+| `"uf"` | UF |
 
 Operations: Load.
 
@@ -328,8 +328,8 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `"cities"` |  |
-| `"state"` |  |
+| `"cities"` | Lista de cidades com este DDD |
+| `"state"` | Sigla do estado |
 
 Operations: Load.
 
@@ -339,9 +339,9 @@ API path: `/ddd/v1/{ddd}`
 
 | Field | Description |
 | --- | --- |
-| `"date"` |  |
-| `"name"` |  |
-| `"type"` |  |
+| `"date"` | Data do feriado |
+| `"name"` | Nome do feriado |
+| `"type"` | Tipo de feriado |
 
 Operations: Load.
 
@@ -351,8 +351,8 @@ API path: `/feriados/v1/{ano}`
 
 | Field | Description |
 | --- | --- |
-| `"nome"` |  |
-| `"valor"` |  |
+| `"nome"` | Nome da marca |
+| `"valor"` | Código da marca |
 
 Operations: Load.
 
@@ -362,15 +362,15 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `"anoModelo"` |  |
-| `"codigoFipe"` |  |
-| `"combustivel"` |  |
-| `"marca"` |  |
-| `"mesReferencia"` |  |
-| `"modelo"` |  |
-| `"siglaCombustivel"` |  |
-| `"tipoVeiculo"` |  |
-| `"valor"` |  |
+| `"anoModelo"` | Ano do modelo |
+| `"codigoFipe"` | Código FIPE |
+| `"combustivel"` | Tipo de combustível |
+| `"marca"` | Marca do veículo |
+| `"mesReferencia"` | Mês de referência da tabela |
+| `"modelo"` | Modelo do veículo |
+| `"siglaCombustivel"` | Sigla do combustível |
+| `"tipoVeiculo"` | Tipo do veículo |
+| `"valor"` | Valor do veículo |
 
 Operations: Load.
 
@@ -380,8 +380,8 @@ API path: `/fipe/preco/v1/{codigoFipe}`
 
 | Field | Description |
 | --- | --- |
-| `"codigo_ibge"` |  |
-| `"nome"` |  |
+| `"codigo_ibge"` | Código IBGE do município |
+| `"nome"` | Nome do município |
 
 Operations: Load.
 
@@ -391,10 +391,10 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
-| `"nome"` |  |
+| `"id"` | ID da UF |
+| `"nome"` | Nome da UF |
 | `"regiao"` |  |
-| `"sigla"` |  |
+| `"sigla"` | Sigla da UF |
 
 Operations: List, Load.
 
@@ -420,10 +420,10 @@ Create an instance: `bank := client.Bank(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `int` |  |
-| `fullName` | `string` |  |
-| `ispb` | `string` |  |
-| `name` | `string` |  |
+| `code` | `int` | Código do banco |
+| `fullName` | `string` | Nome completo do banco |
+| `ispb` | `string` | Identificador único do banco |
+| `name` | `string` | Nome do banco |
 
 #### Example: Load
 
@@ -488,24 +488,24 @@ Create an instance: `cnpj := client.Cnpj(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | `string` |  |
-| `capital_social` | `float64` |  |
-| `cep` | `string` |  |
-| `cnae_fiscal` | `int` |  |
-| `cnae_fiscal_descricao` | `string` |  |
-| `cnpj` | `string` |  |
-| `complemento` | `string` |  |
-| `data_inicio_atividade` | `string` |  |
-| `ddd_telefone_1` | `string` |  |
-| `logradouro` | `string` |  |
-| `municipio` | `string` |  |
-| `natureza_juridica` | `string` |  |
-| `nome_fantasia` | `string` |  |
-| `numero` | `string` |  |
-| `porte` | `string` |  |
-| `qsa` | `[]any` |  |
-| `razao_social` | `string` |  |
-| `uf` | `string` |  |
+| `bairro` | `string` | Bairro |
+| `capital_social` | `float64` | Capital social da empresa |
+| `cep` | `string` | CEP |
+| `cnae_fiscal` | `int` | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | `string` | Descrição do CNAE fiscal |
+| `cnpj` | `string` | CNPJ consultado |
+| `complemento` | `string` | Complemento do endereço |
+| `data_inicio_atividade` | `string` | Data de início das atividades |
+| `ddd_telefone_1` | `string` | Telefone principal |
+| `logradouro` | `string` | Logradouro do endereço |
+| `municipio` | `string` | Município |
+| `natureza_juridica` | `string` | Código da natureza jurídica |
+| `nome_fantasia` | `string` | Nome fantasia da empresa |
+| `numero` | `string` | Número do endereço |
+| `porte` | `string` | Porte da empresa |
+| `qsa` | `[]any` | Quadro de sócios e administradores |
+| `razao_social` | `string` | Razão social da empresa |
+| `uf` | `string` | UF |
 
 #### Example: Load
 
@@ -532,8 +532,8 @@ Create an instance: `ddd := client.Ddd(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cities` | `[]any` |  |
-| `state` | `string` |  |
+| `cities` | `[]any` | Lista de cidades com este DDD |
+| `state` | `string` | Sigla do estado |
 
 #### Example: Load
 
@@ -560,9 +560,9 @@ Create an instance: `feriado := client.Feriado(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | `string` |  |
-| `name` | `string` |  |
-| `type` | `string` |  |
+| `date` | `string` | Data do feriado |
+| `name` | `string` | Nome do feriado |
+| `type` | `string` | Tipo de feriado |
 
 #### Example: Load
 
@@ -589,8 +589,8 @@ Create an instance: `fipeMarca := client.FipeMarca(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | `string` |  |
-| `valor` | `string` |  |
+| `nome` | `string` | Nome da marca |
+| `valor` | `string` | Código da marca |
 
 #### Example: Load
 
@@ -617,15 +617,15 @@ Create an instance: `fipePreco := client.FipePreco(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `anoModelo` | `int` |  |
-| `codigoFipe` | `string` |  |
-| `combustivel` | `string` |  |
-| `marca` | `string` |  |
-| `mesReferencia` | `string` |  |
-| `modelo` | `string` |  |
-| `siglaCombustivel` | `string` |  |
-| `tipoVeiculo` | `int` |  |
-| `valor` | `string` |  |
+| `anoModelo` | `int` | Ano do modelo |
+| `codigoFipe` | `string` | Código FIPE |
+| `combustivel` | `string` | Tipo de combustível |
+| `marca` | `string` | Marca do veículo |
+| `mesReferencia` | `string` | Mês de referência da tabela |
+| `modelo` | `string` | Modelo do veículo |
+| `siglaCombustivel` | `string` | Sigla do combustível |
+| `tipoVeiculo` | `int` | Tipo do veículo |
+| `valor` | `string` | Valor do veículo |
 
 #### Example: Load
 
@@ -652,8 +652,8 @@ Create an instance: `municipio := client.Municipio(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | `string` |  |
-| `nome` | `string` |  |
+| `codigo_ibge` | `string` | Código IBGE do município |
+| `nome` | `string` | Nome do município |
 
 #### Example: Load
 
@@ -681,10 +681,10 @@ Create an instance: `ufn := client.Ufn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` |  |
-| `nome` | `string` |  |
+| `id` | `int` | ID da UF |
+| `nome` | `string` | Nome da UF |
 | `regiao` | `map[string]any` |  |
-| `sigla` | `string` |  |
+| `sigla` | `string` | Sigla da UF |
 
 #### Example: Load
 

@@ -1,0 +1,11 @@
+# Entity Models
+
+@"bank.aon"
+@"cep.aon"
+@"cnpj.aon"
+@"ddd.aon"
+@"feriado.aon"
+@"fipe_marca.aon"
+@"fipe_preco.aon"
+@"municipio.aon"
+@"ufn.aon"

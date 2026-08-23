@@ -125,10 +125,10 @@ bank = client.Bank
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `Integer` | No |  |
-| `fullName` | `String` | No |  |
-| `ispb` | `String` | No |  |
-| `name` | `String` | No |  |
+| `code` | `Integer` | No | Código do banco |
+| `fullName` | `String` | No | Nome completo do banco |
+| `ispb` | `String` | No | Identificador único do banco |
+| `name` | `String` | No | Nome do banco |
 
 ### Operations
 
@@ -241,24 +241,24 @@ cnpj = client.Cnpj
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | `String` | No |  |
-| `capital_social` | `Float` | No |  |
-| `cep` | `String` | No |  |
-| `cnae_fiscal` | `Integer` | No |  |
-| `cnae_fiscal_descricao` | `String` | No |  |
-| `cnpj` | `String` | No |  |
-| `complemento` | `String` | No |  |
-| `data_inicio_atividade` | `String` | No |  |
-| `ddd_telefone_1` | `String` | No |  |
-| `logradouro` | `String` | No |  |
-| `municipio` | `String` | No |  |
-| `natureza_juridica` | `String` | No |  |
-| `nome_fantasia` | `String` | No |  |
-| `numero` | `String` | No |  |
-| `porte` | `String` | No |  |
-| `qsa` | `Array` | No |  |
-| `razao_social` | `String` | No |  |
-| `uf` | `String` | No |  |
+| `bairro` | `String` | No | Bairro |
+| `capital_social` | `Float` | No | Capital social da empresa |
+| `cep` | `String` | No | CEP |
+| `cnae_fiscal` | `Integer` | No | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | `String` | No | Descrição do CNAE fiscal |
+| `cnpj` | `String` | No | CNPJ consultado |
+| `complemento` | `String` | No | Complemento do endereço |
+| `data_inicio_atividade` | `String` | No | Data de início das atividades |
+| `ddd_telefone_1` | `String` | No | Telefone principal |
+| `logradouro` | `String` | No | Logradouro do endereço |
+| `municipio` | `String` | No | Município |
+| `natureza_juridica` | `String` | No | Código da natureza jurídica |
+| `nome_fantasia` | `String` | No | Nome fantasia da empresa |
+| `numero` | `String` | No | Número do endereço |
+| `porte` | `String` | No | Porte da empresa |
+| `qsa` | `Array` | No | Quadro de sócios e administradores |
+| `razao_social` | `String` | No | Razão social da empresa |
+| `uf` | `String` | No | UF |
 
 ### Operations
 
@@ -310,8 +310,8 @@ ddd = client.Ddd
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cities` | `Array` | No |  |
-| `state` | `String` | No |  |
+| `cities` | `Array` | No | Lista de cidades com este DDD |
+| `state` | `String` | No | Sigla do estado |
 
 ### Operations
 
@@ -363,9 +363,9 @@ feriado = client.Feriado
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | `String` | No |  |
-| `name` | `String` | No |  |
-| `type` | `String` | No |  |
+| `date` | `String` | No | Data do feriado |
+| `name` | `String` | No | Nome do feriado |
+| `type` | `String` | No | Tipo de feriado |
 
 ### Operations
 
@@ -417,8 +417,8 @@ fipe_marca = client.FipeMarca
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | `String` | No |  |
-| `valor` | `String` | No |  |
+| `nome` | `String` | No | Nome da marca |
+| `valor` | `String` | No | Código da marca |
 
 ### Operations
 
@@ -470,15 +470,15 @@ fipe_preco = client.FipePreco
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `anoModelo` | `Integer` | No |  |
-| `codigoFipe` | `String` | No |  |
-| `combustivel` | `String` | No |  |
-| `marca` | `String` | No |  |
-| `mesReferencia` | `String` | No |  |
-| `modelo` | `String` | No |  |
-| `siglaCombustivel` | `String` | No |  |
-| `tipoVeiculo` | `Integer` | No |  |
-| `valor` | `String` | No |  |
+| `anoModelo` | `Integer` | No | Ano do modelo |
+| `codigoFipe` | `String` | No | Código FIPE |
+| `combustivel` | `String` | No | Tipo de combustível |
+| `marca` | `String` | No | Marca do veículo |
+| `mesReferencia` | `String` | No | Mês de referência da tabela |
+| `modelo` | `String` | No | Modelo do veículo |
+| `siglaCombustivel` | `String` | No | Sigla do combustível |
+| `tipoVeiculo` | `Integer` | No | Tipo do veículo |
+| `valor` | `String` | No | Valor do veículo |
 
 ### Operations
 
@@ -530,8 +530,8 @@ municipio = client.Municipio
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | `String` | No |  |
-| `nome` | `String` | No |  |
+| `codigo_ibge` | `String` | No | Código IBGE do município |
+| `nome` | `String` | No | Nome do município |
 
 ### Operations
 
@@ -583,10 +583,10 @@ ufn = client.Ufn
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `Integer` | No |  |
-| `nome` | `String` | No |  |
+| `id` | `Integer` | No | ID da UF |
+| `nome` | `String` | No | Nome da UF |
 | `regiao` | `Hash` | No |  |
-| `sigla` | `String` | No |  |
+| `sigla` | `String` | No | Sigla da UF |
 
 ### Operations
 

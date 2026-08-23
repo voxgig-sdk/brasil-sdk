@@ -1,0 +1,114 @@
+# Entity: ufn
+
+main: kit: entity: ufn: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      short: "ID da UF"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "nome"
+      req: false
+      short: "Nome da UF"
+      type: "`$STRING`"
+    }
+    {
+      name: "regiao"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "sigla"
+      req: false
+      short: "Sigla da UF"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "ufn"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/ibge/uf/v1"
+          parts: [
+            "ibge"
+            "uf"
+            "v1"
+          ]
+          select: {
+            "$action": "v1"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "SP"
+                kind: "param"
+                name: "sigla_uf"
+                orig: "sigla_uf"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ibge/uf/v1/{siglaUF}"
+          parts: [
+            "ibge"
+            "uf"
+            "v1"
+            "{sigla_uf}"
+          ]
+          rename: {
+            param: {
+              siglaUF: "sigla_uf"
+            }
+          }
+          select: {
+            exist: [
+              "sigla_uf"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.regiao`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

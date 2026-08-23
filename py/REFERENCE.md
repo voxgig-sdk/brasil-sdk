@@ -119,10 +119,10 @@ bank = client.Bank()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `int` | No |  |
-| `fullName` | `str` | No |  |
-| `ispb` | `str` | No |  |
-| `name` | `str` | No |  |
+| `code` | `int` | No | Código do banco |
+| `fullName` | `str` | No | Nome completo do banco |
+| `ispb` | `str` | No | Identificador único do banco |
+| `name` | `str` | No | Nome do banco |
 
 ### Operations
 
@@ -235,24 +235,24 @@ cnpj = client.Cnpj()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | `str` | No |  |
-| `capital_social` | `float` | No |  |
-| `cep` | `str` | No |  |
-| `cnae_fiscal` | `int` | No |  |
-| `cnae_fiscal_descricao` | `str` | No |  |
-| `cnpj` | `str` | No |  |
-| `complemento` | `str` | No |  |
-| `data_inicio_atividade` | `str` | No |  |
-| `ddd_telefone_1` | `str` | No |  |
-| `logradouro` | `str` | No |  |
-| `municipio` | `str` | No |  |
-| `natureza_juridica` | `str` | No |  |
-| `nome_fantasia` | `str` | No |  |
-| `numero` | `str` | No |  |
-| `porte` | `str` | No |  |
-| `qsa` | `list` | No |  |
-| `razao_social` | `str` | No |  |
-| `uf` | `str` | No |  |
+| `bairro` | `str` | No | Bairro |
+| `capital_social` | `float` | No | Capital social da empresa |
+| `cep` | `str` | No | CEP |
+| `cnae_fiscal` | `int` | No | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | `str` | No | Descrição do CNAE fiscal |
+| `cnpj` | `str` | No | CNPJ consultado |
+| `complemento` | `str` | No | Complemento do endereço |
+| `data_inicio_atividade` | `str` | No | Data de início das atividades |
+| `ddd_telefone_1` | `str` | No | Telefone principal |
+| `logradouro` | `str` | No | Logradouro do endereço |
+| `municipio` | `str` | No | Município |
+| `natureza_juridica` | `str` | No | Código da natureza jurídica |
+| `nome_fantasia` | `str` | No | Nome fantasia da empresa |
+| `numero` | `str` | No | Número do endereço |
+| `porte` | `str` | No | Porte da empresa |
+| `qsa` | `list` | No | Quadro de sócios e administradores |
+| `razao_social` | `str` | No | Razão social da empresa |
+| `uf` | `str` | No | UF |
 
 ### Operations
 
@@ -303,8 +303,8 @@ ddd = client.Ddd()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cities` | `list` | No |  |
-| `state` | `str` | No |  |
+| `cities` | `list` | No | Lista de cidades com este DDD |
+| `state` | `str` | No | Sigla do estado |
 
 ### Operations
 
@@ -355,9 +355,9 @@ feriado = client.Feriado()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | `str` | No |  |
-| `name` | `str` | No |  |
-| `type` | `str` | No |  |
+| `date` | `str` | No | Data do feriado |
+| `name` | `str` | No | Nome do feriado |
+| `type` | `str` | No | Tipo de feriado |
 
 ### Operations
 
@@ -408,8 +408,8 @@ fipe_marca = client.FipeMarca()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | `str` | No |  |
-| `valor` | `str` | No |  |
+| `nome` | `str` | No | Nome da marca |
+| `valor` | `str` | No | Código da marca |
 
 ### Operations
 
@@ -460,15 +460,15 @@ fipe_preco = client.FipePreco()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `anoModelo` | `int` | No |  |
-| `codigoFipe` | `str` | No |  |
-| `combustivel` | `str` | No |  |
-| `marca` | `str` | No |  |
-| `mesReferencia` | `str` | No |  |
-| `modelo` | `str` | No |  |
-| `siglaCombustivel` | `str` | No |  |
-| `tipoVeiculo` | `int` | No |  |
-| `valor` | `str` | No |  |
+| `anoModelo` | `int` | No | Ano do modelo |
+| `codigoFipe` | `str` | No | Código FIPE |
+| `combustivel` | `str` | No | Tipo de combustível |
+| `marca` | `str` | No | Marca do veículo |
+| `mesReferencia` | `str` | No | Mês de referência da tabela |
+| `modelo` | `str` | No | Modelo do veículo |
+| `siglaCombustivel` | `str` | No | Sigla do combustível |
+| `tipoVeiculo` | `int` | No | Tipo do veículo |
+| `valor` | `str` | No | Valor do veículo |
 
 ### Operations
 
@@ -519,8 +519,8 @@ municipio = client.Municipio()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | `str` | No |  |
-| `nome` | `str` | No |  |
+| `codigo_ibge` | `str` | No | Código IBGE do município |
+| `nome` | `str` | No | Nome do município |
 
 ### Operations
 
@@ -571,10 +571,10 @@ ufn = client.Ufn()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `nome` | `str` | No |  |
+| `id` | `int` | No | ID da UF |
+| `nome` | `str` | No | Nome da UF |
 | `regiao` | `dict` | No |  |
-| `sigla` | `str` | No |  |
+| `sigla` | `str` | No | Sigla da UF |
 
 ### Operations
 

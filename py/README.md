@@ -265,10 +265,10 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `fullName` |  |
-| `ispb` |  |
-| `name` |  |
+| `code` | Código do banco |
+| `fullName` | Nome completo do banco |
+| `ispb` | Identificador único do banco |
+| `name` | Nome do banco |
 
 Operations: List, Load.
 
@@ -289,24 +289,24 @@ API path: `/cep/v1/{cep}`
 
 | Field | Description |
 | --- | --- |
-| `bairro` |  |
-| `capital_social` |  |
-| `cep` |  |
-| `cnae_fiscal` |  |
-| `cnae_fiscal_descricao` |  |
-| `cnpj` |  |
-| `complemento` |  |
-| `data_inicio_atividade` |  |
-| `ddd_telefone_1` |  |
-| `logradouro` |  |
-| `municipio` |  |
-| `natureza_juridica` |  |
-| `nome_fantasia` |  |
-| `numero` |  |
-| `porte` |  |
-| `qsa` |  |
-| `razao_social` |  |
-| `uf` |  |
+| `bairro` | Bairro |
+| `capital_social` | Capital social da empresa |
+| `cep` | CEP |
+| `cnae_fiscal` | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | Descrição do CNAE fiscal |
+| `cnpj` | CNPJ consultado |
+| `complemento` | Complemento do endereço |
+| `data_inicio_atividade` | Data de início das atividades |
+| `ddd_telefone_1` | Telefone principal |
+| `logradouro` | Logradouro do endereço |
+| `municipio` | Município |
+| `natureza_juridica` | Código da natureza jurídica |
+| `nome_fantasia` | Nome fantasia da empresa |
+| `numero` | Número do endereço |
+| `porte` | Porte da empresa |
+| `qsa` | Quadro de sócios e administradores |
+| `razao_social` | Razão social da empresa |
+| `uf` | UF |
 
 Operations: Load.
 
@@ -316,8 +316,8 @@ API path: `/cnpj/v1/{cnpj}`
 
 | Field | Description |
 | --- | --- |
-| `cities` |  |
-| `state` |  |
+| `cities` | Lista de cidades com este DDD |
+| `state` | Sigla do estado |
 
 Operations: Load.
 
@@ -327,9 +327,9 @@ API path: `/ddd/v1/{ddd}`
 
 | Field | Description |
 | --- | --- |
-| `date` |  |
-| `name` |  |
-| `type` |  |
+| `date` | Data do feriado |
+| `name` | Nome do feriado |
+| `type` | Tipo de feriado |
 
 Operations: Load.
 
@@ -339,8 +339,8 @@ API path: `/feriados/v1/{ano}`
 
 | Field | Description |
 | --- | --- |
-| `nome` |  |
-| `valor` |  |
+| `nome` | Nome da marca |
+| `valor` | Código da marca |
 
 Operations: Load.
 
@@ -350,15 +350,15 @@ API path: `/fipe/marcas/v1/{tipoVeiculo}`
 
 | Field | Description |
 | --- | --- |
-| `anoModelo` |  |
-| `codigoFipe` |  |
-| `combustivel` |  |
-| `marca` |  |
-| `mesReferencia` |  |
-| `modelo` |  |
-| `siglaCombustivel` |  |
-| `tipoVeiculo` |  |
-| `valor` |  |
+| `anoModelo` | Ano do modelo |
+| `codigoFipe` | Código FIPE |
+| `combustivel` | Tipo de combustível |
+| `marca` | Marca do veículo |
+| `mesReferencia` | Mês de referência da tabela |
+| `modelo` | Modelo do veículo |
+| `siglaCombustivel` | Sigla do combustível |
+| `tipoVeiculo` | Tipo do veículo |
+| `valor` | Valor do veículo |
 
 Operations: Load.
 
@@ -368,8 +368,8 @@ API path: `/fipe/preco/v1/{codigoFipe}`
 
 | Field | Description |
 | --- | --- |
-| `codigo_ibge` |  |
-| `nome` |  |
+| `codigo_ibge` | Código IBGE do município |
+| `nome` | Nome do município |
 
 Operations: Load.
 
@@ -379,10 +379,10 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
-| `nome` |  |
+| `id` | ID da UF |
+| `nome` | Nome da UF |
 | `regiao` |  |
-| `sigla` |  |
+| `sigla` | Sigla da UF |
 
 Operations: List, Load.
 
@@ -408,10 +408,10 @@ Create an instance: `bank = client.Bank()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `int` |  |
-| `fullName` | `str` |  |
-| `ispb` | `str` |  |
-| `name` | `str` |  |
+| `code` | `int` | Código do banco |
+| `fullName` | `str` | Nome completo do banco |
+| `ispb` | `str` | Identificador único do banco |
+| `name` | `str` | Nome do banco |
 
 #### Example: Load
 
@@ -464,24 +464,24 @@ Create an instance: `cnpj = client.Cnpj()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bairro` | `str` |  |
-| `capital_social` | `float` |  |
-| `cep` | `str` |  |
-| `cnae_fiscal` | `int` |  |
-| `cnae_fiscal_descricao` | `str` |  |
-| `cnpj` | `str` |  |
-| `complemento` | `str` |  |
-| `data_inicio_atividade` | `str` |  |
-| `ddd_telefone_1` | `str` |  |
-| `logradouro` | `str` |  |
-| `municipio` | `str` |  |
-| `natureza_juridica` | `str` |  |
-| `nome_fantasia` | `str` |  |
-| `numero` | `str` |  |
-| `porte` | `str` |  |
-| `qsa` | `list` |  |
-| `razao_social` | `str` |  |
-| `uf` | `str` |  |
+| `bairro` | `str` | Bairro |
+| `capital_social` | `float` | Capital social da empresa |
+| `cep` | `str` | CEP |
+| `cnae_fiscal` | `int` | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | `str` | Descrição do CNAE fiscal |
+| `cnpj` | `str` | CNPJ consultado |
+| `complemento` | `str` | Complemento do endereço |
+| `data_inicio_atividade` | `str` | Data de início das atividades |
+| `ddd_telefone_1` | `str` | Telefone principal |
+| `logradouro` | `str` | Logradouro do endereço |
+| `municipio` | `str` | Município |
+| `natureza_juridica` | `str` | Código da natureza jurídica |
+| `nome_fantasia` | `str` | Nome fantasia da empresa |
+| `numero` | `str` | Número do endereço |
+| `porte` | `str` | Porte da empresa |
+| `qsa` | `list` | Quadro de sócios e administradores |
+| `razao_social` | `str` | Razão social da empresa |
+| `uf` | `str` | UF |
 
 #### Example: Load
 
@@ -504,8 +504,8 @@ Create an instance: `ddd = client.Ddd()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cities` | `list` |  |
-| `state` | `str` |  |
+| `cities` | `list` | Lista de cidades com este DDD |
+| `state` | `str` | Sigla do estado |
 
 #### Example: Load
 
@@ -528,9 +528,9 @@ Create an instance: `feriado = client.Feriado()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | `str` |  |
-| `name` | `str` |  |
-| `type` | `str` |  |
+| `date` | `str` | Data do feriado |
+| `name` | `str` | Nome do feriado |
+| `type` | `str` | Tipo de feriado |
 
 #### Example: Load
 
@@ -553,8 +553,8 @@ Create an instance: `fipe_marca = client.FipeMarca()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `nome` | `str` |  |
-| `valor` | `str` |  |
+| `nome` | `str` | Nome da marca |
+| `valor` | `str` | Código da marca |
 
 #### Example: Load
 
@@ -577,15 +577,15 @@ Create an instance: `fipe_preco = client.FipePreco()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `anoModelo` | `int` |  |
-| `codigoFipe` | `str` |  |
-| `combustivel` | `str` |  |
-| `marca` | `str` |  |
-| `mesReferencia` | `str` |  |
-| `modelo` | `str` |  |
-| `siglaCombustivel` | `str` |  |
-| `tipoVeiculo` | `int` |  |
-| `valor` | `str` |  |
+| `anoModelo` | `int` | Ano do modelo |
+| `codigoFipe` | `str` | Código FIPE |
+| `combustivel` | `str` | Tipo de combustível |
+| `marca` | `str` | Marca do veículo |
+| `mesReferencia` | `str` | Mês de referência da tabela |
+| `modelo` | `str` | Modelo do veículo |
+| `siglaCombustivel` | `str` | Sigla do combustível |
+| `tipoVeiculo` | `int` | Tipo do veículo |
+| `valor` | `str` | Valor do veículo |
 
 #### Example: Load
 
@@ -608,8 +608,8 @@ Create an instance: `municipio = client.Municipio()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `codigo_ibge` | `str` |  |
-| `nome` | `str` |  |
+| `codigo_ibge` | `str` | Código IBGE do município |
+| `nome` | `str` | Nome do município |
 
 #### Example: Load
 
@@ -633,10 +633,10 @@ Create an instance: `ufn = client.Ufn()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` |  |
-| `nome` | `str` |  |
+| `id` | `int` | ID da UF |
+| `nome` | `str` | Nome da UF |
 | `regiao` | `dict` |  |
-| `sigla` | `str` |  |
+| `sigla` | `str` | Sigla da UF |
 
 #### Example: Load
 

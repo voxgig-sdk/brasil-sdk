@@ -36,24 +36,28 @@
               "active": true,
               "name": "code",
               "req": false,
+              "short": "Código do banco",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "fullName",
               "req": false,
+              "short": "Nome completo do banco",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "ispb",
               "req": false,
+              "short": "Identificador único do banco",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Nome do banco",
               "type": "`$STRING`"
             }
           ],
@@ -246,108 +250,126 @@
               "active": true,
               "name": "bairro",
               "req": false,
+              "short": "Bairro",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "capital_social",
               "req": false,
+              "short": "Capital social da empresa",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "cep",
               "req": false,
+              "short": "CEP",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "cnae_fiscal",
               "req": false,
+              "short": "CNAE fiscal principal",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "cnae_fiscal_descricao",
               "req": false,
+              "short": "Descrição do CNAE fiscal",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "cnpj",
               "req": false,
+              "short": "CNPJ consultado",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "complemento",
               "req": false,
+              "short": "Complemento do endereço",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "data_inicio_atividade",
               "req": false,
+              "short": "Data de início das atividades",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "ddd_telefone_1",
               "req": false,
+              "short": "Telefone principal",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "logradouro",
               "req": false,
+              "short": "Logradouro do endereço",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "municipio",
               "req": false,
+              "short": "Município",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "natureza_juridica",
               "req": false,
+              "short": "Código da natureza jurídica",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "nome_fantasia",
               "req": false,
+              "short": "Nome fantasia da empresa",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "numero",
               "req": false,
+              "short": "Número do endereço",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "porte",
               "req": false,
+              "short": "Porte da empresa",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "qsa",
               "req": false,
+              "short": "Quadro de sócios e administradores",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "razao_social",
               "req": false,
+              "short": "Razão social da empresa",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "uf",
               "req": false,
+              "short": "UF",
               "type": "`$STRING`"
             }
           ],
@@ -411,12 +433,14 @@
               "active": true,
               "name": "cities",
               "req": false,
+              "short": "Lista de cidades com este DDD",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "state",
               "req": false,
+              "short": "Sigla do estado",
               "type": "`$STRING`"
             }
           ],
@@ -480,18 +504,21 @@
               "active": true,
               "name": "date",
               "req": false,
+              "short": "Data do feriado",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Nome do feriado",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Tipo de feriado",
               "type": "`$STRING`"
             }
           ],
@@ -555,12 +582,14 @@
               "active": true,
               "name": "nome",
               "req": false,
+              "short": "Nome da marca",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "valor",
               "req": false,
+              "short": "Código da marca",
               "type": "`$STRING`"
             }
           ],
@@ -630,54 +659,63 @@
               "active": true,
               "name": "anoModelo",
               "req": false,
+              "short": "Ano do modelo",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "codigoFipe",
               "req": false,
+              "short": "Código FIPE",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "combustivel",
               "req": false,
+              "short": "Tipo de combustível",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "marca",
               "req": false,
+              "short": "Marca do veículo",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "mesReferencia",
               "req": false,
+              "short": "Mês de referência da tabela",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "modelo",
               "req": false,
+              "short": "Modelo do veículo",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "siglaCombustivel",
               "req": false,
+              "short": "Sigla do combustível",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "tipoVeiculo",
               "req": false,
+              "short": "Tipo do veículo",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "valor",
               "req": false,
+              "short": "Valor do veículo",
               "type": "`$STRING`"
             }
           ],
@@ -747,12 +785,14 @@
               "active": true,
               "name": "codigo_ibge",
               "req": false,
+              "short": "Código IBGE do município",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "nome",
               "req": false,
+              "short": "Nome do município",
               "type": "`$STRING`"
             }
           ],
@@ -822,12 +862,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "ID da UF",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "nome",
               "req": false,
+              "short": "Nome da UF",
               "type": "`$STRING`"
             },
             {
@@ -840,6 +882,7 @@
               "active": true,
               "name": "sigla",
               "req": false,
+              "short": "Sigla da UF",
               "type": "`$STRING`"
             }
           ],

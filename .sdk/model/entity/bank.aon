@@ -1,0 +1,103 @@
+# Entity: bank
+
+main: kit: entity: bank: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "code"
+      req: false
+      short: "Código do banco"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "fullName"
+      req: false
+      short: "Nome completo do banco"
+      type: "`$STRING`"
+    }
+    {
+      name: "ispb"
+      req: false
+      short: "Identificador único do banco"
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Nome do banco"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "bank"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/banks/v1"
+          parts: [
+            "banks"
+            "v1"
+          ]
+          select: {
+            "$action": "v1"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "001"
+                kind: "param"
+                name: "code"
+                orig: "code"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/banks/v1/{code}"
+          parts: [
+            "banks"
+            "v1"
+            "{code}"
+          ]
+          select: {
+            exist: [
+              "code"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

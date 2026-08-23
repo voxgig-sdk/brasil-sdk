@@ -33,6 +33,9 @@ class BrasilConfig
         return [
             "main" => [
                 "name" => "Brasil",
+                "slug" => "brasil",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -63,18 +66,22 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'code',
+              'short' => 'Código do banco',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'fullName',
+              'short' => 'Nome completo do banco',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'ispb',
+              'short' => 'Identificador único do banco',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'name',
+              'short' => 'Nome do banco',
               'type' => '`$STRING`',
             ],
           ],
@@ -246,74 +253,92 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'bairro',
+              'short' => 'Bairro',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'capital_social',
+              'short' => 'Capital social da empresa',
               'type' => '`$NUMBER`',
             ],
             [
               'name' => 'cep',
+              'short' => 'CEP',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'cnae_fiscal',
+              'short' => 'CNAE fiscal principal',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'cnae_fiscal_descricao',
+              'short' => 'Descrição do CNAE fiscal',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'cnpj',
+              'short' => 'CNPJ consultado',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'complemento',
+              'short' => 'Complemento do endereço',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'data_inicio_atividade',
+              'short' => 'Data de início das atividades',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'ddd_telefone_1',
+              'short' => 'Telefone principal',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'logradouro',
+              'short' => 'Logradouro do endereço',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'municipio',
+              'short' => 'Município',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'natureza_juridica',
+              'short' => 'Código da natureza jurídica',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'nome_fantasia',
+              'short' => 'Nome fantasia da empresa',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'numero',
+              'short' => 'Número do endereço',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'porte',
+              'short' => 'Porte da empresa',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'qsa',
+              'short' => 'Quadro de sócios e administradores',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'razao_social',
+              'short' => 'Razão social da empresa',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'uf',
+              'short' => 'UF',
               'type' => '`$STRING`',
             ],
           ],
@@ -369,10 +394,12 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'cities',
+              'short' => 'Lista de cidades com este DDD',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'state',
+              'short' => 'Sigla do estado',
               'type' => '`$STRING`',
             ],
           ],
@@ -428,14 +455,17 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'date',
+              'short' => 'Data do feriado',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'name',
+              'short' => 'Nome do feriado',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'type',
+              'short' => 'Tipo de feriado',
               'type' => '`$STRING`',
             ],
           ],
@@ -491,10 +521,12 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'nome',
+              'short' => 'Nome da marca',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'valor',
+              'short' => 'Código da marca',
               'type' => '`$STRING`',
             ],
           ],
@@ -556,38 +588,47 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'anoModelo',
+              'short' => 'Ano do modelo',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'codigoFipe',
+              'short' => 'Código FIPE',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'combustivel',
+              'short' => 'Tipo de combustível',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'marca',
+              'short' => 'Marca do veículo',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'mesReferencia',
+              'short' => 'Mês de referência da tabela',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'modelo',
+              'short' => 'Modelo do veículo',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'siglaCombustivel',
+              'short' => 'Sigla do combustível',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'tipoVeiculo',
+              'short' => 'Tipo do veículo',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'valor',
+              'short' => 'Valor do veículo',
               'type' => '`$STRING`',
             ],
           ],
@@ -649,10 +690,12 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'codigo_ibge',
+              'short' => 'Código IBGE do município',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'nome',
+              'short' => 'Nome do município',
               'type' => '`$STRING`',
             ],
           ],
@@ -714,10 +757,12 @@ class BrasilConfig
           'fields' => [
             [
               'name' => 'id',
+              'short' => 'ID da UF',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'nome',
+              'short' => 'Nome da UF',
               'type' => '`$STRING`',
             ],
             [
@@ -726,6 +771,7 @@ class BrasilConfig
             ],
             [
               'name' => 'sigla',
+              'short' => 'Sigla da UF',
               'type' => '`$STRING`',
             ],
           ],

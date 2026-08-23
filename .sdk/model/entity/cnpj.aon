@@ -1,0 +1,167 @@
+# Entity: cnpj
+
+main: kit: entity: cnpj: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "bairro"
+      req: false
+      short: "Bairro"
+      type: "`$STRING`"
+    }
+    {
+      name: "capital_social"
+      req: false
+      short: "Capital social da empresa"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "cep"
+      req: false
+      short: "CEP"
+      type: "`$STRING`"
+    }
+    {
+      name: "cnae_fiscal"
+      req: false
+      short: "CNAE fiscal principal"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "cnae_fiscal_descricao"
+      req: false
+      short: "Descrição do CNAE fiscal"
+      type: "`$STRING`"
+    }
+    {
+      name: "cnpj"
+      req: false
+      short: "CNPJ consultado"
+      type: "`$STRING`"
+    }
+    {
+      name: "complemento"
+      req: false
+      short: "Complemento do endereço"
+      type: "`$STRING`"
+    }
+    {
+      name: "data_inicio_atividade"
+      req: false
+      short: "Data de início das atividades"
+      type: "`$STRING`"
+    }
+    {
+      name: "ddd_telefone_1"
+      req: false
+      short: "Telefone principal"
+      type: "`$STRING`"
+    }
+    {
+      name: "logradouro"
+      req: false
+      short: "Logradouro do endereço"
+      type: "`$STRING`"
+    }
+    {
+      name: "municipio"
+      req: false
+      short: "Município"
+      type: "`$STRING`"
+    }
+    {
+      name: "natureza_juridica"
+      req: false
+      short: "Código da natureza jurídica"
+      type: "`$STRING`"
+    }
+    {
+      name: "nome_fantasia"
+      req: false
+      short: "Nome fantasia da empresa"
+      type: "`$STRING`"
+    }
+    {
+      name: "numero"
+      req: false
+      short: "Número do endereço"
+      type: "`$STRING`"
+    }
+    {
+      name: "porte"
+      req: false
+      short: "Porte da empresa"
+      type: "`$STRING`"
+    }
+    {
+      name: "qsa"
+      req: false
+      short: "Quadro de sócios e administradores"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "razao_social"
+      req: false
+      short: "Razão social da empresa"
+      type: "`$STRING`"
+    }
+    {
+      name: "uf"
+      req: false
+      short: "UF"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "cnpj"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "00000000000191"
+                kind: "param"
+                name: "cnpj"
+                orig: "cnpj"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cnpj/v1/{cnpj}"
+          parts: [
+            "cnpj"
+            "v1"
+            "{cnpj}"
+          ]
+          select: {
+            exist: [
+              "cnpj"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

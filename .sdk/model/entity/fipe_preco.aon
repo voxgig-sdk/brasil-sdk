@@ -1,0 +1,119 @@
+# Entity: fipe_preco
+
+main: kit: entity: fipe_preco: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "anoModelo"
+      req: false
+      short: "Ano do modelo"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "codigoFipe"
+      req: false
+      short: "Código FIPE"
+      type: "`$STRING`"
+    }
+    {
+      name: "combustivel"
+      req: false
+      short: "Tipo de combustível"
+      type: "`$STRING`"
+    }
+    {
+      name: "marca"
+      req: false
+      short: "Marca do veículo"
+      type: "`$STRING`"
+    }
+    {
+      name: "mesReferencia"
+      req: false
+      short: "Mês de referência da tabela"
+      type: "`$STRING`"
+    }
+    {
+      name: "modelo"
+      req: false
+      short: "Modelo do veículo"
+      type: "`$STRING`"
+    }
+    {
+      name: "siglaCombustivel"
+      req: false
+      short: "Sigla do combustível"
+      type: "`$STRING`"
+    }
+    {
+      name: "tipoVeiculo"
+      req: false
+      short: "Tipo do veículo"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "valor"
+      req: false
+      short: "Valor do veículo"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "fipe_preco"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "001004-1"
+                kind: "param"
+                name: "codigo_fipe"
+                orig: "codigo_fipe"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/fipe/preco/v1/{codigoFipe}"
+          parts: [
+            "fipe"
+            "preco"
+            "v1"
+            "{codigo_fipe}"
+          ]
+          rename: {
+            param: {
+              codigoFipe: "codigo_fipe"
+            }
+          }
+          select: {
+            exist: [
+              "codigo_fipe"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v1"
+      ]
+    ]
+  }
+
+
+
+}

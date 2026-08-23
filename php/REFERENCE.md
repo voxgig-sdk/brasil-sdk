@@ -124,10 +124,10 @@ $bank = $client->Bank();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `int` | No |  |
-| `fullName` | `string` | No |  |
-| `ispb` | `string` | No |  |
-| `name` | `string` | No |  |
+| `code` | `int` | No | Código do banco |
+| `fullName` | `string` | No | Nome completo do banco |
+| `ispb` | `string` | No | Identificador único do banco |
+| `name` | `string` | No | Nome do banco |
 
 ### Operations
 
@@ -240,24 +240,24 @@ $cnpj = $client->Cnpj();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bairro` | `string` | No |  |
-| `capital_social` | `float` | No |  |
-| `cep` | `string` | No |  |
-| `cnae_fiscal` | `int` | No |  |
-| `cnae_fiscal_descricao` | `string` | No |  |
-| `cnpj` | `string` | No |  |
-| `complemento` | `string` | No |  |
-| `data_inicio_atividade` | `string` | No |  |
-| `ddd_telefone_1` | `string` | No |  |
-| `logradouro` | `string` | No |  |
-| `municipio` | `string` | No |  |
-| `natureza_juridica` | `string` | No |  |
-| `nome_fantasia` | `string` | No |  |
-| `numero` | `string` | No |  |
-| `porte` | `string` | No |  |
-| `qsa` | `array` | No |  |
-| `razao_social` | `string` | No |  |
-| `uf` | `string` | No |  |
+| `bairro` | `string` | No | Bairro |
+| `capital_social` | `float` | No | Capital social da empresa |
+| `cep` | `string` | No | CEP |
+| `cnae_fiscal` | `int` | No | CNAE fiscal principal |
+| `cnae_fiscal_descricao` | `string` | No | Descrição do CNAE fiscal |
+| `cnpj` | `string` | No | CNPJ consultado |
+| `complemento` | `string` | No | Complemento do endereço |
+| `data_inicio_atividade` | `string` | No | Data de início das atividades |
+| `ddd_telefone_1` | `string` | No | Telefone principal |
+| `logradouro` | `string` | No | Logradouro do endereço |
+| `municipio` | `string` | No | Município |
+| `natureza_juridica` | `string` | No | Código da natureza jurídica |
+| `nome_fantasia` | `string` | No | Nome fantasia da empresa |
+| `numero` | `string` | No | Número do endereço |
+| `porte` | `string` | No | Porte da empresa |
+| `qsa` | `array` | No | Quadro de sócios e administradores |
+| `razao_social` | `string` | No | Razão social da empresa |
+| `uf` | `string` | No | UF |
 
 ### Operations
 
@@ -309,8 +309,8 @@ $ddd = $client->Ddd();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cities` | `array` | No |  |
-| `state` | `string` | No |  |
+| `cities` | `array` | No | Lista de cidades com este DDD |
+| `state` | `string` | No | Sigla do estado |
 
 ### Operations
 
@@ -362,9 +362,9 @@ $feriado = $client->Feriado();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | `string` | No |  |
-| `name` | `string` | No |  |
-| `type` | `string` | No |  |
+| `date` | `string` | No | Data do feriado |
+| `name` | `string` | No | Nome do feriado |
+| `type` | `string` | No | Tipo de feriado |
 
 ### Operations
 
@@ -416,8 +416,8 @@ $fipe_marca = $client->FipeMarca();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `nome` | `string` | No |  |
-| `valor` | `string` | No |  |
+| `nome` | `string` | No | Nome da marca |
+| `valor` | `string` | No | Código da marca |
 
 ### Operations
 
@@ -469,15 +469,15 @@ $fipe_preco = $client->FipePreco();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `anoModelo` | `int` | No |  |
-| `codigoFipe` | `string` | No |  |
-| `combustivel` | `string` | No |  |
-| `marca` | `string` | No |  |
-| `mesReferencia` | `string` | No |  |
-| `modelo` | `string` | No |  |
-| `siglaCombustivel` | `string` | No |  |
-| `tipoVeiculo` | `int` | No |  |
-| `valor` | `string` | No |  |
+| `anoModelo` | `int` | No | Ano do modelo |
+| `codigoFipe` | `string` | No | Código FIPE |
+| `combustivel` | `string` | No | Tipo de combustível |
+| `marca` | `string` | No | Marca do veículo |
+| `mesReferencia` | `string` | No | Mês de referência da tabela |
+| `modelo` | `string` | No | Modelo do veículo |
+| `siglaCombustivel` | `string` | No | Sigla do combustível |
+| `tipoVeiculo` | `int` | No | Tipo do veículo |
+| `valor` | `string` | No | Valor do veículo |
 
 ### Operations
 
@@ -529,8 +529,8 @@ $municipio = $client->Municipio();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `codigo_ibge` | `string` | No |  |
-| `nome` | `string` | No |  |
+| `codigo_ibge` | `string` | No | Código IBGE do município |
+| `nome` | `string` | No | Nome do município |
 
 ### Operations
 
@@ -582,10 +582,10 @@ $ufn = $client->Ufn();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `nome` | `string` | No |  |
+| `id` | `int` | No | ID da UF |
+| `nome` | `string` | No | Nome da UF |
 | `regiao` | `array` | No |  |
-| `sigla` | `string` | No |  |
+| `sigla` | `string` | No | Sigla da UF |
 
 ### Operations
 

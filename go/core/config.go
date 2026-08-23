@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Brasil",
+			"slug": "brasil",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -41,18 +44,22 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "code",
+						"short": "Código do banco",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "fullName",
+						"short": "Nome completo do banco",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "ispb",
+						"short": "Identificador único do banco",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Nome do banco",
 						"type": "`$STRING`",
 					},
 				},
@@ -224,74 +231,92 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "bairro",
+						"short": "Bairro",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "capital_social",
+						"short": "Capital social da empresa",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "cep",
+						"short": "CEP",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "cnae_fiscal",
+						"short": "CNAE fiscal principal",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "cnae_fiscal_descricao",
+						"short": "Descrição do CNAE fiscal",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "cnpj",
+						"short": "CNPJ consultado",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "complemento",
+						"short": "Complemento do endereço",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "data_inicio_atividade",
+						"short": "Data de início das atividades",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "ddd_telefone_1",
+						"short": "Telefone principal",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "logradouro",
+						"short": "Logradouro do endereço",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "municipio",
+						"short": "Município",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "natureza_juridica",
+						"short": "Código da natureza jurídica",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "nome_fantasia",
+						"short": "Nome fantasia da empresa",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "numero",
+						"short": "Número do endereço",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "porte",
+						"short": "Porte da empresa",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "qsa",
+						"short": "Quadro de sócios e administradores",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "razao_social",
+						"short": "Razão social da empresa",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "uf",
+						"short": "UF",
 						"type": "`$STRING`",
 					},
 				},
@@ -347,10 +372,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "cities",
+						"short": "Lista de cidades com este DDD",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "state",
+						"short": "Sigla do estado",
 						"type": "`$STRING`",
 					},
 				},
@@ -406,14 +433,17 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "date",
+						"short": "Data do feriado",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Nome do feriado",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Tipo de feriado",
 						"type": "`$STRING`",
 					},
 				},
@@ -469,10 +499,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "nome",
+						"short": "Nome da marca",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "valor",
+						"short": "Código da marca",
 						"type": "`$STRING`",
 					},
 				},
@@ -534,38 +566,47 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "anoModelo",
+						"short": "Ano do modelo",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "codigoFipe",
+						"short": "Código FIPE",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "combustivel",
+						"short": "Tipo de combustível",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "marca",
+						"short": "Marca do veículo",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "mesReferencia",
+						"short": "Mês de referência da tabela",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "modelo",
+						"short": "Modelo do veículo",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "siglaCombustivel",
+						"short": "Sigla do combustível",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "tipoVeiculo",
+						"short": "Tipo do veículo",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "valor",
+						"short": "Valor do veículo",
 						"type": "`$STRING`",
 					},
 				},
@@ -627,10 +668,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "codigo_ibge",
+						"short": "Código IBGE do município",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "nome",
+						"short": "Nome do município",
 						"type": "`$STRING`",
 					},
 				},
@@ -692,10 +735,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"short": "ID da UF",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "nome",
+						"short": "Nome da UF",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -704,6 +749,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "sigla",
+						"short": "Sigla da UF",
 						"type": "`$STRING`",
 					},
 				},
