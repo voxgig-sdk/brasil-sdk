@@ -28,6 +28,7 @@ module BrasilConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
