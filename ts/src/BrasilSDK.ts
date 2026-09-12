@@ -25,6 +25,7 @@ import { Utility } from './utility/Utility'
 import { BaseFeature } from './feature/base/BaseFeature'
 
 
+
 const stdutil = new Utility()
 
 
@@ -34,6 +35,7 @@ class BrasilSDK {
   _utility = new Utility()
   _features: Feature[]
   _rootctx: Context
+  
 
   constructor(options?: any) {
 
@@ -106,6 +108,8 @@ class BrasilSDK {
     return this._utility.struct.clone(this._utility)
   }
 
+  
+
 
   async prepare(fetchargs?: any) {
     const utility = this._utility
@@ -151,6 +155,8 @@ class BrasilSDK {
         spec.headers[key] = uheaders[key]
       }
     }
+
+    
 
     // Apply SDK auth (apikey, auth prefix, etc.)
     const authResult = prepareAuth(ctx)
@@ -429,6 +435,7 @@ const SDK = BrasilSDK
 export {
   stdutil,
   config,
+  
 
   BaseFeature,
   BrasilEntityBase,

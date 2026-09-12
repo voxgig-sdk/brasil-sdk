@@ -48,6 +48,7 @@ main: kit: entity: cnpj: {
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "data_inicio_atividade"
       req: false
       short: "Data de início das atividades"
@@ -135,10 +136,16 @@ main: kit: entity: cnpj: {
           }
           method: "GET"
           orig: "/cnpj/v1/{cnpj}"
-          parts: [
-            "cnpj"
-            "v1"
-            "{cnpj}"
+          segments: [
+            {
+              lit: "cnpj"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "cnpj"
+            }
           ]
           select: {
             exist: [

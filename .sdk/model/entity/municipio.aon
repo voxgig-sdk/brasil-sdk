@@ -39,17 +39,25 @@ main: kit: entity: municipio: {
           }
           method: "GET"
           orig: "/ibge/municipios/v1/{siglaUF}"
-          parts: [
-            "ibge"
-            "municipios"
-            "v1"
-            "{sigla_uf}"
-          ]
           rename: {
             param: {
               siglaUF: "sigla_uf"
             }
           }
+          segments: [
+            {
+              lit: "ibge"
+            }
+            {
+              lit: "municipios"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "sigla_uf"
+            }
+          ]
           select: {
             exist: [
               "sigla_uf"

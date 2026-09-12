@@ -81,17 +81,25 @@ main: kit: entity: fipe_preco: {
           }
           method: "GET"
           orig: "/fipe/preco/v1/{codigoFipe}"
-          parts: [
-            "fipe"
-            "preco"
-            "v1"
-            "{codigo_fipe}"
-          ]
           rename: {
             param: {
               codigoFipe: "codigo_fipe"
             }
           }
+          segments: [
+            {
+              lit: "fipe"
+            }
+            {
+              lit: "preco"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "codigo_fipe"
+            }
+          ]
           select: {
             exist: [
               "codigo_fipe"

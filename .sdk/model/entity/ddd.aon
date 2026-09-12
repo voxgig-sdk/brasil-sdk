@@ -39,10 +39,16 @@ main: kit: entity: ddd: {
           }
           method: "GET"
           orig: "/ddd/v1/{ddd}"
-          parts: [
-            "ddd"
-            "v1"
-            "{ddd}"
+          segments: [
+            {
+              lit: "ddd"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "ddd"
+            }
           ]
           select: {
             exist: [

@@ -39,9 +39,13 @@ main: kit: entity: bank: {
         {
           method: "GET"
           orig: "/banks/v1"
-          parts: [
-            "banks"
-            "v1"
+          segments: [
+            {
+              lit: "banks"
+            }
+            {
+              lit: "v1"
+            }
           ]
           select: {
             "$action": "v1"
@@ -71,10 +75,16 @@ main: kit: entity: bank: {
           }
           method: "GET"
           orig: "/banks/v1/{code}"
-          parts: [
-            "banks"
-            "v1"
-            "{code}"
+          segments: [
+            {
+              lit: "banks"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "code"
+            }
           ]
           select: {
             exist: [

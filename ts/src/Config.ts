@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -122,9 +133,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/banks/v1",
-              "parts": [
-                "banks",
-                "v1"
+              "segments": [
+                {
+                  "lit": "banks"
+                },
+                {
+                  "lit": "v1"
+                }
               ],
               "select": {
                 "$action": "v1"
@@ -132,7 +147,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "banks",
+                "v1"
+              ]
             }
           ]
         },
@@ -156,10 +175,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/banks/v1/{code}",
-              "parts": [
-                "banks",
-                "v1",
-                "{code}"
+              "segments": [
+                {
+                  "lit": "banks"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "code"
+                }
               ],
               "select": {
                 "exist": [
@@ -169,7 +194,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "banks",
+                "v1",
+                "{code}"
+              ]
             }
           ]
         }
@@ -215,10 +245,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cep/v1/{cep}",
-              "parts": [
-                "cep",
-                "v1",
-                "{cep}"
+              "segments": [
+                {
+                  "lit": "cep"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "cep"
+                }
               ],
               "select": {
                 "exist": [
@@ -228,7 +264,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.location`"
-              }
+              },
+              "parts": [
+                "cep",
+                "v1",
+                "{cep}"
+              ]
             },
             {
               "args": {
@@ -246,10 +287,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cep/v2/{cep}",
-              "parts": [
-                "cep",
-                "v2",
-                "{cep}"
+              "segments": [
+                {
+                  "lit": "cep"
+                },
+                {
+                  "lit": "v2"
+                },
+                {
+                  "var": "cep"
+                }
               ],
               "select": {
                 "exist": [
@@ -259,7 +306,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.location`"
-              }
+              },
+              "parts": [
+                "cep",
+                "v2",
+                "{cep}"
+              ]
             }
           ]
         }
@@ -313,6 +365,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "data_inicio_atividade",
           "short": "Data de início das atividades",
           "type": "`$STRING`"
@@ -390,10 +443,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cnpj/v1/{cnpj}",
-              "parts": [
-                "cnpj",
-                "v1",
-                "{cnpj}"
+              "segments": [
+                {
+                  "lit": "cnpj"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "cnpj"
+                }
               ],
               "select": {
                 "exist": [
@@ -403,7 +462,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cnpj",
+                "v1",
+                "{cnpj}"
+              ]
             }
           ]
         }
@@ -451,10 +515,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/ddd/v1/{ddd}",
-              "parts": [
-                "ddd",
-                "v1",
-                "{ddd}"
+              "segments": [
+                {
+                  "lit": "ddd"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "ddd"
+                }
               ],
               "select": {
                 "exist": [
@@ -464,7 +534,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "ddd",
+                "v1",
+                "{ddd}"
+              ]
             }
           ]
         }
@@ -480,6 +555,7 @@ class Config {
     "feriado": {
       "fields": [
         {
+          "format": "date",
           "name": "date",
           "short": "Data do feriado",
           "type": "`$STRING`"
@@ -517,10 +593,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/feriados/v1/{ano}",
-              "parts": [
-                "feriados",
-                "v1",
-                "{ano}"
+              "segments": [
+                {
+                  "lit": "feriados"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "ano"
+                }
               ],
               "select": {
                 "exist": [
@@ -530,7 +612,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "feriados",
+                "v1",
+                "{ano}"
+              ]
             }
           ]
         }
@@ -578,17 +665,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/fipe/marcas/v1/{tipoVeiculo}",
-              "parts": [
-                "fipe",
-                "marcas",
-                "v1",
-                "{tipo_veiculo}"
-              ],
               "rename": {
                 "param": {
                   "tipoVeiculo": "tipo_veiculo"
                 }
               },
+              "segments": [
+                {
+                  "lit": "fipe"
+                },
+                {
+                  "lit": "marcas"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "tipo_veiculo"
+                }
+              ],
               "select": {
                 "exist": [
                   "tipo_veiculo"
@@ -597,7 +692,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "fipe",
+                "marcas",
+                "v1",
+                "{tipo_veiculo}"
+              ]
             }
           ]
         }
@@ -680,17 +781,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/fipe/preco/v1/{codigoFipe}",
-              "parts": [
-                "fipe",
-                "preco",
-                "v1",
-                "{codigo_fipe}"
-              ],
               "rename": {
                 "param": {
                   "codigoFipe": "codigo_fipe"
                 }
               },
+              "segments": [
+                {
+                  "lit": "fipe"
+                },
+                {
+                  "lit": "preco"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "codigo_fipe"
+                }
+              ],
               "select": {
                 "exist": [
                   "codigo_fipe"
@@ -699,7 +808,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "fipe",
+                "preco",
+                "v1",
+                "{codigo_fipe}"
+              ]
             }
           ]
         }
@@ -747,17 +862,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/ibge/municipios/v1/{siglaUF}",
-              "parts": [
-                "ibge",
-                "municipios",
-                "v1",
-                "{sigla_uf}"
-              ],
               "rename": {
                 "param": {
                   "siglaUF": "sigla_uf"
                 }
               },
+              "segments": [
+                {
+                  "lit": "ibge"
+                },
+                {
+                  "lit": "municipios"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "sigla_uf"
+                }
+              ],
               "select": {
                 "exist": [
                   "sigla_uf"
@@ -766,7 +889,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "ibge",
+                "municipios",
+                "v1",
+                "{sigla_uf}"
+              ]
             }
           ]
         }
@@ -801,6 +930,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "ufn",
       "op": {
         "list": {
@@ -812,10 +945,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/ibge/uf/v1",
-              "parts": [
-                "ibge",
-                "uf",
-                "v1"
+              "segments": [
+                {
+                  "lit": "ibge"
+                },
+                {
+                  "lit": "uf"
+                },
+                {
+                  "lit": "v1"
+                }
               ],
               "select": {
                 "$action": "v1"
@@ -823,7 +962,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "ibge",
+                "uf",
+                "v1"
+              ]
             }
           ]
         },
@@ -847,17 +991,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/ibge/uf/v1/{siglaUF}",
-              "parts": [
-                "ibge",
-                "uf",
-                "v1",
-                "{sigla_uf}"
-              ],
               "rename": {
                 "param": {
                   "siglaUF": "sigla_uf"
                 }
               },
+              "segments": [
+                {
+                  "lit": "ibge"
+                },
+                {
+                  "lit": "uf"
+                },
+                {
+                  "lit": "v1"
+                },
+                {
+                  "var": "sigla_uf"
+                }
+              ],
               "select": {
                 "exist": [
                   "sigla_uf"
@@ -866,7 +1018,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.regiao`"
-              }
+              },
+              "parts": [
+                "ibge",
+                "uf",
+                "v1",
+                "{sigla_uf}"
+              ]
             }
           ]
         }
@@ -886,6 +1044,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

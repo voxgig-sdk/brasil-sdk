@@ -6,6 +6,7 @@ main: kit: entity: feriado: {
 
   fields: [
     {
+      format: "date"
       name: "date"
       req: false
       short: "Data do feriado"
@@ -45,10 +46,16 @@ main: kit: entity: feriado: {
           }
           method: "GET"
           orig: "/feriados/v1/{ano}"
-          parts: [
-            "feriados"
-            "v1"
-            "{ano}"
+          segments: [
+            {
+              lit: "feriados"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "ano"
+            }
           ]
           select: {
             exist: [

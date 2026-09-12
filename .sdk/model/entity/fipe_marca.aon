@@ -39,17 +39,25 @@ main: kit: entity: fipe_marca: {
           }
           method: "GET"
           orig: "/fipe/marcas/v1/{tipoVeiculo}"
-          parts: [
-            "fipe"
-            "marcas"
-            "v1"
-            "{tipo_veiculo}"
-          ]
           rename: {
             param: {
               tipoVeiculo: "tipo_veiculo"
             }
           }
+          segments: [
+            {
+              lit: "fipe"
+            }
+            {
+              lit: "marcas"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "tipo_veiculo"
+            }
+          ]
           select: {
             exist: [
               "tipo_veiculo"

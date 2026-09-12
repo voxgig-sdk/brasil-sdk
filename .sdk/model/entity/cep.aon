@@ -37,10 +37,16 @@ main: kit: entity: cep: {
           }
           method: "GET"
           orig: "/cep/v1/{cep}"
-          parts: [
-            "cep"
-            "v1"
-            "{cep}"
+          segments: [
+            {
+              lit: "cep"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              var: "cep"
+            }
           ]
           select: {
             exist: [
@@ -67,10 +73,16 @@ main: kit: entity: cep: {
           }
           method: "GET"
           orig: "/cep/v2/{cep}"
-          parts: [
-            "cep"
-            "v2"
-            "{cep}"
+          segments: [
+            {
+              lit: "cep"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              var: "cep"
+            }
           ]
           select: {
             exist: [

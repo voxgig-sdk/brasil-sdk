@@ -97,9 +97,13 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/banks/v1',
-                  'parts' => [
-                    'banks',
-                    'v1',
+                  'segments' => [
+                    [
+                      'lit' => 'banks',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'v1',
@@ -107,6 +111,10 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'banks',
+                    'v1',
                   ],
                 ],
               ],
@@ -131,10 +139,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/banks/v1/{code}',
-                  'parts' => [
-                    'banks',
-                    'v1',
-                    '{code}',
+                  'segments' => [
+                    [
+                      'lit' => 'banks',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'code',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -144,6 +158,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'banks',
+                    'v1',
+                    '{code}',
                   ],
                 ],
               ],
@@ -190,10 +209,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cep/v1/{cep}',
-                  'parts' => [
-                    'cep',
-                    'v1',
-                    '{cep}',
+                  'segments' => [
+                    [
+                      'lit' => 'cep',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'cep',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -203,6 +228,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.location`',
+                  ],
+                  'parts' => [
+                    'cep',
+                    'v1',
+                    '{cep}',
                   ],
                 ],
                 [
@@ -221,10 +251,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cep/v2/{cep}',
-                  'parts' => [
-                    'cep',
-                    'v2',
-                    '{cep}',
+                  'segments' => [
+                    [
+                      'lit' => 'cep',
+                    ],
+                    [
+                      'lit' => 'v2',
+                    ],
+                    [
+                      'var' => 'cep',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -234,6 +270,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.location`',
+                  ],
+                  'parts' => [
+                    'cep',
+                    'v2',
+                    '{cep}',
                   ],
                 ],
               ],
@@ -288,6 +329,7 @@ class BrasilConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date',
               'name' => 'data_inicio_atividade',
               'short' => 'Data de início das atividades',
               'type' => '`$STRING`',
@@ -365,10 +407,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cnpj/v1/{cnpj}',
-                  'parts' => [
-                    'cnpj',
-                    'v1',
-                    '{cnpj}',
+                  'segments' => [
+                    [
+                      'lit' => 'cnpj',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'cnpj',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -378,6 +426,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'cnpj',
+                    'v1',
+                    '{cnpj}',
                   ],
                 ],
               ],
@@ -426,10 +479,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ddd/v1/{ddd}',
-                  'parts' => [
-                    'ddd',
-                    'v1',
-                    '{ddd}',
+                  'segments' => [
+                    [
+                      'lit' => 'ddd',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'ddd',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -439,6 +498,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'ddd',
+                    'v1',
+                    '{ddd}',
                   ],
                 ],
               ],
@@ -455,6 +519,7 @@ class BrasilConfig
         'feriado' => [
           'fields' => [
             [
+              'format' => 'date',
               'name' => 'date',
               'short' => 'Data do feriado',
               'type' => '`$STRING`',
@@ -492,10 +557,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/feriados/v1/{ano}',
-                  'parts' => [
-                    'feriados',
-                    'v1',
-                    '{ano}',
+                  'segments' => [
+                    [
+                      'lit' => 'feriados',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'ano',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -505,6 +576,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'feriados',
+                    'v1',
+                    '{ano}',
                   ],
                 ],
               ],
@@ -553,15 +629,23 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/fipe/marcas/v1/{tipoVeiculo}',
-                  'parts' => [
-                    'fipe',
-                    'marcas',
-                    'v1',
-                    '{tipo_veiculo}',
-                  ],
                   'rename' => [
                     'param' => [
                       'tipoVeiculo' => 'tipo_veiculo',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'fipe',
+                    ],
+                    [
+                      'lit' => 'marcas',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'tipo_veiculo',
                     ],
                   ],
                   'select' => [
@@ -572,6 +656,12 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'fipe',
+                    'marcas',
+                    'v1',
+                    '{tipo_veiculo}',
                   ],
                 ],
               ],
@@ -655,15 +745,23 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/fipe/preco/v1/{codigoFipe}',
-                  'parts' => [
-                    'fipe',
-                    'preco',
-                    'v1',
-                    '{codigo_fipe}',
-                  ],
                   'rename' => [
                     'param' => [
                       'codigoFipe' => 'codigo_fipe',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'fipe',
+                    ],
+                    [
+                      'lit' => 'preco',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'codigo_fipe',
                     ],
                   ],
                   'select' => [
@@ -674,6 +772,12 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'fipe',
+                    'preco',
+                    'v1',
+                    '{codigo_fipe}',
                   ],
                 ],
               ],
@@ -722,15 +826,23 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/municipios/v1/{siglaUF}',
-                  'parts' => [
-                    'ibge',
-                    'municipios',
-                    'v1',
-                    '{sigla_uf}',
-                  ],
                   'rename' => [
                     'param' => [
                       'siglaUF' => 'sigla_uf',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'ibge',
+                    ],
+                    [
+                      'lit' => 'municipios',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'sigla_uf',
                     ],
                   ],
                   'select' => [
@@ -741,6 +853,12 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'ibge',
+                    'municipios',
+                    'v1',
+                    '{sigla_uf}',
                   ],
                 ],
               ],
@@ -776,6 +894,10 @@ class BrasilConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'ufn',
           'op' => [
             'list' => [
@@ -787,10 +909,16 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/uf/v1',
-                  'parts' => [
-                    'ibge',
-                    'uf',
-                    'v1',
+                  'segments' => [
+                    [
+                      'lit' => 'ibge',
+                    ],
+                    [
+                      'lit' => 'uf',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'v1',
@@ -798,6 +926,11 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'ibge',
+                    'uf',
+                    'v1',
                   ],
                 ],
               ],
@@ -822,15 +955,23 @@ class BrasilConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ibge/uf/v1/{siglaUF}',
-                  'parts' => [
-                    'ibge',
-                    'uf',
-                    'v1',
-                    '{sigla_uf}',
-                  ],
                   'rename' => [
                     'param' => [
                       'siglaUF' => 'sigla_uf',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'ibge',
+                    ],
+                    [
+                      'lit' => 'uf',
+                    ],
+                    [
+                      'lit' => 'v1',
+                    ],
+                    [
+                      'var' => 'sigla_uf',
                     ],
                   ],
                   'select' => [
@@ -841,6 +982,12 @@ class BrasilConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.regiao`',
+                  ],
+                  'parts' => [
+                    'ibge',
+                    'uf',
+                    'v1',
+                    '{sigla_uf}',
                   ],
                 ],
               ],
