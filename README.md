@@ -105,7 +105,7 @@ local results, err = client:Bank():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
+| TypeScript | `@voxgig-sdk/brasil-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
 | Python | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
 | PHP | `voxgig-sdk/brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/brasil-sdk/go` | `go get github.com/voxgig-sdk/brasil-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Bank():list()
 ### TypeScript
 
 ```ts
-import { BrasilSDK } from '@voxgig-sdk/brasil'
+import { BrasilSDK } from '@voxgig-sdk/brasil-sdk'
 
 const client = new BrasilSDK()
 
