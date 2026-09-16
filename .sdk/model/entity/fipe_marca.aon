@@ -37,6 +37,12 @@ main: kit: entity: fipe_marca: {
               }
             ]
           }
+          contract: {
+            id: "GET /fipe/marcas/v1/{tipoVeiculo}"
+            json: "{\"operationId\":\"getFipeMarcas\",\"parameters\":[{\"description\":\"Tipo de veículo (carros, motos ou caminhoes)\",\"in\":\"path\",\"name\":\"tipoVeiculo\",\"required\":true,\"schema\":{\"enum\":[\"carros\",\"motos\",\"caminhoes\"],\"example\":\"carros\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"nome\":{\"description\":\"Nome da marca\",\"example\":\"Fiat\",\"type\":\"string\"},\"valor\":{\"description\":\"Código da marca\",\"example\":\"21\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de marcas retornada com sucesso\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/fipe/marcas/v1/{tipoVeiculo}"
           rename: {

@@ -28,5 +28,86 @@
         "state": "s51"
       }
     }
+  },
+  "requests": {
+    "GET /ddd/v1/{ddd}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDDD",
+        "parameters": [
+          {
+            "description": "Código DDD (2 dígitos)",
+            "in": "path",
+            "name": "ddd",
+            "required": true,
+            "schema": {
+              "example": "11",
+              "pattern": "^[0-9]{2}$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "cities": {
+                      "description": "Lista de cidades com este DDD",
+                      "example": [
+                        "São Paulo",
+                        "Guarulhos",
+                        "Osasco"
+                      ],
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "state": {
+                      "description": "Sigla do estado",
+                      "example": "SP",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "DDD encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "DDD não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

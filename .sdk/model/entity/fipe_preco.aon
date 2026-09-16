@@ -79,6 +79,12 @@ main: kit: entity: fipe_preco: {
               }
             ]
           }
+          contract: {
+            id: "GET /fipe/preco/v1/{codigoFipe}"
+            json: "{\"operationId\":\"getFipePreco\",\"parameters\":[{\"description\":\"Código FIPE do veículo\",\"in\":\"path\",\"name\":\"codigoFipe\",\"required\":true,\"schema\":{\"example\":\"001004-1\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"anoModelo\":{\"description\":\"Ano do modelo\",\"example\":2020,\"type\":\"integer\"},\"codigoFipe\":{\"description\":\"Código FIPE\",\"example\":\"001004-1\",\"type\":\"string\"},\"combustivel\":{\"description\":\"Tipo de combustível\",\"example\":\"Gasolina\",\"type\":\"string\"},\"marca\":{\"description\":\"Marca do veículo\",\"example\":\"Fiat\",\"type\":\"string\"},\"mesReferencia\":{\"description\":\"Mês de referência da tabela\",\"example\":\"janeiro de 2024\",\"type\":\"string\"},\"modelo\":{\"description\":\"Modelo do veículo\",\"example\":\"Palio 1.0\",\"type\":\"string\"},\"siglaCombustivel\":{\"description\":\"Sigla do combustível\",\"example\":\"G\",\"type\":\"string\"},\"tipoVeiculo\":{\"description\":\"Tipo do veículo\",\"example\":1,\"type\":\"integer\"},\"valor\":{\"description\":\"Valor do veículo\",\"example\":\"R$ 50.000,00\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Preço encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Código FIPE não encontrado\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/fipe/preco/v1/{codigoFipe}"
           rename: {

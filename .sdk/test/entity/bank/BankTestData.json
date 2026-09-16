@@ -2,21 +2,21 @@
   "existing": {
     "bank": {
       "BANK00": {
-        "code": "s28",
+        "code": 40,
         "fullName": "s29",
         "ispb": "s2a",
         "name": "s2b",
         "id": "BANK00"
       },
       "BANK01": {
-        "code": "s50",
+        "code": 80,
         "fullName": "s51",
         "ispb": "s52",
         "name": "s53",
         "id": "BANK01"
       },
       "BANK02": {
-        "code": "s78",
+        "code": 120,
         "fullName": "s79",
         "ispb": "s7a",
         "name": "s7b",
@@ -27,10 +27,139 @@
   "new": {
     "bank": {
       "bank_ref01": {
-        "code": "sa0",
+        "code": 160,
         "fullName": "sa1",
         "ispb": "sa2",
         "name": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /banks/v1": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBanks",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "code": {
+                        "description": "Código do banco",
+                        "example": 1,
+                        "type": "integer"
+                      },
+                      "fullName": {
+                        "description": "Nome completo do banco",
+                        "example": "Banco do Brasil S.A.",
+                        "type": "string"
+                      },
+                      "ispb": {
+                        "description": "Identificador único do banco",
+                        "example": "00000000",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Nome do banco",
+                        "example": "Banco do Brasil S.A.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Lista de bancos retornada com sucesso"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /banks/v1/{code}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBankByCode",
+        "parameters": [
+          {
+            "description": "Código do banco (3 dígitos)",
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "example": "001",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Código do banco",
+                      "example": 1,
+                      "type": "integer"
+                    },
+                    "fullName": {
+                      "description": "Nome completo do banco",
+                      "example": "Banco do Brasil S.A.",
+                      "type": "string"
+                    },
+                    "ispb": {
+                      "description": "Identificador único do banco",
+                      "example": "00000000",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do banco",
+                      "example": "Banco do Brasil S.A.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Banco encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Banco não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

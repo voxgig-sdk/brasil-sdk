@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { BrasilSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('UfnEntity', async () => {
 
     const live = 'TRUE' === process.env.BRASIL_TEST_LIVE
     for (const op of ['list', 'load']) {
-      if (maybeSkipControl(t, 'entityOp', 'ufn.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'ufn.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set BRASIL_TEST_UFN_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"id","req":false,"short":"ID da UF","type":"`$INTEGER`","index$":0},{"active":true,"name":"nome","req":false,"short":"Nome da UF","type":"`$STRING`","index$":1},{"active":true,"name":"regiao","req":false,"type":"`$OBJECT`","index$":2},{"active":true,"name":"sigla","req":false,"short":"Sigla da UF","type":"`$STRING`","index$":3}],"id":{"field":"id","name":"id"},"name":"ufn","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{},"contract":{"id":"GET /ibge/uf/v1","json":"{\"operationId\":\"getIbgeUFs\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"id\":{\"description\":\"ID da UF\",\"example\":35,\"type\":\"integer\"},\"nome\":{\"description\":\"Nome da UF\",\"example\":\"São Paulo\",\"type\":\"string\"},\"regiao\":{\"properties\":{\"id\":{\"example\":3,\"type\":\"integer\"},\"nome\":{\"example\":\"Sudeste\",\"type\":\"string\"},\"sigla\":{\"example\":\"SE\",\"type\":\"string\"}},\"type\":\"object\"},\"sigla\":{\"description\":\"Sigla da UF\",\"example\":\"SP\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de UFs retornada com sucesso\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/ibge/uf/v1","segments":[{"lit":"ibge"},{"lit":"uf"},{"lit":"v1"}],"select":{"$action":"v1"},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":"SP","kind":"param","name":"sigla_uf","orig":"sigla_uf","reqd":true,"type":"`$STRING`","index$":0}]},"contract":{"id":"GET /ibge/uf/v1/{siglaUF}","json":"{\"operationId\":\"getIbgeUF\",\"parameters\":[{\"description\":\"Sigla da UF (2 caracteres)\",\"in\":\"path\",\"name\":\"siglaUF\",\"required\":true,\"schema\":{\"example\":\"SP\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"id\":{\"description\":\"ID da UF\",\"example\":35,\"type\":\"integer\"},\"nome\":{\"description\":\"Nome da UF\",\"example\":\"São Paulo\",\"type\":\"string\"},\"regiao\":{\"properties\":{\"id\":{\"example\":3,\"type\":\"integer\"},\"nome\":{\"example\":\"Sudeste\",\"type\":\"string\"},\"sigla\":{\"example\":\"SE\",\"type\":\"string\"}},\"type\":\"object\"},\"sigla\":{\"description\":\"Sigla da UF\",\"example\":\"SP\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"UF encontrada com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"UF não encontrada\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/ibge/uf/v1/{siglaUF}","rename":{"param":{"siglaUF":"sigla_uf"}},"segments":[{"lit":"ibge"},{"lit":"uf"},{"lit":"v1"},{"var":"sigla_uf"}],"select":{"exist":["sigla_uf"]},"transform":{"req":"`reqdata`","res":"`body.regiao`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["v1"]]},"key$":"ufn","name__orig":"ufn","Name":"Ufn","name_":"ufn","name-":"ufn","NAME":"UFN","index$":8}, {"active":true,"entity":"ufn","key$":"BasicUfnFlow","kind":"basic","name":"BasicUfnFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"ufn_ref01"}}],"index$":0},{"active":true,"data":{},"input":{"ref":"ufn_ref01","srcdatavar":"ufn_ref01_data","suffix":"_dt0"},"match":{"id":"ufn01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-ufn_ref01"}}],"index$":1}]}, 'Ufn')
     }
     const client = setup.client
     const struct = setup.struct
@@ -116,13 +115,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['BRASIL_TEST_UFN_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'BRASIL_TEST_UFN_ENTID': idmap,
     'BRASIL_TEST_LIVE': 'FALSE',
@@ -133,7 +125,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.BRASIL_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['BRASIL_TEST_UFN_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new BrasilSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -145,7 +143,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -158,7 +157,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.BRASIL_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

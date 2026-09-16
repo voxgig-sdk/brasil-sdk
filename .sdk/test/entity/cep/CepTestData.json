@@ -28,5 +28,235 @@
         "type": "s51"
       }
     }
+  },
+  "requests": {
+    "GET /cep/v1/{cep}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCep",
+        "parameters": [
+          {
+            "description": "CEP a ser consultado (apenas números)",
+            "in": "path",
+            "name": "cep",
+            "required": true,
+            "schema": {
+              "example": "01310100",
+              "pattern": "^[0-9]{8}$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "cep": {
+                      "description": "CEP consultado",
+                      "example": "01310100",
+                      "type": "string"
+                    },
+                    "city": {
+                      "description": "Nome da cidade",
+                      "example": "São Paulo",
+                      "type": "string"
+                    },
+                    "location": {
+                      "properties": {
+                        "coordinates": {
+                          "properties": {
+                            "latitude": {
+                              "example": "-23.5629358",
+                              "type": "string"
+                            },
+                            "longitude": {
+                              "example": "-46.6527128",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "example": "Point",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "neighborhood": {
+                      "description": "Nome do bairro",
+                      "example": "Bela Vista",
+                      "type": "string"
+                    },
+                    "service": {
+                      "description": "Serviço utilizado para consulta",
+                      "example": "viacep",
+                      "type": "string"
+                    },
+                    "state": {
+                      "description": "Sigla do estado",
+                      "example": "SP",
+                      "type": "string"
+                    },
+                    "street": {
+                      "description": "Nome da rua",
+                      "example": "Avenida Paulista",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CEP encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CEP não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /cep/v2/{cep}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCepV2",
+        "parameters": [
+          {
+            "description": "CEP a ser consultado (apenas números)",
+            "in": "path",
+            "name": "cep",
+            "required": true,
+            "schema": {
+              "example": "01310100",
+              "pattern": "^[0-9]{8}$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "cep": {
+                      "description": "CEP consultado",
+                      "example": "01310100",
+                      "type": "string"
+                    },
+                    "city": {
+                      "description": "Nome da cidade",
+                      "example": "São Paulo",
+                      "type": "string"
+                    },
+                    "location": {
+                      "properties": {
+                        "coordinates": {
+                          "properties": {
+                            "latitude": {
+                              "example": "-23.5629358",
+                              "type": "string"
+                            },
+                            "longitude": {
+                              "example": "-46.6527128",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "example": "Point",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "neighborhood": {
+                      "description": "Nome do bairro",
+                      "example": "Bela Vista",
+                      "type": "string"
+                    },
+                    "service": {
+                      "description": "Serviço utilizado para consulta",
+                      "example": "viacep",
+                      "type": "string"
+                    },
+                    "state": {
+                      "description": "Sigla do estado",
+                      "example": "SP",
+                      "type": "string"
+                    },
+                    "street": {
+                      "description": "Nome da rua",
+                      "example": "Avenida Paulista",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CEP encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CEP não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

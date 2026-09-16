@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.BRASIL_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'fipe_preco.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'fipe_preco.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set BRASIL_TEST_FIPE_PRECO_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "anoModelo", "req": false, "short": "Ano do modelo", "type": "`$INTEGER`", "index$": 0 }, { "active": true, "name": "codigoFipe", "req": false, "short": "Código FIPE", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "combustivel", "req": false, "short": "Tipo de combustível", "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "marca", "req": false, "short": "Marca do veículo", "type": "`$STRING`", "index$": 3 }, { "active": true, "name": "mesReferencia", "req": false, "short": "Mês de referência da tabela", "type": "`$STRING`", "index$": 4 }, { "active": true, "name": "modelo", "req": false, "short": "Modelo do veículo", "type": "`$STRING`", "index$": 5 }, { "active": true, "name": "siglaCombustivel", "req": false, "short": "Sigla do combustível", "type": "`$STRING`", "index$": 6 }, { "active": true, "name": "tipoVeiculo", "req": false, "short": "Tipo do veículo", "type": "`$INTEGER`", "index$": 7 }, { "active": true, "name": "valor", "req": false, "short": "Valor do veículo", "type": "`$STRING`", "index$": 8 }], "name": "fipe_preco", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "example": "001004-1", "kind": "param", "name": "codigo_fipe", "orig": "codigo_fipe", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "GET /fipe/preco/v1/{codigoFipe}", "json": "{\"operationId\":\"getFipePreco\",\"parameters\":[{\"description\":\"Código FIPE do veículo\",\"in\":\"path\",\"name\":\"codigoFipe\",\"required\":true,\"schema\":{\"example\":\"001004-1\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"anoModelo\":{\"description\":\"Ano do modelo\",\"example\":2020,\"type\":\"integer\"},\"codigoFipe\":{\"description\":\"Código FIPE\",\"example\":\"001004-1\",\"type\":\"string\"},\"combustivel\":{\"description\":\"Tipo de combustível\",\"example\":\"Gasolina\",\"type\":\"string\"},\"marca\":{\"description\":\"Marca do veículo\",\"example\":\"Fiat\",\"type\":\"string\"},\"mesReferencia\":{\"description\":\"Mês de referência da tabela\",\"example\":\"janeiro de 2024\",\"type\":\"string\"},\"modelo\":{\"description\":\"Modelo do veículo\",\"example\":\"Palio 1.0\",\"type\":\"string\"},\"siglaCombustivel\":{\"description\":\"Sigla do combustível\",\"example\":\"G\",\"type\":\"string\"},\"tipoVeiculo\":{\"description\":\"Tipo do veículo\",\"example\":1,\"type\":\"integer\"},\"valor\":{\"description\":\"Valor do veículo\",\"example\":\"R$ 50.000,00\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Preço encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Código FIPE não encontrado\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/fipe/preco/v1/{codigoFipe}", "rename": { "param": { "codigoFipe": "codigo_fipe" } }, "segments": [{ "lit": "fipe" }, { "lit": "preco" }, { "lit": "v1" }, { "var": "codigo_fipe" }], "select": { "exist": ["codigo_fipe"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [["v1"]] }, "key$": "fipe_preco", "name__orig": "fipe_preco", "Name": "FipePreco", "name_": "fipe_preco", "name-": "fipe-preco", "NAME": "FIPE_PRECO", "index$": 6 }, { "active": true, "entity": "fipe_preco", "key$": "BasicFipePrecoFlow", "kind": "basic", "name": "BasicFipePrecoFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "fipe_preco_ref01", "srcdatavar": "fipe_preco_ref01_data", "suffix": "_dt0" }, "match": { "id": "fipe_preco01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-fipe_preco_ref01" } }], "index$": 0 }] }, 'FipePreco');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -100,12 +98,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['BRASIL_TEST_FIPE_PRECO_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'BRASIL_TEST_FIPE_PRECO_ENTID': idmap,
         'BRASIL_TEST_LIVE': 'FALSE',
@@ -113,7 +105,13 @@ function basicSetup(extra) {
     });
     idmap = env['BRASIL_TEST_FIPE_PRECO_ENTID'];
     const live = 'TRUE' === env.BRASIL_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['BRASIL_TEST_FIPE_PRECO_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.BrasilSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -124,7 +122,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -136,7 +135,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.BRASIL_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

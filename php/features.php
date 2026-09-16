@@ -4,7 +4,10 @@ declare(strict_types=1);
 // Brasil SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class BrasilFeatures
@@ -14,8 +17,14 @@ class BrasilFeatures
         switch ($name) {
             case "base":
                 return new BrasilBaseFeature();
+            case "ratelimit":
+                return new BrasilRatelimitFeature();
+            case "retry":
+                return new BrasilRetryFeature();
             case "test":
                 return new BrasilTestFeature();
+            case "timeout":
+                return new BrasilTimeoutFeature();
             default:
                 return new BrasilBaseFeature();
         }
@@ -31,7 +40,10 @@ class BrasilFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

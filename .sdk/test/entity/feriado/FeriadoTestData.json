@@ -32,5 +32,62 @@
         "type": "s7a"
       }
     }
+  },
+  "requests": {
+    "GET /feriados/v1/{ano}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFeriados",
+        "parameters": [
+          {
+            "description": "Ano a ser consultado",
+            "in": "path",
+            "name": "ano",
+            "required": true,
+            "schema": {
+              "example": 2024,
+              "maximum": 2100,
+              "minimum": 1900,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "date": {
+                        "description": "Data do feriado",
+                        "example": "2024-01-01",
+                        "format": "date",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Nome do feriado",
+                        "example": "Ano Novo",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "Tipo de feriado",
+                        "example": "national",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Lista de feriados retornada com sucesso"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

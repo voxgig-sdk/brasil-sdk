@@ -37,6 +37,12 @@ main: kit: entity: municipio: {
               }
             ]
           }
+          contract: {
+            id: "GET /ibge/municipios/v1/{siglaUF}"
+            json: "{\"operationId\":\"getIbgeMunicipios\",\"parameters\":[{\"description\":\"Sigla da UF (2 caracteres)\",\"in\":\"path\",\"name\":\"siglaUF\",\"required\":true,\"schema\":{\"example\":\"SP\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"codigo_ibge\":{\"description\":\"Código IBGE do município\",\"example\":\"3550308\",\"type\":\"string\"},\"nome\":{\"description\":\"Nome do município\",\"example\":\"São Paulo\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de municípios retornada com sucesso\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/ibge/municipios/v1/{siglaUF}"
           rename: {

@@ -32,5 +32,159 @@
         "sigla": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /ibge/uf/v1": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getIbgeUFs",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "description": "ID da UF",
+                        "example": 35,
+                        "type": "integer"
+                      },
+                      "nome": {
+                        "description": "Nome da UF",
+                        "example": "São Paulo",
+                        "type": "string"
+                      },
+                      "regiao": {
+                        "properties": {
+                          "id": {
+                            "example": 3,
+                            "type": "integer"
+                          },
+                          "nome": {
+                            "example": "Sudeste",
+                            "type": "string"
+                          },
+                          "sigla": {
+                            "example": "SE",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "sigla": {
+                        "description": "Sigla da UF",
+                        "example": "SP",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Lista de UFs retornada com sucesso"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /ibge/uf/v1/{siglaUF}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getIbgeUF",
+        "parameters": [
+          {
+            "description": "Sigla da UF (2 caracteres)",
+            "in": "path",
+            "name": "siglaUF",
+            "required": true,
+            "schema": {
+              "example": "SP",
+              "pattern": "^[A-Z]{2}$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "ID da UF",
+                      "example": 35,
+                      "type": "integer"
+                    },
+                    "nome": {
+                      "description": "Nome da UF",
+                      "example": "São Paulo",
+                      "type": "string"
+                    },
+                    "regiao": {
+                      "properties": {
+                        "id": {
+                          "example": 3,
+                          "type": "integer"
+                        },
+                        "nome": {
+                          "example": "Sudeste",
+                          "type": "string"
+                        },
+                        "sigla": {
+                          "example": "SE",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "sigla": {
+                      "description": "Sigla da UF",
+                      "example": "SP",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "UF encontrada com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "UF não encontrada"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

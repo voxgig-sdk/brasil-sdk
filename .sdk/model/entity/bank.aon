@@ -37,6 +37,12 @@ main: kit: entity: bank: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /banks/v1"
+            json: "{\"operationId\":\"getBanks\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"code\":{\"description\":\"Código do banco\",\"example\":1,\"type\":\"integer\"},\"fullName\":{\"description\":\"Nome completo do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"},\"ispb\":{\"description\":\"Identificador único do banco\",\"example\":\"00000000\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de bancos retornada com sucesso\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/banks/v1"
           segments: [
@@ -72,6 +78,12 @@ main: kit: entity: bank: {
                 type: "`$STRING`"
               }
             ]
+          }
+          contract: {
+            id: "GET /banks/v1/{code}"
+            json: "{\"operationId\":\"getBankByCode\",\"parameters\":[{\"description\":\"Código do banco (3 dígitos)\",\"in\":\"path\",\"name\":\"code\",\"required\":true,\"schema\":{\"example\":\"001\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Código do banco\",\"example\":1,\"type\":\"integer\"},\"fullName\":{\"description\":\"Nome completo do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"},\"ispb\":{\"description\":\"Identificador único do banco\",\"example\":\"00000000\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Banco encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Banco não encontrado\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/banks/v1/{code}"

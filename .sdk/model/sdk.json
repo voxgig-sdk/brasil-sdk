@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "bank": {
           "active": true,
@@ -70,6 +134,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /banks/v1",
+                    "json": "{\"operationId\":\"getBanks\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"code\":{\"description\":\"Código do banco\",\"example\":1,\"type\":\"integer\"},\"fullName\":{\"description\":\"Nome completo do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"},\"ispb\":{\"description\":\"Identificador único do banco\",\"example\":\"00000000\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de bancos retornada com sucesso\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/banks/v1",
@@ -109,6 +179,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /banks/v1/{code}",
+                    "json": "{\"operationId\":\"getBankByCode\",\"parameters\":[{\"description\":\"Código do banco (3 dígitos)\",\"in\":\"path\",\"name\":\"code\",\"required\":true,\"schema\":{\"example\":\"001\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Código do banco\",\"example\":1,\"type\":\"integer\"},\"fullName\":{\"description\":\"Nome completo do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"},\"ispb\":{\"description\":\"Identificador único do banco\",\"example\":\"00000000\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do banco\",\"example\":\"Banco do Brasil S.A.\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Banco encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Banco não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -185,6 +261,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /cep/v1/{cep}",
+                    "json": "{\"operationId\":\"getCep\",\"parameters\":[{\"description\":\"CEP a ser consultado (apenas números)\",\"in\":\"path\",\"name\":\"cep\",\"required\":true,\"schema\":{\"example\":\"01310100\",\"pattern\":\"^[0-9]{8}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"cep\":{\"description\":\"CEP consultado\",\"example\":\"01310100\",\"type\":\"string\"},\"city\":{\"description\":\"Nome da cidade\",\"example\":\"São Paulo\",\"type\":\"string\"},\"location\":{\"properties\":{\"coordinates\":{\"properties\":{\"latitude\":{\"example\":\"-23.5629358\",\"type\":\"string\"},\"longitude\":{\"example\":\"-46.6527128\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":{\"example\":\"Point\",\"type\":\"string\"}},\"type\":\"object\"},\"neighborhood\":{\"description\":\"Nome do bairro\",\"example\":\"Bela Vista\",\"type\":\"string\"},\"service\":{\"description\":\"Serviço utilizado para consulta\",\"example\":\"viacep\",\"type\":\"string\"},\"state\":{\"description\":\"Sigla do estado\",\"example\":\"SP\",\"type\":\"string\"},\"street\":{\"description\":\"Nome da rua\",\"example\":\"Avenida Paulista\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CEP encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CEP não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/cep/v1/{cep}",
@@ -223,6 +305,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /cep/v2/{cep}",
+                    "json": "{\"operationId\":\"getCepV2\",\"parameters\":[{\"description\":\"CEP a ser consultado (apenas números)\",\"in\":\"path\",\"name\":\"cep\",\"required\":true,\"schema\":{\"example\":\"01310100\",\"pattern\":\"^[0-9]{8}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"cep\":{\"description\":\"CEP consultado\",\"example\":\"01310100\",\"type\":\"string\"},\"city\":{\"description\":\"Nome da cidade\",\"example\":\"São Paulo\",\"type\":\"string\"},\"location\":{\"properties\":{\"coordinates\":{\"properties\":{\"latitude\":{\"example\":\"-23.5629358\",\"type\":\"string\"},\"longitude\":{\"example\":\"-46.6527128\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":{\"example\":\"Point\",\"type\":\"string\"}},\"type\":\"object\"},\"neighborhood\":{\"description\":\"Nome do bairro\",\"example\":\"Bela Vista\",\"type\":\"string\"},\"service\":{\"description\":\"Serviço utilizado para consulta\",\"example\":\"viacep\",\"type\":\"string\"},\"state\":{\"description\":\"Sigla do estado\",\"example\":\"SP\",\"type\":\"string\"},\"street\":{\"description\":\"Nome da rua\",\"example\":\"Avenida Paulista\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CEP encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CEP não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -417,6 +505,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /cnpj/v1/{cnpj}",
+                    "json": "{\"operationId\":\"getCnpj\",\"parameters\":[{\"description\":\"CNPJ a ser consultado (apenas números)\",\"in\":\"path\",\"name\":\"cnpj\",\"required\":true,\"schema\":{\"example\":\"00000000000191\",\"pattern\":\"^[0-9]{14}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bairro\":{\"description\":\"Bairro\",\"type\":\"string\"},\"capital_social\":{\"description\":\"Capital social da empresa\",\"type\":\"number\"},\"cep\":{\"description\":\"CEP\",\"type\":\"string\"},\"cnae_fiscal\":{\"description\":\"CNAE fiscal principal\",\"type\":\"integer\"},\"cnae_fiscal_descricao\":{\"description\":\"Descrição do CNAE fiscal\",\"type\":\"string\"},\"cnpj\":{\"description\":\"CNPJ consultado\",\"example\":\"00000000000191\",\"type\":\"string\"},\"complemento\":{\"description\":\"Complemento do endereço\",\"type\":\"string\"},\"data_inicio_atividade\":{\"description\":\"Data de início das atividades\",\"format\":\"date\",\"type\":\"string\"},\"ddd_telefone_1\":{\"description\":\"Telefone principal\",\"type\":\"string\"},\"logradouro\":{\"description\":\"Logradouro do endereço\",\"type\":\"string\"},\"municipio\":{\"description\":\"Município\",\"type\":\"string\"},\"natureza_juridica\":{\"description\":\"Código da natureza jurídica\",\"type\":\"string\"},\"nome_fantasia\":{\"description\":\"Nome fantasia da empresa\",\"example\":\"BANCO DO BRASIL\",\"type\":\"string\"},\"numero\":{\"description\":\"Número do endereço\",\"type\":\"string\"},\"porte\":{\"description\":\"Porte da empresa\",\"type\":\"string\"},\"qsa\":{\"description\":\"Quadro de sócios e administradores\",\"items\":{\"properties\":{\"nome\":{\"type\":\"string\"},\"qual\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"razao_social\":{\"description\":\"Razão social da empresa\",\"example\":\"BANCO DO BRASIL S.A.\",\"type\":\"string\"},\"uf\":{\"description\":\"UF\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CNPJ encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"CNPJ não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/cnpj/v1/{cnpj}",
@@ -493,6 +587,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /ddd/v1/{ddd}",
+                    "json": "{\"operationId\":\"getDDD\",\"parameters\":[{\"description\":\"Código DDD (2 dígitos)\",\"in\":\"path\",\"name\":\"ddd\",\"required\":true,\"schema\":{\"example\":\"11\",\"pattern\":\"^[0-9]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"cities\":{\"description\":\"Lista de cidades com este DDD\",\"example\":[\"São Paulo\",\"Guarulhos\",\"Osasco\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"state\":{\"description\":\"Sigla do estado\",\"example\":\"SP\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"DDD encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"DDD não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -579,6 +679,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /feriados/v1/{ano}",
+                    "json": "{\"operationId\":\"getFeriados\",\"parameters\":[{\"description\":\"Ano a ser consultado\",\"in\":\"path\",\"name\":\"ano\",\"required\":true,\"schema\":{\"example\":2024,\"maximum\":2100,\"minimum\":1900,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"date\":{\"description\":\"Data do feriado\",\"example\":\"2024-01-01\",\"format\":\"date\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do feriado\",\"example\":\"Ano Novo\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo de feriado\",\"example\":\"national\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de feriados retornada com sucesso\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/feriados/v1/{ano}",
@@ -655,6 +761,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /fipe/marcas/v1/{tipoVeiculo}",
+                    "json": "{\"operationId\":\"getFipeMarcas\",\"parameters\":[{\"description\":\"Tipo de veículo (carros, motos ou caminhoes)\",\"in\":\"path\",\"name\":\"tipoVeiculo\",\"required\":true,\"schema\":{\"enum\":[\"carros\",\"motos\",\"caminhoes\"],\"example\":\"carros\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"nome\":{\"description\":\"Nome da marca\",\"example\":\"Fiat\",\"type\":\"string\"},\"valor\":{\"description\":\"Código da marca\",\"example\":\"21\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de marcas retornada com sucesso\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -790,6 +902,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /fipe/preco/v1/{codigoFipe}",
+                    "json": "{\"operationId\":\"getFipePreco\",\"parameters\":[{\"description\":\"Código FIPE do veículo\",\"in\":\"path\",\"name\":\"codigoFipe\",\"required\":true,\"schema\":{\"example\":\"001004-1\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"anoModelo\":{\"description\":\"Ano do modelo\",\"example\":2020,\"type\":\"integer\"},\"codigoFipe\":{\"description\":\"Código FIPE\",\"example\":\"001004-1\",\"type\":\"string\"},\"combustivel\":{\"description\":\"Tipo de combustível\",\"example\":\"Gasolina\",\"type\":\"string\"},\"marca\":{\"description\":\"Marca do veículo\",\"example\":\"Fiat\",\"type\":\"string\"},\"mesReferencia\":{\"description\":\"Mês de referência da tabela\",\"example\":\"janeiro de 2024\",\"type\":\"string\"},\"modelo\":{\"description\":\"Modelo do veículo\",\"example\":\"Palio 1.0\",\"type\":\"string\"},\"siglaCombustivel\":{\"description\":\"Sigla do combustível\",\"example\":\"G\",\"type\":\"string\"},\"tipoVeiculo\":{\"description\":\"Tipo do veículo\",\"example\":1,\"type\":\"integer\"},\"valor\":{\"description\":\"Valor do veículo\",\"example\":\"R$ 50.000,00\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Preço encontrado com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Código FIPE não encontrado\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/fipe/preco/v1/{codigoFipe}",
@@ -874,6 +992,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /ibge/municipios/v1/{siglaUF}",
+                    "json": "{\"operationId\":\"getIbgeMunicipios\",\"parameters\":[{\"description\":\"Sigla da UF (2 caracteres)\",\"in\":\"path\",\"name\":\"siglaUF\",\"required\":true,\"schema\":{\"example\":\"SP\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"codigo_ibge\":{\"description\":\"Código IBGE do município\",\"example\":\"3550308\",\"type\":\"string\"},\"nome\":{\"description\":\"Nome do município\",\"example\":\"São Paulo\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de municípios retornada com sucesso\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -965,6 +1089,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /ibge/uf/v1",
+                    "json": "{\"operationId\":\"getIbgeUFs\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"id\":{\"description\":\"ID da UF\",\"example\":35,\"type\":\"integer\"},\"nome\":{\"description\":\"Nome da UF\",\"example\":\"São Paulo\",\"type\":\"string\"},\"regiao\":{\"properties\":{\"id\":{\"example\":3,\"type\":\"integer\"},\"nome\":{\"example\":\"Sudeste\",\"type\":\"string\"},\"sigla\":{\"example\":\"SE\",\"type\":\"string\"}},\"type\":\"object\"},\"sigla\":{\"description\":\"Sigla da UF\",\"example\":\"SP\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Lista de UFs retornada com sucesso\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/ibge/uf/v1",
@@ -1007,6 +1137,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /ibge/uf/v1/{siglaUF}",
+                    "json": "{\"operationId\":\"getIbgeUF\",\"parameters\":[{\"description\":\"Sigla da UF (2 caracteres)\",\"in\":\"path\",\"name\":\"siglaUF\",\"required\":true,\"schema\":{\"example\":\"SP\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"id\":{\"description\":\"ID da UF\",\"example\":35,\"type\":\"integer\"},\"nome\":{\"description\":\"Nome da UF\",\"example\":\"São Paulo\",\"type\":\"string\"},\"regiao\":{\"properties\":{\"id\":{\"example\":3,\"type\":\"integer\"},\"nome\":{\"example\":\"Sudeste\",\"type\":\"string\"},\"sigla\":{\"example\":\"SE\",\"type\":\"string\"}},\"type\":\"object\"},\"sigla\":{\"description\":\"Sigla da UF\",\"example\":\"SP\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"UF encontrada com sucesso\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"description\":\"Mensagem de erro\",\"example\":\"Recurso não encontrado\",\"type\":\"string\"},\"name\":{\"description\":\"Nome do erro\",\"example\":\"NotFoundError\",\"type\":\"string\"},\"type\":{\"description\":\"Tipo do erro\",\"example\":\"not_found\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"UF não encontrada\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -1053,13 +1189,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1149,6 +1495,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -1498,6 +1940,48 @@
         "website": "https://brasilapi.com.br"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -2052,6 +2536,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -2093,7 +2578,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

@@ -1,12 +1,18 @@
 # Brasil SDK feature factory
 
 from brasil_sdk.feature.base_feature import BrasilBaseFeature
+from brasil_sdk.feature.ratelimit_feature import BrasilRatelimitFeature
+from brasil_sdk.feature.retry_feature import BrasilRetryFeature
 from brasil_sdk.feature.test_feature import BrasilTestFeature
+from brasil_sdk.feature.timeout_feature import BrasilTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: BrasilBaseFeature(),
+    "ratelimit": lambda: BrasilRatelimitFeature(),
+    "retry": lambda: BrasilRetryFeature(),
     "test": lambda: BrasilTestFeature(),
+    "timeout": lambda: BrasilTimeoutFeature(),
 }
 
 

@@ -5,7 +5,7 @@
         "bairro": "sb4",
         "capital_social": 181,
         "cep": "sb6",
-        "cnae_fiscal": "sb7",
+        "cnae_fiscal": 183,
         "cnae_fiscal_descricao": "sb8",
         "cnpj": "sb9",
         "complemento": "sba",
@@ -26,7 +26,7 @@
         "bairro": "s168",
         "capital_social": 361,
         "cep": "s16a",
-        "cnae_fiscal": "s16b",
+        "cnae_fiscal": 363,
         "cnae_fiscal_descricao": "s16c",
         "cnpj": "s16d",
         "complemento": "s16e",
@@ -47,7 +47,7 @@
         "bairro": "s21c",
         "capital_social": 541,
         "cep": "s21e",
-        "cnae_fiscal": "s21f",
+        "cnae_fiscal": 543,
         "cnae_fiscal_descricao": "s220",
         "cnpj": "s221",
         "complemento": "s222",
@@ -72,7 +72,7 @@
         "bairro": "s2d0",
         "capital_social": 721,
         "cep": "s2d2",
-        "cnae_fiscal": "s2d3",
+        "cnae_fiscal": 723,
         "cnae_fiscal_descricao": "s2d4",
         "cnpj": "s2d5",
         "complemento": "s2d6",
@@ -87,6 +87,157 @@
         "qsa": [],
         "razao_social": "s2e0",
         "uf": "s2e1"
+      }
+    }
+  },
+  "requests": {
+    "GET /cnpj/v1/{cnpj}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCnpj",
+        "parameters": [
+          {
+            "description": "CNPJ a ser consultado (apenas números)",
+            "in": "path",
+            "name": "cnpj",
+            "required": true,
+            "schema": {
+              "example": "00000000000191",
+              "pattern": "^[0-9]{14}$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "bairro": {
+                      "description": "Bairro",
+                      "type": "string"
+                    },
+                    "capital_social": {
+                      "description": "Capital social da empresa",
+                      "type": "number"
+                    },
+                    "cep": {
+                      "description": "CEP",
+                      "type": "string"
+                    },
+                    "cnae_fiscal": {
+                      "description": "CNAE fiscal principal",
+                      "type": "integer"
+                    },
+                    "cnae_fiscal_descricao": {
+                      "description": "Descrição do CNAE fiscal",
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "description": "CNPJ consultado",
+                      "example": "00000000000191",
+                      "type": "string"
+                    },
+                    "complemento": {
+                      "description": "Complemento do endereço",
+                      "type": "string"
+                    },
+                    "data_inicio_atividade": {
+                      "description": "Data de início das atividades",
+                      "format": "date",
+                      "type": "string"
+                    },
+                    "ddd_telefone_1": {
+                      "description": "Telefone principal",
+                      "type": "string"
+                    },
+                    "logradouro": {
+                      "description": "Logradouro do endereço",
+                      "type": "string"
+                    },
+                    "municipio": {
+                      "description": "Município",
+                      "type": "string"
+                    },
+                    "natureza_juridica": {
+                      "description": "Código da natureza jurídica",
+                      "type": "string"
+                    },
+                    "nome_fantasia": {
+                      "description": "Nome fantasia da empresa",
+                      "example": "BANCO DO BRASIL",
+                      "type": "string"
+                    },
+                    "numero": {
+                      "description": "Número do endereço",
+                      "type": "string"
+                    },
+                    "porte": {
+                      "description": "Porte da empresa",
+                      "type": "string"
+                    },
+                    "qsa": {
+                      "description": "Quadro de sócios e administradores",
+                      "items": {
+                        "properties": {
+                          "nome": {
+                            "type": "string"
+                          },
+                          "qual": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "razao_social": {
+                      "description": "Razão social da empresa",
+                      "example": "BANCO DO BRASIL S.A.",
+                      "type": "string"
+                    },
+                    "uf": {
+                      "description": "UF",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CNPJ encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "CNPJ não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

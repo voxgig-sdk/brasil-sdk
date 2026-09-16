@@ -2,40 +2,40 @@
   "existing": {
     "fipe_preco": {
       "FIPE_PRECO00": {
-        "anoModelo": "s5a",
+        "anoModelo": 90,
         "codigoFipe": "s5b",
         "combustivel": "s5c",
         "marca": "s5d",
         "mesReferencia": "s5e",
         "modelo": "s5f",
         "siglaCombustivel": "s60",
-        "tipoVeiculo": "s61",
+        "tipoVeiculo": 97,
         "valor": "s62",
         "codigo_fipe": "CODIGO_FIPE01",
         "id": "FIPE_PRECO00"
       },
       "FIPE_PRECO01": {
-        "anoModelo": "sb4",
+        "anoModelo": 180,
         "codigoFipe": "sb5",
         "combustivel": "sb6",
         "marca": "sb7",
         "mesReferencia": "sb8",
         "modelo": "sb9",
         "siglaCombustivel": "sba",
-        "tipoVeiculo": "sbb",
+        "tipoVeiculo": 187,
         "valor": "sbc",
         "codigo_fipe": "CODIGO_FIPE01",
         "id": "FIPE_PRECO01"
       },
       "FIPE_PRECO02": {
-        "anoModelo": "s10e",
+        "anoModelo": 270,
         "codigoFipe": "s10f",
         "combustivel": "s110",
         "marca": "s111",
         "mesReferencia": "s112",
         "modelo": "s113",
         "siglaCombustivel": "s114",
-        "tipoVeiculo": "s115",
+        "tipoVeiculo": 277,
         "valor": "s116",
         "codigo_fipe": "CODIGO_FIPE01",
         "id": "FIPE_PRECO02"
@@ -45,15 +45,126 @@
   "new": {
     "fipe_preco": {
       "fipe_preco_ref01": {
-        "anoModelo": "s168",
+        "anoModelo": 360,
         "codigoFipe": "s169",
         "combustivel": "s16a",
         "marca": "s16b",
         "mesReferencia": "s16c",
         "modelo": "s16d",
         "siglaCombustivel": "s16e",
-        "tipoVeiculo": "s16f",
+        "tipoVeiculo": 367,
         "valor": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /fipe/preco/v1/{codigoFipe}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFipePreco",
+        "parameters": [
+          {
+            "description": "Código FIPE do veículo",
+            "in": "path",
+            "name": "codigoFipe",
+            "required": true,
+            "schema": {
+              "example": "001004-1",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "anoModelo": {
+                        "description": "Ano do modelo",
+                        "example": 2020,
+                        "type": "integer"
+                      },
+                      "codigoFipe": {
+                        "description": "Código FIPE",
+                        "example": "001004-1",
+                        "type": "string"
+                      },
+                      "combustivel": {
+                        "description": "Tipo de combustível",
+                        "example": "Gasolina",
+                        "type": "string"
+                      },
+                      "marca": {
+                        "description": "Marca do veículo",
+                        "example": "Fiat",
+                        "type": "string"
+                      },
+                      "mesReferencia": {
+                        "description": "Mês de referência da tabela",
+                        "example": "janeiro de 2024",
+                        "type": "string"
+                      },
+                      "modelo": {
+                        "description": "Modelo do veículo",
+                        "example": "Palio 1.0",
+                        "type": "string"
+                      },
+                      "siglaCombustivel": {
+                        "description": "Sigla do combustível",
+                        "example": "G",
+                        "type": "string"
+                      },
+                      "tipoVeiculo": {
+                        "description": "Tipo do veículo",
+                        "example": 1,
+                        "type": "integer"
+                      },
+                      "valor": {
+                        "description": "Valor do veículo",
+                        "example": "R$ 50.000,00",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Preço encontrado com sucesso"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Mensagem de erro",
+                      "example": "Recurso não encontrado",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do erro",
+                      "example": "NotFoundError",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Tipo do erro",
+                      "example": "not_found",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Código FIPE não encontrado"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }
