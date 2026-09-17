@@ -583,10 +583,9 @@ ufn = client.Ufn
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `Integer` | No | ID da UF |
-| `nome` | `String` | No | Nome da UF |
-| `regiao` | `Hash` | No |  |
-| `sigla` | `String` | No | Sigla da UF |
+| `id` | `Integer` | No |  |
+| `nome` | `String` | No |  |
+| `sigla` | `String` | No |  |
 
 ### Operations
 

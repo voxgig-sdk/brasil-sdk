@@ -138,7 +138,6 @@ type MunicipioLoadMatch struct {
 type Ufn struct {
 	Id *int `json:"id,omitempty"`
 	Nome *string `json:"nome,omitempty"`
-	Regiao *map[string]any `json:"regiao,omitempty"`
 	Sigla *string `json:"sigla,omitempty"`
 }
 
@@ -151,7 +150,6 @@ type UfnLoadMatch struct {
 type UfnListMatch struct {
 	Id *int `json:"id,omitempty"`
 	Nome *string `json:"nome,omitempty"`
-	Regiao *map[string]any `json:"regiao,omitempty"`
 	Sigla *string `json:"sigla,omitempty"`
 }
 

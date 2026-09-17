@@ -70,8 +70,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    banks = client.Bank().list()
-    print(banks)
+    ufns = client.Ufn().list()
+    print(ufns)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -139,8 +139,8 @@ client = BrasilSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-bank = client.Bank().list()
-# bank contains the mock response record
+ufn = client.Ufn().list()
+# ufn contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -379,10 +379,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` | ID da UF |
-| `nome` | Nome da UF |
-| `regiao` |  |
-| `sigla` | Sigla da UF |
+| `id` |  |
+| `nome` |  |
+| `sigla` |  |
 
 Operations: List, Load.
 
@@ -633,10 +632,9 @@ Create an instance: `ufn = client.Ufn()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` | ID da UF |
-| `nome` | `str` | Nome da UF |
-| `regiao` | `dict` |  |
-| `sigla` | `str` | Sigla da UF |
+| `id` | `int` |  |
+| `nome` | `str` |  |
+| `sigla` | `str` |  |
 
 #### Example: Load
 
@@ -793,6 +791,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── brasil_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations
@@ -810,11 +809,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-bank = client.Bank()
-bank.list()
+ufn = client.Ufn()
+ufn.list()
 
-# bank.data_get() now returns the bank data from the last list
-# bank.match_get() returns the last match criteria
+# ufn.data_get() now returns the ufn data from the last list
+# ufn.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

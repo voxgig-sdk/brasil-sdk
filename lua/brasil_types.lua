@@ -97,7 +97,6 @@
 ---@class Ufn
 ---@field id? number
 ---@field nome? string
----@field regiao? table
 ---@field sigla? string
 
 ---@class UfnLoadMatch
@@ -106,7 +105,6 @@
 ---@class UfnListMatch
 ---@field id? number
 ---@field nome? string
----@field regiao? table
 ---@field sigla? string
 
 local M = {}

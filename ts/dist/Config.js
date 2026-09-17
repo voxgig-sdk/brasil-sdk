@@ -931,21 +931,14 @@ class Config {
             "fields": [
                 {
                     "name": "id",
-                    "short": "ID da UF",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "nome",
-                    "short": "Nome da UF",
                     "type": "`$STRING`"
                 },
                 {
-                    "name": "regiao",
-                    "type": "`$OBJECT`"
-                },
-                {
                     "name": "sigla",
-                    "short": "Sigla da UF",
                     "type": "`$STRING`"
                 }
             ],

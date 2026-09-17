@@ -317,15 +317,11 @@ MunicipioLoadMatch = Struct.new(
 # @!attribute [rw] nome
 #   @return [String, nil]
 #
-# @!attribute [rw] regiao
-#   @return [Hash, nil]
-#
 # @!attribute [rw] sigla
 #   @return [String, nil]
 Ufn = Struct.new(
   :id,
   :nome,
-  :regiao,
   :sigla,
   keyword_init: true
 )
@@ -347,15 +343,11 @@ UfnLoadMatch = Struct.new(
 # @!attribute [rw] nome
 #   @return [String, nil]
 #
-# @!attribute [rw] regiao
-#   @return [Hash, nil]
-#
 # @!attribute [rw] sigla
 #   @return [String, nil]
 UfnListMatch = Struct.new(
   :id,
   :nome,
-  :regiao,
   :sigla,
   keyword_init: true
 )

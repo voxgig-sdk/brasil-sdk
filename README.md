@@ -46,23 +46,23 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = BrasilSDK.test({
   entity: {
-    bank: {
+    ufn: {
       test01: { id: 'test01' },
     },
   },
 })
-const banks = await client.Bank().list()
-// banks is an array of Bank entities, populated with mock data
-// — call banks[0].data() for the record itself
-console.log(banks)
+const ufns = await client.Ufn().list()
+// ufns is an array of Ufn entities, populated with mock data
+// — call ufns[0].data() for the record itself
+console.log(ufns)
 ```
 
 ### Python
 
 ```python
 client = BrasilSDK.test()
-banks = client.Bank().list()
-print(banks)
+ufns = client.Ufn().list()
+print(ufns)
 ```
 
 ### PHP
@@ -70,16 +70,16 @@ print(banks)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = BrasilSDK::test([
-    "entity" => ["bank" => ["test01" => []]],
+    "entity" => ["ufn" => ["test01" => []]],
 ]);
-$banks = $client->Bank()->list();
+$ufns = $client->Ufn()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Bank(nil).List(
+result, err := client.Ufn(nil).List(
     nil, nil,
 )
 ```
@@ -89,28 +89,28 @@ result, err := client.Bank(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = BrasilSDK.test({
-  "entity" => { "bank" => { "test01" => {} } },
+  "entity" => { "ufn" => { "test01" => {} } },
 })
-banks = client.Bank.list()
+ufns = client.Ufn.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Bank():list()
+local results, err = client:Ufn():list()
 ```
 
 ## Packages
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/brasil-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
-| Python | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
-| PHP | `voxgig-sdk/brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
+| TypeScript | `@voxgig-sdk/brasil-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/tags) |
+| Python | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/tags) |
+| PHP | `voxgig-sdk/brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/brasil-sdk/go` | `go get github.com/voxgig-sdk/brasil-sdk/go@latest` |
-| Ruby | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
-| Lua | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/releases) |
+| Ruby | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/tags) |
+| Lua | `voxgig-sdk-brasil` | publish pending — [install from git tag](https://github.com/voxgig-sdk/brasil-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/brasil-sdk/go-cli` | `go install github.com/voxgig-sdk/brasil-sdk/go-cli/cmd/brasil@latest` |
 | Go MCP server | `github.com/voxgig-sdk/brasil-sdk/go-mcp` | `go get github.com/voxgig-sdk/brasil-sdk/go-mcp@latest` |
 

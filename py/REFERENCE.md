@@ -571,10 +571,9 @@ ufn = client.Ufn()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No | ID da UF |
-| `nome` | `str` | No | Nome da UF |
-| `regiao` | `dict` | No |  |
-| `sigla` | `str` | No | Sigla da UF |
+| `id` | `int` | No |  |
+| `nome` | `str` | No |  |
+| `sigla` | `str` | No |  |
 
 ### Operations
 

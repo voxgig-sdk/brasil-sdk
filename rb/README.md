@@ -65,7 +65,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  banks = client.Bank.list()
+  ufns = client.Ufn.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -135,8 +135,8 @@ client = BrasilSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-bank = client.Bank.list()
-puts bank
+ufn = client.Ufn.list()
+puts ufn
 ```
 
 ### Use a custom fetch function
@@ -374,10 +374,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` | ID da UF |
-| `nome` | Nome da UF |
-| `regiao` |  |
-| `sigla` | Sigla da UF |
+| `id` |  |
+| `nome` |  |
+| `sigla` |  |
 
 Operations: List, Load.
 
@@ -637,10 +636,9 @@ Create an instance: `ufn = client.Ufn`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `Integer` | ID da UF |
-| `nome` | `String` | Nome da UF |
-| `regiao` | `Hash` |  |
-| `sigla` | `String` | Sigla da UF |
+| `id` | `Integer` |  |
+| `nome` | `String` |  |
+| `sigla` | `String` |  |
 
 #### Example: Load
 
@@ -799,6 +797,7 @@ Use `Helpers.to_map()` to safely validate that a value is a hash.
 rb/
 ├── Brasil_sdk.rb       -- Main SDK module
 ├── config.rb                  -- Configuration
+├── schema.rb                  -- Generated option + entity specs
 ├── features.rb                -- Feature factory
 ├── core/                      -- Core types and context
 ├── entity/                    -- Entity implementations
@@ -817,11 +816,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-bank = client.Bank
-bank.list()
+ufn = client.Ufn
+ufn.list()
 
-# bank.data_get now returns the bank data from the last list
-# bank.match_get returns the last match criteria
+# ufn.data_get now returns the ufn data from the last list
+# ufn.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

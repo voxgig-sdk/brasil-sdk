@@ -156,7 +156,6 @@ class Ufn
 {
     public ?int $id = null;
     public ?string $nome = null;
-    public ?array $regiao = null;
     public ?string $sigla = null;
 }
 
@@ -171,7 +170,6 @@ class UfnListMatch
 {
     public ?int $id = null;
     public ?string $nome = null;
-    public ?array $regiao = null;
     public ?string $sigla = null;
 }
 

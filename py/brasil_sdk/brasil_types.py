@@ -124,7 +124,6 @@ class MunicipioLoadMatch(TypedDict):
 class Ufn(TypedDict, total=False):
     id: int
     nome: str
-    regiao: dict
     sigla: str
 
 
@@ -135,5 +134,4 @@ class UfnLoadMatch(TypedDict):
 class UfnListMatch(TypedDict, total=False):
     id: int
     nome: str
-    regiao: dict
     sigla: str

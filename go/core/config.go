@@ -908,21 +908,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
-						"short": "ID da UF",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "nome",
-						"short": "Nome da UF",
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "regiao",
-						"type": "`$OBJECT`",
-					},
-					map[string]any{
 						"name": "sigla",
-						"short": "Sigla da UF",
 						"type": "`$STRING`",
 					},
 				},

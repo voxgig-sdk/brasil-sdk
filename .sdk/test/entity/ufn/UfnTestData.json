@@ -3,23 +3,20 @@
     "ufn": {
       "UFN00": {
         "id": "UFN00",
-        "nome": "s29",
-        "regiao": {},
-        "sigla": "s2b",
+        "nome": "s1f",
+        "sigla": "s20",
         "sigla_uf": "SIGLA_UF01"
       },
       "UFN01": {
         "id": "UFN01",
-        "nome": "s51",
-        "regiao": {},
-        "sigla": "s53",
+        "nome": "s3d",
+        "sigla": "s3e",
         "sigla_uf": "SIGLA_UF01"
       },
       "UFN02": {
         "id": "UFN02",
-        "nome": "s79",
-        "regiao": {},
-        "sigla": "s7b",
+        "nome": "s5b",
+        "sigla": "s5c",
         "sigla_uf": "SIGLA_UF01"
       }
     }
@@ -27,9 +24,8 @@
   "new": {
     "ufn": {
       "ufn_ref01": {
-        "nome": "sa1",
-        "regiao": {},
-        "sigla": "sa3"
+        "nome": "s79",
+        "sigla": "s7a"
       }
     }
   },

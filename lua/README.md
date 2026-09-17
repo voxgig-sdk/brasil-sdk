@@ -64,7 +64,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local banks, err = client:Bank():list()
+local ufns, err = client:Ufn():list()
 if err then error(err) end
 ```
 
@@ -122,7 +122,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Bank():list()
+local result, err = client:Ufn():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -365,10 +365,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` | ID da UF |
-| `nome` | Nome da UF |
-| `regiao` |  |
-| `sigla` | Sigla da UF |
+| `id` |  |
+| `nome` |  |
+| `sigla` |  |
 
 Operations: List, Load.
 
@@ -619,10 +618,9 @@ Create an instance: `local ufn = client:Ufn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `number` | ID da UF |
-| `nome` | `string` | Nome da UF |
-| `regiao` | `table` |  |
-| `sigla` | `string` | Sigla da UF |
+| `id` | `number` |  |
+| `nome` | `string` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
@@ -779,6 +777,7 @@ Use `helpers.to_map()` to safely validate that a value is a table.
 lua/
 ├── brasil_sdk.lua    -- Main SDK module
 ├── config.lua               -- Configuration
+├── schema.lua               -- Generated option + entity specs
 ├── features.lua             -- Feature factory
 ├── core/                    -- Core types and context
 ├── entity/                  -- Entity implementations
@@ -797,11 +796,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local bank = client:Bank()
-bank:list()
+local ufn = client:Ufn()
+ufn:list()
 
--- bank:data_get() now returns the bank data from the last list
--- bank:match_get() returns the last match criteria
+-- ufn:data_get() now returns the ufn data from the last list
+-- ufn:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

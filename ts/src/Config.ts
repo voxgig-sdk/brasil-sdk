@@ -127,33 +127,33 @@ class Config {
 
     entity: {
       
-      bank: {
-      },
-
-      cep: {
-      },
-
-      cnpj: {
-      },
-
-      ddd: {
-      },
-
-      feriado: {
-      },
-
-      fipe_marca: {
-      },
-
-      fipe_preco: {
-      },
-
-      municipio: {
-      },
-
-      ufn: {
-      },
-
+        bank: {
+        },
+  
+        cep: {
+        },
+  
+        cnpj: {
+        },
+  
+        ddd: {
+        },
+  
+        feriado: {
+        },
+  
+        fipe_marca: {
+        },
+  
+        fipe_preco: {
+        },
+  
+        municipio: {
+        },
+  
+        ufn: {
+        },
+  
     }
   }
 
@@ -972,21 +972,14 @@ class Config {
       "fields": [
         {
           "name": "id",
-          "short": "ID da UF",
           "type": "`$INTEGER`"
         },
         {
           "name": "nome",
-          "short": "Nome da UF",
           "type": "`$STRING`"
         },
         {
-          "name": "regiao",
-          "type": "`$OBJECT`"
-        },
-        {
           "name": "sigla",
-          "short": "Sigla da UF",
           "type": "`$STRING`"
         }
       ],

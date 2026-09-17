@@ -674,10 +674,9 @@ const ufn = client.Ufn()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `number` | No | ID da UF |
-| `nome` | `string` | No | Nome da UF |
-| `regiao` | `Record<string, any>` | No |  |
-| `sigla` | `string` | No | Sigla da UF |
+| `id` | `number` | No |  |
+| `nome` | `string` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Actions
 

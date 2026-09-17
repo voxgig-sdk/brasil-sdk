@@ -91,7 +91,6 @@ export interface MunicipioLoadMatch {
 export interface Ufn {
     id?: number;
     nome?: string;
-    regiao?: Record<string, any>;
     sigla?: string;
 }
 export interface UfnLoadMatch {
@@ -100,7 +99,6 @@ export interface UfnLoadMatch {
 export interface UfnListMatch {
     id?: number;
     nome?: string;
-    regiao?: Record<string, any>;
     sigla?: string;
     $action?: string;
     [action: string]: any;

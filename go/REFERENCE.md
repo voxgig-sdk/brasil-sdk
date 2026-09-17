@@ -584,10 +584,9 @@ fmt.Println(ufn.GetName()) // "ufn"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No | ID da UF |
-| `nome` | `string` | No | Nome da UF |
-| `regiao` | `map[string]any` | No |  |
-| `sigla` | `string` | No | Sigla da UF |
+| `id` | `int` | No |  |
+| `nome` | `string` | No |  |
+| `sigla` | `string` | No |  |
 
 ### Operations
 

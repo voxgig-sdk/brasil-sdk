@@ -70,8 +70,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const banks = await client.Bank().list()
-  console.log(banks)
+  const ufns = await client.Ufn().list()
+  console.log(ufns)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -137,10 +137,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = BrasilSDK.test()
 
-const bank = await client.Bank().list()
-// bank is the entity, populated with mock response data
-// — call bank.data() for the record itself
-console.log(bank)
+const ufn = await client.Ufn().list()
+// ufn is the entity, populated with mock response data
+// — call ufn.data() for the record itself
+console.log(ufn)
 ```
 
 You can also use the instance method:
@@ -155,14 +155,14 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Bank()
+const entity = client.Ufn()
 
 // First call runs the operation and stores its result
 await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -432,10 +432,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` | ID da UF |
-| `nome` | Nome da UF |
-| `regiao` |  |
-| `sigla` | Sigla da UF |
+| `id` |  |
+| `nome` |  |
+| `sigla` |  |
 
 Operations: list, load.
 
@@ -686,10 +685,9 @@ Create an instance: `const ufn = client.Ufn()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `number` | ID da UF |
-| `nome` | `string` | Nome da UF |
-| `regiao` | `Record<string, any>` |  |
-| `sigla` | `string` | Sigla da UF |
+| `id` | `number` |  |
+| `nome` | `string` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
@@ -857,11 +855,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const bank = client.Bank()
-await bank.list()
+const ufn = client.Ufn()
+await ufn.list()
 
-// bank.data() now returns the bank data from the last `list`
-// bank.match() returns the last match criteria
+// ufn.data() now returns the ufn data from the last `list`
+// ufn.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

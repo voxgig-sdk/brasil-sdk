@@ -75,12 +75,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-banks, err := client.Bank(nil).List(nil, nil)
+ufns, err := client.Ufn(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = banks
+_ = ufns
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -144,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-bank, err := client.Bank(nil).List(
+ufn, err := client.Ufn(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(bank) // the returned mock data
+fmt.Println(ufn) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -391,10 +391,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `"id"` | ID da UF |
-| `"nome"` | Nome da UF |
-| `"regiao"` |  |
-| `"sigla"` | Sigla da UF |
+| `"id"` |  |
+| `"nome"` |  |
+| `"sigla"` |  |
 
 Operations: List, Load.
 
@@ -681,10 +680,9 @@ Create an instance: `ufn := client.Ufn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` | ID da UF |
-| `nome` | `string` | Nome da UF |
-| `regiao` | `map[string]any` |  |
-| `sigla` | `string` | Sigla da UF |
+| `id` | `int` |  |
+| `nome` | `string` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
@@ -864,11 +862,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-bank := client.Bank(nil)
-bank.List(nil, nil)
+ufn := client.Ufn(nil)
+ufn.List(nil, nil)
 
-// bank.Data() now returns the bank data from the last list
-// bank.Match() returns the last match criteria
+// ufn.Data() now returns the ufn data from the last list
+// ufn.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

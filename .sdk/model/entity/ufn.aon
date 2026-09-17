@@ -8,24 +8,16 @@ main: kit: entity: ufn: {
     {
       name: "id"
       req: false
-      short: "ID da UF"
       type: "`$INTEGER`"
     }
     {
       name: "nome"
       req: false
-      short: "Nome da UF"
       type: "`$STRING`"
-    }
-    {
-      name: "regiao"
-      req: false
-      type: "`$OBJECT`"
     }
     {
       name: "sigla"
       req: false
-      short: "Sigla da UF"
       type: "`$STRING`"
     }
   ]

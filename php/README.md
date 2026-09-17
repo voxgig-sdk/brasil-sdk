@@ -68,7 +68,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $banks = $client->Bank()->list();
+    $ufns = $client->Ufn()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -142,8 +142,8 @@ $client = BrasilSDK::test();
 
 // list() returns entity instances (throws on error);
 // call data_get() for the mock record.
-$bank = $client->Bank()->list();
-print_r(array_map(fn($item) => $item->data_get(), $bank));
+$ufn = $client->Ufn()->list();
+print_r(array_map(fn($item) => $item->data_get(), $ufn));
 ```
 
 ### Use a custom fetch function
@@ -385,10 +385,9 @@ API path: `/ibge/municipios/v1/{siglaUF}`
 
 | Field | Description |
 | --- | --- |
-| `id` | ID da UF |
-| `nome` | Nome da UF |
-| `regiao` |  |
-| `sigla` | Sigla da UF |
+| `id` |  |
+| `nome` |  |
+| `sigla` |  |
 
 Operations: List, Load.
 
@@ -648,10 +647,9 @@ Create an instance: `$ufn = $client->Ufn();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` | ID da UF |
-| `nome` | `string` | Nome da UF |
-| `regiao` | `array` |  |
-| `sigla` | `string` | Sigla da UF |
+| `id` | `int` |  |
+| `nome` | `string` |  |
+| `sigla` | `string` |  |
 
 #### Example: Load
 
@@ -810,6 +808,7 @@ Use `Helpers::to_map()` to safely validate that a value is an array.
 php/
 ├── brasil_sdk.php          -- Main SDK class
 ├── config.php                     -- Configuration
+├── schema.php                     -- Generated option + entity specs
 ├── features.php                   -- Feature factory
 ├── core/                          -- Core types and context
 ├── entity/                        -- Entity implementations
@@ -828,11 +827,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$bank = $client->Bank();
-$bank->list();
+$ufn = $client->Ufn();
+$ufn->list();
 
-// $bank->data_get() now returns the bank data from the last list
-// $bank->match_get() returns the last match criteria
+// $ufn->data_get() now returns the ufn data from the last list
+// $ufn->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
